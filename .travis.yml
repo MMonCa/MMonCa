@@ -10,4 +10,4 @@ before_install:
  - sudo apt-get install liblapack-dev
 
 install:
- - make g++
+ - make travis
