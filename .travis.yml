@@ -13,4 +13,4 @@ before_install:
 
 install: true
 script: make travis
-after_success: cd test && ./runAll.sh
+after_success: cd test && ./runAll.sh Obj_travis
