@@ -1,0 +1,73 @@
+proc eDOSMass {
+	set mt 0.1905
+	set ml 0.9163
+	
+	return [expr 6.**(2./3.) * ($mt * $mt * $ml)**(1./3.)]
+}
+
+proc hDOSMass {
+	set T   $arg0
+	set a   0.4435870
+	set b   0.3609528e-2
+	set c   0.1173515e-3
+	set d   0.1263218e-5
+	set e   0.3025581e-8
+	set f   0.4683382e-2
+	set g   0.2286895e-3
+	set h   0.7469271e-6
+	set i   0.1727481e-8
+	return [expr (($a + $b * $T + $c * $T**2. + $d * $T**3. + $e * $T**4.) / (1 + $f * $T + $g * $T**2. + $h * $T**3. + $i * $T**4.))**(2./3.)]
+}
+
+proc Bandgap {
+	set T     $arg0   ;# K
+	## set Eg0   1.1692  ;# eV
+	## set alpha 4.9e-4  ;# ev.K^-1
+	## set beta  655.    ;# K
+	set Eg0   1.17     ;# eV
+	set alpha 4.73e-4  ;# ev.K^-1
+	set beta  636.     ;# K
+
+	return [expr $Eg0 - ($alpha * $T**2.) / ($T + $beta)] ;# eV
+}
+
+// Stress impact on band structure from Birr & Pikus
+// Influence of stress on band edges is NOT implemented yet 
+map<string,float> Ec.dilatational {
+1 -8.6
+2 -8.6
+3 -8.6
+}
+
+map<string,float> Ev.dilatational { 
+1 -2.1
+2 -2.1
+}
+
+map<string,float> Ec.deviatoric(1) { 
+1  9.5
+2  0.0
+3  0.0
+}
+
+map<string,float> Ec.deviatoric(2) { 
+1  0.1
+2  9.5
+3  0.0
+}
+
+map<string,float> Ec.deviatoric(3) { 
+1  0.0
+2  0.0
+3  9.5
+}
+
+map<string,float> Ev.deviatoric(1) { 
+1  0.5
+2  4.0
+}
+
+map<string,float> Ev.deviatoric(2) { 
+1  0.5
+2  4.0
+}

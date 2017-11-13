@@ -1,0 +1,119 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.8
+Compiled on Jul 29 2014 12:46:56 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='S_Iron Fe'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value='true,.19' index='C+I'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='10' maxy='10' maxz='10' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: S_Iron(<111> HeCluster ICluster VCluster ) 
+     X: (0 - 10) nm. 7 elements. Delta = 1.42857 nm.
+     Y: (0 - 10) nm. 7 elements. Delta = 1.42857 nm.
+     Z: (0 - 10) nm. 7 elements. Delta = 1.42857 nm.
+Total 343 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSS -          0:1.42857
+SSSSSSS -          8.57143:10
+Starting clusters:  S_Iron(<111> HeCluster ICluster VCluster )
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: V+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: C+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: CV+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: HeI+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: HeV+Gas
+Checking SPER..............Refining A/C interface .............. Done.
+------------------------------------------------------------------ insert -----
+insert coord=' 5 5.0 5 ' particle='C'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert coord=' 5 5.2 5 ' particle='I'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles particle='CI'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='no' float=' 0 ' value='0' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+no: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value='true,.21' index='C+I'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='10' maxy='10' maxz='10' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: S_Iron(<111> HeCluster ICluster VCluster ) 
+Deleting old simulation
+     X: (0 - 10) nm. 7 elements. Delta = 1.42857 nm.
+     Y: (0 - 10) nm. 7 elements. Delta = 1.42857 nm.
+     Z: (0 - 10) nm. 7 elements. Delta = 1.42857 nm.
+Total 343 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSS -          0:1.42857
+SSSSSSS -          8.57143:10
+Starting clusters:  S_Iron(<111> HeCluster ICluster VCluster )
+Checking SPER..............Refining A/C interface .............. Done.
+------------------------------------------------------------------ insert -----
+insert coord=' 5 5.0 5 ' particle='C'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert coord=' 5 5.2 5 ' particle='I'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles particle='CI'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='yes' float=' 1 ' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+yes: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+Time spent: 1s. Annealing: 0s.
+         2 times: S_Iron/Models/interactions Interaction not used: C+Gas
+         2 times: S_Iron/Models/interactions Interaction not used: CV+Gas
+         2 times: S_Iron/Models/interactions Interaction not used: HeI+Gas
+         2 times: S_Iron/Models/interactions Interaction not used: HeV+Gas
+         2 times: S_Iron/Models/interactions Interaction not used: I+Gas
+         2 times: S_Iron/Models/interactions Interaction not used: V+Gas
+         1 times: no: Requested error is  < 0% maximum error is 0%
+         1 times: yes: Requested error is  < 0% maximum error is 0%
+There are 11 total sentences. Collect them all!
+Milagrosamente...
+              ... he ganado

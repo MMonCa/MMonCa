@@ -1,0 +1,2 @@
+arrhenius V(migration) { 7e-2 0.67 }
+arrhenius V(formation) { 5.3e24 2.12 }

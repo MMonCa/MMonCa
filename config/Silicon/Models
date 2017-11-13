@@ -1,0 +1,160 @@
+string alloy Ge
+bool self.diffusion false
+string material.composition Si
+
+// atomic density: /cm3
+// molar volume:   cm3/mol
+// permittivity:   unitless
+
+float atomic.density 5e22
+float alloy.density  4.2e22
+float molar.volume   12.05883
+float permittivity   11.68
+float theta          1
+float smoothing.factor 1
+float alloy.second.neighbor.contribution 0.5
+float lambda         0.384
+bool  epitaxy        false
+float amorphization.threshold 1.25e22
+
+map<string,float> mixing.enthalpy {
+xi     0
+xo     0
+poly1  0
+xi     1
+}
+
+map<string,bool> particles {
+	As   	  true 
+	AsI_0,+	  true
+	AsV_0,+	  true
+	B    	  true
+	BI_0,- 	  true
+	BV_0,-	  true
+	C 	      true
+	CI  	  true
+	CV  	  true
+	I_0,-,+   true
+	V_0,-,+   true
+}
+map<string,bool> defined {
+	IVCluster    true
+	Void         true 
+	<311>        true
+	BICs         true
+	CCluster     true
+	DLoop	     true
+}
+
+array<string,string> interactions { 
+  	I+I         IVCluster,1
+  	V+V         IVCluster,1
+	I+V         IVCluster,1
+	
+	IVCluster:*+I true
+	IVCluster:*+V true
+	IVCluster+IVCluster true
+
+	Void:*+I		true
+	Void:*+V		true
+	<311>:*+I		true
+	<311>:*+V		true
+	
+	I+Gas		true
+	I+SiO2    true
+	V+SiO2    true
+	V+Gas     true
+	
+	As+I    true 
+	As+V    true 
+	AsI+V  	true 
+	AsV+I   	true
+	
+	AsI+Gas 	false
+	AsV+Gas 	false
+	
+	B+I     true 
+	BI+V    	true 
+	B+BI    	BICs,1
+	BI+I    	BICs,1
+	BI+BI   	BICs,1
+	
+	BICs:*+BI	true
+	BICs:*+I	true
+	BICs:*+V	true
+
+	BICs:B2+V	 false
+	BICs:B3+V	 false
+	BICs:B4+V	 false
+	BICs:B5+V	 false
+	BICs:B6+V	 false
+	BICs:B7+V	 false
+	BICs:B8+V	 false
+
+	BICs:B2I9+I false
+	BICs:B3I9+BI false
+	BICs:B3I9+I false
+	BICs:B8+BI   false
+	BICs:B8I+BI  false
+	BICs:B8I2+BI false
+	BICs:B8I3+BI false
+	BICs:B8I4+BI false
+	BICs:B8I5+BI false
+	BICs:B8I6+BI false
+	BICs:B8I7+BI false
+	BICs:B8I8+BI false
+	BICs:BI9+BI  false
+	BICs:BI9+I false
+	
+	BI+Gas  	false
+	BI+SiO2 	true
+
+	C+I     true
+	CV+I     	true
+	C+CI     	CCluster,1
+	CI+I     	CCluster,1
+	CI+CI    	CCluster,1
+	
+	CCluster:*+I     true
+	CCluster:*+CI    true
+	CCluster:*+V     true
+	
+    CI+SiO2  true
+	CI+Gas   false
+	CV+Gas   false
+}
+
+# <311> IVCluster DLoop BICs CCluster Void 
+array<string> interaction.result { 
+
+<311>  + <311>     = <311>
+<311>  + IVCluster = IVCluster
+<311>  + DLoop     = DLoop
+<311>  + BICs      = BICs
+<311>  + CCluster  = CCluster
+<311> == Void      = Void
+<311> <  Void      = Void
+<311> >  Void      = <311>
+
+IVCluster +  IVCluster = IVCluster
+IVCluster +  DLoop     = IVCluster
+IVCluster +  BICs      = BICs
+IVCluster +  CCluster  = CCluster
+IVCluster +  Void      = IVCluster
+
+DLoop +  DLoop    = DLoop
+DLoop +  BICs     = BICs
+DLoop +  CCluster = CCluster
+DLoop == Void     = Void
+DLoop >  Void     = DLoop
+DLoop <  Void     = Void
+
+BICs +  BICs     = BICs
+BICs +  CCluster = BICs
+BICs +  Void     = BICs
+
+CCluster +  CCluster = CCluster
+CCluster +  Void     = CCluster
+
+Void +  Void = Void
+}

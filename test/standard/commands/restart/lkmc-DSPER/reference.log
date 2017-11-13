@@ -1,0 +1,187 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.9
+Compiled on Oct  7 2014 11:23:46 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on Iris.
+BCA:  (C) 2000-2014 University of Valladolid and
+      (C)      2014 IMDEA Materials Institute
+      Module based on IIS-UVA.
+ For licensing details, write "license"
+----------------------------------------------------------------- restart -----
+restart load='dump'
+-------------------------------------------------------------------------------
+
+Reading restart information from dump.mmonca
+{
+
+Reading defects: AmorphousSilicon() Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+     X: (-2 - 54) nm. 37 elements. Delta = 1.51351 nm.
+     Y: (0 - 180) nm. 120 elements. Delta = 1.5 nm.
+     Z: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+Total 57720 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -                                                                                                                           -2:-0.486486
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -                                                                                                                           -0.486486:1.02703
+AAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAA -                                                                                                                           46.4324:47.9459
+AASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAA -                                                                                                                           47.9459:49.4595
+AASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAA -                                                                                                                           49.4595:50.973
+ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSA -                                                                                                                           50.973:52.4865
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                                           52.4865:54
+Starting clusters:  AmorphousSilicon() Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: BI+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: CI+SiO2
+Interfacing...
+} . Restarting done
+-------------------------------------------------------------------- save -----
+save lammps='nodist-test'
+-------------------------------------------------------------------------------
+
+Writing 31853 atoms in nodist-test.dump done!.
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Created 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -                                                                                                                           -2:-0.486486
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -                                                                                                                           -0.486486:1.02703
+AAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAA -   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    46.4324:47.9459
+AASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAA -  XXXX                X                                                                                             XXXX   47.9459:49.4595
+AASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAA - XXX                                                                                                                 XXXX  49.4595:50.973
+ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSA - XXX                                                                                                                  XXX  50.973:52.4865
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS - XX                                                                                                                    XX  52.4865:54
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='time1' float='38.5757' value='38.5757' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+time1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth1' float='45.9306' value='45.9306' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough1' float='1.11952' value='1.11952' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal temp='550' events='1200000' time='55'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 55 seconds at 823.15K (550ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+550C      40s       42231   3.52%    3.0e+04 s^-1 44.805664 nm.   14077 ev/s 
+550C      50s      336295  28.02%    2.9e+04 s^-1 43.040569 nm.   13366 ev/s 
+550C      60s      627732  52.31%    2.9e+04 s^-1 41.139698 nm.   11657 ev/s 
+550C      70s      914342  76.20%    2.9e+04 s^-1 39.510380 nm.   11942 ev/s 
+550C      80s     1197565  99.80%    2.8e+04 s^-1 37.609509 nm.   12314 ev/s 
+550C 80.0836s     1200000 100.00%    2.9e+04 s^-1 37.609509 nm. 
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -                                                                                                                           -2:-0.486486
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -                                                                                                                           -0.486486:1.02703
+AAAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAA -      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX       38.8649:40.3784
+AAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAA -     XXXX                                                                                                        XXXX      40.3784:41.8919
+AAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAA -    XXXX                                                                 X                                        XXX      41.8919:43.4054
+AAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAA -    XXX                  X                                                                                         XXX     43.4054:44.9189
+AAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAA -   XXXX                                                                                                            XXXX    44.9189:46.4324
+AAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAA -  XXXX                                                                                                              XXXX   46.4324:47.9459
+AASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAA -  XXX                 X                                                                                              XXX   47.9459:49.4595
+ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAA - XXX                                                                                                                  XXX  49.4595:50.973
+ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSA - XX                                                                                                                   XXX  50.973:52.4865
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS - XX                                                                                                                    XX  52.4865:54
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom           173803    219650    206935    506242     64660     28699        11
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='nodist-test' append
+-------------------------------------------------------------------------------
+
+Writing 32859 atoms in nodist-test.dump done!.
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='time2' float='80.0836' value='80.9954' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+time2: Requested error is  < 2% maximum error is 1.12574%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth2' float='39.3677' value='39.2563' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth2: Requested error is  < 2% maximum error is 0.283768%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough2' float='3.0493' value='3.10041' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough2: Requested error is  < 2% maximum error is 1.64849%
+Test PASSED... continuing
+Time spent: 125s. Annealing: 97s.
+         1 times: Silicon/Models/interactions Interaction not used: BI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: CI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: I+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: V+SiO2
+         6 times: Snapshot not defined or error.
+         1 times: depth1: Requested error is  < 0% maximum error is 0%
+         1 times: depth2: Requested error is  < 2% maximum error is 0.283768%
+         1 times: rough1: Requested error is  < 0% maximum error is 0%
+         1 times: rough2: Requested error is  < 2% maximum error is 1.64849%
+         1 times: time1: Requested error is  < 0% maximum error is 0%
+         1 times: time2: Requested error is  < 2% maximum error is 1.12574%
+There are 14 total sentences. Collect them all!
+¡Adiós amigos!

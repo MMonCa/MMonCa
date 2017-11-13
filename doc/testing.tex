@@ -1,0 +1,11 @@
+\subsection{Testing MMonCa}
+
+\MMonCa\ includes a test suite of several test cases. If you want to check the integrity of the distribution, or whether yuor compilation is correct, all tests should be run and should pass. Sometimes few tests might fail even when the distribution is correct if it was compiled in an architecture different than the original. The original architecture is \param{Ubuntu} LTS 14.04. In this cases, the failing cases are usually a little bit out of the random variation allowed in the original architecture. 
+
+All the tests are in the \param{test} subdirectory. The following scripts are available:
+
+\begin{description}
+\item [\param{runAll.sh}] To run all the tests and display the results.
+\item [\param{runFailed.sh}] To run only the failing tests and display all the results.
+\item [\param{collect.sh}] To display the results only, no running of tests.
+\end{description}

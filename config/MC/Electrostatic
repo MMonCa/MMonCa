@@ -1,0 +1,24 @@
+bool   load.poisson            false
+bool   FermiDirac              true
+
+// Do NOT set "self.consistent.lkmc" to true! 
+bool   self.consistent.lkmc    false
+// Setting partial ionization to "true" is not a good idea for process simulation!
+// At high concentration, ionization energy of shallow impurities becomes ~ 0!
+bool   partial.ionization      false
+
+// Conjugate-Gradient solver 
+float  cg.tolerance            1e-5
+int    cg.max.iteration        1000
+int    cg.verbose              0
+
+// Newton-Raphson solver
+float  newton.tolerance        1e-4
+int    newton.max.iteration    50
+int    newton.verbose          0
+
+// update mechanism
+int   update.time.decade 3
+float update.time.delta 0
+float update.time.min 1e-10
+float update.events 1e7 

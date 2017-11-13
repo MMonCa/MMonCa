@@ -1,0 +1,307 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2012  
+Reading config in 
+Reading config in OKMC
+Reading config in OKMC/Gas_Iron
+Reading config in OKMC/AmorphousSilicon
+Reading config in OKMC/Niobium
+Reading config in OKMC/SiO2_Silicon
+Reading config in OKMC/Iron
+Reading config in OKMC/Gas_Tungsten
+Reading config in OKMC/Nitride_SiO2
+Reading config in OKMC/Nitride
+Reading config in OKMC/Copper
+Reading config in OKMC/Copper_Niobium
+Reading config in OKMC/Barite
+Reading config in OKMC/Gas_Silicon
+Reading config in OKMC/AmorphousBarite
+Reading config in OKMC/Tungsten
+Reading config in OKMC/Gas
+Reading config in OKMC/SiO2
+Reading config in OKMC/Silicon
+Reading config in MC
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/lambda' value='0.287'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='40' maxy='40' maxz='40' material='material'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+OKMC/Iron/Models/interactions Interaction not used: He2V+V
+Tensor Mesh created
+     X: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Y: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Z: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+Total 19683 elements
+IIIIIIIIIIIIIIIIIIIIIIIIIII  0:1.48148
+IIIIIIIIIIIIIIIIIIIIIIIIIII  1.48148:2.96296
+IIIIIIIIIIIIIIIIIIIIIIIIIII  2.96296:4.44444
+IIIIIIIIIIIIIIIIIIIIIIIIIII  4.44444:5.92593
+IIIIIIIIIIIIIIIIIIIIIIIIIII  5.92593:7.40741
+IIIIIIIIIIIIIIIIIIIIIIIIIII  7.40741:8.88889
+IIIIIIIIIIIIIIIIIIIIIIIIIII  8.88889:10.3704
+IIIIIIIIIIIIIIIIIIIIIIIIIII  10.3704:11.8519
+IIIIIIIIIIIIIIIIIIIIIIIIIII  11.8519:13.3333
+IIIIIIIIIIIIIIIIIIIIIIIIIII  13.3333:14.8148
+IIIIIIIIIIIIIIIIIIIIIIIIIII  14.8148:16.2963
+IIIIIIIIIIIIIIIIIIIIIIIIIII  16.2963:17.7778
+IIIIIIIIIIIIIIIIIIIIIIIIIII  17.7778:19.2593
+IIIIIIIIIIIIIIIIIIIIIIIIIII  19.2593:20.7407
+IIIIIIIIIIIIIIIIIIIIIIIIIII  20.7407:22.2222
+IIIIIIIIIIIIIIIIIIIIIIIIIII  22.2222:23.7037
+IIIIIIIIIIIIIIIIIIIIIIIIIII  23.7037:25.1852
+IIIIIIIIIIIIIIIIIIIIIIIIIII  25.1852:26.6667
+IIIIIIIIIIIIIIIIIIIIIIIIIII  26.6667:28.1481
+IIIIIIIIIIIIIIIIIIIIIIIIIII  28.1481:29.6296
+IIIIIIIIIIIIIIIIIIIIIIIIIII  29.6296:31.1111
+IIIIIIIIIIIIIIIIIIIIIIIIIII  31.1111:32.5926
+IIIIIIIIIIIIIIIIIIIIIIIIIII  32.5926:34.0741
+IIIIIIIIIIIIIIIIIIIIIIIIIII  34.0741:35.5556
+IIIIIIIIIIIIIIIIIIIIIIIIIII  35.5556:37.037
+IIIIIIIIIIIIIIIIIIIIIIIIIII  37.037:38.5185
+IIIIIIIIIIIIIIIIIIIIIIIIIII  38.5185:40
+Interfacing...
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I20' coord='20 20 20'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='VCluster' ID='V20' coord='18 18 18'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ anneal -----
+anneal time='300' temp='326.85'
+-------------------------------------------------------------------------------
+Annealing the sample for 300 seconds at 600K (326.85ºC)
+327C 0.000103007s           1   9.7e+03 s^-1 
+327C 0.000413401s           2   3.2e+03 s^-1 
+327C 0.000627047s           3   4.7e+03 s^-1 
+327C 0.000761987s           4   7.4e+03 s^-1 
+327C 0.000815131s           5   1.9e+04 s^-1 
+327C  0.00117237s           7   5.6e+03 s^-1 
+327C  0.00249346s          10   2.3e+03 s^-1 
+327C  0.00309592s          13   5.0e+03 s^-1 
+327C  0.00429191s          15   1.7e+03 s^-1 
+327C  0.00532578s          17   1.9e+03 s^-1 
+327C  0.00616932s          22   5.9e+03 s^-1 
+327C  0.00716301s          25   3.0e+03 s^-1 
+327C  0.00840546s          29   3.2e+03 s^-1 
+327C  0.00901978s          34   8.1e+03 s^-1 
+327C   0.0114099s          36   8.4e+02 s^-1 
+327C   0.0202645s          73   4.2e+03 s^-1 
+327C   0.0302322s         103   3.0e+03 s^-1 
+327C   0.0400829s         146   4.4e+03 s^-1 
+327C   0.0501305s         179   3.3e+03 s^-1 
+327C   0.0600523s         218   3.9e+03 s^-1 
+327C    0.070107s         263   4.5e+03 s^-1 
+327C   0.0808892s         292   2.7e+03 s^-1 
+327C    0.090373s         334   4.4e+03 s^-1 
+327C    0.100441s         370   3.6e+03 s^-1 
+327C    0.200543s         724   3.5e+03 s^-1 
+327C    0.300067s        1074   3.5e+03 s^-1 
+327C    0.400441s        1446   3.7e+03 s^-1 
+327C    0.500393s        1757   3.1e+03 s^-1 
+327C    0.600223s        2130   3.7e+03 s^-1 
+327C    0.700345s        2470   3.4e+03 s^-1 
+327C    0.800108s        2813   3.4e+03 s^-1 
+327C    0.900316s        3184   3.7e+03 s^-1 
+327C     1.00035s        3513   3.3e+03 s^-1 
+327C     2.00004s        6932   3.4e+03 s^-1 
+327C     3.00002s       10532   3.6e+03 s^-1 
+327C     4.00018s       13997   3.5e+03 s^-1 
+327C     5.00001s       17556   3.6e+03 s^-1 
+327C     6.00015s       21095   3.5e+03 s^-1 
+327C     7.00001s       24526   3.4e+03 s^-1    3431 ev/s 
+327C     8.00002s       28111   3.6e+03 s^-1 
+327C     9.00079s       31503   3.4e+03 s^-1 
+327C     10.0005s       35122   3.6e+03 s^-1 
+327C     20.0002s       70296   3.5e+03 s^-1 
+327C     30.0002s      105030   3.5e+03 s^-1 
+327C     40.0014s      139588   3.5e+03 s^-1   34558 ev/s 
+327C     50.0002s      174597   3.5e+03 s^-1 
+327C     60.0004s      209417   3.5e+03 s^-1 
+327C     70.0005s      244349   3.5e+03 s^-1   34932 ev/s 
+327C     80.0003s      279166   3.5e+03 s^-1 
+327C     90.0005s      314321   3.5e+03 s^-1 
+327C         100s      349449   3.5e+03 s^-1   35128 ev/s 
+327C     200.001s      697883   3.5e+03 s^-1  116144 ev/s 
+327C         300s     2069440   1.4e+04 s^-1  342889 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+<111>/I19                            1
+VCluster/V19                         1
+----------------- Event Log --------------
+ ----------------------------------------Iron            MobileParticle
+Type           migrate  break up
+V              1023065
+
+ ----------------------------------------Iron            ExtendedDefect
+Type           migrate        to      from    emit I    emit V    detrap
+<111>          1046368
+VCluster                                                     6
+
+----------------- Reaction Log --------------
+ ----------------------------------------Iron            ExtendedDefect
+ExtendedDefect <111>+V               1
+ExtendedDefect VCluster+V            5
+
+----------------------------------------------------------------- extract -----
+extract count.defects defect='VCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='perpendicular' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+perpendicular: Requested error is 0% error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract defects file='out'
+-------------------------------------------------------------------------------
+Results written in out
+------------------------------------------------------------------- param -----
+param set type='string' key='OKMC/Iron/<111>/migration.type' value='3d'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='40' maxy='40' maxz='40' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 2 objects...done
+Time spent: 11s.
+Tensor Mesh created
+     X: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Y: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Z: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+Total 19683 elements
+IIIIIIIIIIIIIIIIIIIIIIIIIII  0:1.48148
+IIIIIIIIIIIIIIIIIIIIIIIIIII  1.48148:2.96296
+IIIIIIIIIIIIIIIIIIIIIIIIIII  2.96296:4.44444
+IIIIIIIIIIIIIIIIIIIIIIIIIII  4.44444:5.92593
+IIIIIIIIIIIIIIIIIIIIIIIIIII  5.92593:7.40741
+IIIIIIIIIIIIIIIIIIIIIIIIIII  7.40741:8.88889
+IIIIIIIIIIIIIIIIIIIIIIIIIII  8.88889:10.3704
+IIIIIIIIIIIIIIIIIIIIIIIIIII  10.3704:11.8519
+IIIIIIIIIIIIIIIIIIIIIIIIIII  11.8519:13.3333
+IIIIIIIIIIIIIIIIIIIIIIIIIII  13.3333:14.8148
+IIIIIIIIIIIIIIIIIIIIIIIIIII  14.8148:16.2963
+IIIIIIIIIIIIIIIIIIIIIIIIIII  16.2963:17.7778
+IIIIIIIIIIIIIIIIIIIIIIIIIII  17.7778:19.2593
+IIIIIIIIIIIIIIIIIIIIIIIIIII  19.2593:20.7407
+IIIIIIIIIIIIIIIIIIIIIIIIIII  20.7407:22.2222
+IIIIIIIIIIIIIIIIIIIIIIIIIII  22.2222:23.7037
+IIIIIIIIIIIIIIIIIIIIIIIIIII  23.7037:25.1852
+IIIIIIIIIIIIIIIIIIIIIIIIIII  25.1852:26.6667
+IIIIIIIIIIIIIIIIIIIIIIIIIII  26.6667:28.1481
+IIIIIIIIIIIIIIIIIIIIIIIIIII  28.1481:29.6296
+IIIIIIIIIIIIIIIIIIIIIIIIIII  29.6296:31.1111
+IIIIIIIIIIIIIIIIIIIIIIIIIII  31.1111:32.5926
+IIIIIIIIIIIIIIIIIIIIIIIIIII  32.5926:34.0741
+IIIIIIIIIIIIIIIIIIIIIIIIIII  34.0741:35.5556
+IIIIIIIIIIIIIIIIIIIIIIIIIII  35.5556:37.037
+IIIIIIIIIIIIIIIIIIIIIIIIIII  37.037:38.5185
+IIIIIIIIIIIIIIIIIIIIIIIIIII  38.5185:40
+Interfacing...
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I20' coord='20 20 20'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='VCluster' ID='V20' coord='18 18 18'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ anneal -----
+anneal time='300' temp='326.85'
+-------------------------------------------------------------------------------
+Annealing the sample for 300 seconds at 600K (326.85ºC)
+327C 3.43357e-05s           1   2.9e+04 s^-1 
+327C 0.000137801s           2   9.7e+03 s^-1 
+327C 0.000209017s           3   1.4e+04 s^-1 
+327C 0.000390792s           7   2.2e+04 s^-1 
+327C 0.000444958s           8   1.8e+04 s^-1 
+327C 0.000629812s           9   5.4e+03 s^-1 
+327C 0.000831158s          10   5.0e+03 s^-1 
+327C 0.000909595s          11   1.3e+04 s^-1 
+327C  0.00103198s          13   1.6e+04 s^-1 
+327C  0.00205645s          22   8.8e+03 s^-1 
+327C  0.00300661s          34   1.3e+04 s^-1 
+327C  0.00400512s          38   4.0e+03 s^-1 
+327C  0.00506659s          48   9.4e+03 s^-1 
+327C  0.00608814s          64   1.6e+04 s^-1 
+327C  0.00710354s          77   1.3e+04 s^-1 
+327C   0.0081759s          87   9.3e+03 s^-1 
+327C  0.00928472s          97   9.0e+03 s^-1 
+327C   0.0100774s         103   7.6e+03 s^-1 
+327C   0.0200175s         218   1.2e+04 s^-1 
+327C   0.0301244s         334   1.1e+04 s^-1 
+327C   0.0401187s         440   1.1e+04 s^-1 
+327C   0.0501553s         537   9.7e+03 s^-1 
+327C   0.0600731s         648   1.1e+04 s^-1 
+327C   0.0700119s         763   1.2e+04 s^-1 
+327C   0.0800808s         857   9.3e+03 s^-1 
+327C    0.090259s         965   1.1e+04 s^-1 
+327C    0.100023s        1074   1.1e+04 s^-1 
+327C    0.200075s        2130   1.1e+04 s^-1 
+327C    0.300107s        3184   1.1e+04 s^-1 
+327C    0.400112s        4215   1.0e+04 s^-1 
+327C    0.500016s        5217   1.0e+04 s^-1 
+327C    0.600068s        6233   1.0e+04 s^-1 
+327C    0.700065s        7263   1.0e+04 s^-1 
+327C    0.800112s        8335   1.1e+04 s^-1 
+327C    0.900097s        9411   1.1e+04 s^-1 
+327C     1.00006s       10525   1.1e+04 s^-1 
+327C     2.00049s       21093   1.1e+04 s^-1 
+327C     3.00001s       31496   1.0e+04 s^-1 
+327C     4.00006s       42140   1.1e+04 s^-1 
+327C     5.00004s       52671   1.1e+04 s^-1   10531 ev/s 
+327C     6.00002s       63149   1.0e+04 s^-1 
+327C     7.00006s       73785   1.1e+04 s^-1 
+327C     8.00008s       84116   1.0e+04 s^-1 
+327C     9.00002s       94615   1.0e+04 s^-1 
+327C     10.0001s      105022   1.0e+04 s^-1 
+327C          20s      209409   1.0e+04 s^-1  104387 ev/s 
+327C          30s      314307   1.0e+04 s^-1  104898 ev/s 
+327C          40s      419449   1.1e+04 s^-1  105142 ev/s 
+327C          50s      523812   1.0e+04 s^-1  104363 ev/s 
+327C          60s      628325   1.0e+04 s^-1  104513 ev/s 
+327C     70.0001s      733003   1.0e+04 s^-1  104678 ev/s 
+327C          80s      837387   1.0e+04 s^-1  104384 ev/s 
+327C     90.0001s      941931   1.0e+04 s^-1  104544 ev/s 
+327C         100s     1046496   1.0e+04 s^-1  104565 ev/s 
+No more events to anneal... over.
+327C         300s     2029837   4.9e+03 s^-1  196668 ev/s 
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Iron            MobileParticle
+Type           migrate  break up
+V               396960
+
+ ----------------------------------------Iron            ExtendedDefect
+Type           migrate        to      from    emit I    emit V    detrap
+<111>          1632873
+VCluster                                                     3
+
+----------------- Reaction Log --------------
+ ----------------------------------------Iron            ExtendedDefect
+ExtendedDefect VCluster+V            3 VCluster+<111>        1
+
+----------------------------------------------------------------- extract -----
+extract count.defects defect='VCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='3D' float='0' value='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+3D: Requested error is 0% error is 0%
+Test PASSED... continuing
+Deleting 0 objects...done
+Time spent: 15s.
+         1 times: 3D: Requested error is 0% error is 0%
+         2 times: OKMC/Iron/Models/interactions Interaction not used: He2V+V
+         1 times: perpendicular: Requested error is 0% error is 0%
+¡Esto sí que es ...
+                ... una chirigota!

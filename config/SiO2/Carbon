@@ -1,0 +1,5 @@
+// Migration
+arrhenius C(migration) 2.26e-3 3
+// Binding
+arrhenius C(formation) 0 1
+

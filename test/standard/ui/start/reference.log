@@ -1,0 +1,56 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.3 Compiled on May  9 2013 12:54:23
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+Loading Particle To Node handler
+Building nodes
+IIIIIIIIIIIII -                0:1.53846
+IIIIIIIIIIIII -                1.53846:3.07692
+IIIIIIIIIIIII -                3.07692:4.61538
+IIIIIIIIIIIII -                4.61538:6.15385
+IIIIIIIIIIIII -                6.15385:7.69231
+IIIIIIIIIIIII -                7.69231:9.23077
+IIIIIIIIIIIII -                9.23077:10.7692
+IIIIIIIIIIIII -                10.7692:12.3077
+IIIIIIIIIIIII -                12.3077:13.8462
+IIIIIIIIIIIII -                13.8462:15.3846
+IIIIIIIIIIIII -                15.3846:16.9231
+IIIIIIIIIIIII -                16.9231:18.4615
+IIIIIIIIIIIII -                18.4615:20
+Deleting 0 objects...done
+Time spent: 0s.
+No por mucho simular amanece más temprano

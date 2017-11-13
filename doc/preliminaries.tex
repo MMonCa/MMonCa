@@ -1,0 +1,54 @@
+\section{Citing}
+
+Please, if using \MMonCa\ cite it as in Ref.~\cite{MARTIN-BRAGADO-CPC13}.
+If you use the LKMC module only, you can cite Ref.~\cite{MARTIN-BRAGADO-APL11}.
+If using the BCA software (Ion Implant Simulator) cite
+Ref.~\cite{HERNANDEZ-MANGAS-JAP02}
+
+
+\section{Introduction}
+\subsection{Installation from source code}
+\begin{enumerate}
+ \item Download and unpack the \MMonCa\ source code from the IMDEA Materials web page. {\tt http://www.materials.imdea.org/MMonCa}.
+ \item Be sure you have a modern version of the {\tt g++} compiler installed in your system. 
+\begin{itemize}
+\item Type \param{make} to obtain some help on how the \param{Makefile} system works.
+\item The make command expects one \param{machine} to be specified. The available machines are in the directory \param{sysmakes}.
+\item Each \param{machine} is a specific configuration for a particular architecture. The \param{make} commands creates a binary directory called {\tt Obj\verb+_+machine} directory, with the \param{mmonca} binary inside.
+\end{itemize}
+\item The compilation system looks for several libraries. Some of them are compulsory, other optional if you want to have the \param{iris} FEM module running. In an Ubuntu or Debian system these libraries can be installed using \param{apt-get}. The required libraries (for Ubuntu) are:
+\begin{description}
+\item[compulsory] {\tt tcl-dev}.
+\item[compulsory] {\tt libboost-dev}.
+\item[compulsory] {\tt libboost-iostreams-dev}
+\item[iris] {\tt libsuperlu3-dev}.
+\item[iris] {\tt liblapack-dev}.
+\end{description}
+ \item Depending on the location of your workspace, add the following line to {\tt .bashrc: export MCPATH=/home/\textit{username}/workspace/MMonCa/config}
+ \item After compiling the code navigate to ({\tt cd} command): \\
+{\tt /home/\textit{username}/workspace/MMonCa/test}, and enter {\tt runAll.sh} in order to run the KMC tests and confirm a successful installation. The test suite expects a MMonCa binary in a directory called Release. You can copy or link a binary there for the test suite to work. By default, it uses the binary inside \verb-Obj_g++-.
+\end{enumerate}
+
+
+
+\subsection{Submission Policy}
+\index{submission}
+When collaborating on a program, it is essential to preserve the functionality of existing code before adding your own. Therefore, after code is developed it is important to run all existing \param{test} to check that there are no failures. Also, new tests are required to be created for every new feature in the code.
+
+The test-suite can be run with the command \param{runAll.sh} in the \param{test} directory as previously explained.
+
+\subsection{Installation from binary sources}
+\begin{itemize}
+\item Untar and unzip the \MMonCa\ binary with something like:
+\begin{verbatim}
+tar -xvzf MMonCa-VERSION-bin.tar.gz
+\end{verbatim}
+\item Be sure you have the following libraries installed in your system:
+\begin{itemize}
+\item libtcl
+\item libblas
+\item liblapack
+\item libsuperlu
+\end{itemize}
+ \item Depending on the location of your workspace, add the following line to {\tt .bashrc: export MCPATH=/home/\textit{username}/workspace/MMonCa/config}.\index{MCPATH}
+\end{itemize}

@@ -1,0 +1,29 @@
+\section{profile}
+\index{profile}
+
+This command ``reads'' a profile from a TCL procedure and atomizes it into the requested defect. It needs at least two arguments, the {\tt proc} with the profile information, and the {\tt name} of the defect.
+
+The {\tt proc} has to be specified by the user in the input script.
+
+{\tt name} can be a point defect, or a cluster. \MMonCa\ tries to figure out which type. If a
+cluster (for instance, ``I56'' is detected, and extra parameter \param{type} is requested.
+
+\begin{description}
+\item [do.not.react]\index{do.not.react} Avoids the reaction of an incoming particle with an existing one.
+\item [name=$<$ID$>$]\index{name} Specifies the particle or defect ID (i.e. Ci, C2I3, etc...)
+\item [defect=$<$defect$>$>]\index{defect} For clusters, specifies between the different clusters (ICluster, Void, etc...)
+\item [proc=$<$procedure$>$]\index{proc} Specifies the TCL procedure that, taking the arguments x, y and z in nanometers, will return the concentration.
+\end{description}
+
+\subsection{Examples}
+ For instance, if {\tt proc=myName}
+
+\begin{lstlisting}
+proc myName { x y z } {
+  if { $x > 19 && $x < 21 } { return 1e20 }
+  return 0
+}
+
+profile name=FeI proc=myName
+profile name=V4 proc=myName defect=VCluster
+\end{lstlisting}

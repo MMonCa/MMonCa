@@ -1,0 +1,25 @@
+\section{insert}
+\index{insert}
+
+It inserts OKMC objects in the simulator.
+Accepted defects are:
+\begin{description}
+\item[Clusters] Requires a {\tt defect} name and an {\tt ID}.
+\item[Mobile particles] Requires a {\tt particle} name.
+\end{description}
+
+\begin{description}
+\item [coord=$<$x y z$>$]\index{coord} Coordinates for the defect or the center of mass of the defect.
+\item [defect=$<$name$>$]\index{defect} Inserts a defect with the specified name. It requires the proper {\tt ID} parameter.
+\item [do.not.react]\index{do.not.react} Flag to avoid the reaction of just inserted particles. (i.e., if an inserted particles is on the capture radius of an existing one, it does not react).
+\item [ID=$<$ID$>$]\index{ID} Defect's ID.
+\item [interface]\index{interface} Flag to insert particles at interfaces. Use together with the \param{particle} parameter.
+\item [particle=$<$type$>$]\index{particle} Inserts a particle with the specified type at the requested coordinates.
+\end{description}
+
+\subsection{Examples}
+\begin{itemize}
+\item \verb+insert defect=Cluster ID=HeV2 coord={5 5 5}+
+\item \verb+insert particle=HeV coord={$x1 $y1 $z1}+ Insert an HeV at coordinates (x1, y1, z1) previously defined.
+\item \verb+insert defect=ICluster ID=^I4 coord={3 4 5 }+
+\end{itemize}

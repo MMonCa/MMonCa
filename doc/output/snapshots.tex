@@ -1,0 +1,23 @@
+\section{Updates}
+\index{updates}
+
+\MMonCa\ uses an update mechanism to call update events (to be described later) based on the following parameters:
+\begin{description}
+\item[time.decade\index{time.decade}] The update event wil be called this number of times per decade of simulated time. For instance, a value of 10 here will update at times 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, ...
+\item[time.delta\index{time.delta}] The update event will be called at the specified interval. For instance, for {\tt time.delta}=5, at 5, 10, 15, 20, ...
+\item[time.min\index{time.min}] Minimum time to start the updates.
+\item[events\index{events}] The update event will be called each {\tt events}.
+\end{description}
+
+All the above options work at the same time. For instance, it is possible to have the updates 3 times per decade, and also every 10 seconds.
+
+These update mechanisms are used for the following modules:
+
+\begin{description}
+\item[snapshots\index{snapshot}] \MMonCa\ outputs the status the simulation with a frequency specified in the {\tt MC/General/snapshot} update. This update produces two different actions. First, it outputs the current status, and it also calls the {\tt snapshot} procedure. The user can defined a snapshot procedure to extract information, save the time evolution of the simulation, etc. The option {\tt events} does not work for snapshots.
+\item[charge model update\index{update!charge model}] The frequency at which the Poisson solver is called is specified in the {\tt MC/Electrostatic/update} parameter.
+\item[mechanical update\index{update!mechanical}] The frequency at which the mechanical solver is called and the mechanical information fed into KMC is specified in the {\tt Mechanics/General/update} parameter.
+\end{description}
+
+
+

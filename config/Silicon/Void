@@ -1,0 +1,54 @@
+string shape void
+float density.cm3 3e22
+string to   Void
+string from IVCluster
+string migration.type 3d
+// coordinates axis.2 1 0 0
+coordinates axis.1 0 1 0 
+coordinates axis.0 0 0 1
+coordinates not.in.plane 0 0 0
+bool IV.model false
+bool percolation true
+float lambda         0.384
+
+proc transform.from { }
+proc migration      { }
+proc transform.to   { }
+
+proc formation {
+  set list ""
+  set ener(2)      2.14
+  set ener(3)      1.96
+  set ener(4)      2.35
+  set ener(5)      3.06
+  set ener(6)      3.67
+  set ener(7)      1.54
+  set ener(8)      2.13
+  set ener(9)      3.62
+  set ener(10)     3.80
+  set Ef 3.74
+  set pot 0
+  for { set size 2 } { $size < 500 } { incr size } {
+	set EbS 1.5
+  	set EbL 2.5
+  	set a   0.6667
+
+    set Eb [expr $EbL - ($EbL-$EbS)*(pow($size,$a) - pow($size-1.,$a))/(pow(2.,$a)-1.)]
+	if { $size < 11 } { set Eb $ener($size) }	
+	set pot [expr $pot - $Eb]
+	lappend list V$size < [expr $size*$Ef + $pot] >
+	}
+	return $list
+	
+}
+
+proc prefactor {	
+ 	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 5.*$size]
+		
+		lappend list V$size,V
+		lappend list $pref
+	}
+	return $list
+}

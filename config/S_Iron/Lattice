@@ -1,0 +1,13 @@
+string type bcc.1
+
+// 0   0   0
+// 0.5 0.5 0.5
+
+float               parameter 0.287
+
+bool remove.defects false
+
+map<string,float>   neighbor.distance first 0.25 second 0.4 third 0.4
+
+map<string,float>   wafer.orientation i 1 j 0 k 0
+map<string,float>   flat.orientation  i 0 j 1 k 0

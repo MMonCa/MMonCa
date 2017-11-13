@@ -1,0 +1,393 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2012  
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='OKMC/Iron/Models/defined' value='true' index='MultiCluster'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='OKMC/Iron/Helium/cluster.potential' value='4' index='He4V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+a false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+b false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+c false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+d false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+f false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+g false -- false OK 
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='true' index='He*+V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='false' index='He*V*+V'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 0 objects...done
+Time spent: 0s.
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+h true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+i false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+j false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+k false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+l false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+m false -- false OK 
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='true' index='He*+V'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 0 objects...done
+Time spent: 0s.
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+n true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+o true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+p true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+q true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+r false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+s false -- false OK 
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='false' index='He*+V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='true' index='HeV2+V'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 0 objects...done
+Time spent: 0s.
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+t false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+u false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+v false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+w true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+x false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+y false -- false OK 
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='true' index='He*+He*'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 0 objects...done
+Time spent: 0s.
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+0 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+1 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+2 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+3 true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+4 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+5 true -- true OK 
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='true' index='He*+VCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 0 objects...done
+Time spent: 0s.
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+6 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+7 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+8 false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+9 true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+A true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+B true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+Gas'
+-------------------------------------------------------------------------------
+C false -- false OK 
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='OKMC/Iron/Models/interactions' value='true' index='He*+Gas'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 0 objects...done
+Time spent: 0s.
+Tensor Mesh created
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+IIIIIIIIIIIII  0:1.53846
+IIIIIIIIIIIII  1.53846:3.07692
+IIIIIIIIIIIII  3.07692:4.61538
+IIIIIIIIIIIII  4.61538:6.15385
+IIIIIIIIIIIII  6.15385:7.69231
+IIIIIIIIIIIII  7.69231:9.23077
+IIIIIIIIIIIII  9.23077:10.7692
+IIIIIIIIIIIII  10.7692:12.3077
+IIIIIIIIIIIII  12.3077:13.8462
+IIIIIIIIIIIII  13.8462:15.3846
+IIIIIIIIIIIII  15.3846:16.9231
+IIIIIIIIIIIII  16.9231:18.4615
+IIIIIIIIIIIII  18.4615:20
+Interfacing...
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+V'
+-------------------------------------------------------------------------------
+D false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V+V'
+-------------------------------------------------------------------------------
+E false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2V2+V'
+-------------------------------------------------------------------------------
+F false -- false OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='HeV2+V'
+-------------------------------------------------------------------------------
+G true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+VCluster'
+-------------------------------------------------------------------------------
+H true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+He2V'
+-------------------------------------------------------------------------------
+I true -- true OK 
+------------------------------------------------------------------- param -----
+param get.reaction material='Iron' index='He2+Gas'
+-------------------------------------------------------------------------------
+J true -- true OK 
+Deleting 0 objects...done
+Time spent: 0s.
+¡Hasta la vista!

@@ -1,0 +1,19 @@
+map<string,string> materials \
+Silicon Si AmorphousSilicon aSi SiO2 SiO2 Nitride Ni \
+S_Iron Fe \
+Gas Gas 
+
+int    random.seed 4357
+
+int    domains    1
+int    subdomains 1
+int    levels     1
+
+int   snapshot.time.decade 10
+float snapshot.time.delta 0
+float snapshot.time.min 1e-5
+float snapshot.events 1e8
+
+bool   debug false
+bool   average.rates false
+bool   load.poisson false

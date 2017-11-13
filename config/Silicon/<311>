@@ -1,0 +1,108 @@
+string shape plane311
+float density.cm2 4.1e14
+string to   <311>
+string from IVCluster
+string migration.type 3d
+// coordinates axis.2 3  1  1
+coordinates axis.1 0 -1  1 
+coordinates axis.0 2 -3 -3
+coordinates not.in.plane 0 0 0
+float axes.ratio 7
+bool IV.model false
+bool percolation true
+float lambda         0.384
+
+proc transform.from { }
+proc migration { }
+proc transform.to   { }
+
+proc formation {
+  set Ef 4
+  set list ""
+	
+  set ener(2)      2.40
+  set ener(3)      2.50
+  set ener(4)      2.77
+  set ener(5)      2.67
+  set ener(6)      2.48
+  set ener(7)      2.46
+  set ener(8)      3.24
+  set ener(9)      2.40
+  set ener(10)     2.69
+  set ener(11)     2.73
+  set ener(12)     2.92
+  set ener(13)     3.00
+  set ener(14)     3.06
+  set ener(15)     2.940
+  set ener(16)     2.940
+  set ener(17)     2.941
+  set ener(18)     2.941
+  set ener(19)     2.942
+  set ener(20)     2.942
+  set ener(21)     2.943
+  set ener(22)     2.943
+  set ener(23)     2.944
+  set ener(24)     2.944
+  set ener(25)     2.944
+  set ener(26)     2.945
+  set ener(27)     2.945
+  set ener(28)     2.946
+  set ener(29)     2.946
+  set ener(30)     2.947
+  set ener(31)     2.947
+  set ener(32)     2.947
+  set ener(33)     2.948
+  set ener(34)     2.948
+  set ener(35)     2.949
+  set ener(36)     2.949
+  set ener(37)     2.950
+  set ener(38)     2.950
+  set ener(39)     2.951
+  set ener(40)     2.951
+  set ener(41)     2.951
+  set ener(42)     2.952
+  set ener(43)     2.952
+  set ener(44)     2.953
+  set ener(45)     2.953
+  set ener(46)     2.954
+  set ener(47)     2.954
+  set ener(48)     2.955
+  set ener(49)     2.955
+  set ener(50)     2.955
+  set ener(51)     2.956
+  set ener(52)     2.956
+  set ener(53)     2.957
+  set ener(54)     2.957
+  set ener(55)     2.958
+  set ener(56)     2.958
+  set ener(57)     2.958
+  set ener(58)     2.959
+  set ener(59)     2.959
+  set ener(60)     2.960 
+		
+  set pot 0
+  for { set size 2 } { $size < 500 } { incr size } {
+	set EbS 2.64
+  	set EbL 3.17
+  	set a   0.75
+
+    set Eb [expr $EbL - ($EbL-$EbS)*(pow($size,$a) - pow($size-1.,$a))/(pow(2.,$a)-1.)]
+	if { $size < 61 } { set Eb $ener($size) }	
+	set pot [expr $pot - $Eb]
+	lappend list I$size < [expr $size*$Ef + $pot] >
+   }
+   return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 50.*$size]
+		
+		lappend list I$size,I
+		lappend list $pref
+	}
+	return $list
+}
+
+

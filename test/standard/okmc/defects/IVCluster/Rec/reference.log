@@ -1,0 +1,197 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 1.0.9-BC Compiled on Feb 27 2014 12:01:25
+        Contact: ignacio.martin@imdea.org
+     (C) 2011-2014 IMDEA Materials Institute.     
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in SiliconCarbide
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in Gas_SiliconCarbide
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in AmorphousTungsten
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value='true' index='IVCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+     X: (-2 - 20) nm. 15 elements. Delta = 1.46667 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2535 elements
+Loading Particle To Node handler
+Setting long hop in number 3
+Building nodes... Done
+SSSSSSSSSSSSS  -2:-0.533333
+SSSSSSSSSSSSS  18.5333:20
+Interfacing...
+---------------------------- Warning -----------------------------------
+This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+------------------------------------------------------------------ insert -----
+insert defect='IVCluster' ID='SiV^I' coord=' 11 10 10 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='IVCluster' ID='Si3V3^I3' coord=' 10 11 10 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='IVCluster' ID='Si2V3^I2' coord=' 10 10 11 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+Created 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+IVCluster/V3^I2                      1
+IVCluster/V3^I3                      1
+IVCluster/V^I                        1
+----------------------------------------------------------------- extract -----
+extract count.particles defect='IVCluster' ID='SiV^I'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='2' value='2' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles defect='IVCluster' ID='Si3V3^I3'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='6' value='6' error='0'
+-------------------------------------------------------------------------------
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles defect='IVCluster' ID='Si2V3^I2'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='5' value='5' error='0'
+-------------------------------------------------------------------------------
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='10' temp='500' events='1000000'
+-------------------------------------------------------------------------------
+Annealing the sample for 10 seconds at 773.15K (500ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+500C   1e-05s          15   0.00%    1.5e+06 s^-1       5 ev/s 
+500C   2e-05s          22   0.00%    7.8e+05 s^-1 
+500C   3e-05s          26   0.00%    4.0e+05 s^-1 
+500C   4e-05s          30   0.00%    4.0e+05 s^-1 
+500C   5e-05s          33   0.00%    3.0e+05 s^-1 
+500C   6e-05s          37   0.00%    4.0e+05 s^-1 
+500C   7e-05s          41   0.00%    4.0e+05 s^-1 
+500C   8e-05s          47   0.00%    6.0e+05 s^-1 
+500C   9e-05s          53   0.01%    6.0e+05 s^-1 
+500C  0.0001s          62   0.01%    9.0e+05 s^-1 
+500C 0.00011s          66   0.01%    4.0e+05 s^-1 
+500C  0.0002s         116   0.01%    5.6e+05 s^-1 
+500C  0.0003s         163   0.02%    4.7e+05 s^-1 
+500C  0.0004s         226   0.02%    6.3e+05 s^-1 
+500C  0.0005s         273   0.03%    4.7e+05 s^-1 
+500C  0.0006s         331   0.03%    5.8e+05 s^-1 
+500C  0.0007s         384   0.04%    5.3e+05 s^-1 
+500C  0.0008s         457   0.05%    7.3e+05 s^-1 
+500C  0.0009s         516   0.05%    5.9e+05 s^-1 
+500C   0.001s         569   0.06%    5.3e+05 s^-1 
+500C  0.0011s         627   0.06%    5.8e+05 s^-1 
+500C   0.002s        1140   0.11%    5.7e+05 s^-1 
+500C   0.003s        1681   0.17%    5.4e+05 s^-1 
+500C   0.004s        2254   0.23%    5.7e+05 s^-1 
+500C   0.005s        2772   0.28%    5.2e+05 s^-1 
+500C   0.006s        3367   0.34%    6.0e+05 s^-1 
+500C   0.007s        3943   0.39%    5.8e+05 s^-1 
+500C   0.008s        4497   0.45%    5.5e+05 s^-1 
+500C   0.009s        5028   0.50%    5.3e+05 s^-1 
+500C    0.01s        5595   0.56%    5.7e+05 s^-1 
+500C   0.011s        6200   0.62%    6.1e+05 s^-1 
+500C    0.02s       11224   1.12%    5.6e+05 s^-1 
+500C    0.03s       16740   1.67%    5.5e+05 s^-1 
+500C    0.04s       22210   2.22%    5.5e+05 s^-1 
+500C    0.05s       27895   2.79%    5.7e+05 s^-1 
+500C    0.06s       33574   3.36%    5.7e+05 s^-1 
+500C    0.07s       38980   3.90%    5.4e+05 s^-1 
+500C    0.08s       44622   4.46%    5.6e+05 s^-1 
+500C    0.09s       50235   5.02%    5.6e+05 s^-1 
+500C     0.1s       55808   5.58%    5.6e+05 s^-1 
+500C    0.11s       61416   6.14%    5.6e+05 s^-1 
+500C       1s      557734  55.77%    5.6e+05 s^-1  496318 ev/s 
+500C 1.79187s     1000000 100.00%    5.6e+05 s^-1 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/VSi                   1
+----------------- Event Log --------------
+ ----------------------------------------Silicon         MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+VSi_0                                                                   299799     33189
+VSi_-                                                                   299726     33451
+VSi_+                                                                   300496     33332
+
+ ----------------------------------------Silicon                Cluster
+Type                   Mig      To    From     Rec Emissions  
+IVCluster/V^I                                    3 
+IVCluster/V2^I2                                  2 
+IVCluster/V3^I2                                    1(VSi) 
+IVCluster/V3^I3                                  1 
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='SiI'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='0' value='0' error='0'
+-------------------------------------------------------------------------------
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles particle='VSi'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+Test PASSED... continuing
+Time spent: 1s.
+         6 times: : Requested error is  < 0% maximum error is 0%
+        42 times: Snapshot not defined or error.
+         1 times: This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+There are 8 total sentences. Collect them all!
+Hay 10 tipos de personas...
+                        ... las que saben binario y las que no

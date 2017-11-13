@@ -1,0 +1,229 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.3 Compiled on Jun 19 2013 12:50:23
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/lambda' value='0.287'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='1.3'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/data.delta.x' value='1.'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/data.delta.y' value='1.'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/data.delta.z' value='1.'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='50' maxy='50' maxz='50' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+     X: (0 - 50) nm. 38 elements. Delta = 1.31579 nm.
+     Y: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+     Z: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+Total 41382 elements
+Loading Particle To Node handler
+Building nodes
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  0:1.31579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  1.31579:2.63158
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  2.63158:3.94737
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  3.94737:5.26316
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  5.26316:6.57895
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  6.57895:7.89474
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  7.89474:9.21053
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  9.21053:10.5263
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  10.5263:11.8421
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  11.8421:13.1579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  13.1579:14.4737
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  14.4737:15.7895
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  15.7895:17.1053
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  17.1053:18.4211
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  18.4211:19.7368
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  19.7368:21.0526
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  21.0526:22.3684
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  22.3684:23.6842
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  23.6842:25
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  25:26.3158
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  26.3158:27.6316
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  27.6316:28.9474
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  28.9474:30.2632
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  30.2632:31.5789
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  31.5789:32.8947
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  32.8947:34.2105
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  34.2105:35.5263
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  35.5263:36.8421
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  36.8421:38.1579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  38.1579:39.4737
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  39.4737:40.7895
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  40.7895:42.1053
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  42.1053:43.4211
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  43.4211:44.7368
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  44.7368:46.0526
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  46.0526:47.3684
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  47.3684:48.6842
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  48.6842:50
+Interfacing...
+Deltas for concs are (1, 1, 1)
+------------------------------------------------------------------ insert -----
+insert particle='I' coord=' 5.5 5.5 5.5 '
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract profile name='I'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='zero' array=' 0. (...)' value='0' init='7' end='50' error='0'
+-------------------------------------------------------------------------------
+zero 7.5 0 -> (0 0% )
+zero 8.5 0 -> (0 0% )
+zero 9.5 0 -> (0 0% )
+zero 10.5 0 -> (0 0% )
+zero 11.5 0 -> (0 0% )
+zero 12.5 0 -> (0 0% )
+zero 13.5 0 -> (0 0% )
+zero 14.5 0 -> (0 0% )
+zero 15.5 0 -> (0 0% )
+zero 16.5 0 -> (0 0% )
+zero 17.5 0 -> (0 0% )
+zero 18.5 0 -> (0 0% )
+zero 19.5 0 -> (0 0% )
+zero 20.5 0 -> (0 0% )
+zero 21.5 0 -> (0 0% )
+zero 22.5 0 -> (0 0% )
+zero 23.5 0 -> (0 0% )
+zero 24.5 0 -> (0 0% )
+zero 25.5 0 -> (0 0% )
+zero 26.5 0 -> (0 0% )
+zero 27.5 0 -> (0 0% )
+zero 28.5 0 -> (0 0% )
+zero 29.5 0 -> (0 0% )
+zero 30.5 0 -> (0 0% )
+zero 31.5 0 -> (0 0% )
+zero 32.5 0 -> (0 0% )
+zero 33.5 0 -> (0 0% )
+zero 34.5 0 -> (0 0% )
+zero 35.5 0 -> (0 0% )
+zero 36.5 0 -> (0 0% )
+zero 37.5 0 -> (0 0% )
+zero 38.5 0 -> (0 0% )
+zero 39.5 0 -> (0 0% )
+zero 40.5 0 -> (0 0% )
+zero 41.5 0 -> (0 0% )
+zero 42.5 0 -> (0 0% )
+zero 43.5 0 -> (0 0% )
+zero 44.5 0 -> (0 0% )
+zero 45.5 0 -> (0 0% )
+zero 46.5 0 -> (0 0% )
+zero 47.5 0 -> (0 0% )
+zero 48.5 0 -> (0 0% )
+zero 49.5 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+zero: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='I'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='value' array=' 0. (...)' value='4.0000000000000006e+17' init='5' end='6' error='0'
+-------------------------------------------------------------------------------
+value 5.5 4e+17 -> (4e+17 0% )
+---------------------------- Warning -----------------------------------
+value: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='I' dimension='2'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='val.2' array.2D=' 0. (...)' value='2.0000000000000004e+19' init=' 5 5 5 ' end=' 6 6 6 ' error='0'
+-------------------------------------------------------------------------------
+val.2 5.5 5.5 2e+19 -> (2e+19 0% )
+---------------------------- Warning -----------------------------------
+val.2: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='I' dimension='3'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='val.3' array.3D=' 0. (...)' value='1.0000000000000001e+21' init=' 5 5 5 ' end=' 6 6 6 ' error='0'
+-------------------------------------------------------------------------------
+val.3 5.5 5.5 5.5 1e+21 -> (1e+21 0% )
+---------------------------- Warning -----------------------------------
+val.3: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ insert -----
+insert particle='I' coord=' 5.7 5.3 5.2 '
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract profile name='I' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='val.10' array=' 0. (...)' value='8.000000000000001e+17' init='5' end='6' error='0'
+-------------------------------------------------------------------------------
+val.10 5.5 8e+17 -> (8e+17 0% )
+---------------------------- Warning -----------------------------------
+val.10: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='I' dimension='2'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='val.20' array.2D=' 0. (...)' value='4.000000000000001e+19' init=' 5 5 5 ' end=' 6 6 6 ' error='0'
+-------------------------------------------------------------------------------
+val.20 5.5 5.5 4e+19 -> (4e+19 0% )
+---------------------------- Warning -----------------------------------
+val.20: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='I' dimension='3'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='val.30' array.3D=' 0. (...)' value='2.0000000000000003e+21' init=' 5 5 5 ' end=' 6 6 6 ' error='0'
+-------------------------------------------------------------------------------
+val.30 5.5 5.5 5.5 2e+21 -> (2e+21 0% )
+---------------------------- Warning -----------------------------------
+val.30: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+Deleting 2 objects...done
+Time spent: 2s.
+         1 times: val.10: Requested error is  < 0%  maximum error is 0%
+         1 times: val.20: Requested error is  < 0%  maximum error is 0%
+         1 times: val.2: Requested error is  < 0%  maximum error is 0%
+         1 times: val.30: Requested error is  < 0%  maximum error is 0%
+         1 times: val.3: Requested error is  < 0%  maximum error is 0%
+         1 times: value: Requested error is  < 0%  maximum error is 0%
+         1 times: zero: Requested error is  < 0%  maximum error is 0%
+¡Hasta la vista!

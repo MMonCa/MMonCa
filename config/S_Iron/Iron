@@ -1,0 +1,2 @@
+arrhenius I(migration) { 8.2e-3 0.34 }
+arrhenius I(formation) { 1e25 3.77   }

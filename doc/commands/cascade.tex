@@ -1,0 +1,120 @@
+\section{cascade}
+\index{cascade}
+
+Command used to implant or insert cascades of point defects into the simulation. Mostly used for damage simulation from an external source.
+
+The global options for all {\tt cascade} commands are
+
+\begin{description}
+\item[correct.for.surface]\index{correct.for.surface} Option to change the depth coordinate and adapt it to the place where the surface is. It assumes the cascades are computed for a surface at $x=0$.
+\item[defects]\index{defects} Procedure used to obtain the defect type of clusters. i.e., Is V4 a ICluster, a 111, etc.
+\item[fluence]\index{fluence} Fluence for cascades in the simulation. The number of cascades will be $A\mathrm{fluence}$ being $A$ the $YZ$ simulation area. Compulsory. Units: cm$^{-2}$.
+\item[do.not.react]\index{do.not.react} If specified, the new incoming particles will not react with the existing ones.
+\item[do.not.shift]\index{do.not.shift} For file cascades only: do not change the y and z coordinates of the read cascade: use it as it is.
+\item[flux]\index{flux} Optional option to specify the rate at which cascades will be annealed. If not specified, cascades will be assumed to be ``instantaneous''
+\item[periodic]\index{periodic} If present, this flag allows for coordinates outside the simulation cell to be reinserted by means of periodic boundary conditions.
+\item[temp]\index{temp} Optional. Temperature in Celsius degrees to anneal the cascades (to simulate dynamic annealing). If not specified, it is the current simulation temperature.
+\item[voluminic]\index{voluminic} Optional. If present, this flag allows to introduce the cascades homogeneously in the volume of the sample instead of just in the surface.
+\end{description}
+
+The command \param{cascade} will introduce the cascades one by one in the simulator and perform a ``dynamic annealing'' of $-\Delta t\log(r)$ after each cascade. $r$ is a random number between 0 and 1, and $\Delta t$ is the average time between cascades, equals to \param{fluence}/\param{flux}.
+
+The currently supported models for cascades are:
+\begin{description}
+\item [file] The only supported source of cascades now: Read them from a file.
+\end{description}
+
+The following options are valid for \param{file} only.
+
+\begin{description}
+\item[file=$<$filename$>$] Name of the input file. Compulsory.
+\item[format=$<$formattext$>$] Optional format of the input file. It uses A:B:C:D if not specified.
+\end{description}
+
+Cascade accepts two different formats, called ``New cascade'' and ``Number of particles''. The general format of the input file is the same, the only difference is the label used to indicate when a new cascade starts. \MMonCa\ detects the format automagically.
+\begin{itemize}
+\item A file can contain several cascades. Thus, it is necessary to insert some special label in the cascade file every time a new cascade starts.
+\item Each cascade starts with one of this two formats:
+\begin{description}
+\item[\# New cascade] The verbatim label \verb+# New cascade+. 
+\item[Number] A number indicating how many defects (one per line) are contained in each cascade.
+\end{description}
+\item After the special label, the list of point defects follows.
+\item The format for each line in the list of defects must be the same, and it has to contain, at least, the name of the point defect, and three columns with  the x, y and z coordinates. The $y$ and $z$ of such coordinates refer to an impact point of $(0,0)$.
+\end{itemize}
+
+The \param{cascade} command will read as many cascades as needed, in the order they have in the file, and shift them with random $y$ and $z$ numbers to fill the whole area. If more cascades than the ones specified in the file are needed the process will start again from the first cascade in the file.
+
+The \param{format} command needed for the \param{file} option specifies the format for the point defects in the file. It is a string containing a list of field. Such list of fields is separated by colons ``:''. 4 fields are needed, representing the particle type (mobile particle types only) and the x, y and z coordinates in nanometers. The positions of such fields in this order will be indicated by using the letters A to Z. Arithmetic operations are possible. The letters A to Z represent the column number in the text file specified in the \param{filename}. Some examples follow.
+
+The \param{defects} option allows the specification of a procedure to resolve the defect type of a given cluster:
+\begin{lstlisting}
+proc defects { def } { 
+	if { [string index $def 0] == "V" } 
+		return "VCluster" 
+	return "<111>" 
+}
+\end{lstlisting}
+
+\subsection{Cascade examples}
+\index{cascade!formats}
+Two equivalent examples are given above in the two accepted formats. The format is automatically detected by \MMonCa.
+
+\subsubsection{Format ``\# New cascade''}
+
+The following example contains 2 cascades:
+
+\begin{lstlisting}
+# New cascade
+I 23.4 .5  .9
+V 21.2 .6  .85
+I 17.2 .55 .92
+V 18.0 .53 .87
+I 20.0 .58 .91
+# New cascade
+I 19.9 -.1 .1
+V 19.7 -.2 .2
+I 17.2 .1  -.1
+V 19.3  .2 .2
+I 18.3 -.14   .17
+V 20.1 -0.03 0.1
+I 21.9  0.12 0.16
+\end{lstlisting}
+
+\subsubsection{Format ``number of defects''}
+
+The following example contains 2 cascades:
+
+\begin{lstlisting}
+5
+I 23.4 .5  .9
+V 21.2 .6  .85
+I 17.2 .55 .92
+V 18.0 .53 .87
+I 20.0 .58 .91
+7
+I 19.9 -.1 .1
+V 19.7 -.2 .2
+I 17.2 .1  -.1
+V 19.3  .2 .2
+I 18.3 -.14   .17
+V 20.1 -0.03 0.1
+I 21.9  0.12 0.16
+\end{lstlisting}
+
+\subsection {Examples}
+
+Some examples for the \param{format} field follows:
+\begin{itemize}
+\item \verb+A:B:C:D+ A file in nanometers where the first column are the particles types and the following ones x, y and z.
+\item \verb+A:C:D:E+ A file, in nanometers, where the first column are the particle types and the x, y and z are codified in 3$^\mathrm{rd}$, 4$^\mathrm{th}$ and 5$^\mathrm{th}$ columns. The second column in the file is not used.
+\item \verb+D:A*1e7:B*1e7:C*1e7+ A file, where x,y and z are in the first, second and third column and are specified in cm (being converted into nm by using the factor $10^7$. The fourth column contains the particle types.
+\item \verb-A:B+C*10:B+C*10:B+C*10- In this file, the x, y and z coordinates are going to be the same: the second column plus then times the third one.
+\end{itemize}
+
+Some examples for the whole command follows:
+\begin{itemize}
+\item \verb+cascade file=cascade periodic fluence=5e14 flux=1e12 temp=-150+
+\item \verb+cascade file=cascade periodic fluence=5e14 temp=-150 voluminic+
+\item \verb-cascade file=cascade format=B:C*.287:D*.287:E*.287 periodic fluence=4.8e9-
+\end{itemize}

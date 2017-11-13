@@ -1,0 +1,31 @@
+OKMC files:
+Main author: 
+	Ignacio Martin-Bragado
+Contributions: 
+	Benoit Sklenard (Poisson solver)
+	Ignacio Dopico (Alloys)
+	José Luis Gomez-Selles (Charge, Automatic amorphization)
+
+LKMC files:
+Main author:
+	Ignacio Martin-Bragado
+Contributions:
+	Benoit Sklenard (stress model)
+
+Interfaces (I/O):
+Main author:
+	Ignacio Martin-Bragado
+Contributions:
+	Benoit Sklenard (VTK writer, Makefiles)
+	Laura Agudo (Voluminic cascade option)
+	Juan-Pablo Balbuena (Mesh parser)
+
+FEM files:
+Main author:
+	Ignacio Romero
+
+RNG.cpp: Takuji Nishimura and Makoto Matsumoto
+
+BCA files: (IIS-UVA)
+Main author:
+	Jesus Maria Hernandez Mangas

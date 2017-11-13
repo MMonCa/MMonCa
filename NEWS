@@ -1,0 +1,23 @@
+1.0.0 Wed Nov  7 2012,  6:44PM
+1.0.1 Tue Nov 20 2012,  2:44PM
+1.0.2 Thu Dec 20 2012,  3:18PM
+1.0.3 ???
+1.0.4 Thu Jun 20 2013,
+1.0.5 Wed Aug 14 2013, 11:05AM. No more Extended defects
+1.0.6 ???                     . 100+111
+1.0.7 Thu Dec 26 2013,  1:00PM. Snapshots for SiC
+1.0.8 Mon Jan 20 2014, 11:27AM. No libbost_regex
+1.0.9-BC Wed, Feb 19 2014. Binary Crystals (SiC)
+2.0.0 Wed, Mar 12 2014. Binary crystals merged in master.
+2.0.1 Tue, Mar 18 2014. Fixed bugs. New parallel.events.
+2.0.2 Mon, Mar 31 2014. SiI -> SiC^CI cluster directly.
+2.0.3 Thu, Apr  3 2014. Charge model for binary crystals.
+2.0.4 Wed, Apr 23 2014. Old notation for unary crystals. 
+2.0.5 Mon, May 12 2014. Bug fixes for SiC^SiC
+2.0.6      May    2014. EUPL released.
+2.0.7 Thu, Jul 24 2014. New Makefile system
+2.0.8      Jul 30 2014. New capture volume for reactions.
+2.0.9                   Fuzz
+2.0.10     Dec 03 2014. Several bugs fixed. New epitaxy for BC crystals.
+2.0.13     Jun 02 2015. Initialization from grid files. Several bugs.
+2.0.14     Jul 06 2015. Apache 2 released.

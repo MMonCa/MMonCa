@@ -1,0 +1,14 @@
+string left SiO2
+
+map<string,float>	recombination.length.right { }
+map<string,float>	desorption.low       {  }
+map<string,float>	desorption.threshold {  }
+map<string,float>   desorption.high      {  }
+map<string,float>	barrier.right    {  }
+
+map<string,float>	recombination.length.left { }
+map<string,float>   desorption.left  { B 0 }
+map<string,float>   barrier.left     { B 0 }
+
+arrhenius           B(formation)  { 1e-3 0 }
+arrhenius           B(migration)  { 0 5 }

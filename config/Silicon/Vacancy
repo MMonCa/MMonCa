@@ -1,0 +1,13 @@
+arrhenius V_0(migration) { 5.e-8 0.4 } // was 1e-3 0.4
+arrhenius V_+(migration) { 5.e-8 0.4 } // was 1e-3 0.4
+arrhenius V_-(migration) { 5.e-8 0.4 } // was 1e-3 0.4
+arrhenius V(update)      { 5.e-8 0.4 } // was 1e-3 0.4
+arrhenius V(formation)   { 0% 9.20e29 3.74 100% 8.5e27 2.85 }  // was  0% 4.61e25 3.74 100% 8.5e27 2.85 
+
+// For self-diffusion
+float correlation.factor .5
+arrhenius alpha { 1 0 }
+  
+map<string,int> V(state.charge) V_0 0     V_+ 1     V_- -1
+float           V(e(-1,0))      .8
+float           V(e(0,1))       .4

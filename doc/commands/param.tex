@@ -1,0 +1,85 @@
+\section{param}
+\index{param}
+
+Gets and sets parameters.
+
+\begin{description}
+
+\item[add] Adds without overwriting the value for the specified parameter. It works for only two types: 
+\begin{description}
+\item [array$<$string,string$>$] Has to be used together with \param{type}, \param{key}, \param{index} and \param{value}. 
+\item [array$<$string$>$] Requires \param{type}, \param{key} and \param{value}.
+\end{description}
+
+\begin{description}
+\item[index=$<$key$>$] Operates in a particular a value of a map or array.
+\item[key=$<$key$>$] Path to the parameter.
+\item[type=$<$type$>$] The argument type: Only \param{array$<$string,string$>$} is supported.
+\item[value=$<$value$>$] New value for the parameter.
+\end{description}
+
+\item[get] Obtains the value for the specified parameter. Has to be used together with \param{type} and \param{key}, and optionally with \param{index} and \param{size}.
+\begin{description}
+\item[index=$<$idx$>$] Index for map or vectors. For vectors is an unsigned.
+\item[key=$<$key$>$] Path to the parameter.
+\item[size=$<$size$>$] Size for \param{proc.prefactor} or \param{proc.potential} or \param{proc.migration}.
+\item[type=$<$type$>$] See the list of types.
+\end{description}
+
+\item[get.reaction] Returns \param{true} or \param{false} for a specified reaction looking at the internal look-up tables. It needs to compulsory parameters, \param{material} and \param{index}.
+\begin{description}
+\item[index=$<$key$>$] Reaction to look at.
+\item[material=$<$mat$>$] Material.
+\end{description}
+
+\item[set] Overwrites the value for the specified parameter. Has to be used together with \param{type}, \param{key} and \param{value}. The option \param{new} is optional and allows to create a new parameter when there is no value assigned yet. The option \param{index} is also optional, and allows to pick up a particular definition inside a map or array.
+\begin{description}
+\item[index=$<$key$>$] Operates in a particular a value of a map instead of the whole map.
+\item[key=$<$key$>$] Path to the parameter.
+\item[new] Does not force the previous existence of the parameter.
+\item[type=$<$type$>$] The argument type: One of \param{bool}, \param{int}, \param{float}, \param{string}, \param{array$<$string,string$>$}, \param{map$<$string,string$>$}, \param{map$<$string,float$>$}, \param{coordinates}, \param{arrhenius} or \param{proc}.
+\item[value=$<$value$>$] New value for the parameter.
+\end{description}
+
+\item[unset] Deletes the value for the specified parameter. Has to be used together with \param{type}, \param{key} and \param{value}. The option \param{index} is optional, and allows to pick up a particular definition inside a map or array.
+\begin{description}
+\item[index=$<$key$>$] Operates in a particular a value of a map instead of on the whole data.
+\item[key=$<$key$>$] Path to the parameter.
+\item[type=$<$type$>$] The argument type: One of \param{bool}, \param{int}, \param{float}, \param{string}, \param{array$<$string,string$>$}, \param{map$<$string,string$>$}, \param{map$<$string,float$>$}, \param{coordinates}, \param{arrhenius} or \param{proc}.
+\item[value=$<$value$>$] New value for the parameter.
+\end{description}
+
+\end{description}
+
+The types allowed in the option \param{type} are:
+\begin{itemize}
+\item \param{bool} set, get, unset
+\item \param{int} set, get, unset
+\item \param{float} set, get, unset
+\item \param{string} set, get, unset
+\item \param{array$<$string$>$} add, set, get, unset
+\item \param{array$<$string,string$>$} add, set, get, unset
+\item \param{map$<$string,bool$>$} set, get unset
+\item \param{map$<$string,string$>$} set, get, unset
+\item \param{map$<$string,float$>$} set, get, unset
+\item \param{map$<$string,arrhenius$>$} set, get, unset
+\item \param{coordinates} set, get, unset
+\item \param{arrhenius} set, get, unset
+\item \param{proc} set, get, unset
+\end{itemize}
+
+\subsection{Examples}
+\begin{itemize}
+\item \verb+param set type=bool   key=MC/Mesh/periodic.x value=true+
+\item \verb+param set type=float  key=MC/Mesh/lambda     value=0.287+
+\item \verb+param set type=arrhenius key=Iron/Carbon/CI(binding)+ \hfill \\\verb+value={ 5e-2   0.87 }+
+\item \verb-param set type=map<string,string> key=Iron/Iron/- \hfill \\ \verb-interactions value={ FeI+Gas true }-
+\item \verb-param set type=map<string,string> key=Iron/Iron/- \hfill \\ \verb-interactions value=true index=FeI+Gas-
+\item \verb+param set type=proc key=Iron/HeCluster/formation+ \hfill \\ \verb+value={ { if {$size != "HeV2" } { return 5 };  return 1.5} }+
+\item \verb+set l [param get type=float key=MC/Mesh/lambda]+
+\item \verb+set PmV  [lindex [param get type=arrhenius+ \hfill \\ \verb+key=Iron/Vacancy/VFe(migration)] 0]+
+\item \verb+set EmV  [lindex [param get type=arrhenius + \hfill \\ \verb+key=Iron/Vacancy/VFe(migration)] 1]+
+\item \verb-set PbHeV2 [param get type=proc - \hfill \\ \verb-key=Iron/HeCluster/prefactor index=HeV2,VFe]-
+\item \verb-set EbHeV2 [param get type=proc - \hfill \\ \verb-key=Iron/HeCluster/formation index=HeV2]-
+\item \verb-param get.reaction material=Iron index=He2V2+VFe-
+\end{itemize}

@@ -1,0 +1,213 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.13
+Compiled on Jun  2 2015 15:11:44 for x86_64-Linux
+for #89-Ubuntu SMP Wed May 20 10:34:39 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si AmorphousSilicon aSi'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/wafer.orientation' value='i 1.0  j 0.0 k 0.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/flat.orientation' value='i -0.0 j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/wafer.orientation' value='i 1.0  j 0.0 k 0.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/flat.orientation' value='i -0.0 j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='42' miny='0' minz='0' maxx='54' maxy='180' maxz='19.96954402884553' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: AmorphousSilicon() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (42 - 54) nm. 8 elements. Delta = 1.5 nm.
+     Y: (0 - 180) nm. 120 elements. Delta = 1.5 nm.
+     Z: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+Total 12480 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> AmorphousSilicon
+1 -> Silicon
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -                                                                                                                           42:43.5
+111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -                                                                                                                           52.5:54
+Starting clusters:  AmorphousSilicon() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+Gas
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: BI+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: CI+SiO2
+Interfacing...
+Checking SPER... 536536/292656 atoms. Done.
+----------------------------------------------------------------- profile -----
+profile name='Ge' proc='pure'
+-------------------------------------------------------------------------------
+
+Discarded Ge(2110) 
+Created AmorphousSilicon,Ge(1583397) Silicon,Ge(226200) 
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='330' depth='51'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1 seconds at 603.15K (330ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+330C    0.002s           1   8.79%    1.1e+03 s^-1 52.4 nm. 548 Mb
+330C    0.003s           5   8.79%    4.0e+03 s^-1 52.4 nm. 548 Mb
+330C    0.004s           8   8.79%    3.0e+03 s^-1 52.4 nm. 548 Mb
+330C    0.005s           9   8.79%    1.0e+03 s^-1 52.4 nm. 548 Mb
+330C    0.006s          10   8.79%    1.0e+03 s^-1 52.4 nm. 548 Mb
+330C    0.007s          11   8.79%    1.0e+03 s^-1 52.4 nm. 548 Mb
+330C     0.01s          12   8.79%    1.0e+03 s^-1 52.4 nm. 548 Mb
+330C    0.011s          16   8.79%    4.0e+03 s^-1 52.4 nm. 548 Mb
+330C     0.02s          30   8.79%    1.6e+03 s^-1 52.4 nm. 548 Mb
+330C     0.03s          44   8.79%    1.4e+03 s^-1 52.4 nm. 548 Mb
+330C     0.04s          66   8.79%    2.2e+03 s^-1 52.4 nm. 548 Mb
+330C     0.05s          83   8.79%    1.7e+03 s^-1 52.4 nm. 548 Mb
+330C     0.06s         101   8.79%    1.8e+03 s^-1 52.4 nm. 548 Mb
+330C     0.07s         125   8.79%    2.4e+03 s^-1 52.4 nm. 548 Mb
+330C     0.08s         147   8.79%    2.2e+03 s^-1 52.4 nm. 548 Mb
+330C     0.09s         157   8.79%    1.0e+03 s^-1 52.4 nm. 548 Mb
+330C      0.1s         180   8.79%    2.3e+03 s^-1 52.4 nm. 548 Mb
+330C     0.11s         193   8.79%    1.3e+03 s^-1 52.4 nm. 548 Mb
+330C        1s        2054  17.58%    2.1e+03 s^-1 52.3 nm.    1861 ev/s 548 Mb
+330C        2s        4198  26.37%    2.1e+03 s^-1 52.1 nm. 548 Mb
+330C        3s        6510  26.37%    2.3e+03 s^-1 52.1 nm. 548 Mb
+330C        4s        9099  26.37%    2.6e+03 s^-1 52.1 nm.    2589 ev/s 548 Mb
+330C        5s       11895  26.37%    2.8e+03 s^-1 52.1 nm. 548 Mb
+330C        6s       14998  35.15%    3.1e+03 s^-1 52.0 nm.    3103 ev/s 548 Mb
+330C        7s       18231  35.15%    3.2e+03 s^-1 52.0 nm. 548 Mb
+330C        8s       21499  35.15%    3.3e+03 s^-1 52.0 nm.    3268 ev/s 548 Mb
+330C        9s       24822  35.15%    3.3e+03 s^-1 52.0 nm. 548 Mb
+330C       10s       28308  35.15%    3.5e+03 s^-1 52.0 nm.    3486 ev/s 548 Mb
+330C       20s       60707  52.73%    3.2e+03 s^-1 51.7 nm.    8099 ev/s 548 Mb
+330C       30s       93377  70.31%    3.3e+03 s^-1 51.5 nm.    6534 ev/s 548 Mb
+330C       40s      125589  79.10%    3.2e+03 s^-1 51.3 nm.    8053 ev/s 548 Mb
+330C       50s      158030  96.67%    3.2e+03 s^-1 51.1 nm.    6488 ev/s 548 Mb
+330C     54.4s      172097 105.46%    3.2e+03 s^-1 50.9 nm.    4689 ev/s 548 Mb
+0 -> AmorphousSilicon
+1 -> Silicon
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -                                                                                                                           42:43.5
+111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  52.5:54
+----------------------------- Defect logfile --------------
+---------------------------------------AmorphousSilicon --------
+MobileParticle/Ge              1583397
+---------------------------------------   Silicon --------
+MobileParticle/Ge               226200
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                 <100>_6   <100>_7   <100>_8   <100>_9  <100>_10     <110>     <111>      none
+LatticeAtom            24968     30276     25858     68694     11520     10781
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean min.y='60' max.y='120' min.z='0' max.z='19.96954402884553'
+-------------------------------------------------------------------------------
+
+Original depth is 51.5338 
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='330' depth='45'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1 seconds at 603.15K (330ºC)
+330C       60s      190250   2.30%    3.2e+03 s^-1 50.8 nm.    6051 ev/s 548 Mb
+330C       70s      222694   4.59%    3.2e+03 s^-1 50.6 nm.    5407 ev/s 548 Mb
+330C       80s      254814   6.89%    3.2e+03 s^-1 50.5 nm.    4015 ev/s 566 Mb
+330C       90s      287043  11.48%    3.2e+03 s^-1 50.2 nm.    3581 ev/s 569 Mb
+330C      100s      318535  16.07%    3.1e+03 s^-1 50.0 nm.    3149 ev/s 569 Mb
+330C      200s      636022  45.90%    3.2e+03 s^-1 48.2 nm.    4409 ev/s 575 Mb
+330C      300s      947554  82.63%    3.1e+03 s^-1 46.0 nm.    5563 ev/s 582 Mb
+330C      361s     1135728 100.99%    3.1e+03 s^-1 44.9 nm.    7526 ev/s 589 Mb
+0 -> AmorphousSilicon
+1 -> Silicon
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -                                                                                                                           42:43.5
+000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000 -   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    46.5:48
+001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000 -  XXX                                                                                                                XXX   48:49.5
+001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100 - XXX                                                           XXX                                 X         X       XXXX  49.5:51
+011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110 - XXX                                                                                                                  XXX  51:52.5
+111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 - XX               XXX    XX                                                 X                                          XX  52.5:54
+----------------------------- Defect logfile --------------
+---------------------------------------AmorphousSilicon --------
+MobileParticle/Ge               710788
+---------------------------------------   Silicon --------
+MobileParticle/Ge              1098809
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                 <100>_6   <100>_7   <100>_8   <100>_9  <100>_10     <110>     <111>      none
+LatticeAtom           138229    191049    177789    471081     81494     76085         1
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean min.y='60' max.y='120' min.z='0' max.z='19.96954402884553'
+-------------------------------------------------------------------------------
+
+00 - Final depth is 45.6266 
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+Velocity  for angle 00 is 1.1575916820306968 in nm/min. 
+Roughness for angle 00 is 1.11426 53.2171 5.77175 in nm. 
+-------------------------------------------------------------------- test -----
+test tag='0' float='1.05' value='1.1575916820306968' error='0.10'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+0: Requested error is  < 10% maximum error is 9.29445%
+Test PASSED... continuing
+Time spent: 257s. Annealing: 215s.
+         1 times: 0: Requested error is  < 10% maximum error is 9.29445%
+         2 times: Alloy material is given but selfdiffusion is set to false
+         1 times: Silicon/Models/interactions Interaction not used: BI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: CI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: I+Gas
+         1 times: Silicon/Models/interactions Interaction not used: I+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: V+Gas
+         1 times: Silicon/Models/interactions Interaction not used: V+SiO2
+        66 times: Snapshot not defined or error.
+There are 15 total sentences. Collect them all!
+No por mucho simular...
+                    ... amanece más temprano

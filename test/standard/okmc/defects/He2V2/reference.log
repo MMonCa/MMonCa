@@ -1,0 +1,106 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                      2011    
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='OKMC/Iron/Vacancy/V(formation)' value=' 0 5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='OKMC/Iron/Vacancy/V(migration)' value=' 1.0e-3 1.0 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='OKMC/Iron/Interstitial/I(formation)' value=' 0 5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='vector<string>' key='OKMC/Iron/Defects/defined' value=' MultiCluster ICluster VCluster IVCluster '
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='15' maxy='15' maxz='15' material='material'
+-------------------------------------------------------------------------------
+Leo interacciones clusters
+interacción C y I
+interacción Ci y V
+Leo interacciones clusters
+interacción He y I
+interacción He y V
+interacción He2V y V
+interacción HeV y I
+interacción HeV y V
+interacción Hei y V
+Tensor Mesh created
+     X: (-2 - 15) nm. 11 elements. Delta = 1.54545 nm.
+     Y: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Z: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+Total 1100 elements
+GGGGGGGGGG  -2:-0.454545
+IIIIIIIIII  -0.454545:1.09091
+IIIIIIIIII  1.09091:2.63636
+IIIIIIIIII  2.63636:4.18182
+IIIIIIIIII  4.18182:5.72727
+IIIIIIIIII  5.72727:7.27273
+IIIIIIIIII  7.27273:8.81818
+IIIIIIIIII  8.81818:10.3636
+IIIIIIIIII  10.3636:11.9091
+IIIIIIIIII  11.9091:13.4545
+IIIIIIIIII  13.4545:15
+Interfacing...
+------------------------------------------------------------------ insert -----
+insert defect='MultiCluster' ID='He2V' coord=' 7 7 7 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='MobileParticle' particle='V' coord=' 7 7 7 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ anneal -----
+anneal time='10' temp='700'
+-------------------------------------------------------------------------------
+Annealing the sample for 10 seconds at 973.15K (700ºC)
+700C  3.2254e-09s           1   3.1e+08 s^-1 
+700C 2.55801e-08s           2   4.5e+07 s^-1 
+700C 1.11175e-07s           3   1.2e+07 s^-1 
+700C 2.43327e-07s           4   7.6e+06 s^-1 
+700C 3.55154e-07s           5   8.9e+06 s^-1 
+700C 4.36655e-07s           6   1.2e+07 s^-1 
+700C 5.28753e-07s           8   2.2e+07 s^-1 
+700C 6.18984e-07s           9   1.1e+07 s^-1 
+700C  8.4152e-07s          12   1.3e+07 s^-1 
+700C  9.5815e-07s          13   8.6e+06 s^-1 
+700C 1.11067e-06s          14   6.6e+06 s^-1 
+700C 2.05107e-06s          24   1.1e+07 s^-1 
+700C 3.20984e-06s          35   9.5e+06 s^-1 
+700C 4.09286e-06s          48   1.5e+07 s^-1 
+700C 5.11081e-06s          58   9.8e+06 s^-1 
+700C 6.02224e-06s          68   1.1e+07 s^-1 
+700C  7.1885e-06s          84   1.4e+07 s^-1 
+700C 8.00942e-06s          94   1.2e+07 s^-1 
+700C 9.07995e-06s         109   1.4e+07 s^-1 
+700C 1.02196e-05s         125   1.4e+07 s^-1 
+700C 2.00111e-05s         269   1.5e+07 s^-1 
+700C 1.22352e+10s         289   1.6e-09 s^-1 
+700C          10s         289   -0.0e+00 s^-1 
+----------------- Event Log --------------
+ ----------------------------------------Iron            MobileParticle
+Type           migrate  break up
+V                  288
+
+----------------- Reaction Log --------------
+ ----------------------------------------Iron              MultiCluster
+MultiCluster He2V+V                1
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='MultiCluster' ID='H2V2'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test float='4' value='4' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+: Requested error is 0% error is 0%
+Test PASSED... continuing
+Deleting 101 objects...done
+Time spent: 0s.
+1 times: : Requested error is 0% error is 0%
+¡Adiós amigos!

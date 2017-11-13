@@ -1,0 +1,68 @@
+# ---------------------------------------------------------------------
+# Makefile file for MacBook Air
+#
+# Author: Benoit Sklenard <benoit.sklenard@cea.fr>
+# Modified: Ignacio Martin-Bragado
+# October 15, 2014
+#
+
+# ---------------------------------------------------------------------
+# compiler/linker settings
+# specify flags and libraries needed for your compiler
+CXX      = c++
+CXXFLAGS = -O2
+CC       = cc
+CCFLAGS  = -O2
+DEPFLAGS = -MMD -MP
+
+LINK      = c++
+LINKFLAGS = -O2
+LIB       = -lpthread -lm
+
+ARCHIVE =
+ARFLAGS =
+SHLIBFLAGS =
+
+# ---------------------------------------------------------------------
+# MMonCa-specific settings
+FELIKS = no
+
+# TCL lib, required
+
+TCL_INC = -I/usr/include/tcl8.5/
+TCL_PATH = -L/usr/lib
+TCL_LIB = -ltcl8.5
+
+# Boost lib
+
+BOOST_INC =  -DNDEBUG -DBOOST_UBLAS_NDEBUG
+BOOST_PATH = -L/opt/local/lib
+BOOST_LIB = -lboost_iostreams-mt
+
+# SuperLu lib, optional
+# Required if iris is built
+# Can be empty if "FELIKS = no" (see above)
+
+SUPERLU_INC =
+SUPERLU_PATH =
+SUPERLU_LIB = -lsuperlu
+
+# Lapack lib, optional
+# required if iris is built
+# Can be empty if "FELIKS = no" (see above)
+
+LAPACK_INC =
+LAPACK_PATH =
+LAPACK_LIB = -llapack
+
+# Blas lib, optional
+# Can be empty if "FELIKS = no" (see above)
+
+BLAS_INC =
+BLAS_PATH =
+BLAS_LIB = -lblas
+
+# Do not remove the following include
+
+include ../Makefile.$(TARGET)
+

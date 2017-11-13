@@ -1,0 +1,9 @@
+float  every    50000
+string model    None
+
+int    dimension 2
+
+int update.time.decade 1
+float update.time.delta 0
+float update.time.min 1e-5
+float update.events 1e7

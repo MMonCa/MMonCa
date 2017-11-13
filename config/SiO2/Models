@@ -1,0 +1,18 @@
+string alloy none
+string material.composition Si
+
+float atomic.density 5e22
+float molar.volume   0
+// permittivity value required!
+float permittivity   0
+float lambda         0.384
+bool  epitaxy        false
+
+map<string,bool> particles { 
+C   true 
+}
+map<string,bool> defined { }
+array<string,string> interactions { 
+	C+Nitride	true
+}
+array<string> interaction.result { }

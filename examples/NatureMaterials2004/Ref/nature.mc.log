@@ -1,0 +1,216 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.11
+Compiled on Jan 27 2015 17:20:21 for x86_64-Linux
+for #73-Ubuntu SMP Tue Dec 16 00:22:43 UTC 2014
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='S_Iron Fe'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='S_Iron/Iron/I(capture.radius)' value='0.55' new
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value=' 
+	 (...)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='S_Iron/Vacancy/V(migration)' value='5e-5 0.67'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='S_Iron/Iron/I(migration)' value='3.2e-3 0.34'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='143.5' maxy='143.5' maxz='143.5' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: S_Iron(<111> HeCluster ICluster VCluster ) 
+     X: (0 - 143.5) nm. 96 elements. Delta = 1.49479 nm.
+     Y: (0 - 143.5) nm. 96 elements. Delta = 1.49479 nm.
+     Z: (0 - 143.5) nm. 96 elements. Delta = 1.49479 nm.
+Total 884736 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                   0:1.49479
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                   142.005:143.5
+Starting clusters:  S_Iron(<111> HeCluster ICluster VCluster )
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: V+Gas
+Interfacing...
+Checking SPER... Done.
+----------------------------------------------------------------- cascade -----
+cascade file='electron.cascade' format='B:C*.287:D*.287:E*.287' periodic fluence='4.8562e9' do.not.react
+-------------------------------------------------------------------------------
+
+Reading 1 cascades with average dynamic annealing of 0
+New cascade file detected. Storing cascades for random implantation within the file...
+Old file was: File not specified
+New file is: electron.cascade
+Detected 1 different cascades within the input file.... Starting implantation!
+cascade: 0/1 (    0%)
+Out I(37) V(6) 
+Created S_Iron,I(29963) S_Iron,V(29994) 
+The cascades occupied a box of (-0.287573993206024169921875, -0.27672541141510009765625, -0.2890090048313140869140625) - (143.75830078125, 143.7870025634765625, 143.815704345703125)
+Number of loops reading the file: 1
+-------------------------------------------------------------------- save -----
+save lammps='evolution'
+-------------------------------------------------------------------------------
+
+Writing 59957 atoms in evolution.dump done!.
+Running for 79.58756439999999 K 
+------------------------------------------------------------------ anneal -----
+anneal time='300' temp='-193.5624356'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 300 seconds at 79.5876K (-193.562ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+-194C      300s           0 100.00%    0.0e+00 s^-1 1679 Mb
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                   0:1.49479
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                   142.005:143.5
+----------------------------- Defect logfile --------------
+---------------------------------------    S_Iron --------
+MobileParticle/I                 29963
+MobileParticle/V                 29994
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='evolution' append
+-------------------------------------------------------------------------------
+
+Writing 59957 atoms in evolution.dump done!.
+----------------------------------------------------------------- extract -----
+extract count.particles
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles particle='I' defect='MobileParticle'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles particle='V' defect='MobileParticle'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='ICluster' ID='I2'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='VCluster' ID='V2'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='ICluster' ID='I3'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='VCluster' ID='V3'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='<111>'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='ICluster'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='VCluster'
+-------------------------------------------------------------------------------
+
+79.58756439999999 59957 753.346335599133 29963 29994 0 0 0 0 0 0 0 
+Running for 82.04896900419878 K 
+------------------------------------------------------------------ anneal -----
+anneal time='300' temp='-191.10103099580118'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 300 seconds at 82.049K (-191.101ºC)
+-191C      600s           0 100.00%    0.0e+00 s^-1 1679 Mb
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                   0:1.49479
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                   142.005:143.5
+----------------------------- Defect logfile --------------
+---------------------------------------    S_Iron --------
+MobileParticle/I                 29963
+MobileParticle/V                 29994
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='evolution' append
+-------------------------------------------------------------------------------
+
+Writing 59957 atoms in evolution.dump done!.
+----------------------------------------------------------------- extract -----
+extract count.particles
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles particle='I' defect='MobileParticle'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles particle='V' defect='MobileParticle'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='ICluster' ID='I2'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='VCluster' ID='V2'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='ICluster' ID='I3'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='VCluster' ID='V3'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='<111>'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='ICluster'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract count.particles defect='VCluster'
+-------------------------------------------------------------------------------
+
+82.04896900419878 59957 0.0 29963 29994 0 0 0 0 0 0 0 
+------------------------------------------------------------------ report -----
+report reactions.interface
+-------------------------------------------------------------------------------
+
+----------------- Interface reaction Log --------------
+Time spent: 14s. Annealing: 0s.
+         1 times: S_Iron/Models/interactions Interaction not used: I+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: V+Gas
+        67 times: Snapshot not defined or error.
+There are 14 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

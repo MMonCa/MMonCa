@@ -1,0 +1,259 @@
+\subsection{\tt Cluster}
+\index{Cluster}
+Clusters are the agglomeration of any number of impurities with Is or Vs. The first step to include them in a simulation is to allow them in the {\tt Model} file by defining its name. For instance:
+
+\begin{lstlisting}
+map<string,bool> defined { 
+	IVCluster true 
+	ICluster  true
+	HeCluster true
+}
+\end{lstlisting}
+
+Defines 3 {\tt Clusters}: {\tt ICluster}, {\tt IVCluster} and {\tt HeCluster}. 
+
+Once the defects are defined, its implementation is to be written in a file named as the just-defined cluster. Such implementation relies on the following parameters:
+
+All the prefactor units\index{prefactor units} are ``diffusivity'' units (cm$^2$s$^{-1}$). Consequently, they will be transformed into frequency units using the conversion factor $6/\lambda^2$. The lamdba used is not the \param{lambda} defined for each cluster, but the general one in \param{Models/lambda}.
+
+\begin{description}
+\item [shape] of the defect, can be {\tt disk}, {\tt plane311}, {\tt irregular} or {\tt sphere}.
+
+\item [to] which defect it evolves. Any valid cluster.
+
+\item [from] which defect it evolved. Any valid cluster.
+
+\item [density.cm2] for {\tt disk} and  {\tt plane311} only. Surface density (atoms/cm$^{2}$).
+
+\item [density.cm3] for {\tt irregular} and {\tt sphere} only. Volumetric density (atoms/cm$^{3}$).
+
+\item [migration.type] for the defect. Could be {\tt 3d}, {\tt parallel} or {\tt perpendicular} to the axis 0 and 1 of the defect.
+
+\item[lambda] used for the defect diffusion. Bigger or smaller lamdbas than the one in \param{Models/lambda} can be used. In particular, use of a bigger lambda will speed up the simulation of cluster diffusion while maintaning the correct diffusivity, but some caution should be taken, because if lambda is too big the cluster might diffuse over particles without reacting with them. Consequently, lambdas bigger than twice the minimum capture distance are not suggested.
+
+\item [axis.0, axis.1] Three axis for the defect. 0 and 1 are the plane for planar defects. 2 is the perpendicular axis to the plane. A {\tt dist}, for instance, will be grown using the axis 0 and 1.
+
+\item [axes.ratio] For {\tt disk} and \{311\} is the geometrical ratio of {\tt axis.0} versus {\tt axis.1}. A value of 2 would mean the defect is twice large in axis 0 than 1.
+
+\item [not.in.plane] Defects are created in the specified plane and all its families. For instance, 1 0 0 will crate also 0 1 0, 0 0 1, defects. If one of these particular planes has to be avoided, it can be specified here. The main use is to avoid defects perpendicular to the surface that will diffuse in 1D parallel to the surface and then will never recombine, slowing down the simulation.
+
+\item[IV.model] True or false. If false, instantaneous recombination of Is with Vs will happen. Otherwise, IV pairs will be maintained and recombined with a specified barrier. Setting this value to true forces to define also an IV.barrier parameter.
+
+\item [formation]\index{formation} The formation energy ($E_f$) of the clusters. The origin of energies is an empty, perfect system. Consequently, formation energy would be the total addition of the formation energies of the isolated, constituent particles, minus the binding energies of each of this particles to the cluster. 
+
+In some cases, the potential energy ($E_p$) might be available. For potential energy if the cluster is something like \verb+An^Im+, the origin of energies ($E=0$) is assumed as a system where all the particles of the cluster exist, but are infinitely separated (i.e., they do not interact). In this case, a system with $n$ AM and $m$ MI. Then, we would have that ($E_f(A_nI_m) = nE_f(AM) + mE_f(MI) + E_p(A_nI_m)$.
+
+The procedure should returns a list with all the cluster IDs and its formation energies. This list is used as the existing clusters later. For instance, if CCluster is defined as a cluster and we want to have 3 clusters (\verb+C2^I+, \verb+C^I2+ and \verb+C2+), formation should return something like {\tt \verb+C2^I -2 C^I2 -1 C2 .3+}.
+
+This parameter is of extreme importance because it also defines the available clusters. If a cluster is not defined here, but in other parameters, \MMonCa\ will ignore it. If a cluster is defined here but not in other parameters, \MMonCa\ will assume default values for the non-defined cluster in the other parameters. Formation, then, is the ``canonical'' definition of available clusters, for both types and syntaxis.
+
+\item [prefactor]\index{prefactor} The emission prefactor for each emitted particle. The cluster is written first, and the emitted particle is attached with a comma. For instance, emission of MI from \verb+C^I2+ would be {\tt \verb+C^I2,MI+}. Creation of FPs is allowed, and also controlled with the prefactor (and the opposite reaction). For instance, He5 $\rightarrow$ He5V + MI. Since this is an I emission, the prefactor would be {\tt He5V,MI}. A list with all the clusters and all the possible emissions is expected. If some prefactor for a cluster defined in the formation is missing, the code assumes its prefactor is 0.
+
+\item [percolation]\index{percolation} Boolean parameter to allow the reaction of a cluster with another one while growing, and without the need of diffusion (i.e., without needing one cluster moving into the other).
+
+\item [transform.to] Procedure that returns the rates for transforming the defect to {\tt to }. A list with all the clusters with the prefactors and energies is expected. If a cluster is not included, its Tranformation rate is ``0 5'', i.e., no transformation.
+
+\item [transform.from] Procedure that returns the rates for transforming the defect to {\tt from}.  A list with all the clusters with the prefactors and energies is expected. If a cluster is not included, its transformation rate is ``0 5'', i.e., no transformation.
+
+\item [migration]\index{migration} Migration energy of the cluster, as an arrhenius value (prefactor and activation energy).  A list with all the clusters with the prefactors and energies is expected. If a cluster is not included, its transformation rate is ``0 5'', i.e., no migration.
+
+\item[IV.barrier] Procedure that returns the rates for recombination of IV pairs. If a cluster is not included, the rate is ``0 5'', i.e., no recombination.
+
+\end{description}
+
+All these parameters are defined with a key and a value. The keys used in {\tt formation} are used in the other procedures. Different notations might be available for the same cluster, as explained in sec.~\ref{sec:syntaxis}, but we strongly suggest being consistent with the one chosen. The parameters with procedures are described in Table~\ref{tab:multicluster}
+
+\begin{table}
+\caption{Keys and values needed to defined clusters}
+\label{tab:multicluster}
+\begin{tabular} {l|ll|rr|c}
+\hline
+Parameter name & key              & value     & key example   & value example & default\\\hline
+formation      & cluster          & float     & CV2           & -2.4          & NO \\
+prefactor      & cluster,particle & float     & CV2,V         & 1e-3          & 0 \\
+migration      & cluster          & arrhenius & CV2           & 0.01 1.2      & 0 5\\
+transform.to   & cluster          & arrhenius & CV2           & 1e-3 .7       & 0 5\\
+transform.from & cluster          & arrhenius & CV2           & 1e-3 .5       & 0 5\\
+IV.barrier     & cluster          & arrhenius & \verb+CV2^I+ & 1e-2 .4       & 0 5\\
+\end{tabular}
+\end{table}
+
+For instance, for a hypothetical carbon cluster defined in silicon:
+
+\begin{lstlisting}        
+string shape           	irregular
+float density.cm3      	5e22
+string to    			CCluster
+string from  			CCluster
+string migration.type	3d
+// coordinates axis.2   1 0 0
+coordinates axis.1     	0 1 0 
+coordinates axis.0     	0 0 1
+coordinates not.in.plane 0 0 0
+float       axes.ratio 	1
+float       lambda 0.387
+
+bool IV.model false
+proc transform.to   { return "" }
+proc transform.from { return "" }
+proc migration      { return "" }
+
+proc formation {
+    set EfC 0
+    set EfI 3.6
+    set list ""
+    
+    append list "C2I   [expr 2*$EfC + 1*$EfI -2.3] "
+    append list "C2    [expr 2*$EfC + 0*$EfI -1.2] "
+    append list "C2I2  [expr 2*$EfC + 2*$EfI -7] "
+    append list "C3I   [expr 3*$EfC + 1*$EfI -1.7] "
+    append list "C3I2  [expr 3*$EfC + 2*$EfI -9.7] "
+    append list "C3I3  [expr 3*$EfC + 3*$EfI -11.5] "
+    append list "C4I3  [expr 4*$EfC + 3*$EfI -13.7] "
+    append list "C4I4  [expr 4*$EfC + 4*$EfI -16.5] "
+    append list "C4I2  [expr 4*$EfC + 3*$EfI -12.5] "
+    append list "C5I3  [expr 5*$EfC + 4*$EfI -13] "
+    append list "C5I4  [expr 5*$EfC + 4*$EfI -20.5] "
+    append list "C5I5  [expr 5*$EfC + 5*$EfI -25.0] "
+    append list "C6I5  [expr 6*$EfC + 5*$EfI -26.9] "
+    append list "C6I4  [expr 6*$EfC + 4*$EfI -25.4] "
+    append list "C6I6  [expr 6*$EfC + 6*$EfI -30.9] "
+    return $list
+}
+
+proc prefactor {
+     set list ""
+     append list "C2I,SiI   2.03e-2 "
+     append list "C2I,CI    2.03e-2 "
+     append list "C2I,VSi   2.03e-2 "
+     append list "C2,SiI    2.03e-2 "
+     append list "C2,CI     2.03e-2 "
+     append list "C2I2,VSi  2.03e-2 "
+     append list "C2I2,CI   2.03e-2 "
+     append list "C3I,SiI   2.03e-2 "
+     append list "C3I,CI    2.03e-2 "
+     append list "C3I2,SiI  2.03e-2 "
+     append list "C3I2,CI   2.03e-2 "
+     append list "C3I2,VSi  2.03e-2 "
+     append list "C3I3,VSi  2.03e-2 "
+     append list "C3I3,CI   2.03e-2 "
+     append list "C4I3,SiI  2.03e-2 "
+     append list "C4I3,SiI  2.03e-2 "
+     append list "C4I3,CI   2.03e-2 "
+     append list "C4I2,CI   2.03e-2 "
+     append list "C4I2,SiI  2.03e-2 "
+     append list "C4I4,CI   2.03e-2 "
+     append list "C4I4,VSi  2.03e-2 "
+     append list "C5I3,SiI  2.03e-2 "
+     append list "C5I3,CI   2.03e-2 "
+     append list "C5I4,SiI  2.03e-2 "
+     append list "C5I4,VSi  2.03e-2 "
+     append list "C5I4,CI   2.03e-2 "
+     append list "C5I5,CI   2.03e-2 "
+     append list "C5I5,VSi  2.03e-2 "
+     append list "C6I5,SiI  2.03e-2 "
+     append list "C6I5,VSi  2.03e-2 "
+     append list "C6I4,CI   2.03e-2 "
+	
+     return $list
+}
+\end{lstlisting}
+
+Finally, for a cluster with a {\tt IV.model} set to true, an extra producedure would be required.
+
+\begin{lstlisting}
+proc IV.barrier {
+ set prefactor   5.0e-4
+ set energy(1)   0.43
+ set energy(2)   0.7
+ set energy(199) 1.6
+ set energy(255) 2.7
+ set alpha       1.0
+ 
+ set list ""
+ for { set size 0 } { $size < 50 } { incr size } {
+     for { set iv 1 } { $iv < 250 } { incr iv } {
+	 set pref [expr ($prefactor*pow($iv,$alpha))]
+	 set ener $energy(255)
+	 
+	 if { $iv <= 1 } { set ener $energy(1) }
+	 if { $iv == 2 } { set ener $energy(2) }
+	 if { $iv <= 199 && $iv > 2 } {
+	     set b [expr ($energy(199) - $energy(2))/(199. -2.)]
+	     set a [expr $energy(199) - $b*199.]
+	     set ener [expr $a + $b*$iv]
+	 }
+	 if { $iv <= 255 && $iv > 199 } {
+	     set b [expr ($energy(255) - $energy(199))/(255. -199.)]
+	     set a [expr $energy(255) - $b*255.]
+	     set ener [expr $a + $b*$iv]
+	 }	
+	 lappend list V$iv^I[expr $size+$iv]
+	 lappend list $pref
+	 lappend list $ener
+	 lappend list V[expr $size + $iv]^I$iv
+	 lappend list $pref
+	 lappend list $ener
+     }
+   }
+   return $list
+\end{lstlisting}
+
+\subsubsection{Cluster interactions}
+
+The result of the interactions between clusters needs to be defined in an array of strings names {\tt interaction.result} placed in the {\tt Models} file for each material. Every line in the array must contain 5 arguments in the form \verb+ reactant1 operator reactant2 = result+.
+\begin{description}
+\item [reactant1] Type of the first interacting defect. (For instance, ICluster)
+\item [reactant2] Type of the second interacting defect. (For instance, $<$111$>$)
+\item [operator] An operator to take the defect sizes ($s_1$ and $s_2$, counted as the total number of particles) into account. One of the following:
+  \begin{description}
+    \item [+] To specify the result independently on the size of both reactants.
+    \item [==] When one reactant has the same size as the other. ($s_1 = s_2$)
+    \item [$\sim$=,n] When one reactant is approximately the same size as the other, measured as $$|s_1 - s_2|/\mathrm{max}(s_1,s_2) < n$$.
+    \item [$<$] When $s_1 < s_2$.
+    \item [$>$] When $s_1 > s_2$.
+  \end{description}
+Only one reaction for each case has to be specified. For instance \verb+<111> > <100> = <111>+ also implies that \verb+<100> < <111> = <111>+, but this last one does not need to be specified. If a reaction is specified several times, a warning will be issued and the last reaction will be taken only.
+\item [result] Name of the resulting defect. (For instance, $<$111$>$)
+\end{description}
+
+\marginpar{Example}
+
+\begin{lstlisting}
+array<string> interaction.result {
+
+        ICluster + ICluster = ICluster
+        ICluster + <100> = <100>
+        ICluster + <111> = <111>      
+        VCluster + VCluster = VCluster
+        <100> + <100> = <100> 
+
+        <100> ~=,.05  <111> = <100>
+        <100> >   <111> = <100>
+        <100> <   <111> = <111>
+
+        <111> ~=,.05 <111> = <100>
+        <111> >  <111> = <111>        
+        <111> <  <111> = <111>        
+
+        VCluster == <100> = <100>
+        VCluster < <100> = <100>
+        VCluster > <100> = VCluster
+
+        VCluster == <100> = <100>
+        VCluster == <111> = <111>
+        VCluster < <111> = <111>
+        VCluster > <111> = VCluster
+
+        VCluster == ICluster = VCluster
+        VCluster >  ICluster = VCluster
+        VCluster <  ICluster = ICluster
+}
+\end{lstlisting}
+
+\subsubsection{Summary}
+
+Clusters in \MMonCa\ are very flexible defects. They can be used as multi clusters for activation deactivation of defects (i.e., BICs and similar in semiconductors), to simulate bubbles (HeClusters in metals) extended defects (\{311\}, $<$111$>$, etc...) and amorphous pockets (\verb+V2I+ etc...).
+
+Clusters can migrate, transform, emit constituent particles and recombine existing IV pairs. Clusters can adopt different shapes, and interact between them.
+

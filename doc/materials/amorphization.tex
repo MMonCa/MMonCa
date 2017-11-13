@@ -1,0 +1,16 @@
+\index{amorphization}
+\label{sec:amorph}
+
+When a region of the material overcomes a certain threshold of damage concentration (i.e. self-interstitials and vacancies), that region is amorphized, so all the atoms from the material are displaced from their crystalline position, and no more damage can be introduced in those areas. Self-interstitial and vacancy definitions no longer make sense in those areas. Such threshold value is defined in the {\tt Models} file for each material. 
+
+\begin{description}
+\item [amorphization.threshold=$<$value$>$] Units are atoms/cm$^3$ units. To deactivate the amorphization model, it is enough to not assign a value to it.
+\end{description}
+
+If the amorphization model is wanted to be active, the definition of the amorphous material corresponding to the crystalline one needs to be defined. For example, to active the amorphous model in the material {\tt Silicon} , {\tt AmorphousSilicon} must be defined.
+
+When amorphizing an area of the simulation, the {\tt LKMC} module is called, and lattice atoms are placed on the interfaces between amorphous and crystalline zones. This is done dynamically when using {\tt cascade} or {\tt profile} commands. When new areas are amorphized, lattice atoms are automatically removed in areas where the amorphous/crystalline interfaces no longer exist. 
+
+For output information of this model, see section \ref{sec:extract}.
+
+

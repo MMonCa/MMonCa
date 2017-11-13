@@ -1,0 +1,133 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.3 Compiled on Jun 19 2013 12:50:23
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/wafer.orientation' value='i 1 j 0 k 0'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/flat.orientation' value='i 0 j 1 k 1'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/wafer.orientation' value='i 1 j 0 k 0'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/flat.orientation' value='i 0 j 1 k 1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='54' maxy='23.041781571744842' maxz='23.041781571744842' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+     X: (-2 - 54) nm. 37 elements. Delta = 1.51351 nm.
+     Y: (0 - 23.0418) nm. 15 elements. Delta = 1.53612 nm.
+     Z: (0 - 23.0418) nm. 15 elements. Delta = 1.53612 nm.
+Total 8325 elements
+Loading Particle To Node handler
+Building nodes
+GGGGGGGGGGGGGGG -                  -2:-0.486486
+AAAAAAAAAAAAAAA -                  -0.486486:1.02703
+AAAAAAAAAAAAAAA -                  1.02703:2.54054
+AAAAAAAAAAAAAAA -                  2.54054:4.05405
+AAAAAAAAAAAAAAA -                  4.05405:5.56757
+AAAAAAAAAAAAAAA -                  5.56757:7.08108
+AAAAAAAAAAAAAAA -                  7.08108:8.59459
+AAAAAAAAAAAAAAA -                  8.59459:10.1081
+AAAAAAAAAAAAAAA -                  10.1081:11.6216
+AAAAAAAAAAAAAAA -                  11.6216:13.1351
+AAAAAAAAAAAAAAA -                  13.1351:14.6486
+AAAAAAAAAAAAAAA -                  14.6486:16.1622
+AAAAAAAAAAAAAAA -                  16.1622:17.6757
+AAAAAAAAAAAAAAA -                  17.6757:19.1892
+AAAAAAAAAAAAAAA -                  19.1892:20.7027
+AAAAAAAAAAAAAAA -                  20.7027:22.2162
+AAAAAAAAAAAAAAA -                  22.2162:23.7297
+AAAAAAAAAAAAAAA -                  23.7297:25.2432
+AAAAAAAAAAAAAAA -                  25.2432:26.7568
+AAAAAAAAAAAAAAA -                  26.7568:28.2703
+AAAAAAAAAAAAAAA -                  28.2703:29.7838
+AAAAAAAAAAAAAAA -                  29.7838:31.2973
+AAAAAAAAAAAAAAA -                  31.2973:32.8108
+AAAAAAAAAAAAAAA -                  32.8108:34.3243
+AAAAAAAAAAAAAAA -                  34.3243:35.8378
+AAAAAAAAAAAAAAA -                  35.8378:37.3514
+AAAAAAAAAAAAAAA -                  37.3514:38.8649
+AAAAAAAAAAAAAAA -                  38.8649:40.3784
+AAAAAAAAAAAAAAA -                  40.3784:41.8919
+AAAAAAAAAAAAAAA -                  41.8919:43.4054
+AAAAAAAAAAAAAAA -                  43.4054:44.9189
+AAAAAAAAAAAAAAA -                  44.9189:46.4324
+AAAAAAAAAAAAAAA -                  46.4324:47.9459
+AAAAAAAAAAAAAAA -                  47.9459:49.4595
+SSSSSSSSSSSSSSS -                  49.4595:50.973
+SSSSSSSSSSSSSSS -                  50.973:52.4865
+SSSSSSSSSSSSSSS -                  52.4865:54
+Amorphizing
+0.1.2.3.4.5.6.7.8.9.10.
+..done
+Cleaning for DIAMOND models...
+Applying strain...
+Done. Updating...done
+
+Deltas for concs are (1, 1.00182, 1.00182)
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='ac.mean.x' float='49.4237' value='50' error='0.05'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+ac.mean.x: Requested error is  < 5% maximum error is 1.1526%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='ac.mean.y' float='11.3289' value='11.520890785872421' error='0.05'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+ac.mean.y: Requested error is  < 5% maximum error is 1.66646%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='ac.mean.z' float='11.3289' value='11.520890785872421' error='0.05'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+ac.mean.z: Requested error is  < 5% maximum error is 1.66646%
+Test PASSED... continuing
+Deleting 43200 objects...done
+Time spent: 4s.
+         1 times: ac.mean.x: Requested error is  < 5% maximum error is 1.1526%
+         1 times: ac.mean.y: Requested error is  < 5% maximum error is 1.66646%
+         1 times: ac.mean.z: Requested error is  < 5% maximum error is 1.66646%
+No por mucho simular amanece más temprano

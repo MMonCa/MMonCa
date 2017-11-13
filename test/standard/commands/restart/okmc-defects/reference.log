@@ -1,0 +1,186 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.9
+Compiled on Sep 30 2014 15:24:39 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si SiO2 SiO2'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Models/amorphization.threshold' value='-1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='I+I'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- restart -----
+restart load='dump'
+-------------------------------------------------------------------------------
+
+Reading restart information from dump.mmonca
+{
+
+Reading defects: SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+     X: (0 - 24) nm. 16 elements. Delta = 1.5 nm.
+     Y: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+     Z: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+Total 17424 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                    0:1.5
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                    22.5:24
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+SiO2/Models/interactions Interaction not used: C+Nitride
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+Gas
+Interfacing...
+Checking SPER... Done.
+---------------------------- Warning -----------------------------------
+Cluster C2 prefactor for particle I is non null (8.26009e+13), but cluster does not exist
+} . Restarting done
+------------------------------------------------------------------ report -----
+report defects
+-------------------------------------------------------------------------------
+
+----------------------------- Defect logfile --------------
+---------------------------------------      SiO2 --------
+SiO2_Silicon/B                       1
+---------------------------------------   Silicon --------
+CCluster/C2                      11957
+MobileParticle/I                 11981
+----------------------------------------------------------------- extract -----
+extract profile name='I'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.5 (...)' value='4e20' error='0.06' init='1' end='11' tag='I.par'
+-------------------------------------------------------------------------------
+
+I.par 1.5 3.916e+20 -> (4e+20 2.10001% )
+I.par 2.5 4.104e+20 -> (4e+20 2.6% )
+I.par 3.5 3.928e+20 -> (4e+20 1.80001% )
+I.par 4.5 4.132e+20 -> (4e+20 3.3% )
+I.par 5.5 3.96e+20 -> (4e+20 1% )
+I.par 6.5 3.964e+20 -> (4e+20 0.899999% )
+I.par 7.5 3.96e+20 -> (4e+20 1% )
+I.par 8.5 4.004e+20 -> (4e+20 0.099994% )
+I.par 9.5 4.004e+20 -> (4e+20 0.099994% )
+I.par 10.5 3.824e+20 -> (4e+20 4.4% )
+---------------------------- Warning -----------------------------------
+I.par: Requested error is  < 6%  maximum error is 4.4%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='C'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.5 (...)' value='8e20' error='0.06' init='1' end='11' tag='C.par'
+-------------------------------------------------------------------------------
+
+C.par 1.5 7.672e+20 -> (8e+20 4.1% )
+C.par 2.5 7.944e+20 -> (8e+20 0.700002% )
+C.par 3.5 7.728e+20 -> (8e+20 3.4% )
+C.par 4.5 8.448e+20 -> (8e+20 5.6% )
+C.par 5.5 8.112e+20 -> (8e+20 1.39999% )
+C.par 6.5 7.808e+20 -> (8e+20 2.40001% )
+C.par 7.5 7.968e+20 -> (8e+20 0.400002% )
+C.par 8.5 7.936e+20 -> (8e+20 0.800005% )
+C.par 9.5 8.216e+20 -> (8e+20 2.7% )
+C.par 10.5 7.864e+20 -> (8e+20 1.7% )
+---------------------------- Warning -----------------------------------
+C.par: Requested error is  < 6%  maximum error is 5.6%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='I'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.5 (...)' value='0' error='0.' init='13' end='24' tag='I.par'
+-------------------------------------------------------------------------------
+
+I.par 13.5 0 -> (0 0% )
+I.par 14.5 0 -> (0 0% )
+I.par 15.5 0 -> (0 0% )
+I.par 16.5 0 -> (0 0% )
+I.par 17.5 0 -> (0 0% )
+I.par 18.5 0 -> (0 0% )
+I.par 19.5 0 -> (0 0% )
+I.par 20.5 0 -> (0 0% )
+I.par 21.5 0 -> (0 0% )
+I.par 22.5 0 -> (0 0% )
+I.par 23.5 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+I.par: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='C'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.5 (...)' value='0' error='0.' init='13' end='24' tag='C.par'
+-------------------------------------------------------------------------------
+
+C.par 13.5 0 -> (0 0% )
+C.par 14.5 0 -> (0 0% )
+C.par 15.5 0 -> (0 0% )
+C.par 16.5 0 -> (0 0% )
+C.par 17.5 0 -> (0 0% )
+C.par 18.5 0 -> (0 0% )
+C.par 19.5 0 -> (0 0% )
+C.par 20.5 0 -> (0 0% )
+C.par 21.5 0 -> (0 0% )
+C.par 22.5 0 -> (0 0% )
+C.par 23.5 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+C.par: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.defects ID='C2' defect='CCluster'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test float='11957' value='11999.999999999998' error='0.05' tag='Defects'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Defects: Requested error is  < 5% maximum error is 0.358333%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles particle='B'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test float='1' value='1' error='0' tag='B.interface'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+B.interface: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+Time spent: 22s. Annealing: 0s.
+         1 times: B.interface: Requested error is  < 0% maximum error is 0%
+         1 times: C.par: Requested error is  < 0%  maximum error is 0%
+         1 times: C.par: Requested error is  < 6%  maximum error is 5.6%
+     11957 times: Cluster C2 prefactor for particle I is non null (8.26009e+13), but cluster does not exist
+         1 times: Defects: Requested error is  < 5% maximum error is 0.358333%
+         1 times: I.par: Requested error is  < 0%  maximum error is 0%
+         1 times: I.par: Requested error is  < 6%  maximum error is 4.4%
+         1 times: SiO2/Models/interactions Interaction not used: C+Nitride
+         1 times: Silicon/Models/interactions Interaction not used: I+Gas
+         1 times: Silicon/Models/interactions Interaction not used: V+Gas
+There are 14 total sentences. Collect them all!
+Lo más importante en la vida es...
+                               ... ¡Vaya! ¡Se me olvidó!

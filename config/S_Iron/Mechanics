@@ -1,0 +1,11 @@
+// GPa
+float E							211
+float nu						0.29
+// 1/C
+float thermal.expansion         11.8e-6
+float temp.ref					300
+float alloy.E                   279
+float alloy.nu                  0.21
+float alloy.thermal.expansion	4.9e-6
+float alloy.temp.ref			300
+map<string,string> eigenstrains { }

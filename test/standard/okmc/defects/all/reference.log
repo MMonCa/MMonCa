@@ -1,0 +1,281 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.5 Compiled on Aug 16 2013 15:33:23
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='40' maxy='40' maxz='40' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+AmorphousSilicon_Silicon/Arsenic/recombination.length.rightAs can't be lower than lambda. Reassigning interface trapping probability to 1
+AmorphousSilicon_Silicon/Arsenic/recombination.length.rightAsi can't be lower than lambda. Reassigning interface trapping probability to 1
+     X: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Y: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Z: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+Total 19683 elements
+MeshElement: sizeof: 208
+MeshElement: hops  : 48
+MeshElement: strain: 24
+MeshElement: displa: 12
+MeshElement: interf: 24
+MeshElement: _V    : 8
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  0:1.48148
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  1.48148:2.96296
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  2.96296:4.44444
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  4.44444:5.92593
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  5.92593:7.40741
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  7.40741:8.88889
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  8.88889:10.3704
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  10.3704:11.8519
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  11.8519:13.3333
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  13.3333:14.8148
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  14.8148:16.2963
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  16.2963:17.7778
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  17.7778:19.2593
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  19.2593:20.7407
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  20.7407:22.2222
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  22.2222:23.7037
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  23.7037:25.1852
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  25.1852:26.6667
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  26.6667:28.1481
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  28.1481:29.6296
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  29.6296:31.1111
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  31.1111:32.5926
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  32.5926:34.0741
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  34.0741:35.5556
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  35.5556:37.037
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  37.037:38.5185
+SSSSSSSSSSSSSSSSSSSSSSSSSSS  38.5185:40
+Interfacing...
+Deltas for concs are (1, 1, 1)
+------------------------------------------------------------------ insert -----
+insert defect='<311>' ID='I38' coord='20 20 20'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='Void' ID='V39' coord='18 18 18'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='DLoop' ID='I40' coord='16 16 16'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='CCluster' ID='C6I6' coord='14 14 14'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Cluster C6I6 prefactor for particle V is non null (4.12789e+13), but cluster does not exist
+-------------------------------------------------------------------- save -----
+save ovito='defects'
+-------------------------------------------------------------------------------
+Writing 129 atoms in defects done!.
+----------------------------------------------------------------- extract -----
+extract defects file='defects.txt'
+-------------------------------------------------------------------------------
+Results written in defects.txt
+----------------------------------------------------------------- extract -----
+extract count.particles defect='Void'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='Void' float='39' value='39' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Void: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles defect='DLoop'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='DLoop' float='40' value='40' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+DLoop: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles defect='<311>'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='<311>' float='38' value='38' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+<311>: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.particles defect='CCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='CCluster' float='12' value='12' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+CCluster: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='1e10' events='2e7' temp='700'
+-------------------------------------------------------------------------------
+Annealing the sample for 1e+10 seconds at 973.15K (700ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+700C       5e-06s           1   0.00%    1.0e+06 s^-1 
+700C       6e-06s           2   0.00%    1.0e+06 s^-1 
+700C       8e-06s           3   0.00%    1.0e+06 s^-1 
+700C       9e-06s           8   0.00%    5.0e+06 s^-1 
+700C       4e-05s           9   0.00%    1.0e+05 s^-1 
+700C       5e-05s          12   0.00%    3.0e+05 s^-1 
+700C       6e-05s          14   0.00%    2.0e+05 s^-1 
+700C       7e-05s          15   0.00%    1.0e+05 s^-1 
+700C       8e-05s         187   0.00%    1.7e+07 s^-1 
+700C       9e-05s         189   0.00%    2.0e+05 s^-1 
+700C      0.0002s        5882   0.03%    5.7e+07 s^-1 
+700C      0.0003s        5887   0.03%    5.0e+04 s^-1 
+700C      0.0004s      133237   0.67%    1.3e+09 s^-1  127350 ev/s 
+700C      0.0005s      133420   0.67%    1.8e+06 s^-1 
+700C      0.0006s      133428   0.67%    8.0e+04 s^-1 
+700C      0.0007s      139409   0.70%    6.0e+07 s^-1 
+700C      0.0008s      139413   0.70%    4.0e+04 s^-1 
+700C      0.0009s      139423   0.70%    1.0e+05 s^-1 
+700C       0.001s      139428   0.70%    5.0e+04 s^-1 
+700C       0.002s      298015   1.49%    1.6e+08 s^-1 
+700C       0.003s      314308   1.57%    1.6e+07 s^-1 
+700C       0.004s      346459   1.73%    3.2e+07 s^-1 
+700C       0.005s      527320   2.64%    1.8e+08 s^-1 
+700C       0.006s      534124   2.67%    6.8e+06 s^-1 
+700C       0.007s      762199   3.81%    2.3e+08 s^-1 
+700C       0.008s      762264   3.81%    6.5e+04 s^-1 
+700C       0.009s      795735   3.98%    3.3e+07 s^-1 
+700C        0.01s      796178   3.98%    4.4e+05 s^-1 
+700C        0.02s     1629008   8.15%    8.3e+07 s^-1  832830 ev/s 
+700C        0.05s     1629009   8.15%    1.0e+02 s^-1 
+700C        0.06s     1629010   8.15%    1.0e+02 s^-1 
+700C        0.08s     1629051   8.15%    4.1e+03 s^-1 
+700C         0.2s     1629052   8.15%    1.0e+01 s^-1 
+700C         0.3s     1629057   8.15%    5.0e+01 s^-1 
+700C         0.4s     1629073   8.15%    1.6e+02 s^-1 
+700C         0.5s     1629081   8.15%    8.0e+01 s^-1 
+700C         0.7s     1629082   8.15%    1.0e+01 s^-1 
+700C         0.8s     1629086   8.15%    4.0e+01 s^-1 
+700C         0.9s     1629090   8.15%    4.0e+01 s^-1 
+700C           1s     1629091   8.15%    1.0e+01 s^-1 
+700C           2s     1638951   8.19%    9.9e+03 s^-1 
+700C           3s     1700526   8.50%    6.2e+04 s^-1 
+700C           4s     3491576  17.46%    1.8e+06 s^-1  895525 ev/s 
+700C           5s     8337268  41.69%    4.8e+06 s^-1  969138 ev/s 
+700C           6s    13384222  66.92%    5.0e+06 s^-1 1009390 ev/s 
+700C           7s    17508122  87.54%    4.1e+06 s^-1  824780 ev/s 
+700C     7.27099s    20000000 100.00%    9.2e+06 s^-1 1245939 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+CCluster/C6I4                        1
+DLoop/I40                            1
+MobileParticle/I                     1
+----------------- Event Log --------------
+ ----------------------------------------Silicon         MobileParticle
+Type           migrate  break up    emit I    emit V     state
+I             17862345
+V              2136589
+
+ ----------------------------------------Silicon                Cluster
+Type        Mig To From Emissions 
+<311>/I10 9(I) 
+<311>/I11 21(I) 
+<311>/I6 2(I) 
+<311>/I7 7(I) 
+<311>/I9 1(I) 
+CCluster/C6I5 578(I) 
+Void/V11 4(V) 
+Void/V12 6(V) 
+Void/V13 10(V) 
+Void/V14 25(V) 
+Void/V15 25(V) 
+Void/V16 5(V) 
+Void/V17 1(V) 
+Void/V18 3(V) 
+Void/V19 7(V) 
+Void/V2 1(V) 
+Void/V20 10(V) 
+Void/V21 24(V) 
+Void/V22 18(V) 
+Void/V23 28(V) 
+Void/V24 16(V) 
+Void/V25 39(V) 
+Void/V26 26(V) 
+Void/V27 13(V) 
+Void/V28 23(V) 
+Void/V29 9(V) 
+Void/V3 5(V) 
+Void/V30 24(V) 
+Void/V31 41(V) 
+Void/V32 3(V) 
+Void/V33 1(V) 
+Void/V34 5(V) 
+Void/V35 17(V) 
+Void/V36 12(V) 
+Void/V37 7(V) 
+Void/V38 2(V) 
+Void/V39 14(V) 
+Void/V4 5(V) 
+Void/V7 2(V) 
+Void/V8 12(V) 
+
+ ----------------------------------------Silicon              IVCluster
+Type           migrate      emit transform recombine
+IVCluster                      5
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle V+V                   5
+
+ ----------------------------------------Silicon                Cluster
+Cluster    <311>+I              36 <311>+V              33
+Cluster    CCluster+I          578 CCluster+V            2
+Cluster    Void+I                4 Void+V              409
+
+-------------------------------------------------------------------- save -----
+save ovito='defects' append
+-------------------------------------------------------------------------------
+Writing 51 atoms in defects done!.
+----------------------------------------------------------------- extract -----
+extract defects file='defects2.txt'
+-------------------------------------------------------------------------------
+Results written in defects2.txt
+Deleting 3 objects...done
+Time spent: 21s.
+         1 times: <311>: Requested error is  < 0% maximum error is 0%
+         1 times: CCluster: Requested error is  < 0% maximum error is 0%
+         2 times: Cluster C6I6 prefactor for particle V is non null (4.12789e+13), but cluster does not exist
+         1 times: DLoop: Requested error is  < 0% maximum error is 0%
+       142 times: Snapshot not defined or error.
+         1 times: Void: Requested error is  < 0% maximum error is 0%
+¡Adiós amigos!

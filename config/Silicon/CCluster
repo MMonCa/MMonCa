@@ -1,0 +1,78 @@
+string shape           	irregular
+float density.cm3      	5e22
+string to    			CCluster
+string from  			CCluster
+string migration.type	3d
+// coordinates axis.2   1 0 0
+coordinates axis.1     	0 1 0 
+coordinates axis.0     	0 0 1
+coordinates not.in.plane 0 0 0
+float       axes.ratio 	1
+bool IV.model false
+bool percolation true
+float lambda         0.384
+
+proc transform.to   { return "" }
+proc transform.from { return "" }
+proc migration      { return "" }
+
+proc formation {
+    set EfC 0
+    set EfI 3.6
+	set list ""
+	append list "C2I   < [expr 2*$EfC + 1*$EfI -2.3] > "
+	append list "C2    < [expr 2*$EfC + 0*$EfI -1.2] > "
+	append list "C2I2  < [expr 2*$EfC + 2*$EfI -7] > "
+	append list "C3I   < [expr 3*$EfC + 1*$EfI -1.7] > "
+	append list "C3I2  < [expr 3*$EfC + 2*$EfI -9.7] > "
+	append list "C3I3  < [expr 3*$EfC + 3*$EfI -11.5] > "
+	append list "C4I3  < [expr 4*$EfC + 3*$EfI -13.7] > "
+	append list "C4I4  < [expr 4*$EfC + 4*$EfI -16.5] > "
+	append list "C4I2  < [expr 4*$EfC + 3*$EfI -12.5] > "
+	append list "C5I3  < [expr 5*$EfC + 4*$EfI -13] > "
+	append list "C5I4  < [expr 5*$EfC + 4*$EfI -20.5] > "
+	append list "C5I5  < [expr 5*$EfC + 5*$EfI -25.0] > "
+	append list "C6I5  < [expr 6*$EfC + 5*$EfI -26.9] > "
+	append list "C6I4  < [expr 6*$EfC + 4*$EfI -25.4] > "
+	append list "C6I6  < [expr 6*$EfC + 6*$EfI -30.9] > "
+	return $list
+}
+
+proc prefactor {
+	set list ""
+	append list "C2I,I   2.03e-2 "
+	append list "C2I,CI  2.03e-2 "
+	append list "C2I,V   2.03e-2 "
+	append list "C2,I    2.03e-2 "
+	append list "C2,CI   2.03e-2 "
+	append list "C2I2,V  2.03e-2 "
+	append list "C2I2,CI 2.03e-2 "
+	append list "C3I,I   2.03e-2 "
+	append list "C3I,CI  2.03e-2 "
+	append list "C3I2,I  2.03e-2 "
+	append list "C3I2,CI 2.03e-2 "
+	append list "C3I2,V  2.03e-2 "
+	append list "C3I3,V  2.03e-2 "
+	append list "C3I3,CI 2.03e-2 "
+	append list "C4I3,I  2.03e-2 "
+	append list "C4I3,I  2.03e-2 "
+	append list "C4I3,CI 2.03e-2 "
+	append list "C4I2,CI 2.03e-2 "
+	append list "C4I2,I  2.03e-2 "
+	append list "C4I4,CI 2.03e-2 "
+	append list "C4I4,V  2.03e-2 "
+	append list "C5I3,I  2.03e-2 "
+	append list "C5I3,CI 2.03e-2 "
+	append list "C5I4,I  2.03e-2 "
+	append list "C5I4,V  2.03e-2 "
+	append list "C5I4,CI 2.03e-2 "
+	append list "C5I5,CI 2.03e-2 "
+	append list "C5I5,V  2.03e-2 "
+	append list "C6I5,I  2.03e-2 "
+	append list "C6I5,V  2.03e-2 "
+	append list "C6I4,CI 2.03e-2 "
+	
+	return $list
+}
+
+

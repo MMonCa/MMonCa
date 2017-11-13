@@ -1,0 +1,3 @@
+float stress.xx 0.e9
+float stress.yy 0.e9
+float stress.zz 0.e9

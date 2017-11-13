@@ -1,0 +1,25 @@
+
+\section{test}
+\index{test}
+Used mainly to test the code. It checks that some conditions are true, otherwise it aborts with an error.
+
+\begin{description}
+
+\item[array=$<$x1 y1 x2 y2 ... xn yn$>$] It requires the options \param{value=$<$value$>$}, \param{error=$<$error$>$}, \param{init=$<$init$>$} and \param{end=$<$end$>$} it checks that for all the xs between \param{init} and \param{end} the ys have a relative error smaller than \param{error} with respect to \param{value}. It prints the maximum relative error in the array. 
+\item[array.2D] Similar to \param{array} but with input in 2D.
+\item[array.3D] Similar to \param{array} but with input in 3D.
+\item[arrays.2D] Compares that, given two 2D arrays in \param{one} and \param{two}, their $x$ and $y$ are identical and the values are withing a relative error smaller than \param{error}.
+\item[float=$<$number$>$]  It requires the options \param{value=$<$value$>$} and \param{error=$<$error$>$}. It checks that \param{number} has a relative error smaller than \param{error} with respect to \param{value}. It prints the relative error in the array. 
+\item[equal] It tests that \param{one} is equal to \param{two}.
+\item[interval] Tests that \param{value} is between \param{begin} and \param{end}.
+\item[not] Inverts the meaning of the test, i.e., returns OK it is NOT passed.
+\item[tag=$<$tag$>$] Optional argument that allows setting a ``tag'' associated with this test. Useful to distinguish between test commands when many are called.
+\end{description}
+
+\subsection{Examples}
+\begin{itemize}
+\item \verb+test float=[extract count.particles] value=9 error=0+
+\item \verb+test float=[extract count.particles particle=I] value=4 error=0+
+\item \verb+test float=[extract count.particles particle=V] value=5 error=0+
+\item \verb+test one="Hola" not equal two="hola"+
+\end{itemize}

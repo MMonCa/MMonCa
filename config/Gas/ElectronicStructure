@@ -1,0 +1,12 @@
+proc eDOSMass {
+	return 0.
+}
+
+proc hDOSMass {
+	return 0.
+}
+
+proc Bandgap {
+	return 15.0
+}
+

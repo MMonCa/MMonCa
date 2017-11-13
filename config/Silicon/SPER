@@ -1,0 +1,71 @@
+map<string,float> prefactor.111    { Si 1.621e12 Ge 1.50e12 }
+map<string,float> prefactor.110    { Si 2.082e15 Ge 2.41e16 }
+map<string,float> prefactor.100.6  { Si 3.094e16 Ge 1.18e17 }
+map<string,float> prefactor.100.7  { Si 3.094e16 Ge 1.18e17 }
+map<string,float> prefactor.100.8  { Si 3.094e16 Ge 1.18e17 }
+map<string,float> prefactor.100.9  { Si 7.425e17 Ge 2.35e18 }
+map<string,float> prefactor.100.10 { Si 7.425e17 Ge 2.35e18 }
+
+map<string,float> energy.1st {
+Si+Si 2.7
+Si+Ge 2.7
+
+Si+Si2  2.7
+Si+SiGe 2.7
+Si+Ge2  2.7
+
+Si+Si3    2.7
+Si+Si2Ge  2.7
+Si+SiGe2  2.7
+Si+Ge3    2.7
+
+Si+Si4    2.7
+Si+Si3Ge  2.7
+Si+Si2Ge2 2.7
+Si+SiGe3  2.7
+Si+Ge4    2.7
+
+Ge+Si  2.7
+Ge+Ge  2.17
+
+Ge+Si2  2.7
+Ge+SiGe 2.7
+Ge+Ge2  2.17
+
+Ge+Si3   2.7
+Ge+Si2Ge 2.7
+Ge+SiGe2 2.7
+Ge+Ge3   2.17
+
+Ge+Si4    2.7
+Ge+Si3Ge  2.7
+Ge+Si2Ge2 2.7
+Ge+SiGe3  2.7
+Ge+Ge4    2.17
+}
+
+float shear.effect        25
+float twin.probability    0.05
+
+// Stress tensors
+float dvpar.100.2        -0.33
+float dvperp.100.2       0.
+
+float dvpar.100.3        -26.
+float dvperp.100.3       13.
+
+float dvpar.110          0.
+float dvperp.110         0.
+
+float dvpar.111          0.
+float dvperp.111         0.
+
+// Electrostic
+string electrostatic.model GFLS
+float degeneracy.P         1.
+float degeneracy.M         2.
+float degeneracy.0         1.
+
+// ALL energy levels referenced with respect to VBM, at 300K
+float energy.M0            0.99
+float energy.P0            0.0

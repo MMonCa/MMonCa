@@ -1,0 +1,94 @@
+string alloy none
+string material.composition Fe
+
+float atomic.density 8.77e22
+float molar.volume   7.09
+float permittivity   88
+float theta 1518.33
+float lambda         0.287
+bool  epitaxy        false
+
+map<string,bool> particles { 
+	C    true
+	CI   true
+	CV	 true	
+	He   true 
+	HeI  true 
+	HeV  true 
+	I    true
+	V    true
+}
+map<string,bool> defined { 
+	ICluster  true
+	VCluster  true
+	<111>     true
+	HeCluster true
+}
+
+array<string,string> interactions { 
+	I+V         	0
+	I+I         	ICluster,1.
+	V+V         	VCluster,1.
+	
+	I+Gas       	true
+	V+Gas       	true
+    
+	ICluster:*+I		true
+	ICluster:*+V		true
+	ICluster+ICluster	true
+	ICluster+VCluster	true
+	ICluster+<111>      true
+	
+	VCluster:*+I		true
+	VCluster:*+V		true
+	VCluster+VCluster	true
+	VCluster+<111>      true
+	
+	<111>:*+I			true
+	<111>:*+V			true
+	<111>+<111>         true
+	
+	C+I      true 
+	C+Gas	 true
+	CI+V     true
+	CI+Gas   false
+	CV+Gas   true
+	
+	He+I   true
+	He+V   true 
+	HeI+V  true
+	HeV+I  true
+    	HeV+V  HeCluster,1
+    	He2V+V false
+    
+    	HeI+Gas true
+	HeV+Gas true	
+}
+
+# defect0 
+array<string> interaction.result {
+
+	<111> ~=,.05 <111> = <111>
+	<111> >  <111> = <111>
+	<111> <  <111> = <111>
+	
+	<111> == VCluster = <111>
+	<111> >  VCluster = <111>
+	<111> <  VCluster = VCluster
+	
+	<111> +  ICluster  = <111>
+	<111> +  HeCluster = HeCluster 
+	
+	VCluster +  VCluster = VCluster
+	
+	VCluster == ICluster = VCluster
+	VCluster >  ICluster = VCluster
+	VCluster <  ICluster = ICluster
+	
+	VCluster +  HeCluster = HeCluster
+	
+	ICluster +  ICluster = ICluster
+	ICluster +  HeCluster = HeCluster
+	
+	HeCluster +  HeCluster = HeCluster 
+}

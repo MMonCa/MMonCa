@@ -1,0 +1,219 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.12
+Compiled on May  8 2015 17:22:31 for x86_64-Linux
+for #86-Ubuntu SMP Mon May 4 04:32:59 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Models/amorphization.threshold' value='-1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Silicon
+0000000000000 -                0:1.53846
+0000000000000 -                18.4615:20
+Starting clusters:  Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+Gas
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: BI+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: CI+SiO2
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ insert -----
+insert particle='I' coord=' 15 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 15 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='I' coord=' 15.6 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 15.6 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 15.3 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Created Silicon,I(2) Silicon,V(3) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle I_0+V_0               2
+
+ ----------------------------------------Silicon                Cluster
+Cluster    IVCluster+V           1
+
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+IVCluster/V2I                        1
+IVCluster/VI                         1
+0 -> Silicon
+0000000000000 -                0:1.53846
+0000000000000 -                18.4615:20
+----------------------------------------------------------------- extract -----
+extract count.particles
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='part.a' float='5' value='5' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+part.a: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.defects
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='defe.a' float='2' value='2' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+defe.a: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/IVCluster/percolation' value='true'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+Deleting old simulation
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Silicon
+0000000000000 -                0:1.53846
+0000000000000 -                18.4615:20
+Starting clusters:  Silicon(<311> BICs CCluster DLoop IVCluster Void )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ insert -----
+insert particle='I' coord=' 15 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 15 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='I' coord=' 15.6 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 15.6 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 15.3 15 15 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Created Silicon,I(2) Silicon,V(3) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle I_0+V_0               2
+
+ ----------------------------------------Silicon                Cluster
+Cluster    IVCluster+V           1 IVCluster+IVCluster       1
+
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+IVCluster/V3I2                       1
+0 -> Silicon
+0000000000000 -                0:1.53846
+0000000000000 -                18.4615:20
+----------------------------------------------------------------- extract -----
+extract count.particles
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='part.b' float='5' value='5' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+part.b: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.defects
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='defe.b' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+defe.b: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+Time spent: 43s. Annealing: 0s.
+         2 times: Alloy material is given but selfdiffusion is set to false
+         2 times: Silicon/Models/interactions Interaction not used: BI+SiO2
+         2 times: Silicon/Models/interactions Interaction not used: CI+SiO2
+         2 times: Silicon/Models/interactions Interaction not used: I+Gas
+         2 times: Silicon/Models/interactions Interaction not used: I+SiO2
+         2 times: Silicon/Models/interactions Interaction not used: V+Gas
+         2 times: Silicon/Models/interactions Interaction not used: V+SiO2
+         1 times: defe.a: Requested error is  < 0% maximum error is 0%
+         1 times: defe.b: Requested error is  < 0% maximum error is 0%
+         1 times: part.a: Requested error is  < 0% maximum error is 0%
+         1 times: part.b: Requested error is  < 0% maximum error is 0%
+There are 15 total sentences. Collect them all!
+No por mucho simular...
+                    ... amanece más temprano

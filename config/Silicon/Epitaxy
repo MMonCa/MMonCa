@@ -1,0 +1,84 @@
+// Params for SiGe epitaxy
+
+bool model.simplified true
+
+proc prefactor.precursor {
+set name(0) $arg0
+set P(0)    $arg1
+set name(1) $arg2
+set P(1)    $arg3
+set name(2) $arg4
+set P(2)    $arg5
+set T       $arg6
+set type    $arg7
+
+set Pressure 0
+for { set i 0 } { $i < 3 } { incr i } {
+	if { $name($i) == $type } {
+		set Pressure $P($i)
+	}
+}
+
+set N_Si(100)	6.78E14
+set m_SiH4	32.12
+set F_SiH4	[expr $Pressure*1.3333333E21/sqrt($m_SiH4*1.4405617E-3*$T)]
+set ADS		[expr $F_SiH4/$N_Si(100)]
+
+lowmsg "Pressure($type) $Pressure. [format "%s %s %e %s" Vads is $ADS /s]"
+
+return "$ADS"
+}
+
+map<string,float> formation.1st {
+Si+Si -0.4
+Si+Ge -0.4
+
+Si+Si2 -0.5
+Si+SiGe -0.5
+Si+Ge2  -0.5
+
+Si+Si3  -0.75
+Si+Si2Ge -0.75
+Si+SiGe2 -0.75
+Si+Ge3   -0.75
+
+Si+Si4    -2.0
+Si+Si3Ge  -2.0
+Si+Si2Ge2 -2.0
+Si+SiGe3  -2.0
+Si+Ge4    -2.0
+
+Ge+Si  -0.4
+Ge+Ge  -0.4
+
+Ge+Si2  -0.5
+Ge+SiGe -0.5
+Ge+Ge2  -0.5
+
+Ge+Si3   -0.75
+Ge+Si2Ge -0.75
+Ge+SiGe2 -0.75
+Ge+Ge3   -0.75
+
+Ge+Si4    -2.0
+Ge+Si3Ge  -2.0
+Ge+Si2Ge2 -2.0
+Ge+SiGe3  -2.0
+Ge+Ge4    -2.0
+}
+
+map<string,float> formation.2nd { Si+Si -0.15 Si+Ge -0.15 Ge+Si -0.15 Ge+Ge -0.15 }
+map<string,float> formation.3rd { Si+Si -0.12 Si+Ge -0.12 Ge+Si -0.12 Ge+Ge -0.12 }
+
+map<string,string> pair.epi      { }
+map<string,float> barrier.pair   { }
+map<string,float> migration.1st        { Si 0.1 Ge 0.1 }
+map<string,float> migration.2nd        { Si 0.2 Ge 0.2 }
+map<string,float> barrier.epi          { Si 3.7 Ge 3.5 }
+map<string,float> barrier.precursor    { Si 0.0 Ge 0.0 }
+map<string,float> barrier.desorption   { Si 0.0 Ge 0.0 }
+map<string,float> prefactor.epi        { Si 5.6e9 Ge 5.6e9 }
+map<string,float> prefactor.etch       { Si 0.0 Ge 0.0 }
+map<string,float> prefactor.mig        { Si 1e6 Ge 1e6 }
+map<string,float> prefactor.desorption { Si 0.0 Ge 0.0 } 
+map<string,float> speedup.factor       { Si 100. Ge 100. }

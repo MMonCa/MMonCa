@@ -1,0 +1,22 @@
+\section{report}
+\index{report}
+
+This command it used to display reports. One or more of the following options can be used:
+
+\begin{description}
+\item[\param{all}] All of the above but \param{domains} and \param{reactions.interface}.
+\item[\param{defects}] Lists all the defects currently in the simulation.
+\item[\param{domains}] Information on the different domains created for parallelization.
+\item[\param{events}] Lists all the events performed by the KMC algorithm.
+\item[\param{insertions}] Lists the particles and defects created (with \param{insert} or \param{profile}).
+\item[\param{mesh}] If in LKMC mode, displays the current mesh status.
+\item[\param{reactions}] Lists all the reactions that have taken place.
+\item[\param{reactions.interface}] Details the ractions at interfaces.
+\end{description}
+
+\subsection{Examples}
+\begin{itemize}
+\item \verb+report defects+
+\item \verb+report events+
+\item \verb+report mesh defects events reactions+
+\end{itemize}

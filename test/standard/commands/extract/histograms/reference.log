@@ -1,0 +1,142 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.6 Compiled on Nov  6 2013 09:56:54
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/lambda' value='0.287'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='1.3'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/delta.x' value='1.'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/delta.y' value='1.'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/delta.z' value='1.'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='50' maxy='50' maxz='50' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+     X: (0 - 50) nm. 38 elements. Delta = 1.31579 nm.
+     Y: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+     Z: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+Total 41382 elements
+Loading Particle To Node handler
+Setting long hop in number 4
+Building nodes... Done
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  0:1.31579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  1.31579:2.63158
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  2.63158:3.94737
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  3.94737:5.26316
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  5.26316:6.57895
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  6.57895:7.89474
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  7.89474:9.21053
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  9.21053:10.5263
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  10.5263:11.8421
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  11.8421:13.1579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  13.1579:14.4737
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  14.4737:15.7895
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  15.7895:17.1053
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  17.1053:18.4211
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  18.4211:19.7368
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  19.7368:21.0526
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  21.0526:22.3684
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  22.3684:23.6842
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  23.6842:25
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  25:26.3158
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  26.3158:27.6316
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  27.6316:28.9474
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  28.9474:30.2632
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  30.2632:31.5789
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  31.5789:32.8947
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  32.8947:34.2105
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  34.2105:35.5263
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  35.5263:36.8421
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  36.8421:38.1579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  38.1579:39.4737
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  39.4737:40.7895
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  40.7895:42.1053
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  42.1053:43.4211
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  43.4211:44.7368
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  44.7368:46.0526
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  46.0526:47.3684
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  47.3684:48.6842
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  48.6842:50
+Interfacing...
+---------------------------- Warning -----------------------------------
+This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I5' coord=' 5.5 5.5 5.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I5' coord=' 6.5 5.5 6.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I2' coord=' 3.5 5.5 5.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I2' coord=' 15.5 4.5 5.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I2' coord=' 5.5 5.5 7.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I3' coord=' 15.5 15.5 5.5 '
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract histogram defect='<111>' material='Iron'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='val.0' one='I2 3
+I3 1
+I5 2
+' equal two='I2 3
+I3 1
+I5 2
+'
+-------------------------------------------------------------------------------
+Test PASSED... continuing
+Time spent: 0s.
+         1 times: This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+There are 8 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

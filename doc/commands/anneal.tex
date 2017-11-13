@@ -1,0 +1,29 @@
+\section{anneal}
+\index{anneal}
+
+Anneals the simulation at the requested temperature in Celsius degrees. Different criteria to exit the anneal are {\tt depth}, {\tt events} or {\tt time}.
+
+\begin{description}
+\item [depth=$<$depth$>$] Specifies recrystallized depth, in nm, as the exit criteria.
+\item [epitaxy="list"] Specifies, in ``list'', a map of gas names and partial pressures, used for epitaxy.
+\item [events=$<$events$>$] Specifies a number of simulated events as the exit criteria.
+\item [log=$<$filename$>$] Specifies the name of a file to log a list of simulated events and time every 100 events. (This list can be quite big).
+\item [temp=$<$temperature$>$] Requested temperature in Celsius degrees.
+\item [time=$<$time$>$] Specifies simulated time, in seconds, as the exit criteria.
+\end{description}
+
+This command prints an information line at a rate of 10 snapshots per decade, i.e., at 1,2,3... 10,20,30... 100,200... After priting the line, the procedure  \param{snaphot} is called to perform user-defined actions. Such procedure can be used, for instance, to save the simulation.
+
+\begin{lstlisting}
+proc snapshot { } {
+	save ovito=evolution append
+}
+\end{lstlisting}
+
+\subsection{Examples}
+\begin{itemize}
+\item \verb+anneal temp=600 time=20+
+\item \verb+anneal temp=600 depth=20+
+\item \verb+anneal temp=300 time=0.5 events=1000000+
+\item \verb+anneal temp=700  time=1 epitaxy="Si 1 Ge 0.5"+
+\end{itemize}

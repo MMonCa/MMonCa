@@ -1,0 +1,171 @@
+\documentclass[a4paper]{book}
+\usepackage{graphicx}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{makeidx}
+\usepackage{rotating}
+\usepackage{tocbibind}
+\usepackage{fancyhdr}
+\usepackage{natbib}
+\renewcommand{\familydefault}{\sfdefault}
+
+\lstset{
+breakatwhitespace=true,
+language=tcl,
+columns=fullflexible,
+keepspaces=true,
+breaklines=true,
+tabsize=3, 
+showstringspaces=true,
+extendedchars=true,
+  basicstyle=\small\ttfamily,
+  frame=lrtb,
+  numbers=left,
+  keywordstyle=\color{blue}
+}
+
+% Add mmonca keywords here
+\lstset{emph={%  
+    anneal, cascade, extract, init, insert, lowmsg, param, profile, report, save, test%
+    },emphstyle={\color{red}\small\ttfamily}%
+}%
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO]{\includegraphics[width=1cm]{images/logo} user guide}
+\fancyhead[LE]{\includegraphics[width=4mm]{images/AMM}\leftmark}
+\fancyfoot[LE,RO]{\thepage}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\newcommand{\param}[1]{{\tt #1}\index{#1}}
+\newcommand{\idx}[1]{#1\index{#1}}
+\newcommand{\MMonCa}{\includegraphics[width=1cm]{images/logo}}
+
+\renewcommand{\cite}{\citet}
+
+\makeindex
+
+\author{{\Huge IMDEA Materials Institute}\\
+\\
+{\huge Atomistic Modeling of Materials group}\\
+\includegraphics[width=5cm]{images/AMM}\\
+\url{http://www.materials.imdea.org/groups/amm}\\
+\\
+Contact: Ignacio\protect\index{Ignacio} Martin-Bragado: ignacio.martin@imdea.org}
+
+\title{\includegraphics[width=12cm]{images/logo}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+\newpage
+\chapter{Preliminaries}
+
+\input{preliminaries}
+\input{mechanics}
+\input{testing}
+
+\chapter{Running MMonCa}
+
+\input{running}
+\input{parallelism}
+
+\chapter{Syntax}
+\index{syntax}
+\input{defects/syntaxis}
+
+\chapter{Object KMC: defects and particles}
+
+\input{defects/introduction}
+
+\section{Description of defects and parameters}
+
+\input{defects/MobileParticle}
+\input{defects/Cluster}
+\input{defects/Interfaces}
+
+\section{Amorphization}
+\input{materials/amorphization}
+
+\chapter{Lattice KMC: Lattice atoms}
+\input{defects/LKMC}
+
+\chapter{Output}
+
+\input{output/snapshots}
+\input{output/extractinfo.tex}
+
+\chapter{Commands}
+\label{chap:commands}
+
+All the commands can use the generic option \param{no.print} when you do not want \MMonCa\ to print out the command line.
+
+\input{commands/anneal}
+\input{commands/cascade}
+\input{commands/extract}
+\input{commands/init}
+\input{commands/insert}
+\input{commands/lowmsg}
+\input{commands/param}
+\input{commands/profile}
+\input{commands/report}
+\input{commands/restart}
+\input{commands/save}
+\input{commands/test}
+
+\chapter{Limitations}
+
+\section{extract diffusivities}
+
+Only tracks \idx{diffusivity} of impurities, i.e., not of I or V.
+
+\chapter{Appendix}
+
+\section{Binding energies}
+\index{binding}
+
+There is no {\tt Particle(binding) \{ pref\_b ener\_b \}}, instead there are two parameters: {\tt Dopant(formation) \{ pref\_d ener\_d \}} and {\tt Particle(formation) \{ pref\_p ener\_p \}}. Expressions for the variable change for energies and prefactors are shown below:
+\begin{tabular}{lc}
+  $pref_{Dop} = 1$ & $ener_{Dop} = 0$ \\
+\end{tabular}
+
+\begin{equation} 
+  ener_{Part} = ener_{Dop} + ener_{IorV} - ener_{Bind}  
+\end{equation}
+\begin{equation}  
+  pref_{Part} = \frac{pref_{Dop}}{pref_{Bind}} \cdot pref_{IorV} \cdot pref_{migIorV} \cdot v_{capt} 
+\end{equation}
+
+Where $ener_{IorV}$ is the \idx{formation energy} of interstitials or vacancies, $pref_{IorV}$ is the initial concentration of interstitials or vacancies, $pref_{migIorV}$ is the migration prefactor of interstitials or vacancies ({\tt IorV(migration)}), and $v_{capt}$ is the capture volume defined as:
+
+\begin{equation}
+  v_{capt} = 3.65 \cdot \lambda^3
+\end{equation}
+
+Where $\lambda$ is the \idx{migration jump}.
+
+\subsection{Example}
+
+\begin{itemize}
+\item $E_f(C_i) = E_f(I) + E_f(C) - E_b(C_i)$
+\item $\left.\frac{C_{C_i}}{C_{C_{ref}}}\right|_0 = \left.\frac{C_{C}}{C_{C_{ref}}}\right|_0 \cdot C_{I_0} \cdot \nu_{mI_0} \cdot v_{capt} \cdot \frac{1}{\nu{bin}(C_i)}$
+\end{itemize}
+
+\input{Copyrights}
+
+\input{Acknowledgments}
+
+\bibliographystyle{apalike}
+%\bibliographystyle{newapa}
+\bibliography{articles}
+
+\listoffigures
+\listoftables
+\printindex
+
+\end{document}

@@ -1,0 +1,162 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.13
+Compiled on Jun 11 2015 10:23:17 for x86_64-Linux
+for #91-Ubuntu SMP Tue May 26 19:15:08 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Iron Fe Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.y' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.z' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='float' key='Iron/Models/alloy.density'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='I+I'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='10' maxy='10' maxz='10' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Iron(<100> <111> ICluster VCluster ) 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (0 - 10) nm. 10 elements. Delta = 1 nm.
+     Y: (0 - 10) nm. 10 elements. Delta = 1 nm.
+     Z: (0 - 10) nm. 10 elements. Delta = 1 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Gas
+1 -> Iron
+1111111111 -             0:1
+1111111111 -             9:10
+Starting clusters:  Gas() Iron(<100> <111> ICluster VCluster )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+----------------------------------------------------------------- profile -----
+profile name='Cr' proc='alloy'
+-------------------------------------------------------------------------------
+
+Created Iron,Cr(42704) 
+------------------------------------------------------------------ insert -----
+insert particle='V' coord=' 5 5 5 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ anneal -----
+anneal time='1e25' temp='500' events='2e7'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+25 seconds at 773.15K (500ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+500C 1.05e-05s          22   0.00%    2.1e+06 s^-1 97 Mb
+500C  1.1e-05s          26   0.00%    7.5e+06 s^-1 97 Mb
+500C 2.04e-05s          42   0.00%    1.7e+06 s^-1 97 Mb
+500C 3.06e-05s          57   0.00%    1.5e+06 s^-1 97 Mb
+500C 4.02e-05s          79   0.00%    2.3e+06 s^-1 97 Mb
+500C 5.02e-05s          97   0.00%    1.8e+06 s^-1 97 Mb
+500C 6.03e-05s         116   0.00%    1.9e+06 s^-1 97 Mb
+500C 7.13e-05s         142   0.00%    2.3e+06 s^-1 97 Mb
+500C 8.08e-05s         165   0.00%    2.4e+06 s^-1 97 Mb
+500C    9e-05s         175   0.00%    1.1e+06 s^-1 97 Mb
+500C   0.0001s         199   0.00%    2.3e+06 s^-1 97 Mb
+500C 0.000111s         213   0.00%    1.4e+06 s^-1 97 Mb
+500C 0.000201s         402   0.00%    2.1e+06 s^-1 97 Mb
+500C 0.000302s         633   0.00%    2.3e+06 s^-1 97 Mb
+500C 0.000401s         852   0.00%    2.2e+06 s^-1 97 Mb
+500C 0.000501s        1069   0.01%    2.2e+06 s^-1 97 Mb
+500C   0.0006s        1253   0.01%    1.8e+06 s^-1 97 Mb
+500C 0.000701s        1465   0.01%    2.1e+06 s^-1 97 Mb
+500C 0.000802s        1677   0.01%    2.1e+06 s^-1 97 Mb
+500C 0.000901s        1868   0.01%    1.9e+06 s^-1 97 Mb
+500C    0.001s        2096   0.01%    2.3e+06 s^-1 97 Mb
+500C   0.0011s        2316   0.01%    2.2e+06 s^-1 97 Mb
+500C    0.002s        4215   0.02%    2.1e+06 s^-1 97 Mb
+500C    0.003s        6349   0.03%    2.1e+06 s^-1 97 Mb
+500C    0.004s        8424   0.04%    2.1e+06 s^-1 97 Mb
+500C    0.005s       10586   0.05%    2.2e+06 s^-1 97 Mb
+500C    0.006s       12605   0.06%    2.0e+06 s^-1 97 Mb
+500C    0.007s       14693   0.07%    2.1e+06 s^-1 97 Mb
+500C    0.008s       16806   0.08%    2.1e+06 s^-1 97 Mb
+500C    0.009s       18904   0.09%    2.1e+06 s^-1 97 Mb
+500C     0.01s       20939   0.10%    2.0e+06 s^-1 97 Mb
+500C    0.011s       23003   0.12%    2.1e+06 s^-1 97 Mb
+500C     0.02s       41970   0.21%    2.1e+06 s^-1 97 Mb
+500C     0.03s       63123   0.32%    2.1e+06 s^-1 97 Mb
+500C     0.04s       84297   0.42%    2.1e+06 s^-1   21174 ev/s 97 Mb
+500C     0.05s      105186   0.53%    2.1e+06 s^-1 97 Mb
+500C     0.06s      126247   0.63%    2.1e+06 s^-1 97 Mb
+500C     0.07s      147349   0.74%    2.1e+06 s^-1 97 Mb
+500C     0.08s      168332   0.84%    2.1e+06 s^-1 97 Mb
+500C     0.09s      189454   0.95%    2.1e+06 s^-1 97 Mb
+500C      0.1s      210802   1.05%    2.1e+06 s^-1 97 Mb
+500C     0.11s      231683   1.16%    2.1e+06 s^-1 97 Mb
+500C        1s     2104446  10.52%    2.1e+06 s^-1  170251 ev/s 97 Mb
+500C        2s     4208907  21.04%    2.1e+06 s^-1  191314 ev/s 97 Mb
+500C        3s     6311806  31.56%    2.1e+06 s^-1  210289 ev/s 97 Mb
+500C        4s     8416272  42.08%    2.1e+06 s^-1  233829 ev/s 97 Mb
+500C        5s    10519357  52.60%    2.1e+06 s^-1  262885 ev/s 97 Mb
+500C        6s    12621813  63.11%    2.1e+06 s^-1  233606 ev/s 97 Mb
+500C        7s    14725833  73.63%    2.1e+06 s^-1  233780 ev/s 97 Mb
+500C        8s    16830930  84.15%    2.1e+06 s^-1  263137 ev/s 97 Mb
+500C        9s    18933930  94.67%    2.1e+06 s^-1  233666 ev/s 97 Mb
+500C     9.51s    20000000 100.00%    2.1e+06 s^-1  266517 ev/s 97 Mb
+0 -> Gas
+1 -> Iron
+1111111111 -             0:1
+1111111111 -             9:10
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+MobileParticle/Cr                42704
+MobileParticle/V                     1
+----------------- Event Log --------------
+ ----------------------------------------Iron            MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+V                                                                               19999819       181
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract profile name='Cr' dimension='3' file='gen.dat'
+-------------------------------------------------------------------------------
+
+Results written in gen.dat
+----------------------------------------------------------------- restart -----
+restart save='dump'
+-------------------------------------------------------------------------------
+
+Writing restart information in dump.mmonca. Done
+Time spent: 89s. Annealing: 89s.
+         1 times: Alloy material is given but selfdiffusion is set to false
+        52 times: Snapshot not defined or error.
+There are 15 total sentences. Collect them all!
+Camarón que se duerme...
+                     ... se lo lleva la corriente

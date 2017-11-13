@@ -1,0 +1,13 @@
+arrhenius I_-(migration) { 0% 2e-3 0.7  100% 2e-3 0.8 }
+arrhenius I_0(migration) { 0% 2e-3 0.7  100% 2e-3 0.8 }
+arrhenius I_+(migration) { 0% 2e-3 0.7  100% 2e-3 0.8 }
+arrhenius I(update)      { 0% 2e-3 0.7  100% 2e-3 0.8 }
+arrhenius I(formation)   { 0% 7.95e27 4 100% 7.95e27 3.6 }
+
+// For self-diffusion
+float correlation.factor .7
+arrhenius alpha     { 1 0 }
+
+map<string,int> I(state.charge) I_0 0     I_+ 1     I_- -1
+float           I(e(-1,0))      .7
+float           I(e(0,1))       .5

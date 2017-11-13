@@ -1,0 +1,214 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.6 Compiled on Nov 27 2013 11:57:57
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Gas_Iron/Vacancy/barrier.right' value='10' index='V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Gas_Iron/Interstitial/barrier.right' value='10' index='I'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Iron/Vacancy/V(formation)' value=' 1e-5 10 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Iron/Helium/HeV(formation)' value=' 3.93e-26 4.1 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value='false' index='He+V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value='false' index='HeV+HeV'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Gas_Iron/Helium/desorption.low' value='0' index='HeV'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Gas_Iron/Helium/desorption.high' value='1' index='HeV'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Gas_Iron/Helium/desorption.threshold' value='1e14' index='He'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-1.5' miny='0' minz='0' maxx='30' maxy='30' maxz='30' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+     X: (-1.5 - 30) nm. 21 elements. Delta = 1.5 nm.
+     Y: (0 - 30) nm. 20 elements. Delta = 1.5 nm.
+     Z: (0 - 30) nm. 20 elements. Delta = 1.5 nm.
+Total 8400 elements
+Loading Particle To Node handler
+Setting long hop in number 3
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGG  -1.5:0
+IIIIIIIIIIIIIIIIIIII  0:1.5
+IIIIIIIIIIIIIIIIIIII  1.5:3
+IIIIIIIIIIIIIIIIIIII  3:4.5
+IIIIIIIIIIIIIIIIIIII  4.5:6
+IIIIIIIIIIIIIIIIIIII  6:7.5
+IIIIIIIIIIIIIIIIIIII  7.5:9
+IIIIIIIIIIIIIIIIIIII  9:10.5
+IIIIIIIIIIIIIIIIIIII  10.5:12
+IIIIIIIIIIIIIIIIIIII  12:13.5
+IIIIIIIIIIIIIIIIIIII  13.5:15
+IIIIIIIIIIIIIIIIIIII  15:16.5
+IIIIIIIIIIIIIIIIIIII  16.5:18
+IIIIIIIIIIIIIIIIIIII  18:19.5
+IIIIIIIIIIIIIIIIIIII  19.5:21
+IIIIIIIIIIIIIIIIIIII  21:22.5
+IIIIIIIIIIIIIIIIIIII  22.5:24
+IIIIIIIIIIIIIIIIIIII  24:25.5
+IIIIIIIIIIIIIIIIIIII  25.5:27
+IIIIIIIIIIIIIIIIIIII  27:28.5
+IIIIIIIIIIIIIIIIIIII  28.5:30
+Interfacing...
+---------------------------- Warning -----------------------------------
+This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+----------------------------------------------------------------- profile -----
+profile name='HeV' proc='myName'
+-------------------------------------------------------------------------------
+Created Iron,HeV(1055) 
+----------------------------------------------------------------- extract -----
+extract count.particles particle='HeV'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='before' float='1055' value='1080.0' error='0.05'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+before: Requested error is  < 5% maximum error is 2.31481%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='1e10' temp='700' events='1e7'
+-------------------------------------------------------------------------------
+Annealing the sample for 1e+10 seconds at 973.15K (700ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+700C   2e-15s           1   0.00%    1.0e+15 s^-1 
+700C   3e-15s           4   0.00%    3.0e+15 s^-1 
+700C   4e-15s           6   0.00%    2.0e+15 s^-1 
+700C   5e-15s           7   0.00%    1.0e+15 s^-1 
+700C   6e-15s           8   0.00%    1.0e+15 s^-1 
+700C   9e-15s           9   0.00%    1.0e+15 s^-1 
+700C   1e-14s          11   0.00%    2.0e+15 s^-1 
+700C   2e-14s          15   0.00%    4.0e+14 s^-1 
+700C   3e-14s          22   0.00%    7.0e+14 s^-1 
+700C   4e-14s          26   0.00%    4.0e+14 s^-1 
+700C   5e-14s          31   0.00%    5.0e+14 s^-1 
+700C   6e-14s          35   0.00%    4.0e+14 s^-1 
+700C   7e-14s          41   0.00%    6.0e+14 s^-1 
+700C   8e-14s          46   0.00%    5.0e+14 s^-1 
+700C   9e-14s          56   0.00%    1.0e+15 s^-1 
+700C   1e-13s          62   0.00%    6.0e+14 s^-1 
+700C   2e-13s         122   0.00%    6.0e+14 s^-1 
+700C   3e-13s         174   0.00%    5.2e+14 s^-1 
+700C   4e-13s         238   0.00%    6.4e+14 s^-1 
+700C   5e-13s         296   0.00%    5.8e+14 s^-1 
+700C   6e-13s         357   0.00%    6.1e+14 s^-1 
+700C   7e-13s         433   0.00%    7.6e+14 s^-1 
+700C   8e-13s         505   0.01%    7.2e+14 s^-1 
+700C   9e-13s         562   0.01%    5.7e+14 s^-1 
+700C   1e-12s         629   0.01%    6.7e+14 s^-1 
+700C   2e-12s        1236   0.01%    6.1e+14 s^-1 
+700C   3e-12s        1843   0.02%    6.1e+14 s^-1 
+700C   4e-12s        2462   0.02%    6.2e+14 s^-1 
+700C   5e-12s        3080   0.03%    6.2e+14 s^-1 
+700C   6e-12s        3729   0.04%    6.5e+14 s^-1 
+700C   7e-12s        4344   0.04%    6.2e+14 s^-1 
+700C   8e-12s        4938   0.05%    5.9e+14 s^-1 
+700C   9e-12s        5566   0.06%    6.3e+14 s^-1 
+700C   1e-11s        6225   0.06%    6.6e+14 s^-1 
+700C   2e-11s       12320   0.12%    6.1e+14 s^-1 
+700C   3e-11s       18476   0.18%    6.2e+14 s^-1 
+700C   4e-11s       24605   0.25%    6.1e+14 s^-1 
+700C   5e-11s       30883   0.31%    6.3e+14 s^-1 
+700C   6e-11s       37059   0.37%    6.2e+14 s^-1    6176 ev/s 
+700C   7e-11s       43179   0.43%    6.1e+14 s^-1 
+700C   8e-11s       49428   0.49%    6.2e+14 s^-1 
+700C   9e-11s       55554   0.56%    6.1e+14 s^-1 
+700C   1e-10s       61748   0.62%    6.2e+14 s^-1 
+700C   2e-10s      123567   1.24%    6.2e+14 s^-1 
+700C   3e-10s      185336   1.85%    6.2e+14 s^-1 
+700C   4e-10s      247247   2.47%    6.2e+14 s^-1 
+700C   5e-10s      308588   3.09%    6.1e+14 s^-1 
+700C   6e-10s      368944   3.69%    6.0e+14 s^-1 
+700C   7e-10s      429056   4.29%    6.0e+14 s^-1 
+700C   8e-10s      488508   4.89%    5.9e+14 s^-1 
+700C   9e-10s      547635   5.48%    5.9e+14 s^-1 
+700C   1e-09s      606265   6.06%    5.9e+14 s^-1   58630 ev/s 
+700C   2e-09s     1146531  11.47%    5.4e+14 s^-1 
+700C   3e-09s     1617519  16.18%    4.7e+14 s^-1  470988 ev/s 
+700C   4e-09s     2040555  20.41%    4.2e+14 s^-1  423036 ev/s 
+700C   5e-09s     2425310  24.25%    3.8e+14 s^-1  384755 ev/s 
+700C   6e-09s     2783358  27.83%    3.6e+14 s^-1 
+700C   7e-09s     3113474  31.13%    3.3e+14 s^-1  330116 ev/s 
+700C   8e-09s     3421423  34.21%    3.1e+14 s^-1 
+700C   9e-09s     3711606  37.12%    2.9e+14 s^-1  290183 ev/s 
+700C   1e-08s     3987439  39.87%    2.8e+14 s^-1 
+700C   2e-08s     6197537  61.98%    2.2e+14 s^-1  552524 ev/s 
+700C   3e-08s     7682249  76.82%    1.5e+14 s^-1  742356 ev/s 
+700C   4e-08s     8709241  87.09%    1.0e+14 s^-1  513496 ev/s 
+700C   5e-08s     9446149  94.46%    7.4e+13 s^-1  736908 ev/s 
+700C   6e-08s     9970948  99.71%    5.2e+13 s^-1  524799 ev/s 
+700C 6.06866e-08s    10000000 100.00%    4.2e+13 s^-1 
+----------------------------- Defect logfile --------------
+---------------------------------------       Gas --------
+Gas_Iron/He                        830
+---------------------------------------      Iron --------
+MobileParticle/HeV                  70
+----------------- Event Log --------------
+ ----------------------------------------Iron            MobileParticle
+Type                 migrate  break up    emit I    emit V     state  long hop  rejected
+HeV                  9973965                                                59     25976
+
+----------------- Reaction Log --------------
+ ----------------------------------------Iron                 Interface
+Interface  Interface+HeV       985
+
+----------------------------------------------------------------- extract -----
+extract count.particles
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='after' float='900' value='900.0' error='.1'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+after: Requested error is  < 10% maximum error is 0%
+Test PASSED... continuing
+Time spent: 17s.
+        69 times: Snapshot not defined or error.
+         1 times: This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+         1 times: after: Requested error is  < 10% maximum error is 0%
+         1 times: before: Requested error is  < 5% maximum error is 2.31481%
+There are 8 total sentences. Collect them all!
+¡Adiós amigos!

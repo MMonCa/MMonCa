@@ -1,0 +1,200 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.13
+Compiled on Jun 11 2015 10:23:17 for x86_64-Linux
+for #91-Ubuntu SMP Tue May 26 19:15:08 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si AmorphousSilicon aSi Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/wafer.orientation' value='i 1.0  j 0.0 k 0.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/flat.orientation' value='i -0.0 j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/wafer.orientation' value='i 1.0  j 0.0 k 0.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/flat.orientation' value='i -0.0 j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='54' maxy='60' maxz='19.96954402884553' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: AmorphousSilicon() Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (-2 - 54) nm. 37 elements. Delta = 1.51351 nm.
+     Y: (0 - 60) nm. 40 elements. Delta = 1.5 nm.
+     Z: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+Total 19240 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> AmorphousSilicon
+1 -> Gas
+2 -> Silicon
+1111111111111111111111111111111111111111 -                                           -2:-0.486486
+0000000000000000000000000000000000000000 -                                           -0.486486:1.02703
+2222222222222222222222222222222222222222 -                                           52.4865:54
+Starting clusters:  AmorphousSilicon() Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: BI+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: CI+SiO2
+Interfacing...
+Checking SPER... 268528/97656 atoms. Done.
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='550' depth='50'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1 seconds at 823.15K (550ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+550C 0.000245s           1   5.34%    4.1e+03 s^-1 52.4 nm.       0 ev/s 382 Mb
+550C 0.000416s           2   5.34%    5.9e+03 s^-1 52.4 nm. 382 Mb
+550C 0.000622s           4   5.34%    9.7e+03 s^-1 52.4 nm. 382 Mb
+550C 0.000719s           5   5.34%    1.0e+04 s^-1 52.4 nm. 382 Mb
+550C 0.000849s           8   5.34%    2.3e+04 s^-1 52.4 nm. 382 Mb
+550C 0.000927s          10   5.34%    2.6e+04 s^-1 52.4 nm. 382 Mb
+550C  0.00114s          12   5.34%    9.4e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00214s          19   5.34%    7.0e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00307s          24   5.34%    5.4e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00437s          32   5.34%    6.1e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00524s          39   5.34%    8.0e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00634s          44   5.34%    4.6e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00704s          47   5.34%    4.3e+03 s^-1 52.4 nm. 382 Mb
+550C  0.00822s          55   5.34%    6.8e+03 s^-1 52.4 nm. 382 Mb
+550C    0.009s          59   5.34%    5.1e+03 s^-1 52.4 nm. 382 Mb
+550C     0.01s          68   5.34%    8.8e+03 s^-1 52.4 nm. 382 Mb
+550C    0.011s          73   5.34%    5.0e+03 s^-1 52.4 nm. 382 Mb
+550C   0.0204s         142   5.34%    7.3e+03 s^-1 52.4 nm. 382 Mb
+550C   0.0301s         203   5.34%    6.3e+03 s^-1 52.4 nm. 382 Mb
+550C     0.04s         278   5.34%    7.5e+03 s^-1 52.4 nm. 382 Mb
+550C     0.05s         344   5.34%    6.6e+03 s^-1 52.4 nm. 382 Mb
+550C     0.06s         416  10.67%    7.2e+03 s^-1 52.3 nm. 382 Mb
+550C   0.0701s         507  10.67%    9.1e+03 s^-1 52.3 nm. 382 Mb
+550C     0.08s         579  10.67%    7.2e+03 s^-1 52.3 nm. 382 Mb
+550C   0.0902s         654  10.67%    7.4e+03 s^-1 52.3 nm. 382 Mb
+550C      0.1s         721  10.67%    6.8e+03 s^-1 52.3 nm. 382 Mb
+550C     0.11s         797  10.67%    7.5e+03 s^-1 52.3 nm. 382 Mb
+550C        1s        9510  21.34%    9.8e+03 s^-1 52.0 nm.    8713 ev/s 382 Mb
+550C        2s       19934  32.01%    1.0e+04 s^-1 51.7 nm. 382 Mb
+550C        3s       30536  42.68%    1.1e+04 s^-1 51.5 nm.   10602 ev/s 382 Mb
+550C        4s       40983  42.68%    1.0e+04 s^-1 51.5 nm. 382 Mb
+550C        5s       51393  53.35%    1.0e+04 s^-1 51.2 nm.   10410 ev/s 382 Mb
+550C        6s       61733  58.69%    1.0e+04 s^-1 51.1 nm. 382 Mb
+550C        7s       71963  69.36%    1.0e+04 s^-1 50.8 nm.   10230 ev/s 382 Mb
+550C        8s       82315  74.69%    1.0e+04 s^-1 50.6 nm.   10352 ev/s 382 Mb
+550C        9s       92455  80.03%    1.0e+04 s^-1 50.5 nm.   10140 ev/s 382 Mb
+550C       10s      102262  90.70%    9.8e+03 s^-1 50.2 nm. 382 Mb
+550C     11.2s      114171 101.37%    9.9e+03 s^-1 50.0 nm.   11909 ev/s 382 Mb
+0 -> AmorphousSilicon
+1 -> Gas
+2 -> Silicon
+1111111111111111111111111111111111111111 -                                           -2:-0.486486
+0000000000000000000000000000000000000000 -                                           -0.486486:1.02703
+0222222222222222222222222222222222222220 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  50.973:52.4865
+2222222222222222222222222222222222222222 - XX                                    XX  52.4865:54
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                 <100>_6   <100>_7   <100>_8   <100>_9  <100>_10     <110>     <111>      none
+LatticeAtom            18405     21145     18648     47447      5973      2552         1
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- restart -----
+restart save='dump'
+-------------------------------------------------------------------------------
+
+Writing restart information in dump.mmonca. Done
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+1.- 11.1991 50.62 0.298317 
+------------------------------------------------------------------ anneal -----
+anneal time='5e3' temp='550' events='400000'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 5000 seconds at 823.15K (550ºC)
+550C       20s      200789  50.20%    9.8e+03 s^-1 48.5 nm.   12374 ev/s 382 Mb
+550C       30s      294880  73.72%    9.4e+03 s^-1 46.6 nm.   15681 ev/s 382 Mb
+550C       40s      383212  95.80%    8.8e+03 s^-1 44.8 nm.   14722 ev/s 382 Mb
+550C     41.9s      400000 100.00%    8.7e+03 s^-1 44.5 nm.   16788 ev/s 382 Mb
+0 -> AmorphousSilicon
+1 -> Gas
+2 -> Silicon
+1111111111111111111111111111111111111111 -                                           -2:-0.486486
+0000000000000000000000000000000000000000 -                                           -0.486486:1.02703
+0000000000000000000000000022200220000000 -   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    44.9189:46.4324
+0002222222222222222222222222222222222000 -   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    46.4324:47.9459
+0022222222222222222222222222222222222200 -  XXX                                XXX   47.9459:49.4595
+0222222222222222222222222222222222222220 - XXX                                  XXX  50.973:52.4865
+2222222222222222222222222222222222222222 - XX                                    XX  52.4865:54
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                 <100>_6   <100>_7   <100>_8   <100>_9  <100>_10     <110>     <111>      none
+LatticeAtom            59773     73757     67971    167943     21134      9419         3
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+2.- 41.9355 45.983 1.90903 
+Time spent: 60s. Annealing: 26s.
+         2 times: Alloy material is given but selfdiffusion is set to false
+         1 times: Silicon/Models/interactions Interaction not used: BI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: CI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: I+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: V+SiO2
+        42 times: Snapshot not defined or error.
+There are 15 total sentences. Collect them all!
+Son, observe the time...
+                     ... and fly from evil.

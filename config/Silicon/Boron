@@ -1,0 +1,25 @@
+// Migration
+arrhenius B(migration)    { 0 5 }
+arrhenius BV_-(migration) { 0 5 }
+arrhenius BV_0(migration) { 0 5 }
+arrhenius BV(update)      { 0 5 }
+arrhenius BI_-(migration) { 1.7e-3 0.77 } //  was 1.7e-3 0.77 || 4.55e-5 0.364
+arrhenius BI_0(migration) { 1.7e-3 0.77 }
+arrhenius BI(update)      { 1.7e-3 0.77 } 
+ 
+// Binding
+arrhenius B(formation) { 0% 1 0 100% 1 -0.5 }
+arrhenius BI(formation) { 3771.2 3.2 } // was  2700 2.9 || 9300 3.2
+arrhenius BV(formation) { 10.91 3.64 } // was 1 3.54
+
+float  B(state.energy)       0.054
+float  B(state.degeneracy)   2
+bool   B(map.to.grid)        true
+float  B(orbital.radius)     0.5
+
+map<string,int> B(state.charge)  B  -1
+map<string,int> BV(state.charge)   BV_0 0 BV_- -1
+map<string,int> BI(state.charge)   BI_- -1 BI_0 0
+
+float           BI(e(-1,0))      .7
+float           BV(e(-1,0))      .7

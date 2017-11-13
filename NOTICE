@@ -1,0 +1,16 @@
+MMonCa
+Copyright 2011-2015 IMDEA Materials Institute
+
+This product includes software developed at the IMDEA Materials Institute.
+http://www.materials.imdea.org/
+
+Binary Collision Approximation support provided by the Ion Implant
+Simulator, written by Jesus Hernandez Mangas, and copyright by the
+University of Valladolid, under Apache2 license.
+
+Finite Element Method libraries provided by FELIKS, written by Ignacio
+Romero and copyright by the Universidad Politécnica de Madrid, under 
+Apache2 license.
+
+Randon Number Generator (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura,
+see in src/kernel/RNG.cpp

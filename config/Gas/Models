@@ -1,0 +1,13 @@
+string alloy none
+string material.composition none
+
+float atomic.density 1
+float molar.volume   1
+float permittivity   0
+float lambda         0.2
+bool  epitaxy        false
+
+map<string,bool> particles { }
+map<string,bool> defined { }
+array<string,string> interactions { }
+array<string> interaction.result { }

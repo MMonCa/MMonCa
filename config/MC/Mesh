@@ -1,0 +1,22 @@
+bool  periodic.x      false
+bool  periodic.y      true
+bool  periodic.z      true
+
+bool speed.up		  true
+
+float spacing.x	      1.5
+float spacing.y       1.5
+float spacing.z       1.5
+
+float delta.x	1.
+float delta.y	1.
+float delta.z	1.
+
+string  poisson.bc.x     Neumann
+string  poisson.bc.y     Neumann
+string  poisson.bc.z     Neumann
+
+// should be bc.xmin, bc.xmax, bc.ymin, bc.ymax, bc.zmin and bc.zmax
+float   potential.x      0
+float   potential.y      0
+float   potential.z      0

@@ -1,0 +1,154 @@
+\section{Materials}
+\index{materials}
+
+\MMonCa\ assumes that the space is divided in {\tt materials}. A material can be a unary\index{unary material} material (i.e. Silicon, Iron), or a binary material\index{binary material} (i.e., SiC, GaAs). All materials are defined as directories in the \param{config} \MMonCa\ folder. For \MMonCa\ to access one of such folders, the material has to be named in \param{MC/General/materials}. Materials are defined with two strings, the first one for the real (long) name, and the second one for a small (short) name.
+
+\begin{lstlisting}
+map<string,string> materials \
+Silicon Si AmorphousSilicon aSi SiO2 SiO2 Nitride Ni \
+Iron Fe \
+Gas Gas 
+\end{lstlisting}
+
+Inside each material folder, the \param{Models} file defines the most important material properties. In particular, the \param{material.composition}. This string links the material with the \idx{elements}. For a unary material, it is defined as {\tt string material.composition Fe}, while for a binary material as {\tt string material.composition Si,C}. The migration distance for particles in every material together and the default capture radius is defined as the \param{lambda} parameter inside the {\tt Models} file.
+
+\section{Particles}
+\index{particle}
+
+Mobile particles and Cluster defects are made of particles. A particle is defined as an \param{element} and a \param{position}. For instance, the silicon interstitial is a Si in an interstitial position, where the element is silicon and the position is interstitial. Different authors use different notations for the same defects. In our example, the silicon interstitial could be just I, or Si$_i$, SiI, etc...
+
+The notation chosen in \MMonCa\ tries to, in the one hand, be accurate, but on the other hand, be simple enough. To obtain such ``equilibrium'', two different notations are used, one for unary materials, or materials like Si, Fe, etc. where  there is just one type of lattice site, and another one for binary materials, like SiC, where it is important to distinguish between an impurity in a C site, or in a Si site, and between a Si interstitial and a C interstitial.
+
+\subsection{Syntax for particles in unary materials}
+
+Interstitials and vacancies are just called ``I'' and ``V'', while impurities (for instance, C in Fe) are called C, CI, or CV according to their positions. See the following sections for more information.
+
+\subsection{Syntax for particles in binary materials} 
+
+``I'' or ``V'' are ambiguous in a binary material like SiC. Consequently, the particular type has to be specified. Valid notations would be SiI and CI for the Si and C self interstitial respectively. Similarly, a vacancy can be in a C position (VC) or in a Si position (VSi). The same notation applies to substitutional impurities. Being A a generic impurity, it can be in a C (AC) or Si (ASi) position, as well as being interstitial (AI) or paired with a vacancy (AV).
+
+\subsection{Elements}
+\index{element}
+
+The elements are defined in \param{MC/Particles/elements}. They are defined with their \idx{element name} plus a string. The string contains a comma-separated array of properties: the full name, the atomic number and the atomic weight.
+
+\begin{lstlisting}
+// name, element, mass (a.m.u.)
+map<string,string> elements {
+    As Arsenic,33,74.9216
+    B  Boron,5,10.81
+    C  Carbon,6,12.011
+    Cr Chromium,24,55.9961
+    Fe Iron,26,55.845
+    Ge Germanium,32,74.9216
+    He Helium,2,4.002602
+    Si Silicon,14,28.085
+}
+\end{lstlisting}
+
+Added to this element list, there is an ``especial element'' definition: \idx{vacancy}. A vacancy is the lack of an element. 
+
+\subsection{Positions}
+\label{sec:position}\index{position}
+
+\MMonCa\ defines the following positions:
+
+\begin{description}
+\item [\idx{First material}] An element can be in the substitutional position of the first material.
+\item [\idx{Second material}] An element can be in the substitutional position of the second material. This position is not defined for unary materials, only for binary materials.
+\item [\idx{Interstitial}] A particle can be in an interstitial position.
+\item [\idx{Vacancy}] A particle can be paired with a vacancy. This is not strictly speaking a position, but it is a very useful definition for paired defects and for backward compatibility with \MMonCa\ and other KMC codes. 
+\item [\idx{No position}] For particles in clusters or at interfaces it is useful to define the element without a particular position. 
+\end{description}
+
+\subsection{Valid combinations}
+
+\begin{table}
+\caption{Combinations for a unary material: Iron}
+\label{tab:unary}
+\begin{center}
+\begin{tabular}{l|cccc}
+NO & 0 (Fe) & 1 & I   & V   \\\hline
+V  & V      &   &     &     \\
+Fe &        &   & I &       \\
+C  & C      &   & CI  & CI  \\
+He & He     &   & HeI & HeV \\
+\end{tabular}
+\end{center}
+\end{table}
+
+Not all the combinations of positions and elements are valid for each material. For instance, table~\ref{tab:unary} shows valid possibilities for the unary material Iron, and table~\ref{tab:binary} for the binary material SiC.
+
+\begin{table}
+\caption{Combinations for a binary material: Si,C}
+\label{tab:binary}
+\begin{center}
+\begin{tabular}{l|cccc}
+NO & 0 (Si) & 1 (C) & I & V   \\\hline
+V  & VSi    & VC  &     &     \\
+Si &        & SiC & SiI &     \\
+C  & CSi    &     & CI  &     \\
+He & HeSi   & HeC & HeI & HeV \\
+\end{tabular}
+\end{center}
+\end{table}
+
+Interestingly, some combinations might be possible in some materials while not in others. For instance, Si in the position 0 is valid for Iron, but not for SiC.
+
+\subsection{Particle syntax}
+\index{particle!syntax}
+
+\subsubsection{Unary materials}
+
+\begin{table}
+\caption{Alternative notations for unary materials}
+\label{tab:alternative}
+\begin{center}
+\begin{tabular}{l|c|c}
+Type & Notation 1 & Notation 2 \\
+     & ($\mu$electronics) & (Energy) \\\hline
+Self interstitial & I & I \\
+Self vacancy      & V & V \\\hline
+Impurity in or near lattice position & A & AV \\
+Interstitial impurity & AI & A \\\hline
+2 interstitial impurities & A2I2 & A2 \\
+1 lattice, 1 interstitial & A2I & A2V \\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Self interstitials and vacancies are specified simply as I and V. Interstitial impurities are specified with a I suffix. Vacancy-paired impurities have a V suffix. Impurities in a substitutional position can be specified with just the impurity name, although such notation is also valid for interstitial impurities, as long as all the notation in the material is consistent. An example can be seen in table~\ref{tab:alternative}
+
+
+\subsubsection{Binary materials}
+
+Particles are specified with the element and the position. For instance, FeI, VFe, SiI, SiC, etc... This notation allows to specify self-interstitials and vacancies (VFe, VSi, SiI, CI), \idx{antisite}s (CSi, SiC), impurities in \idx{substitutional position} (BSi, HeFe), impurities in \idx{interstitial position} (HeI) and impurities paired with vacancies (HeV). Impurities paired with vacancies assume that both positions are taken, i.e., for HeV in SiC, a Si and a C position are taken.
+
+\section{Clusters}
+\label{sec:syntaxis}
+
+\subsection{Unary materials}
+
+The notation of cluster for unary materials follows the standard criteria of specifying the impurities together with ``I'' or ``V''. This way, a cluster with 3 self interstitials is just I3. A cluster that contains one impurity atom A and two interstitial atoms (regardless of whether they are self interstitials or one of them is the impurity) is AI2. 
+
+Amorphous pockets can be specified as InVm, where $n$ and $m$ are the number of self ``I'' and ``V''. It is noteworthy that internally the clusters are represented using the full notation, i.e., the simulator represents them internally as $n$ material atoms in an interstitial position and $m$ vacancies of the material.
+
+``I'' atoms do not actually exist in the simulation. For a material M they are actually MI. When specifying ``I'',
+\MMonCa\ translates it automatically to MI. This can produced some peculiar outputs that need to be understood. Let's imagine we have a simulation with 2 ``I''s and 1 BI3. The command
+\begin{lstlisting}
+extract count.particles name=I
+\end{lstlisting}
+will return 2, because there are just two MI. ¿Where are the other ``I''s in the cluster BI3?. They are not stored like MI, but rather as a cluster of the type M2B, with three interstitial positions (a M2B\verb+^+I3  in the binary notation). To obtain the total 5 interstitials, a 
+\begin{lstlisting}
+extract count.positions position=I
+\end{lstlisting}
+has to be issued. 
+
+
+\subsection{Binary materials}
+
+Since \idx{clusters} are agglomeration of particles, they are defined by a set of elements and positions. In the case of clusters, the symbol ``\verb+^+'' is used to separate the elements from the positions. For instance, a cluster of self interstitials in Iron is \verb+Fe3^I3+. The self interstitials might be from different materials, like \verb+Si2C^I3+.
+
+Such a \idx{notation} can be abbreviated, and the code accepts such abbreviations and uses them in its output. For instance in SiC, a notation like \verb+Si2^I3+ implies that the \idx{full notation} would be \verb+Si2C^I3+.
+
+For clusters with possible {\idx recombinations} (amorphous pockets or similar), some abbreviations are also possible. Something like \verb+V^I+ is possible instead of the full notation of \verb+SiV^ISi+. The user is free to use one notation or the other, but she has to be consistent with the one used and used it everywhere in the parameters and in the input. Some differences might be noted, though. Although conceptually similar, \verb+V^I+ will actually be a cluster with only 1 particle, while \verb+SiV^ISi+ will contain 2. Nevertheless, both of them will have only 1 recombination event to disappear.

@@ -1,0 +1,16 @@
+\index{LKMC}
+
+\section{Introduction}
+
+\MMonCa\ contains a module to perform Lattice KMC simulations. Such module can be used independently or linked to the Object KMC module. 
+
+The basis of a Lattice KMC simulation is the ``Lattice Atom''. A lattice atom is a representation of a real atom in the lattice of a crystal, or a position of such atom if it had to be in the lattice. Depending on the local configuration and other material properties (temperature, concentrations, deformations), different events are associated with the lattice atom. The main event to be associated is the ``filling'' of such position, if its represents an empty position. 
+
+Using such a simple approach, two different \index{epitaxy} epitaxies can be simulated:
+\begin{description}
+
+\item[Solid Phase Epitaxial Regrowth] or SPER, where a crystalline phase advances against an amorphous phase. In this case the ``filling'' is interpreted as an atom in the amorphous phase attaching to a crystalline position, and thus being incorporated to the crystalline phase. More information on these type of models can be found in Refs.~\cite{MARTIN-BRAGADO-APL09,MARTIN-BRAGADO-APL11,MARTIN-BRAGADO-JAP12}.
+
+\item[Solid Gas Epitaxy] The epitaxial growth of a material by reactions with existing gases, for instance, Selective Epitaxial Growth. For this models, the ``filling'' of a Lattice Site is directly related to the deposition of a new atom on the interface. An example can be found in Ref.~\cite{MARTIN-BRAGADO-APL11b}. These type o models can also include different mechanisms: diffusion, etching, deposition, etc. An example of such a model is found in Ref.~\cite{CHEN-SISPAD13}.
+\end{description}
+

@@ -1,0 +1,14 @@
+string left AmorphousSilicon
+
+map<string,float>	recombination.length.right { }
+map<string,float>   desorption.high      { AsI 0 AsV 0 As 0 }
+map<string,float>	desorption.low       {  }
+map<string,float>	desorption.threshold { As 0 }
+map<string,float>   barrier.right    { AsI 0 AsV 0 As 0 }
+
+map<string,float>	recombination.length.left { }
+map<string,float>   desorption.left  { }
+map<string,float>   barrier.left     { }
+
+arrhenius           As(formation)  { 1e-3 0 }
+arrhenius           As(migration)  { 0 5 }

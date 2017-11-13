@@ -1,0 +1,41 @@
+string shape           void
+float density.cm3      8.46e22
+string to    HeCluster
+string from  HeCluster
+string migration.type  3d
+// coordinates axis.2     1 0 0
+coordinates axis.1     0 1 0 
+coordinates axis.0     0 0 1
+coordinates not.in.plane 0 0 0
+float       axes.ratio 1
+bool IV.model false
+bool percolation true
+float lambda         0.287
+
+proc transform.to   { }
+proc transform.from   { }
+proc migration   { }
+
+proc formation {
+	set list ""	
+	set EfV 2.17
+	set EfHe 0
+ 	append list "He2   < [expr 2*$EfHe     -0.5] > "
+ 	append list "He2V  < [expr 2*$EfHe+  $EfV-1] > "
+ 	append list "HeV2  < [expr   $EfHe+2*$EfV-2] > "
+ 	append list "He2V2 < [expr 2*$EfHe+2*$EfV-1.5] >"
+ 	for { set i 3 } { $i < 500 } { incr i } { append list " He$i < [expr $i*$EfHe - 0.33*$i] >" }
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	append list "He2V,HeV  1e-3 "
+	append list	"He2V,V    1e-3 "
+	append list	"HeV2,HeV  1e-3 "
+	append list	"HeV2,V    1e-3 "
+	append list	"He2V2,HeV 1e-3 "
+	append list	"He2V2,V   1e-3"
+	
+	return $list
+}

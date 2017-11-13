@@ -1,0 +1,3 @@
+// For self-diffusion
+float correlation.factor .7
+arrhenius alpha     { 1 0 }

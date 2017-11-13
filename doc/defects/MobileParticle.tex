@@ -1,0 +1,36 @@
+\subsection{\tt MobileParticle}
+\index{MobileParticle}
+MobileParticles are single \idx{point defects}, i.e., they are represented with three coordinates only. They can be either self point defects (interstitials or vacancies) or impurities (carbon, helium, etc). For each impurity or element $A$, a mobile particle with each of the 5 different positions explained in section~\ref{sec:position} can also be found. 
+
+MobileParticle parameters, for a given species $A$ are the following ones:
+\begin{description}
+\item [A(migration)] An arrhenius with the \idx{diffusivity}.
+\item [A(formation)] An arrhenius with the  \idx{formation energy} in the bulk.
+\end{description}
+
+The events that a MobileParticle can perform are:
+\begin{description}
+\item[\idx{Migration}] Standard.
+\item[\idx{Break-up}] For instance, $AI \rightarrow AM + MI$, being $M$ the material. The formation parameters are used to define the break-up frequencies, but $E_\mathrm{binding}(AI) = E_f(AM) + E_f(MI) - E_f(AI)$.
+\item[\idx{Frank-Turnbull}] For instance, $AM  \rightarrow AI +VM$ or $AM \rightarrow AV + MI$. Formation values are used to compute such break-up frequencies.
+\end{description}
+
+If the \idx{charge model} is activated, additional state charges can be defined for each particle. For instance
+
+\begin{description}
+\item [AM(state.charge)] AM 0
+\item [AI(state.charge)] \verb+AI_0+ 0 \verb+AI_-+ -1
+\end{description}
+
+The \idx{levels} in the \idx{band gap} for the transitions between charges have also to be defined.
+
+\begin{lstlisting}
+float AI(e(-1,0))   .5
+\end{lstlisting}
+
+And, finally, a frequency to \idx{update} the charge state between different states is required.
+
+\begin{lstlisting}
+arrhenius AI(update) { 1 0.7 }
+\end{lstlisting}
+

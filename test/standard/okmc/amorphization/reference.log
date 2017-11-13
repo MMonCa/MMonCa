@@ -1,0 +1,434 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.7
+Compiled on Jul 29 2014 10:56:47 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Iron Fe Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value='false' index='V+I'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value='false' index='I+V'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value='false' index='I+I'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value='false' index='V+V'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Iron/Models/amorphization.threshold' value='7e22' new
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='24' maxy='51' maxz='51' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Iron(<100> <111> HeCluster ICluster VCluster ) 
+     X: (0 - 24) nm. 16 elements. Delta = 1.5 nm.
+     Y: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+     Z: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+Total 18496 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG  0:1.5
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  13.5:15
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  22.5:24
+Starting clusters:  Gas() Iron(<100> <111> HeCluster ICluster VCluster )
+Interfacing...
+Introducing damage below the threshold... This shouldn't amorphize. 
+----------------------------------------------------------------- profile -----
+profile name='I' proc='myName'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Sorry, defect 'I' not implemented yet in the material Gas
+Out I(1) 
+Created Iron,I(1364473) 
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Out I(1) 
+Created Iron,I(1364473) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+MobileParticle/I               1364473
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='0' error='0' init='0' end='27' tag='noAmorphI'
+-------------------------------------------------------------------------------
+
+noAmorphI 0.75 0 -> (0 0% )
+noAmorphI 2.25 0 -> (0 0% )
+noAmorphI 3.75 0 -> (0 0% )
+noAmorphI 5.25 0 -> (0 0% )
+noAmorphI 6.75 0 -> (0 0% )
+noAmorphI 8.25 0 -> (0 0% )
+noAmorphI 9.75 0 -> (0 0% )
+noAmorphI 11.25 0 -> (0 0% )
+noAmorphI 12.75 0 -> (0 0% )
+noAmorphI 14.25 0 -> (0 0% )
+noAmorphI 15.75 0 -> (0 0% )
+noAmorphI 17.25 0 -> (0 0% )
+noAmorphI 18.75 0 -> (0 0% )
+noAmorphI 20.25 0 -> (0 0% )
+noAmorphI 21.75 0 -> (0 0% )
+noAmorphI 23.25 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+noAmorphI: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+Allright, let's amorphize it!' 
+----------------------------------------------------------------- profile -----
+profile name='V' proc='myName'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Sorry, defect 'V' not implemented yet in the material Gas
+Discarded V(809658) 
+Created Iron,V(554805) 
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Discarded V(809658) 
+Created Iron,V(554805) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+MobileParticle/I               1364473
+MobileParticle/V                554805
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='1' error='0' init='13.5' end='27' tag='AmorphIV'
+-------------------------------------------------------------------------------
+
+AmorphIV 14.25 1 -> (1 0% )
+AmorphIV 15.75 1 -> (1 0% )
+AmorphIV 17.25 1 -> (1 0% )
+AmorphIV 18.75 1 -> (1 0% )
+AmorphIV 20.25 1 -> (1 0% )
+AmorphIV 21.75 1 -> (1 0% )
+AmorphIV 23.25 1 -> (1 0% )
+---------------------------- Warning -----------------------------------
+AmorphIV: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------- param -----
+param get type='float' key='Iron/Models/amorphization.threshold'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract profile.damage material='Gas'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='0' error='0' init='0' end='13.5' tag='profGas'
+-------------------------------------------------------------------------------
+
+profGas 0.75 0 -> (0 0% )
+profGas 2.25 0 -> (0 0% )
+profGas 3.75 0 -> (0 0% )
+profGas 5.25 0 -> (0 0% )
+profGas 6.75 0 -> (0 0% )
+profGas 8.25 0 -> (0 0% )
+profGas 9.75 0 -> (0 0% )
+profGas 11.25 0 -> (0 0% )
+profGas 12.75 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+profGas: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.damage material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='7e22' error='0' init='13.5' end='27' tag='profIron'
+-------------------------------------------------------------------------------
+
+profIron 14.25 7e+22 -> (7e+22 0% )
+profIron 15.75 7e+22 -> (7e+22 0% )
+profIron 17.25 7e+22 -> (7e+22 0% )
+profIron 18.75 7e+22 -> (7e+22 0% )
+profIron 20.25 7e+22 -> (7e+22 0% )
+profIron 21.75 7e+22 -> (7e+22 0% )
+profIron 23.25 7e+22 -> (7e+22 0% )
+---------------------------- Warning -----------------------------------
+profIron: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------- param -----
+param set type='float' key='Iron/Models/amorphization.threshold' value='1e22'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='27' maxy='51' maxz='51' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Iron(<100> <111> HeCluster ICluster VCluster ) 
+Deleting old simulation
+     X: (0 - 27) nm. 18 elements. Delta = 1.5 nm.
+     Y: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+     Z: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+Total 20808 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG  0:1.5
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  13.5:15
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  25.5:27
+Starting clusters:  Gas() Iron(<100> <111> HeCluster ICluster VCluster )
+Interfacing...
+What about changing the threshold? 
+----------------------------------------------------------------- profile -----
+profile name='I' proc='myName'
+-------------------------------------------------------------------------------
+
+Out I(2) 
+Discarded I(1393727) 
+Created Iron,I(360582) 
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Out I(2) 
+Discarded I(1393727) 
+Created Iron,I(360582) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+MobileParticle/I                360582
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='0' error='0' init='0' end='13.5' tag='AmorphGasI'
+-------------------------------------------------------------------------------
+
+AmorphGasI 0.75 0 -> (0 0% )
+AmorphGasI 2.25 0 -> (0 0% )
+AmorphGasI 3.75 0 -> (0 0% )
+AmorphGasI 5.25 0 -> (0 0% )
+AmorphGasI 6.75 0 -> (0 0% )
+AmorphGasI 8.25 0 -> (0 0% )
+AmorphGasI 9.75 0 -> (0 0% )
+AmorphGasI 11.25 0 -> (0 0% )
+AmorphGasI 12.75 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+AmorphGasI: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='1' error='0' init='13.5' end='27' tag='AmorphIronI'
+-------------------------------------------------------------------------------
+
+AmorphIronI 14.25 1 -> (1 0% )
+AmorphIronI 15.75 1 -> (1 0% )
+AmorphIronI 17.25 1 -> (1 0% )
+AmorphIronI 18.75 1 -> (1 0% )
+AmorphIronI 20.25 1 -> (1 0% )
+AmorphIronI 21.75 1 -> (1 0% )
+AmorphIronI 23.25 1 -> (1 0% )
+AmorphIronI 24.75 1 -> (1 0% )
+AmorphIronI 26.25 1 -> (1 0% )
+---------------------------- Warning -----------------------------------
+AmorphIronI: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='27' maxy='51' maxz='51' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Iron(<100> <111> HeCluster ICluster VCluster ) 
+Deleting old simulation
+     X: (0 - 27) nm. 18 elements. Delta = 1.5 nm.
+     Y: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+     Z: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+Total 20808 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG  0:1.5
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  13.5:15
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  25.5:27
+Starting clusters:  Gas() Iron(<100> <111> HeCluster ICluster VCluster )
+Interfacing...
+These impurities should not amorphize, since no Is nor Vs are generated.... 
+----------------------------------------------------------------- profile -----
+profile name='C' proc='myName'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Sorry, defect 'C' not implemented yet in the material Gas
+Out C(2) 
+Created Iron,C(1754309) 
+----------------------------------------------------------------- profile -----
+profile name='CI' proc='myName'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Sorry, defect 'CI' not implemented yet in the material Gas
+Created Iron,CI(1754344) 
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Created Iron,CI(1754344) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+MobileParticle/C               1754309
+MobileParticle/CI              1754344
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='0' error='0' init='0' end='27' tag='noAmorphC'
+-------------------------------------------------------------------------------
+
+noAmorphC 0.75 0 -> (0 0% )
+noAmorphC 2.25 0 -> (0 0% )
+noAmorphC 3.75 0 -> (0 0% )
+noAmorphC 5.25 0 -> (0 0% )
+noAmorphC 6.75 0 -> (0 0% )
+noAmorphC 8.25 0 -> (0 0% )
+noAmorphC 9.75 0 -> (0 0% )
+noAmorphC 11.25 0 -> (0 0% )
+noAmorphC 12.75 0 -> (0 0% )
+noAmorphC 14.25 0 -> (0 0% )
+noAmorphC 15.75 0 -> (0 0% )
+noAmorphC 17.25 0 -> (0 0% )
+noAmorphC 18.75 0 -> (0 0% )
+noAmorphC 20.25 0 -> (0 0% )
+noAmorphC 21.75 0 -> (0 0% )
+noAmorphC 23.25 0 -> (0 0% )
+noAmorphC 24.75 0 -> (0 0% )
+noAmorphC 26.25 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+noAmorphC: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+The last thing to check is to deactivate the amorphization model...  
+------------------------------------------------------------------- param -----
+param set type='float' key='Iron/Models/amorphization.threshold' value='-1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='27' maxy='51' maxz='51' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Iron(<100> <111> HeCluster ICluster VCluster ) 
+Deleting old simulation
+     X: (0 - 27) nm. 18 elements. Delta = 1.5 nm.
+     Y: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+     Z: (0 - 51) nm. 34 elements. Delta = 1.5 nm.
+Total 20808 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG  0:1.5
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  13.5:15
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  25.5:27
+Starting clusters:  Gas() Iron(<100> <111> HeCluster ICluster VCluster )
+Interfacing...
+----------------------------------------------------------------- profile -----
+profile name='I' proc='myName'
+-------------------------------------------------------------------------------
+
+Out I(2) 
+Created Iron,I(1754309) 
+----------------------------------------------------------------- profile -----
+profile name='V' proc='myName'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Discarded particle with no valid position. V
+Discarded V(1755659) 
+Created Iron,V(1754344) 
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Discarded V(1755659) 
+Created Iron,V(1754344) 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+MobileParticle/I               1754309
+MobileParticle/V               1754344
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction material='Iron'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='0.7 (...)' value='0' error='0' init='0' end='27' tag='noAmorphModel'
+-------------------------------------------------------------------------------
+
+noAmorphModel 0.75 0 -> (0 0% )
+noAmorphModel 2.25 0 -> (0 0% )
+noAmorphModel 3.75 0 -> (0 0% )
+noAmorphModel 5.25 0 -> (0 0% )
+noAmorphModel 6.75 0 -> (0 0% )
+noAmorphModel 8.25 0 -> (0 0% )
+noAmorphModel 9.75 0 -> (0 0% )
+noAmorphModel 11.25 0 -> (0 0% )
+noAmorphModel 12.75 0 -> (0 0% )
+noAmorphModel 14.25 0 -> (0 0% )
+noAmorphModel 15.75 0 -> (0 0% )
+noAmorphModel 17.25 0 -> (0 0% )
+noAmorphModel 18.75 0 -> (0 0% )
+noAmorphModel 20.25 0 -> (0 0% )
+noAmorphModel 21.75 0 -> (0 0% )
+noAmorphModel 23.25 0 -> (0 0% )
+noAmorphModel 24.75 0 -> (0 0% )
+noAmorphModel 26.25 0 -> (0 0% )
+---------------------------- Warning -----------------------------------
+noAmorphModel: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+Time spent: 218s. Annealing: 0s.
+         1 times: AmorphGasI: Requested error is  < 0%  maximum error is 0%
+         1 times: AmorphIV: Requested error is  < 0%  maximum error is 0%
+         1 times: AmorphIronI: Requested error is  < 0%  maximum error is 0%
+   1755659 times: Discarded particle with no valid position. V
+   1755554 times: Sorry, defect 'C' not implemented yet in the material Gas
+   1755659 times: Sorry, defect 'CI' not implemented yet in the material Gas
+   5266662 times: Sorry, defect 'I' not implemented yet in the material Gas
+   1755717 times: Sorry, defect 'V' not implemented yet in the material Gas
+         1 times: noAmorphC: Requested error is  < 0%  maximum error is 0%
+         1 times: noAmorphI: Requested error is  < 0%  maximum error is 0%
+         1 times: noAmorphModel: Requested error is  < 0%  maximum error is 0%
+         1 times: profGas: Requested error is  < 0%  maximum error is 0%
+         1 times: profIron: Requested error is  < 0%  maximum error is 0%
+There are 11 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

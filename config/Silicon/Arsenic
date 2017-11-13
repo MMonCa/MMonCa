@@ -1,0 +1,26 @@
+// Migration
+
+arrhenius As(migration) 0 5
+arrhenius AsI_+(migration) 1e-1 1.3
+arrhenius AsI_0(migration) 1e-1 1.3
+arrhenius AsI(update)      1e-1 1.3
+arrhenius AsV_+(migration) 2e-2 2.2
+arrhenius AsV_0(migration) 2e-2 2.2
+arrhenius AsV(update)      2e-2 2.2
+
+// Binding
+arrhenius As(formation)  1 0
+arrhenius AsI(formation) 1 3.07
+arrhenius AsV(formation) 1 1.74
+
+float  As(state.energy)       0.054
+float  As(state.degeneracy)   2
+
+bool   As(map.to.grid)        true
+float  As(orbital.radius)     0.5
+
+map<string,int> As(state.charge)  As  1
+map<string,int> AsV(state.charge) AsV_0 0 AsV_+ 1
+map<string,int> AsI(state.charge) AsI_0 0 AsI_+ 1
+float           AsI(e(0,1))      .3
+float           AsV(e(0,1))      .2

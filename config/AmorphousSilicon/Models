@@ -1,0 +1,29 @@
+string alloy Ge
+bool self.diffusion false
+string material.composition Si
+
+float atomic.density 5e22
+float alloy.density  4.2e22
+float smoothing.factor 1
+float alloy.second.neighbor.contribution 0.5
+float theta          1
+map<string,float> mixing.enthalpy {
+xi     0
+xo     0
+poly1  0
+xi     1
+}
+
+float molar.volume   12.05883
+float permittivity   11.68
+float lambda         0.384
+bool  epitaxy        false
+
+map<string,bool> particles { 
+	As   true
+	B    true
+}
+
+map<string,bool> defined { }
+array<string,string> interactions { }
+array<string> interaction.result { }

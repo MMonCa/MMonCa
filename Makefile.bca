@@ -1,0 +1,61 @@
+# ---------------------------------------------------------------------
+# BCA compilation (no need to edit this file)
+# Use Makefile.<target> in ./sysmakes for custom settings
+#
+# Author: Benoit Sklenard <benoit.sklenard@cea.fr>
+#
+# October 15, 2014 (v1)
+# December 20, 2014 (v2)
+# February 11, 2015 (v2.1) : fix bug in dependencies
+#
+
+SHELL  := /bin/bash
+COLOR  ?= yes
+
+# Build rules and dependencies
+SRC_INC    := -I../src
+EXTRA_INC  := $(SRC_INC) -DGCC3 -DDAMAGE1D -DMODEL2
+EXTRA_PATH :=
+EXTRA_LIB  :=
+
+DIR = $(dir ../src/bca/)
+
+$(shell mkdir -p $(DIR:../src/%=%))
+
+SRC_CC := $(sort $(wildcard $(addsuffix *.c,$(DIR))))
+OBJ_CC := $(SRC_CC:../src/%.c=%.o)
+DEP_CC := $(SRC_CC:../src/%.c=%.d)
+
+SRC_CXX := $(sort $(wildcard $(addsuffix *.cpp,$(DIR))))
+OBJ_CXX := $(SRC_CXX:../src/%.cpp=%.o)
+DEP_CXX := $(SRC_CXX:../src/%.cpp=%.d)
+
+OBJ := $(OBJ_CXX) $(OBJ_CC)
+DEP := $(DEP_CXX) $(DEP_CC)
+
+ifeq ($(COLOR),yes)
+	BUILD_OBJ_CC  = \e[32mBuilding CC object $(@:../src/%=%) \e[0m
+	BUILD_OBJ_CXX = \e[32mBuilding CXX object $(@:../src/%=%) \e[0m
+	LINK_BINARY   = \e[31;1mLinking CXX binary $(EXE) \e[0m
+else
+	BUILD_OBJ_CC  = Building CC object $(@:../src/%=%)
+	BUILD_OBJ_CXX = Building CXX object $(@:../src/%=%)
+	LINK_BINARY   = Linking CXX binary $(EXE)
+endif
+
+# Link
+all: $(OBJ)
+	@echo -e "$(LINK_BINARY)"	
+	$(LINK) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(EXTRA_LIB) $(FELIKS_LIB) $(LIB) -o $(EXE)
+
+# Compilation
+$(OBJ_CC): %.o: ../src/%.c
+	@echo -e "$(BUILD_OBJ_CC)"	
+	$(CC) $(CCFLAGS) $(SHFLAGS) $(EXTRA_INC) $(DEPFLAGS) -c $< -o $@
+
+$(OBJ_CXX): %.o: ../src/%.cpp
+	@echo -e "$(BUILD_OBJ_CXX)"
+	$(CXX) $(CXXFLAGS) $(SHFLAGS) $(EXTRA_INC) $(DEPFLAGS) -c $< -o $@
+	
+-include $(DEP)
+

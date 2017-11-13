@@ -1,0 +1,32 @@
+\section{save}
+\index{save}
+\label{sec:save}
+
+Used to write a file with the simulation data such as LKMC and OKMC particles, materials or fields.
+
+The type of file has to be chosen with one of the following options:
+
+\begin{description}
+\item [atomeye=$<$filename$>$]\index{atomeye} Uses \param{filename} to generate and output file compatible with AtomEye.
+\item [xyz=$<$filename$>$]\index{xyz} Uses \param{filename} as the output xyz file.
+\item [lammps=$<$filename$>$]\index{lammps} Creates the file with a lammps format understood for \param{ovito} to read time evolution.
+\item [csv=$<$filename$>$]\index{csv} Creates a file with the information separated by commas.
+\item [vtk=$<$filename$>$]\index{vtk} Generates a VTK file containing various datasets (eletrostatic potential, strain, stress and materials) using the XML VTK file format. This file can be opened with various softwares such as \param{ParaView} or \param{VisIt}.
+\end{description}
+
+The following optional parameters can be added to change the behavior of created files:
+
+\begin{description}
+\item [append]\index{append} Appends to the file instead of recreating it. (Use it for time evolution in the ovito format)
+\item [defects]\index{defects} Allows the specification of a list of defects, separated by spaces, to be saved. Defects not specified will not be saved. For MobileParticles, \param{MobileParticle} has to be specified. For other defects, the defect name (eg. \param{ICluster}, \param{VCluster}) is to be written. If alloy atoms are requested, type \param{Alloy}.
+\item [lattice]\index{lattice} Writes all the lattice generated instead of the default A/C interface.
+\item [lkmc.defect]\index{lkmc.defect} Writes the defective lkmc atoms as well.
+\item [scale=$<$number$>$]\index{scale} Applies number to scale all the positions.
+\end{description}
+
+\subsection{Examples}\begin{itemize}
+\item \verb+save xyz=lattice+
+\item \verb+save lammps=evolution append scale=10+
+\item \verb+save vtk=foo+
+\end{itemize}
+

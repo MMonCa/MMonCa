@@ -1,0 +1,18 @@
+// Migration
+arrhenius C(migration) 0 5
+arrhenius CI(migration) 2.26e-3 0.791
+arrhenius CV(migration) 0.0 5.0 
+
+// Binding
+arrhenius C(formation)  1 0
+arrhenius CI(formation) 10199 2.5
+arrhenius CV(formation) 5351 1.73
+
+map<string,int> C(state.charge)  C   0
+map<string,int> CI(state.charge) CI  0
+map<string,int> CV(state.charge) CV  0
+
+float  C(state.energy)       0.0
+float  C(state.degeneracy)   1
+bool   C(map.to.grid)        true
+float  C(orbital.radius)     0.5

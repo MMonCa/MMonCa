@@ -1,0 +1,165 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                      2011    
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='OKMC/Iron/Vacancy/V(formation)' value=' 0 5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='OKMC/Iron/Interstitial/I(formation)' value=' 0 5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='OKMC/Iron/Models/interactions' value='false' index='He+V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='OKMC/Iron/Models/interactions' value='false' index='HeV+HeV'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='OKMC/Gas_Iron/Helium/annihilation.right' value='1' index='HeV'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-1.5' miny='0' minz='0' maxx='30' maxy='30' maxz='30' material='material'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+OKMC/Iron/Models/interactions Interaction not used: He2V+V
+Tensor Mesh created
+     X: (-1.5 - 30) nm. 21 elements. Delta = 1.5 nm.
+     Y: (0 - 30) nm. 20 elements. Delta = 1.5 nm.
+     Z: (0 - 30) nm. 20 elements. Delta = 1.5 nm.
+Total 8400 elements
+GGGGGGGGGGGGGGGGGGGG  -1.5:0
+IIIIIIIIIIIIIIIIIIII  0:1.5
+IIIIIIIIIIIIIIIIIIII  1.5:3
+IIIIIIIIIIIIIIIIIIII  3:4.5
+IIIIIIIIIIIIIIIIIIII  4.5:6
+IIIIIIIIIIIIIIIIIIII  6:7.5
+IIIIIIIIIIIIIIIIIIII  7.5:9
+IIIIIIIIIIIIIIIIIIII  9:10.5
+IIIIIIIIIIIIIIIIIIII  10.5:12
+IIIIIIIIIIIIIIIIIIII  12:13.5
+IIIIIIIIIIIIIIIIIIII  13.5:15
+IIIIIIIIIIIIIIIIIIII  15:16.5
+IIIIIIIIIIIIIIIIIIII  16.5:18
+IIIIIIIIIIIIIIIIIIII  18:19.5
+IIIIIIIIIIIIIIIIIIII  19.5:21
+IIIIIIIIIIIIIIIIIIII  21:22.5
+IIIIIIIIIIIIIIIIIIII  22.5:24
+IIIIIIIIIIIIIIIIIIII  24:25.5
+IIIIIIIIIIIIIIIIIIII  25.5:27
+IIIIIIIIIIIIIIIIIIII  27:28.5
+IIIIIIIIIIIIIIIIIIII  28.5:30
+Interfacing...
+----------------------------------------------------------------- profile -----
+profile name='HeV' proc='myName'
+-------------------------------------------------------------------------------
+541 HeV created
+0 HeV discarded
+
+----------------------------------------------------------------- extract -----
+extract count.particles name='HeV'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='before' float='541' value='540.0' error='0.05'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+before: Requested error is 5% error is 0.185185%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='1e10' temp='700' events='1e7'
+-------------------------------------------------------------------------------
+Annealing the sample for 1e+10 seconds at 973.15K (700ºC)
+700C 2.52163e-15s           4   1.6e+15 s^-1 
+700C 9.80718e-15s           5   1.4e+14 s^-1 
+700C 2.10555e-14s           6   8.9e+13 s^-1 
+700C 3.05739e-14s           7   1.1e+14 s^-1 
+700C 4.09532e-14s           9   1.9e+14 s^-1 
+700C 5.30302e-14s          11   1.7e+14 s^-1 
+700C 7.19717e-14s          14   1.6e+14 s^-1 
+700C 8.18989e-14s          15   1.0e+14 s^-1 
+700C 9.48806e-14s          16   7.7e+13 s^-1 
+700C 1.02655e-13s          17   1.3e+14 s^-1 
+700C 2.12796e-13s          30   1.2e+14 s^-1 
+700C 3.01509e-13s          41   1.2e+14 s^-1 
+700C 4.01003e-13s          57   1.6e+14 s^-1 
+700C 5.06723e-13s          69   1.1e+14 s^-1 
+700C 6.12205e-13s          86   1.6e+14 s^-1 
+700C  7.0049e-13s         102   1.8e+14 s^-1 
+700C 8.00974e-13s         115   1.3e+14 s^-1 
+700C 9.05545e-13s         131   1.5e+14 s^-1 
+700C 1.00722e-12s         154   2.3e+14 s^-1 
+700C 2.00504e-12s         317   1.6e+14 s^-1 
+700C 3.00093e-12s         449   1.3e+14 s^-1 
+700C 4.00626e-12s         601   1.5e+14 s^-1 
+700C 5.00437e-12s         747   1.5e+14 s^-1 
+700C 6.00177e-12s         890   1.4e+14 s^-1 
+700C 7.01233e-12s        1042   1.5e+14 s^-1 
+700C 8.00817e-12s        1210   1.7e+14 s^-1 
+700C 9.01394e-12s        1367   1.6e+14 s^-1 
+700C 1.00229e-11s        1519   1.5e+14 s^-1 
+700C 2.00114e-11s        3124   1.6e+14 s^-1 
+700C 3.00103e-11s        4672   1.5e+14 s^-1 
+700C 4.00076e-11s        6317   1.6e+14 s^-1 
+700C 5.00012e-11s        7816   1.5e+14 s^-1 
+700C 6.00108e-11s        9382   1.6e+14 s^-1 
+700C 7.00067e-11s       10957   1.6e+14 s^-1 
+700C  8.0012e-11s       12577   1.6e+14 s^-1 
+700C 9.00026e-11s       14119   1.5e+14 s^-1 
+700C 1.00001e-10s       15742   1.6e+14 s^-1 
+700C 2.00006e-10s       31516   1.6e+14 s^-1 
+700C 3.00008e-10s       47158   1.6e+14 s^-1 
+700C 4.00001e-10s       63061   1.6e+14 s^-1 
+700C 5.00011e-10s       78867   1.6e+14 s^-1 
+700C 6.00015e-10s       94786   1.6e+14 s^-1 
+700C 7.00003e-10s      110146   1.5e+14 s^-1 
+700C 8.00001e-10s      125624   1.5e+14 s^-1 
+700C 9.00019e-10s      140827   1.5e+14 s^-1 
+700C       1e-09s      155986   1.5e+14 s^-1 
+700C 2.00001e-09s      297547   1.4e+14 s^-1 
+700C 3.00001e-09s      420660   1.2e+14 s^-1 
+700C       4e-09s      531494   1.1e+14 s^-1 
+700C 5.00003e-09s      633082   1.0e+14 s^-1 
+700C       6e-09s      727480   9.4e+13 s^-1 
+700C       7e-09s      816100   8.9e+13 s^-1 
+700C       8e-09s      899858   8.4e+13 s^-1 
+700C 9.00004e-09s      979306   7.9e+13 s^-1 
+700C       1e-08s     1054468   7.5e+13 s^-1 
+700C       2e-08s     1618363   5.6e+13 s^-1  563895 ev/s 
+700C       3e-08s     1986486   3.7e+13 s^-1 
+700C 4.00001e-08s     2234647   2.5e+13 s^-1 
+700C 5.00001e-08s     2407832   1.7e+13 s^-1 
+700C 6.00001e-08s     2537800   1.3e+13 s^-1 
+700C       7e-08s     2629484   9.2e+12 s^-1 
+700C 8.00002e-08s     2686715   5.7e+12 s^-1 
+700C 9.00002e-08s     2724403   3.8e+12 s^-1 
+700C       1e-07s     2741558   1.7e+12 s^-1 
+No more events to anneal... over.
+700C       1e+10s     2777815   3.6e-06 s^-1 
+----------------- Event Log --------------
+ ----------------------------------------Iron            MobileParticle
+Type           migrate  break up
+HeV            2777814
+
+----------------- Reaction Log --------------
+ ----------------------------------------Gas                  Interface
+Interface  Interface+HeV       541
+
+----------------------------------------------------------------- extract -----
+extract count.particles name='HeV'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='after' float='0' value='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+after: Requested error is 0% error is 0%
+Test PASSED... continuing
+Deleting 400 objects...done
+Time spent: 1s.
+1 times: OKMC/Iron/Models/interactions Interaction not used: He2V+V
+1 times: after: Requested error is 0% error is 0%
+1 times: before: Requested error is 5% error is 0.185185%
+¡Adiós amigos!

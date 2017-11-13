@@ -1,0 +1,88 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.9
+Compiled on Oct  1 2014 09:09:06 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Iron Fe'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.y' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.z' value='1'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- restart -----
+restart load='dump'
+-------------------------------------------------------------------------------
+
+Reading restart information from dump.mmonca
+{
+
+Reading defects: Iron(<100> <111> HeCluster ICluster VCluster ) 
+     X: (0 - 10) nm. 10 elements. Delta = 1 nm.
+     Y: (0 - 10) nm. 10 elements. Delta = 1 nm.
+     Z: (0 - 10) nm. 10 elements. Delta = 1 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+IIIIIIIIII -             0:1
+IIIIIIIIII -             9:10
+Starting clusters:  Iron(<100> <111> HeCluster ICluster VCluster )
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: V+Gas
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: C+Gas
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: CV+Gas
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: HeI+Gas
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: HeV+Gas
+Interfacing...
+Checking SPER... Done.
+} . Restarting done
+----------------------------------------------------------------- extract -----
+extract profile name='Cr' dimension='3' file='test.dat'
+-------------------------------------------------------------------------------
+
+Results written in test.dat
+-------------------------------------------------------------------- test -----
+test one='yes' equal two='yes'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+: Requested test yes == yes
+Test PASSED... continuing
+Time spent: 0s. Annealing: 0s.
+         1 times: : Requested test yes == yes
+         1 times: Iron/Models/interactions Interaction not used: C+Gas
+         1 times: Iron/Models/interactions Interaction not used: CV+Gas
+         1 times: Iron/Models/interactions Interaction not used: HeI+Gas
+         1 times: Iron/Models/interactions Interaction not used: HeV+Gas
+         1 times: Iron/Models/interactions Interaction not used: I+Gas
+         1 times: Iron/Models/interactions Interaction not used: V+Gas
+There are 14 total sentences. Collect them all!
+¡Hasta la vista!

@@ -1,0 +1,373 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2012  
+Version: 1.0.2 Compiled on Feb 22 2013 18:29:16
+Reading config in 
+Reading config in AmorphousSilicon
+Reading config in Gas_Tungsten
+Reading config in SiO2_Silicon
+Reading config in Nitride
+Reading config in Gas_Silicon
+Reading config in Silicon
+Reading config in Iron
+Reading config in MC
+Reading config in Gas_Iron
+Reading config in Tungsten
+Reading config in AmorphousBarite
+Reading config in Copper
+Reading config in SiO2
+Reading config in Nitride_SiO2
+Reading config in Copper_Niobium
+Reading config in Niobium
+Reading config in Gas
+Reading config in Copper_Gas
+Reading config in Barite
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(formation)' value=' 9.21e29 3.74 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Interstitial/I(formation)' value=' 7.95e28 4 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(migration)' value=' 5.00e-8 0.4 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Interstitial/I(migration)' value=' 2e-3 0.7 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Boron/Bi(formation)' value=' 3285 2.9 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Boron/Bi(migration)' value=' 1.7e-3 0.77 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/B(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/B(formation)'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='20' maxy='100' maxz='100' material='material'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Iron/Models/interactions Interaction not used: He2V+V
+     X: (-2 - 20) nm. 15 elements. Delta = 1.46667 nm.
+     Y: (0 - 100) nm. 67 elements. Delta = 1.49254 nm.
+     Z: (0 - 100) nm. 67 elements. Delta = 1.49254 nm.
+Total 67335 elements
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG  -2:-0.533333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  -0.533333:0.933333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  0.933333:2.4
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  2.4:3.86667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  3.86667:5.33333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  5.33333:6.8
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  6.8:8.26667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  8.26667:9.73333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  9.73333:11.2
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  11.2:12.6667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  12.6667:14.1333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  14.1333:15.6
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  15.6:17.0667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  17.0667:18.5333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  18.5333:20
+Interfacing...
+----------------------------------------------------------------- profile -----
+profile proc='spike' name='B'
+-------------------------------------------------------------------------------
+Created Silicon,B(317) 
+------------------------------------------------------------------ anneal -----
+anneal events='1e8' temp='950' time='1'
+-------------------------------------------------------------------------------
+Annealing the sample for 1 seconds at 1223.15K (950ºC)
+950C 7.39945e-05s           1   1.4e+04 s^-1 
+950C  8.2188e-05s          36   4.3e+06 s^-1 
+950C 0.000248277s          48   7.2e+04 s^-1 
+950C 0.000325383s         133   1.1e+06 s^-1 
+950C 0.000489853s         136   1.8e+04 s^-1 
+950C  0.00080294s         171   1.1e+05 s^-1 
+950C  0.00103011s         209   1.7e+05 s^-1 
+950C   0.0023022s         444   1.8e+05 s^-1 
+950C  0.00315562s        3174   3.2e+06 s^-1 
+950C  0.00410634s        3326   1.6e+05 s^-1 
+950C  0.00500998s        4520   1.3e+06 s^-1 
+950C  0.00601902s        5699   1.2e+06 s^-1 
+950C  0.00701285s        8573   2.9e+06 s^-1 
+950C  0.00803202s        9084   5.0e+05 s^-1 
+950C  0.00922465s       15402   5.3e+06 s^-1 
+950C   0.0100789s       17014   1.9e+06 s^-1 
+950C   0.0200058s       77240   6.1e+06 s^-1 
+950C   0.0301957s       92453   1.5e+06 s^-1 
+950C   0.0401428s      130428   3.8e+06 s^-1 
+950C   0.0501635s      156422   2.6e+06 s^-1 
+950C   0.0601045s      168576   1.2e+06 s^-1 
+950C   0.0700151s      228353   6.0e+06 s^-1 
+950C   0.0800189s      272085   4.4e+06 s^-1 
+950C   0.0900507s      305642   3.3e+06 s^-1 
+950C    0.100091s      325253   2.0e+06 s^-1 
+950C    0.200016s      599137   2.7e+06 s^-1 
+950C    0.300084s      852404   2.5e+06 s^-1  253267 ev/s 
+950C     0.40006s     1127562   2.8e+06 s^-1 
+950C    0.500039s     1482378   3.5e+06 s^-1 
+950C    0.600057s     1758964   2.8e+06 s^-1 
+950C    0.700111s     2115628   3.6e+06 s^-1 
+950C    0.800042s     2392756   2.8e+06 s^-1 
+950C    0.900004s     2661949   2.7e+06 s^-1  269193 ev/s 
+950C           1s     2902004   2.4e+06 s^-1 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/B                   317
+----------------- Event Log --------------
+ ----------------------------------------Gas                  Interface
+Type          Emission
+Silicon     I        12486V          716
+
+ ----------------------------------------Silicon         MobileParticle
+Type           migrate  break up    emit I    emit V
+I              2755672
+V               126929
+Bi                3215      2985
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle B+I                2985
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I       12486 Interface+V         716
+
+----------------------------------------------------------------- extract -----
+extract diffusivity macroscopic name='B' material='Silicon'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' material='Silicon'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Parameter material not used
+-------------------------------------------------------------------- test -----
+test tag='Icon.noSat' array='-2 0
+-1 0
+0 1.97869e+12
+1 2.54209e+12
+2 2.54388e+12
+3 2.4581e+12
+4 2.49076e+12
+5 2.48043e+12
+6 2.56233e+12
+7 2.55126e+12
+8 2.56093e+12
+9 2.52152e+12
+10 2.53724e+12
+11 2.51239e+12
+12 2.52347e+12
+13 2.56027e+12
+14 2.55441e+12
+15 2.4916e+12
+16 2.49637e+12
+17 2.54695e+12
+18 2.56001e+12
+19 2.47841e+12
+' value='2625343078794.002' init='2' end='18' error='0.1'
+-------------------------------------------------------------------------------
+Icon.noSat 2 2.54388e+12 -> (2.62534e+12 3.10295% )
+Icon.noSat 3 2.4581e+12 -> (2.62534e+12 6.37034% )
+Icon.noSat 4 2.49076e+12 -> (2.62534e+12 5.12631% )
+Icon.noSat 5 2.48043e+12 -> (2.62534e+12 5.51977% )
+Icon.noSat 6 2.56233e+12 -> (2.62534e+12 2.40019% )
+Icon.noSat 7 2.55126e+12 -> (2.62534e+12 2.82184% )
+Icon.noSat 8 2.56093e+12 -> (2.62534e+12 2.45351% )
+Icon.noSat 9 2.52152e+12 -> (2.62534e+12 3.95465% )
+Icon.noSat 10 2.53724e+12 -> (2.62534e+12 3.35587% )
+Icon.noSat 11 2.51239e+12 -> (2.62534e+12 4.30241% )
+Icon.noSat 12 2.52347e+12 -> (2.62534e+12 3.88037% )
+Icon.noSat 13 2.56027e+12 -> (2.62534e+12 2.47865% )
+Icon.noSat 14 2.55441e+12 -> (2.62534e+12 2.70186% )
+Icon.noSat 15 2.4916e+12 -> (2.62534e+12 5.09431% )
+Icon.noSat 16 2.49637e+12 -> (2.62534e+12 4.91262% )
+Icon.noSat 17 2.54695e+12 -> (2.62534e+12 2.98601% )
+---------------------------- Warning -----------------------------------
+Icon.noSat: Requested error is  < 10%  maximum error is 6.37034%
+Test PASSED... continuing
+------------------------------------------------------------------- param -----
+param set type='float' key='Gas_Silicon/Interstitial/supersaturation' value='10'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='20' maxy='100' maxz='100' material='material'
+-------------------------------------------------------------------------------
+Deleting old simulation
+Deleting 4806 objects...done
+Time spent: 2s.
+     X: (-2 - 20) nm. 15 elements. Delta = 1.46667 nm.
+     Y: (0 - 100) nm. 67 elements. Delta = 1.49254 nm.
+     Z: (0 - 100) nm. 67 elements. Delta = 1.49254 nm.
+Total 67335 elements
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG  -2:-0.533333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  -0.533333:0.933333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  0.933333:2.4
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  2.4:3.86667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  3.86667:5.33333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  5.33333:6.8
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  6.8:8.26667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  8.26667:9.73333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  9.73333:11.2
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  11.2:12.6667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  12.6667:14.1333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  14.1333:15.6
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  15.6:17.0667
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  17.0667:18.5333
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS  18.5333:20
+Interfacing...
+----------------------------------------------------------------- profile -----
+profile proc='spike' name='B'
+-------------------------------------------------------------------------------
+Created Silicon,B(317) 
+------------------------------------------------------------------ anneal -----
+anneal events='1e8' temp='950' time='1'
+-------------------------------------------------------------------------------
+Annealing the sample for 1 seconds at 1223.15K (950ºC)
+950C 7.78858e-06s           1   1.3e+05 s^-1 
+950C 8.65649e-06s          36   4.0e+07 s^-1 
+950C 2.61402e-05s          48   6.9e+05 s^-1 
+950C 3.42722e-05s         133   1.0e+07 s^-1 
+950C 5.15846e-05s         136   1.7e+05 s^-1 
+950C  8.4548e-05s         171   1.1e+06 s^-1 
+950C 9.01946e-05s         176   8.9e+05 s^-1 
+950C 0.000108464s         209   1.8e+06 s^-1 
+950C 0.000242403s         444   1.8e+06 s^-1 
+950C 0.000301947s        3147   4.5e+07 s^-1 
+950C 0.000428397s        3326   1.4e+06 s^-1 
+950C 0.000500191s        4515   1.7e+07 s^-1 
+950C 0.000608315s        5553   9.6e+06 s^-1 
+950C 0.000708293s        8495   2.9e+07 s^-1 
+950C 0.000806107s        8795   3.1e+06 s^-1 
+950C 0.000900697s       15072   6.6e+07 s^-1 
+950C  0.00101303s       15895   7.3e+06 s^-1 
+950C  0.00200647s       57821   4.2e+07 s^-1 
+950C   0.0030183s       84989   2.7e+07 s^-1 
+950C  0.00400343s      112264   2.8e+07 s^-1 
+950C  0.00502753s      123715   1.1e+07 s^-1 
+950C  0.00600511s      155286   3.2e+07 s^-1 
+950C  0.00703257s      161225   5.8e+06 s^-1 
+950C  0.00800422s      184356   2.4e+07 s^-1 
+950C  0.00900682s      209808   2.5e+07 s^-1 
+950C   0.0100008s      247164   3.8e+07 s^-1 
+950C   0.0200034s      544501   3.0e+07 s^-1 
+950C   0.0300003s      812617   2.7e+07 s^-1 
+950C   0.0400059s     1043297   2.3e+07 s^-1  230680 ev/s 
+950C   0.0500006s     1343688   3.0e+07 s^-1 
+950C    0.060009s     1632988   2.9e+07 s^-1 
+950C   0.0700082s     1967817   3.3e+07 s^-1 
+950C    0.080001s     2312749   3.5e+07 s^-1 
+950C   0.0900091s     2602659   2.9e+07 s^-1 
+950C    0.100007s     2845645   2.4e+07 s^-1  242986 ev/s 
+950C    0.200003s     5971980   3.1e+07 s^-1 3126335 ev/s 
+950C    0.300005s     8710795   2.7e+07 s^-1 1369407 ev/s 
+950C    0.400004s    11659519   2.9e+07 s^-1 1474362 ev/s 
+950C    0.500001s    14452156   2.8e+07 s^-1 2792637 ev/s 
+950C    0.600018s    17440185   3.0e+07 s^-1 1494014 ev/s 
+950C    0.700006s    20363885   2.9e+07 s^-1 2923700 ev/s 
+950C    0.800002s    23305458   2.9e+07 s^-1 1470786 ev/s 
+950C    0.900021s    26150607   2.8e+07 s^-1 1422574 ev/s 
+950C           1s    28875868   2.7e+07 s^-1 2725261 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/B                   317
+MobileParticle/V                     1
+----------------- Event Log --------------
+ ----------------------------------------Gas                  Interface
+Type          Emission
+Silicon     I       126443V          737
+
+ ----------------------------------------Silicon         MobileParticle
+Type           migrate  break up    emit I    emit V
+I             28518278
+V               168063
+Bi               31677     30658
+
+ ----------------------------------------Silicon              IVCluster
+Type           migrate      emit transform recombine
+IVCluster                      7                   4
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle I+I                   7
+MobileParticle V+I                   4
+MobileParticle B+I               30658
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I      126439 Interface+V         732
+
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='Icon.sat' array='-2 0
+-1 0
+0 2.02175e+13
+1 2.59259e+13
+2 2.60115e+13
+3 2.61551e+13
+4 2.63458e+13
+5 2.63037e+13
+6 2.63182e+13
+7 2.62553e+13
+8 2.60403e+13
+9 2.60516e+13
+10 2.63669e+13
+11 2.63141e+13
+12 2.64708e+13
+13 2.62757e+13
+14 2.62467e+13
+15 2.61661e+13
+16 2.60565e+13
+17 2.59215e+13
+18 2.58965e+13
+19 2.58778e+13
+' value='26253430787940.02' init='2' end='18' error='0.1'
+-------------------------------------------------------------------------------
+Icon.sat 2 2.60115e+13 -> (2.62534e+13 0.921516% )
+Icon.sat 3 2.61551e+13 -> (2.62534e+13 0.374538% )
+Icon.sat 4 2.63458e+13 -> (2.62534e+13 0.351836% )
+Icon.sat 5 2.63037e+13 -> (2.62534e+13 0.191483% )
+Icon.sat 6 2.63182e+13 -> (2.62534e+13 0.246713% )
+Icon.sat 7 2.62553e+13 -> (2.62534e+13 0.00712539% )
+Icon.sat 8 2.60403e+13 -> (2.62534e+13 0.811815% )
+Icon.sat 9 2.60516e+13 -> (2.62534e+13 0.768775% )
+Icon.sat 10 2.63669e+13 -> (2.62534e+13 0.432212% )
+Icon.sat 11 2.63141e+13 -> (2.62534e+13 0.231096% )
+Icon.sat 12 2.64708e+13 -> (2.62534e+13 0.827967% )
+Icon.sat 13 2.62757e+13 -> (2.62534e+13 0.0848257% )
+Icon.sat 14 2.62467e+13 -> (2.62534e+13 0.0256338% )
+Icon.sat 15 2.61661e+13 -> (2.62534e+13 0.332641% )
+Icon.sat 16 2.60565e+13 -> (2.62534e+13 0.750115% )
+Icon.sat 17 2.59215e+13 -> (2.62534e+13 1.26433% )
+---------------------------- Warning -----------------------------------
+Icon.sat: Requested error is  < 10%  maximum error is 1.26433%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract diffusivity macroscopic name='B' material='Silicon'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='diffB.sat' float='4.81475e-14' value='5.1396099999999996e-14' error='0.1'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+diffB.sat: Requested error is  < 10% maximum error is 6.32071%
+Test PASSED... continuing
+Deleting 4807 objects...done
+Time spent: 16s.
+         1 times: Icon.noSat: Requested error is  < 10%  maximum error is 6.37034%
+         1 times: Icon.sat: Requested error is  < 10%  maximum error is 1.26433%
+         2 times: Iron/Models/interactions Interaction not used: He2V+V
+         1 times: Parameter material not used
+         1 times: diffB.sat: Requested error is  < 10% maximum error is 6.32071%
+¡Hasta la vista!

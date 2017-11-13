@@ -1,0 +1,26 @@
+\section{restart}
+\index{restart}
+\label{sec:restart}
+
+The \param{restart} command allows to save and load the simulation state and the defined parameters\index{parameter}, not to visualize it, but to ``re-start'' from it. The \param{restart} \param{load} option can be used as a substitute of the \param{init} command. A \param{.mmonca} file is generated or required.
+
+The options specified in the \param{init} command are saved, making unnecessary to re-define a procedure with the \param{material}. All the parameters read, and also the ones changed with the \param{param} command are re-loaded. Consequently, there is no need to redefine parameters before the {\tt restart} {\tt load} option.
+
+Information from both \param{OKMC} and \param{LKMC} modules can be saved and loaded.
+
+\begin{description}
+
+\item[load=$<$filename$>$]\index{load} Initializes a simulation using a previously saved state. \param{filename} contains the name of the file with the saved state. No extension is needed.
+\item[save=$<$filename$>$]\index{save} Dumps the state of the current simulation in \param{filename}. If a name with that file already exists, it is overwritten.
+
+\end{description}
+
+\subsection{Format of the \param{.mmonca} file}
+
+The \param{.mmonca} file is a {\em gzipped} text file with the internal state of the simulator. 
+
+\subsection{Examples}
+\begin{itemize}
+\item \verb+restart save=temporal+ Saves the current state of the simulation in a file called ``temporal.mmonca''.
+\item \verb+restart load=temporal+ Inits the current simulation using the ``temporal.mmonca'' file as the current state.
+\end{itemize}

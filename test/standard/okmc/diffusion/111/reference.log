@@ -1,0 +1,139 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.11
+Compiled on Jan 26 2015 14:46:44 for x86_64-Linux
+for #73-Ubuntu SMP Tue Dec 16 00:22:43 UTC 2014
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='S_Iron Fe'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/snapshot.time.decade' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='40' maxy='40' maxz='40' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: S_Iron(<111> HeCluster ICluster VCluster ) 
+     X: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Y: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+     Z: (0 - 40) nm. 27 elements. Delta = 1.48148 nm.
+Total 19683 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSSSSSSSSSSSSSSSSSSS -                              0:1.48148
+SSSSSSSSSSSSSSSSSSSSSSSSSSS -                              38.5185:40
+Starting clusters:  S_Iron(<111> HeCluster ICluster VCluster )
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: V+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: C+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: CV+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: HeI+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: HeV+Gas
+Interfacing...
+Checking SPER... Done.
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I10' coord='30 25 20'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I100' coord='10 15 20'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I1000' coord='5 10 15'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- save -----
+save lammps='nodist-defects'
+-------------------------------------------------------------------------------
+
+Writing 1110 atoms in nodist-defects.dump done!.
+------------------------------------------------------------------ anneal -----
+anneal time='1e5' temp='326.85' events='3e5'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 100000 seconds at 600K (326.85ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+327C    0.001s          12   0.00%    1.5e+04 s^-1 125 Mb
+327C    0.002s          18   0.01%    6.0e+03 s^-1 125 Mb
+327C     0.01s          92   0.03%    9.2e+03 s^-1 125 Mb
+327C     0.02s         192   0.06%    1.0e+04 s^-1 125 Mb
+327C      0.1s        1058   0.35%    1.1e+04 s^-1 125 Mb
+327C      0.2s        2083   0.69%    1.0e+04 s^-1    1025 ev/s 125 Mb
+327C       10s      104924  34.97%    1.0e+04 s^-1   14691 ev/s 125 Mb
+327C     28.6s      300000 100.00%    1.1e+04 s^-1   21675 ev/s 125 Mb
+SSSSSSSSSSSSSSSSSSSSSSSSSSS -                              0:1.48148
+SSSSSSSSSSSSSSSSSSSSSSSSSSS -                              38.5185:40
+----------------------------- Defect logfile --------------
+---------------------------------------    S_Iron --------
+<111>/I10                            1
+<111>/I100                           1
+<111>/I1000                          1
+----------------- Event Log --------------
+ ----------------------------------------S_Iron                 Cluster
+Type                   Mig      To    From     Rec Emissions  
+<111>/I10          1.1e+05                         
+<111>/I100         9.7e+04                         
+<111>/I1000        9.7e+04                         
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='nodist-defects' append
+-------------------------------------------------------------------------------
+
+Writing 1110 atoms in nodist-defects.dump done!.
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='time' value='28.6' float='28.553' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+time: Requested error is  < 1% maximum error is 0.164339%
+Test PASSED... continuing
+Time spent: 18s. Annealing: 17s.
+         1 times: S_Iron/Models/interactions Interaction not used: C+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: CV+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: HeI+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: HeV+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: I+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: V+Gas
+        12 times: Snapshot not defined or error.
+         1 times: time: Requested error is  < 1% maximum error is 0.164339%
+There are 14 total sentences. Collect them all!
+Camarón que se duerme...
+                     ... se lo lleva la corriente

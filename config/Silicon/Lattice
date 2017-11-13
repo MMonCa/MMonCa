@@ -1,0 +1,18 @@
+
+string type diamond.1
+float  parameter 0.5431
+float  parameter.alloy 0.5658
+
+bool remove.defects false
+
+// distance between atoms in Si is 0.235 nm
+map<string,float>   neighbor.distance first 0.25 second 0.40 third 0.50
+
+map<string,float>   wafer.orientation i 1 j 0 k 0
+map<string,float>   flat.orientation  i 0 j 1 k 1
+
+// Do NOT set map.to.grid to "true"
+bool  map.to.grid         false
+float orbital.radius      0.2
+
+float growth.distortion .0

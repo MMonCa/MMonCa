@@ -1,0 +1,118 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 1.0.9-BC Compiled on Feb 25 2014 12:17:41
+        Contact: ignacio.martin@imdea.org
+     (C) 2011-2014 IMDEA Materials Institute.     
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in SiliconCarbide
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in Gas_SiliconCarbide
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in AmorphousTungsten
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/lambda' value='0.287'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='1.3'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/delta.x' value='1.'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/delta.y' value='1.'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/delta.z' value='1.'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='50' maxy='50' maxz='50' material='material'
+-------------------------------------------------------------------------------
+     X: (0 - 50) nm. 38 elements. Delta = 1.31579 nm.
+     Y: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+     Z: (0 - 50) nm. 33 elements. Delta = 1.51515 nm.
+Total 41382 elements
+Loading Particle To Node handler
+Setting long hop in number 4
+Building nodes... Done
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  0:1.31579
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  48.6842:50
+Interfacing...
+---------------------------- Warning -----------------------------------
+This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='^I2' coord=' 5.5 5.5 5.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert defect='VCluster' ID='V3' coord=' 15.5 5.5 5.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert particle='HeFe' coord=' 5.5 5.5 15.5 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ insert -----
+insert particle='HeV' coord=' 5.5 15.5 5.5'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.positions position='I'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='I' float='2' value='2' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+I: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.positions position='Fe'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='Fe' float='6' value='6' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Fe: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract count.positions position='V'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='V' float='0' value='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+V: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+Time spent: 0s.
+         1 times: Fe: Requested error is  < 0% maximum error is 0%
+         1 times: I: Requested error is  < 0% maximum error is 0%
+         1 times: This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+         1 times: V: Requested error is  < 0% maximum error is 0%
+There are 8 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

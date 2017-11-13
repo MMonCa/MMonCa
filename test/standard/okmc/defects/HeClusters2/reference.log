@@ -1,0 +1,221 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.10
+Compiled on Nov 28 2014 12:19:28 for x86_64-Linux
+for #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+BCA:  (C) 2000-2014 University of Valladolid and
+      (C)      2014 IMDEA Materials Institute
+      Module based on IIS-UVA.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='S_Iron Fe'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/speed.up' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='S_Iron/Helium/He(migration)' value='1e-3 1.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value='true' index='HeCluster:V2+He'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value='false' index='V+V'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value='false' index='V+He'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='S_Iron/Models/interactions' value='false' index='I+He'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='float' key='S_Iron/Models/lambda'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='S_Iron/Helium/He(formation)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='S_Iron/Helium/He(formation)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='S_Iron/Helium/He(migration)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='S_Iron/Helium/He(migration)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='proc' key='S_Iron/HeCluster/prefactor' value=' 
+        set list ""
+        append list     "HeV2,He 1e-18 "
+        return $list
+ '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='proc' key='S_Iron/HeCluster/migration' value=' 
+        set list ""
+        append list     "V2 < 1e-3 0.9 >"
+        return $list
+ '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='proc' key='S_Iron/HeCluster/formation' value=' 
+  (...)'
+-------------------------------------------------------------------------------
+
+time should be 23529204089.364532 
+CHe  should be 94544.64131397785 
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='20' maxy='20' maxz='20' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: S_Iron(<111> HeCluster ICluster VCluster ) 
+     X: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2197 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSSSSS -                0:1.53846
+SSSSSSSSSSSSS -                18.4615:20
+Starting clusters:  S_Iron(<111> HeCluster ICluster VCluster )
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: V+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: C+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: CV+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: HeI+Gas
+---------------------------- Warning -----------------------------------
+S_Iron/Models/interactions Interaction not used: HeV+Gas
+Interfacing...
+Checking SPER... Done.
+------------------------------------------------------------------ insert -----
+insert defect='HeCluster' ID='HeV2' coord=' 10 10 10 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ anneal -----
+anneal time='1e25' temp='1000' events='5e7'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+25 seconds at 1273.15K (1000ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+1000C    2e+08s          18   0.00%    1.8e-07 s^-1 
+1000C    3e+08s      500650   1.00%    5.0e-03 s^-1  500632 ev/s 
+1000C    4e+08s     1033909   2.07%    5.3e-03 s^-1 
+1000C    1e+09s     1541112   3.08%    5.1e-03 s^-1 
+1000C    2e+09s     4344101   8.69%    2.8e-03 s^-1 1401494 ev/s 
+1000C    3e+09s     7487803  14.98%    3.1e-03 s^-1 3143702 ev/s 
+1000C    4e+09s     8563489  17.13%    1.1e-03 s^-1 1075686 ev/s 
+1000C    5e+09s     9262697  18.53%    7.0e-04 s^-1 
+1000C    6e+09s    12052752  24.11%    2.8e-03 s^-1 1395027 ev/s 
+1000C    7e+09s    14590786  29.18%    2.5e-03 s^-1 2538034 ev/s 
+1000C    8e+09s    16362216  32.72%    1.8e-03 s^-1 1771430 ev/s 
+1000C    9e+09s    17115341  34.23%    7.5e-04 s^-1  753125 ev/s 
+1000C    1e+10s    20018929  40.04%    2.9e-03 s^-1 2903588 ev/s 
+1000C    2e+10s    43147296  86.29%    2.3e-03 s^-1 1779105 ev/s 
+1000C 2.40107e+10s    50000000 100.00%    1.7e-03 s^-1 2284234 ev/s 
+SSSSSSSSSSSSS -                0:1.53846
+SSSSSSSSSSSSS -                18.4615:20
+----------------------------- Defect logfile --------------
+---------------------------------------    S_Iron --------
+HeCluster/V2                         1
+MobileParticle/He                    1
+----------------- Event Log --------------
+ ----------------------------------------S_Iron          MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+He                  14271890                                                                 66273
+
+ ----------------------------------------S_Iron                 Cluster
+Type                   Mig      To    From     Rec Emissions  
+HeCluster/HeV2                                     690(He) 
+HeCluster/V2       3.6e+07                         
+
+----------------- Reaction Log --------------
+ ----------------------------------------S_Iron                 Cluster
+Cluster    HeCluster+He        689
+
+be aware of the Moire effects... 
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='1000' float='2.40107e+10' value='23529204089.364532' error='.1'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+1000: Requested error is  < 10% maximum error is 2.04638%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='He'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='1000.He' array=' 0. (...)' value='94544.64131397785' init='0' end='20' error='.15'
+-------------------------------------------------------------------------------
+
+1000.He 0.769231 90150.9 -> (94544.6 4.64727% )
+1000.He 2.30769 89037.3 -> (94544.6 5.82513% )
+1000.He 3.84615 88346.1 -> (94544.6 6.5562% )
+1000.He 5.38462 96249.5 -> (94544.6 1.80323% )
+1000.He 6.92308 91077.8 -> (94544.6 3.66689% )
+1000.He 8.46154 92291.2 -> (94544.6 2.38346% )
+1000.He 10 99281.5 -> (94544.6 5.01018% )
+1000.He 11.5385 94397.1 -> (94544.6 0.156052% )
+1000.He 13.0769 96597.3 -> (94544.6 2.1711% )
+1000.He 14.6154 95065 -> (94544.6 0.550385% )
+1000.He 16.1538 89981.9 -> (94544.6 4.82602% )
+1000.He 17.6923 95097.5 -> (94544.6 0.58476% )
+1000.He 19.2308 93123.8 -> (94544.6 1.50283% )
+---------------------------- Warning -----------------------------------
+1000.He: Requested error is  < 15%  maximum error is 6.5562%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='1000.He.average' float='93130.5' value='94544.64131397785' error='.1'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+1000.He.average: Requested error is  < 10% maximum error is 1.49574%
+Test PASSED... continuing
+Time spent: 27s. Annealing: 27s.
+         1 times: 1000.He.average: Requested error is  < 10% maximum error is 1.49574%
+         1 times: 1000.He: Requested error is  < 15%  maximum error is 6.5562%
+         1 times: 1000: Requested error is  < 10% maximum error is 2.04638%
+         1 times: S_Iron/Models/interactions Interaction not used: C+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: CV+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: HeI+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: HeV+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: I+Gas
+         1 times: S_Iron/Models/interactions Interaction not used: V+Gas
+       130 times: Snapshot not defined or error.
+There are 14 total sentences. Collect them all!
+El mayor obstáculo para encontrar la felicidad...
+                                 ... es buscarla.

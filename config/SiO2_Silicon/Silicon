@@ -1,0 +1,8 @@
+string left SiO2
+
+map<string,float>    supersaturation.right { SiI 1 }
+map<string,float>	 recombination.length.right { SiI 1 }
+map<string,float>    barrier.right { SiI 0 }
+map<string,float>	 desorption.low       { }
+map<string,float>	 desorption.threshold { }
+map<string,float>    desorption.high      { }

@@ -1,0 +1,6 @@
+// Migration
+arrhenius B(migration) 0 1
+arrhenius B(formation) 0 1
+
+bool   B(map.to.grid)     true
+float  B(orbital.radius)  0.2

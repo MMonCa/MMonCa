@@ -1,0 +1,11 @@
+// name, element, mass (a.m.u.)
+map<string,string> elements {
+    As Arsenic,33,74.9216
+    B  Boron,5,10.81
+    C  Carbon,6,12.011
+    Cr Chromium,24,55.9961
+    Fe Iron,26,55.845
+    Ge Germanium,32,74.9216
+    He Helium,2,4.002602
+    Si Silicon,14,28.085
+}
