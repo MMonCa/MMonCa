@@ -1,0 +1,11 @@
+language: cpp
+
+before_install:
+ - apt-get install tcl-dev
+ - apt-get install libboost-dev
+ - apt-get install libboost-iostreams-dev
+ - apt-get install libsuperlu3-dev
+ - apt-get install liblapack-dev
+
+install:
+ - make g++
