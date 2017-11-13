@@ -1,6 +1,8 @@
 language: cpp
 sudo: required
 dist: precise
+env:
+ - MCPATH=${TRAVIS_BUILD_DIR}/config
 
 before_install:
  - sudo apt-get install tcl-dev
@@ -9,5 +11,6 @@ before_install:
  - sudo apt-get install libsuperlu3-dev
  - sudo apt-get install liblapack-dev
 
-install:
- - make travis
+install: true
+script: make travis
+after_success: cd test && ./runAll.sh
