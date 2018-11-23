@@ -82,19 +82,18 @@ int main(int argc, char *argv[])
 	LOWMSG("Version: " << VERSION);
 	LOWMSG("Compiled on " << __DATE__ << " " __TIME__ << " for " << buf.machine << "-" << buf.sysname);
 	LOWMSG("for " << buf.version);
-	LOWMSG("        Contact: ignacio.martin@imdea.org");
-	LOWMSG("        http://materials.imdea.org/MMonCa");
+	LOWMSG("        Contact: imartin2@ucam.edu");
+	LOWMSG("        https://github.com/imartinbragado/MMonCa");
 	LOWMSG("OKMC: (C) 2011-2014 IMDEA Materials Institute.");
+	LOWMSG("OKMC: (C) 2015-2018 Ignacio Martin, Ignacio Dopico")
 	LOWMSG("LKMC: (C) 2011-2014 IMDEA Materials Institute.");
+	LOWMSG("LKMC: (C) 2015-2018 Ignacio Martin, Ignacio DOpico")
 	LOWMSG("BCA:  (C) 2014 Universidad de Valladolid.");
 #if MMONCA_FELIKS
 	LOWMSG("FEM:  (C) 2014 IMDEA Materials Institute and");
 	LOWMSG("      (C) 2014 Technical University of Madrid (UPM)");
 	LOWMSG("      Module based on FELIKS.");
 #endif
-/*	LOWMSG("BCA:  (C) 2000-2014 University of Valladolid and");
-	LOWMSG("      (C)      2014 IMDEA Materials Institute");
-	LOWMSG("      Module based on IIS-UVA.");*/
 	LOWMSG(" For licensing details, write \"license\"");
 
 	if(argc > 2 )
@@ -108,4 +107,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-

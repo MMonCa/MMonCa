@@ -1,0 +1,67 @@
+# ---------------------------------------------------------------------
+# Makefile to define specific settings
+#
+# Author: Benoit Sklenard <benoit.sklenard@cea.fr>
+#
+# October 15, 2014
+#
+
+# ---------------------------------------------------------------------
+# compiler/linker settings
+# specify flags and libraries needed for your compiler
+CXX      = g++
+CXXFLAGS = -O3 -Wall -fopenmp
+CC       = gcc
+CCFLAGS  = -O3 -Wall
+DEPFLAGS = -MMD -MP
+
+LINK      = g++
+LINKFLAGS = -O3 -fopenmp
+LIB       = -lpthread -lm
+
+ARCHIVE =
+ARFLAGS =
+SHLIBFLAGS =
+
+# ---------------------------------------------------------------------
+# MMonCa-specific settings
+FELIKS = no
+CHARGE = no
+
+# TCL lib, required
+
+TCL_INC = -I/usr/include/tcl8.6/
+TCL_PATH = -L/usr/lib/x86_64-linux-gnu/
+TCL_LIB = -ltcl8.6
+
+# Boost lib
+
+BOOST_INC =  -DNDEBUG -DBOOST_UBLAS_NDEBUG 
+BOOST_PATH =
+BOOST_LIB = -lboost_iostreams
+
+# SuperLu lib, optional
+# Can be empty if "FELIKS = no" (see above)
+
+SUPERLU_INC =
+SUPERLU_PATH =
+SUPERLU_LIB = -lsuperlu
+
+# Lapack lib, optional
+# Can be empty if "FELIKS = no" (see above)
+
+LAPACK_INC =
+LAPACK_PATH =
+LAPACK_LIB = -llapack -lblas
+
+# Blas lib, optional
+# Can be empty if "FELIKS = no" (see above)
+
+BLAS_INC =
+BLAS_PATH =
+BLAS_LIB = -lblas
+
+# Do not remove the following include
+
+include ../Makefile.$(TARGET)
+
