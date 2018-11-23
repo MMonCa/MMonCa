@@ -70,6 +70,9 @@ double Polynomial::getIntFirstDerValue(double x)
 double Polynomial::evaluate(const std::vector < std::vector<double> >& vV , double x)
 {
 	double value = 0;
+	if (vV.size() == 0)
+		return value;
+		
 	for(unsigned bnd = 0; bnd < (_bounds.size() - 1); bnd++)
 		if(_bounds[bnd] <= x && x < _bounds[bnd + 1]) // I am on interval "bnd"
 			for(unsigned grade = 0; grade < vV[bnd].size(); grade++)
