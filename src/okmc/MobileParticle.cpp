@@ -410,6 +410,8 @@ void MobileParticle::emit(Kernel::SubDomain *pSub, unsigned char iorv)
 	_pDomain->_pRM->remove(this, _pElement);
 	_ptype = emit1;
 	_pDomain->_pRM->insert(this, _pElement);
+	if (Domains::global()->IsPoisson())
+		_pDomain->_pMesh->getParticleToNodeHandler()->insert(this);
 }
 
 #ifdef NUMODEL
@@ -706,11 +708,14 @@ void MobileParticle::breakup(Kernel::SubDomain *pSub, P_POS pos)
 	_pDomain->_pRM->remove(this, _pElement);
 	_ptype = emit;
 	_state = 0;
+	if (Domains::global()->IsPoisson())
+		_pDomain->_pMesh->getParticleToNodeHandler()->insert(this);
 	_pDomain->_pRM->insert(this, _pElement);
 
 	Kernel::Coordinates newCoords(_coord);
 	breakPosition(pSub, newCoords, _pElement, _pDomain->_pMPPar->_interact_radius[mt][emit][emit2]);
 	MobileParticle * pMP = new MobileParticle(pSub, emit2, stateIorV, _pDomain, newCoords, newCoords); //self inserts
+	pMP->updateState(pSub);
 	if(toCluster)
 	{
 		std::vector<Particle *> dummy;
@@ -756,6 +761,8 @@ Defect * MobileParticle::internalInteract(Kernel::SubDomain *pSub, Defect *def, 
 				_pDomain->_pRM->remove(this, _pElement);
 				_ptype = newPt;
 				_state = resState;
+				if (Domains::global()->IsPoisson())
+					_pDomain->_pMesh->getParticleToNodeHandler()->insert(this);
 				_pDomain->_pRM->insert(this, _pElement);
 				delete mp;
 				return this;
@@ -765,6 +772,8 @@ Defect * MobileParticle::internalInteract(Kernel::SubDomain *pSub, Defect *def, 
 				_pDomain->_pRM->remove(mp, mp->_pElement);
 				mp->_ptype = newPt;
 				mp->_state = resState;
+				if (Domains::global()->IsPoisson())
+					_pDomain->_pMesh->getParticleToNodeHandler()->insert(mp);
 				_pDomain->_pRM->insert(mp, mp->_pElement);
 				delete this;
 				return mp;
