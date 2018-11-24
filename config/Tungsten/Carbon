@@ -1,0 +1,8 @@
+// Migration
+arrhenius C(migration)  1.00489e-5 0.01
+arrhenius CI(migration) 0.0 0.0
+arrhenius CV(migration) 1.00489e-3 4.83
+// Binding
+arrhenius C(formation)    0.136987e7 1.44
+arrhenius CI(formation)   1.499996e7 10.46
+arrhenius CV(formation)   1.0 0.0

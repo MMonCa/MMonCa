@@ -1,0 +1,19 @@
+arrhenius AsI(migration)  { 1.23e-3 0.67 }
+arrhenius AsI(formation)  { 0.4831e23 6.953 }
+
+
+
+arrhenius AsGa_0(migration) { 9.5048e-4 2.70 }
+arrhenius AsGa_+(migration) { 9.5048e-4 2.70 }
+arrhenius AsGa_++(migration) { 9.5048e-4 2.70 }
+arrhenius AsGa(update) { 2e-2 2 }
+arrhenius AsGa(formation) { 0.4831e23 4.034 }
+
+map<string,int> AsGa(state.charge) AsGa_0 0 AsGa_+ 1 AsGa_++ 2
+float	AsGa(e(0,1))	0.97
+float	AsGa(e(1,2))	0.63
+
+map<string,int> AsI(state.charge) AsI 0
+
+float AsI(state.energy) 0.0
+float AsI(state.degeneracy) 1

@@ -1,0 +1,63 @@
+// Parameters from JAP 116, 103701(2014)
+proc eDOSMass {
+	#set mt 0.25
+	#set ml 0.68	
+	#[expr ($mt * $mt * $ml)**(1./3.)]
+	return 4.10e-2
+}
+
+proc hDOSMass {
+        #set T   $arg0
+        #set m0  2.65719
+        #set A   -1.45072
+        #set D   -0.01916
+	#return  [expr $m0+$A*exp($D*$T)]
+	return 4.76e-1
+}
+
+proc Bandgap {
+        set T   $arg0
+        set E0	0.822 
+        return  [expr $E0-4.5e-4*$T*$T/($T+327)]    ;#e V
+}
+
+// Stress impact on band structure from Birr & Pikus
+// Influence of stress on band edges is NOT implemented yet 
+map<string,float> Ec.dilatational {
+1 -8.6
+2 -8.6
+3 -8.6
+}
+
+map<string,float> Ev.dilatational { 
+1 -2.1
+2 -2.1
+}
+
+map<string,float> Ec.deviatoric(1) { 
+1  9.5
+2  0.0
+3  0.0
+}
+
+map<string,float> Ec.deviatoric(2) { 
+1  0.1
+2  9.5
+3  0.0
+}
+
+map<string,float> Ec.deviatoric(3) { 
+1  0.0
+2  0.0
+3  9.5
+}
+
+map<string,float> Ev.deviatoric(1) { 
+1  0.5
+2  4.0
+}
+
+map<string,float> Ev.deviatoric(2) { 
+1  0.5
+2  4.0
+}

@@ -1,0 +1,10 @@
+// JNM 408(2011)257 & PRB 68(2003)205201
+// Formation energy  from JNM 408(2001)257 
+
+arrhenius CSi(migration) { 9.5048e-4 2.70 }
+arrhenius CI(migration)  { 1.23e-3 0.67 }
+arrhenius CSi(formation) { 0.4831e23 4.034 }
+arrhenius CI(formation)  { 0.4831e23 6.953 }
+
+//  	CSi cap.radius 0.436 
+//      CI  cap.radius 0.3088

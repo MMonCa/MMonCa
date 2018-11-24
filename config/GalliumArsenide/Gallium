@@ -1,0 +1,28 @@
+arrhenius GaI_0(migration) { 6.4e-5 1.28 }
+arrhenius GaI_+(migration) { 6.4e-5 1.28 }
+arrhenius GaI(formation) { 4.7e28 3.25 }
+arrhenius GaI(update) {2.15e-4 1.43}
+
+float GaI(state.energy) 	0.054
+float GaI(state.degeneracy) 	2
+
+bool	GaI(map.to.grid)	true
+float	GaI(orbital.radius)	0.5
+
+// arrhenius GaAs_0(migration) { 0 3.66 }
+// arrhenius GaAs_--(migration) { 0 3.66 }
+// arrhenius GaAs_-(migration) { 0 3.66 }
+arrhenius GaAs(migration) { 0 3.66 }
+arrhenius GaAs(formation) { 0.4831e23 3.564 }
+// arrhenius GaAs(update) { 2e-2 2.2 }
+
+// map<string,int> GaAs(state.charge) GaAs_0 0 GaAs_-- -2 GaAs_- -1 GaAs_+ 1
+// float	GaAs(e(-2,-1)) .7
+// float	GaAs(e(-1,0)) .5
+// float	GaAs(e(0,1)) .3
+
+// map<string,int> GaI(state.charge)   GaI_0   0   GaI_+   1 
+
+// float GaI(e(0,1)) 0.2
+
+

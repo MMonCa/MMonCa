@@ -1,0 +1,11 @@
+// Data: Mathieu's file
+// arrhenius V(formation) 7.8981e23 1.258
+// Dato: Mathieu's file and the "real" prefactor value.
+// arrhenius V(formation) 7.8981e23 1.271
+// Data: Artur Tamm's file and the "real" prefactor value.
+arrhenius V(formation) 7.8981e23 1.271
+// Data: Caturla (J. Nucl. Mater, 276)
+arrhenius V(migration) 0.25 0.72
+
+// V cap.radius 0.496
+

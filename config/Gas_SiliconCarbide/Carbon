@@ -1,0 +1,8 @@
+string left Gas
+
+map<string,float>	recombination.length.right { }
+map<string,float>   barrier.right         { CI 0 CSi 0 }
+map<string,float>	desorption.low        { }
+map<string,float>	desorption.threshold  { }
+map<string,float>   desorption.high       { }
+map<string,float>   supersaturation.right { CI 1 CSi 1 }

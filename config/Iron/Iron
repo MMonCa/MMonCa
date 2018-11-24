@@ -1,0 +1,6 @@
+arrhenius I(migration) { 0% 8.2e-3 0.34 100% 8.2e-3 0.67 }
+arrhenius I(formation) { 0% 1e25 3.77   100% 7.95e27 5 }
+
+float correlation.factor 1
+
+arrhenius alpha { 5 0.1 }

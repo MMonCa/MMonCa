@@ -1,0 +1,64 @@
+// Params for SiC epitaxy
+
+bool model.simplified true
+
+proc prefactor.precursor {
+	return 0
+}
+
+map<string,float> formation.1st {
+Si+Si  0.
+Si+C -0.4
+
+Si+Si2   0.
+Si+SiC  0.
+Si+C2  -0.5
+
+Si+Si3   0.0
+Si+Si2C 0.0
+Si+SiC2 0.0
+Si+C3   -0.75
+
+Si+Si4    0.0
+Si+Si3C  0.0
+Si+Si2C2 0.0
+Si+SiC3  0.0
+Si+C4   -2.0
+
+C+Si -0.4
+C+C  0.
+
+C+Si2  -0.5
+C+SiC  0.
+C+C2   0.
+
+C+Si3  -0.75
+C+Si2C 0.0
+C+SiC2 0.0
+C+C3   0.0
+
+C+Si4   -2.0
+C+Si3C  0.0
+C+Si2C2 0.0
+C+SiC3  0.0
+C+C4    0.0
+}
+
+map<string,float> formation.2nd { Si+Si -0.15 Si+C 0       C+Si  0    C+C -0.15 }
+map<string,float> formation.3rd { Si+Si  0    Si+C   -0.12 C+Si -0.12 C+C  0. }
+
+map<string,string> pair.epi      { }
+map<string,float> barrier.pair   { }
+map<string,float> barrier.precursor    {  }
+map<string,float> barrier.desorption   {  }
+map<string,float> prefactor.desorption {  } 
+map<string,float> speedup.factor       {  }
+map<string,float> migration.1st  { Si 0.1   C 0.1 }
+map<string,float> migration.2nd  { Si 0.2   C 0.2 }
+map<string,float> barrier.epi    { Si 3.7   C 3.7 }
+map<string,float> prefactor.epi  { Si 5.6e9 C 5.6e9}
+map<string,float> prefactor.etch { Si 0.0   C 0.0 }
+map<string,float> prefactor.mig  { Si 1e6   C 1e6 }
+map<string,float> prefactor.pair { Si 5.6e9 C 5.6e9 }
+
+

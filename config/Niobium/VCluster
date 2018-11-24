@@ -1,0 +1,68 @@
+// Data: Migration energies from Mathieu's file.
+// Formation energies from Artur Tamm's file. 
+string shape irregular
+float density.cm3 5.55e22 
+string particle V
+string to   VCluster
+string from VCluster
+string migration.type 3d
+coordinates axis.2 1 0 0
+coordinates axis.1 0 1 0 
+coordinates axis.0 0 0 1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+float lambda         0.384
+
+bool IV.model false
+
+proc transform.to { }
+proc transform.from { }
+
+proc migration   { 
+	set list ""
+	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref 0
+		set ener 5
+		if { $size == 2 } { set pref 0.1; set ener 0.8980 }
+		if { $size == 3 } { set pref 0.1; set ener 0.9274 }
+		if { $size == 4 } { set pref 0.1; set ener 1.2857 }
+		
+		lappend list V$size < $pref $ener >
+	}
+	return $list
+}
+
+proc formation {
+	set list ""
+	
+	set pot  0
+	set form 0
+
+	for { set size 2 } { $size < 500 } { incr size } {
+		set e [expr 2./3.]
+		set Ef 2.627
+		set Eb2 -3.934
+		set ener [expr $Ef + $Eb2*(pow($size,$e)-pow($size-1,$e))]
+ 
+		if { $size == 2 } { set ener 0.31632 }
+		if { $size == 3 } { set ener 0.95760 }
+		if { $size == 4 } { set ener 1.57712 }
+		
+		set pot  [expr $pot - $ener]
+		set form [expr $pot + $size*$Ef]
+
+		lappend list V$size < $form >
+	}
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref 1e-6
+		lappend list V$size,V
+		lappend list $pref
+	}
+	return $list
+}

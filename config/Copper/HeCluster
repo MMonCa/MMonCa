@@ -1,0 +1,227 @@
+// Helium Clusters
+string shape           irregular
+float density.cm3      8.49e22 
+string to    HeCluster 
+string from  HeCluster 
+string migration.type  3d
+coordinates axis.2     1 0 0 
+coordinates axis.1     0 1 0 
+coordinates axis.0     0 0 1 
+coordinates not.in.plane 0 0 0 
+float       axes.ratio 1 
+float lambda         0.384
+
+bool IV.model false
+proc transform.to   { } 
+proc transform.from  { } 
+
+proc migration   { 
+ 	set list ""
+ 
+ 	append list "HeV2  < 1e-3 0.86 >" 
+ 	append list "HeV3  < 1e-3 0.8398 >" 
+ 	append list "HeV4  < 1e-3 0.9200 >" 
+
+	set pref1 1e-3
+	set ener1 0.5
+	for {set j 2} {$j <= 6} {incr j} { 
+		lappend list He${j} < $pref1 $ener1 > 
+		lappend list He${j}V < $pref1 $ener1 > 
+		lappend list He${j}V2 < $pref1 $ener1 > 
+		lappend list He${j}V3 < $pref1 $ener1 >  
+		lappend list He${j}V4 < $pref1 $ener1 > 
+	}
+
+	set ener2 0.35
+	for {set j 7} {$j <= 10} {incr j} { 
+		set pref2 [expr 1e-5/$j] 
+		set ener2 [expr $ener2+$j*0.05]
+
+		lappend list He${j} < $pref2 $ener2 >
+		lappend list He${j}V < $pref2 $ener2 >
+		lappend list He${j}V2 < $pref2 $ener2 >
+		lappend list He${j}V3 < $pref2 $ener2 >
+		lappend list He${j}V4 < $pref2 $ener2 >
+	}
+
+	for { set k 5 } { $k < 500 } { incr k } { 
+		set pref3 [expr 1e-4/$k] 
+		set ener3 0.5
+		lappend list HeV${k} < $pref3 $ener3 >
+		lappend list He2V${k} < $pref3 $ener3 >
+		lappend list He3V${k} < $pref3 $ener3 >
+		lappend list He4V${k} < $pref3 $ener3 >
+	}
+
+	return $list 
+} 
+
+proc formation { 
+	set list ""	
+	set EfHe 3.53749
+	set EfV  1.27
+	append list "He2    < [expr 2*$EfHe + -0.2194] > "
+	append list "He3    < [expr 3*$EfHe + -0.7394] > "
+	append list "He4    < [expr 4*$EfHe + -1.7035] > "
+	append list "He5    < [expr 5*$EfHe + -2.9494] > "
+	append list "He6    < [expr 6*$EfHe + -4.2797] > "
+	append list "He7    < [expr 7*$EfHe + -5.5749] > "
+	append list "He8    < [expr 8*$EfHe + -7.1460] > "
+	append list "He9    < [expr 9*$EfHe + -8.6846] > "
+	append list "He10   < [expr 10*$EfHe + -10.4972] > "
+	append list "He2V   < [expr 2*$EfHe + $EfV + -3.22713] > "
+	append list "He3V   < [expr 3*$EfHe + $EfV + -4.37448] > "
+	append list "He4V   < [expr 4*$EfHe + $EfV + -5.68362] > "
+	append list "He5V   < [expr 5*$EfHe + $EfV + -6.71570] > "
+	append list "He6V   < [expr 6*$EfHe + $EfV + -7.96796] > "
+	append list "He7V   < [expr 7*$EfHe + $EfV + -8.99266] > "
+	append list "He8V   < [expr 8*$EfHe + $EfV + -10.12081] > "
+	append list "He9V   < [expr 9*$EfHe + $EfV + -11.65717] > "
+	append list "He10V  < [expr 10*$EfHe + $EfV + -13.29718] > "
+	append list "HeV2   < [expr $EfHe + 2*$EfV + -2.4454] > "
+	append list "He2V2  < [expr 2*$EfHe + 2*$EfV + -4.86258] > "
+	append list "He3V2  < [expr 3*$EfHe + 2*$EfV + -6.39762] > "
+	append list "He4V2  < [expr 4*$EfHe + 2*$EfV + -7.91529] > "
+	append list "He5V2  < [expr 5*$EfHe + 2*$EfV + -9.31436] > "
+	append list "He6V2  < [expr 6*$EfHe + 2*$EfV + -10.81996] > "		
+	append list "He7V2  < [expr 7*$EfHe + 2*$EfV + -12.22318] > "
+	append list "He8V2  < [expr 8*$EfHe + 2*$EfV + -13.69837] > "
+	append list "He9V2  < [expr 9*$EfHe + 2*$EfV + -15.07956] > "
+	append list "He10V2 < [expr 10*$EfHe + 2*$EfV + -16.61853] > "
+	append list "HeV3   < [expr $EfHe + 2*$EfV + -3.14392] > "
+	append list "He2V3  < [expr 2*$EfHe + 3*$EfV + -5.5721] > "
+	append list "He3V3  < [expr 3*$EfHe + 3*$EfV + -8.17484] > "
+	append list "He4V3  < [expr 4*$EfHe + 3*$EfV + -9.80005] > "
+	append list "He5V3  < [expr 5*$EfHe + 3*$EfV + -11.52863] > "
+	append list "He6V3  < [expr 6*$EfHe + 3*$EfV + -13.27145] > "
+	append list "He7V3  < [expr 7*$EfHe + 3*$EfV + -15.12577] > "
+	append list "He8V3  < [expr 8*$EfHe + 3*$EfV + -16.63482] > "
+	append list "He9V3  < [expr 9*$EfHe + 3*$EfV + -18.24543] > "
+	append list "He10V3 < [expr 10*$EfHe + 3*$EfV + -19.83813] > "
+	append list "HeV4   < [expr $EfHe + 4*$EfV + -4.14347] > "
+	append list "He2V4  < [expr 2*$EfHe + 4*$EfV + -6.58949] > "
+	append list "He3V4  < [expr 3*$EfHe + 4*$EfV + -9.23865] > "
+	append list "He4V4  < [expr 4*$EfHe + 4*$EfV + -11.93803] > "	
+	append list "He5V4  < [expr 5*$EfHe + 4*$EfV + -13.64587] > "
+	append list "He6V4  < [expr 6*$EfHe + 4*$EfV + -15.4337] > "
+	append list "He7V4  < [expr 7*$EfHe + 4*$EfV + -17.38643] > "
+	append list "He8V4  < [expr 8*$EfHe + 4*$EfV + -19.45707] > "
+	append list "He9V4  < [expr 9*$EfHe + 4*$EfV + -21.1392] > "
+	append list "He10V4 < [expr 10*$EfHe + 4*$EfV + -23.05683] > "
+	
+	set pot1 -4.14347
+	set pot2 -6.58949
+	set pot3 -9.23865
+	set pot4 -11.93803
+	for { set k 5 } { $k < 500 } { incr k } { 
+		set e [expr 2./3.] 
+		set EfV 1.27
+		set EfHe 3.53749
+		set Eb2 -2.08 
+		set ener [expr $EfV + $Eb2*(pow($k,$e)-pow($k-1,$e))]   
+		set pot1 [expr $pot1 - $ener] 
+		set pot2 [expr $pot2 - $ener] 
+		set pot3 [expr $pot3 - $ener] 
+		set pot4 [expr $pot4 - $ener] 
+
+		lappend list HeV${k} < [expr $pot1 + $EfHe + $k*$EfV] >
+		lappend list He2V${k} < [expr $pot2 + 2*$EfHe + $k*$EfV] >
+		lappend list He3V${k} < [expr $pot3 + 3*$EfHe + $k*$EfV] >
+		lappend list He4V${k} < [expr $pot4 + 4*$EfHe + $k*$EfV] >
+	}
+
+	return $list 
+} 
+
+proc prefactor { 
+	set list "" 
+	set pref 1e-6 
+	set prefHe 1e-9 
+
+	for { set k 5 } { $k < 500 } { incr k } { 
+		lappend list HeV${k},V 
+		lappend list $pref
+		lappend list He2V${k},V 
+		lappend list $pref
+		lappend list He3V${k},V 
+		lappend list $pref
+		lappend list He4V${k},V 
+		lappend list $pref
+	}
+
+	for { set k 2 } { $k <= 4 } { incr k } { 
+		lappend list HeV${k},He 
+		lappend list $prefHe 
+		lappend list HeV${k},V 
+		lappend list $prefHe 
+		lappend list HeV${k},HeV 
+		lappend list $prefHe 
+		lappend list He2V${k},He 
+		lappend list $prefHe 
+		lappend list He2V${k},V 
+		lappend list $prefHe 
+		lappend list He2V${k},HeV 
+		lappend list $prefHe 
+		lappend list He3V${k},He
+		lappend list $prefHe 
+		lappend list He3V${k},V 
+		lappend list $prefHe 
+		lappend list He3V${k},HeV 
+		lappend list $prefHe 
+		lappend list He4V${k},He
+		lappend list $prefHe 
+		lappend list He4V${k},V 
+		lappend list $prefHe 
+		lappend list He4V${k},HeV 
+		lappend list $prefHe 
+		lappend list He5V${k},He 
+		lappend list $prefHe 
+		lappend list He5V${k},V 
+		lappend list $prefHe 
+		lappend list He5V${k},HeV 
+		lappend list $prefHe 
+		lappend list He6V${k},He
+		lappend list $prefHe 
+		lappend list He6V${k},V 
+		lappend list $prefHe 
+		lappend list He6V${k},HeV 
+		lappend list $prefHe 
+		lappend list He7V${k},He
+		lappend list $prefHe 
+		lappend list He7V${k},V 
+		lappend list $prefHe 
+		lappend list He7V${k},HeV 
+		lappend list $prefHe 
+		lappend list He8V${k},He
+		lappend list $prefHe 
+		lappend list He8V${k},V 
+		lappend list $prefHe 
+		lappend list He8V${k},HeV 
+		lappend list $prefHe 
+		lappend list He9V${k},He
+		lappend list $prefHe 
+		lappend list He9V${k},V 
+		lappend list $prefHe 
+		lappend list He9V${k},HeV 
+		lappend list $prefHe 
+		lappend list He10V${k},He
+		lappend list $prefHe 
+		lappend list He10V${k},V 
+		lappend list $prefHe 
+		lappend list He10V${k},HeV 
+		lappend list $prefHe 
+	}
+
+	for {set j 2} {$j <= 10} {incr j} { 
+		lappend list He${j},He 
+		lappend list $prefHe 
+		lappend list He${j}V,He 
+		lappend list $prefHe 
+		lappend list He${j}V,V
+		lappend list $prefHe 
+		lappend list He${j}V,HeV 
+		lappend list $prefHe 
+	} 
+	 
+	return $list 
+} 

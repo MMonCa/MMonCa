@@ -1,0 +1,496 @@
+string shape          disk
+float density.cm2     3.646e15
+string to             ICluster
+string from           IVCluster
+string migration.type perpendicular
+// coordinates axis.2 1  1 1
+coordinates axis.1    0 -1 1 
+coordinates axis.0    2 -1 -1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+float lambda 0.3088
+
+bool IV.model false
+bool percolation true
+
+proc transform.to   { return "" }
+proc transform.from { return "" }
+proc migration      { return "" }
+
+proc formation {
+       set list ""
+       set EfSiI 8.754
+       set EfCI  6.953
+       set EfVSi 4.966
+       set EfVC  4.193
+       set EfCSi 4.034
+       set EfSiC 3.564
+       for { set SizeSi 0 } { $SizeSi < 50 } { incr SizeSi } {
+               for { set SizeC 0 } { $SizeC < 50 } { incr SizeC} {
+                   set Size [expr $SizeSi+$SizeC]
+                   if { $Size>1 } {
+
+                      set n     [expr $SizeSi+$SizeC]
+                      set m     [expr $SizeC/$n]
+                      set Alpha [expr 4.04*$m*$m-3.54*$m+1.717]
+                      set Belta [expr -7.576*$m*$m+6.728*$m+0.908]
+                      set Ef    [expr $Alpha*$n+$Belta*sqrt($n)]
+
+                      # Addition
+                      if { $SizeSi==0 && $SizeC==2 } {
+                          lappend list C2^SiI
+                          lappend list < [expr $EfCI+$EfCSi] >
+                      }
+                      if { $SizeSi==0 && $SizeC==3 } {
+                          lappend list C3^Si2I
+                          lappend list < [expr $EfCSi*2+$EfCI] >
+                      }
+                      if { $SizeSi==0 && $SizeC==4 } {
+                          lappend list C4^Si3I
+                          lappend list < [expr 3*$EfCSi+$EfCI] >
+                      }
+                      if { $SizeSi==2 && $SizeC==1 } {
+                          lappend list Si2C^SiC2
+                          lappend list < [expr $EfSiC*2+$EfCSi] >
+                      }
+                      if { $SizeSi==1 && $SizeC==2 } {
+                          lappend list SiC2^I3
+                          lappend list < [expr $EfSiI+$EfCI*2] >
+                      }
+                      if { $SizeSi==1 && $SizeC==1 } {
+                          lappend list SiC^I2
+                          lappend list < [expr $EfCI+$EfSiI] >
+                      }
+                      
+                      # Addition 2
+                      if { $SizeSi == 2 && $SizeC ==3 } {
+                          lappend list Si2C3^Si2C2I
+                          lappend list < [expr 2*$EfSiC+2*$EfCSi+$EfCI] >
+
+                          lappend list Si2C3^SiC2I2
+                          lappend list < [expr 2*$EfSiC+$EfCSi+2*$EfCI] >
+
+                          lappend list Si2C3^C2I3
+                          lappend list < [expr 2*$EfSiC+3*$EfCI] >                       
+                      }                      
+                      if { $SizeSi == 2 && $SizeC == 2 } {
+                          lappend list Si2C2^C2I2
+                          lappend list < [expr 2*$EfSiC+2*$EfCI] >
+                      }
+                      if { $SizeSi == 2 && $SizeC == 0 } {
+                          lappend list Si2^CI
+                          lappend list < [expr $EfSiC+$EfSiI] >
+                      }
+                      if { $SizeSi == 2 && $SizeC == 4 } {
+                          lappend list Si2C4^Si2C2I2
+                          lappend list < [expr 2*$EfSiC+2*$EfCSi+2*$EfCI] >
+                      }
+                      if { $SizeSi == 1 && $SizeC == 3 } {
+                          lappend list SiC3^Si2CI
+                          lappend list < [expr $EfSiC+2*$EfCSi+$EfCI] >
+                      }
+                      if { $SizeSi == 1 && $SizeC == 5 } {
+                          lappend list SiC5^Si2CI3
+                          lappend list < [expr $EfSiC+2*$EfCSi+3*$EfCI] >
+                      }
+                      if { $SizeSi == 1 && $SizeC == 6 } {
+                          lappend list SiC6^Si2CI4
+                          lappend list < [expr $EfSiC+2*$EfCSi+4*$EfCI] >
+                      }
+                      if { $SizeSi == 2 && $SizeC == 9 } {
+                          lappend list Si2C9^C2I9
+                          lappend list < [expr 2*$EfSiC+9*$EfCI] >
+                      }
+                      if { $SizeSi == 3 && $SizeC == 2 } {
+                          lappend list Si3C2^C3I2
+                          lappend list < [expr 3*$EfSiC+2*$EfCI] >
+                          
+                      }
+                      if { $SizeSi == 4 && $SizeC == 6 } {
+                          lappend list Si4C6^Si3C4I3
+                          lappend list < [expr 4*$EfSiC+3*$EfCSi+3*$EfCI] >
+                      }
+                      if { $SizeSi == 6 && $SizeC == 5 } {
+                          lappend list Si6C5^Si2C6I3
+                          lappend list < [expr 6*$EfSiC+2*$EfCSi+3*$EfCI] >   
+                      }                   
+                      if { $SizeSi == 7 && $SizeC == 5 } {
+                          lappend list Si7C5^Si2C7I3
+                          lappend list < [expr 7*$EfSiC+2*$EfCSi+3*$EfCI] >
+                      }
+                      if { $SizeSi == 6 && $SizeC == 7 } {
+                          lappend list Si6C7^Si2C6I5
+                          lappend list < [expr 6*$EfSiC+2*$EfCSi+5*$EfCI] >
+                      }
+
+                     # Addition 3
+                      if { $SizeSi == 0 && $SizeC == 7 } {
+                          lappend list C7^SiI6
+                          lappend list < [expr $EfCSi+6*$EfCI] >
+                      }
+                      if { $SizeSi == 2 && $SizeC == 3 } {
+                          lappend list Si2C3^SiCI3
+                          lappend list < [expr $EfSiC+$EfCSi+2*$EfCI+$EfSiI] >
+                      }
+                      if { $SizeSi == 2 && $SizeC == 1 } {
+                          lappend list Si2C^SiCI
+                          lappend list < [expr $EfCSi+$EfSiC+$EfSiI] >
+                      }
+                      if { $SizeSi == 3 && $SizeC == 12 } {
+                          lappend list Si3C12^Si2CI12
+                          lappend list < [expr 2*$EfCSi+$EfSiC+2*$EfSiI+10*$EfCI] >
+                      }
+                      if { $SizeSi == 3 && $SizeC == 2 } {
+                          lappend list Si3C2^SiC2I2
+                          lappend list < [expr $EfCSi+2*$EfSiC+$EfCI+$EfSiI] >
+                      }
+                      if { $SizeSi == 1 && $SizeC == 2 } {
+                          lappend list SiC2^SiCI
+                          lappend list < [expr $EfSiC+$EfCSi+$EfCI] >
+                          lappend list SiC2^SiI2 
+                          lappend list < [expr $EfCSi+$EfSiI+$EfCI] >
+                      }
+                      if { $SizeSi == 1 && $SizeC == 3 } {
+                          lappend list SiC3^SiCI2
+                          lappend list < [expr $EfSiC+$EfCSi+2*$EfCI] >
+                          lappend list SiC3^SiI3
+                          lappend list < [expr $EfCSi+$EfSiI+2*$EfCI] >
+                      }
+
+                     # ---------------------------------------------------
+
+                      if { $SizeSi==0 } {
+                         lappend list C${SizeC}^I${Size}
+                         lappend list < [expr $SizeC*$EfCI] >
+
+                         # lappend list C${SizeC}^SiI[expr $Size-1]
+                         # lappend list < [expr $EfCSi+($Size-1)*$EfCI] >
+
+                         for { set nAc 1 } { $nAc < $SizeC } { incr nAc } {
+                              lappend list C${SizeC}^Si${nAc}I[expr $SizeC-$nAc]
+                              lappend list < [expr $nAc*$EfCSi+($SizeC-$nAc)*$EfCI] >
+                         }
+                         if { $SizeC <= 10 } {
+                              lappend list C${SizeC}^Si${SizeC}
+                              lappend list < [expr $SizeC*$EfCSi] >
+                         }                           
+                      }
+
+                      if { $SizeC==0 } {
+                         lappend list Si${SizeSi}^I${Size}
+                         lappend list < [expr $SizeSi*$EfSiI] >
+
+                         # lappend list Si${SizeSi}^CI[expr $Size-1]
+                         # lappend list < [expr $EfSiC+($Size-1)*$EfSiI] >
+
+                         for { set nAsi 1 } { $nAsi < $SizeSi } { incr nAsi } {
+                              lappend list Si${SizeSi}^C${nAsi}I[expr $SizeSi-$nAsi]
+                              lappend list < [expr $nAsi*$EfSiC+($SizeSi-$nAsi)*$EfSiI] >
+                         }
+                         if { $SizeSi <= 10 } {
+                              lappend list Si${SizeSi}^C${SizeSi}
+                              lappend list < [expr $SizeSi*$EfSiC] > 
+                         }
+                      }
+                      
+                      if { $SizeC>0 && $SizeSi>0 } {
+                         # Interstitial cluster
+                         lappend list Si${SizeSi}C${SizeC}^I${Size}
+                         lappend list < [expr $SizeSi*$EfSiI+$SizeC*$EfCI] >
+                         
+                         # Interstitial complex
+                         if { $SizeSi == 1 } {
+                             lappend list SiC${SizeC}^CI${SizeC}
+                             lappend list < [expr $EfSiC+$SizeC*$EfCI] >
+                         }
+                         if { $SizeC == 1 } {
+                             lappend list Si${SizeSi}C^SiI${SizeSi}
+                             lappend list < [expr $EfCSi+$SizeSi*$EfSiI] >
+                         }
+                         if { $SizeSi > 1 } {
+                             lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1]
+                             lappend list < [expr $EfSiC+$SizeC*$EfCI+($SizeSi-1)*$EfSiI] >
+                         }
+                         if { $SizeC > 1 } {
+                             lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1]
+                             lappend list < [expr $EfCSi+$SizeSi*$EfSiI+($SizeC-1)*$EfCI] >
+                         }
+                      }
+
+                      if { $SizeC >= 2 && $SizeC <= 10 && $SizeSi >= 2 && $SizeSi <=10 } {
+                          for { set nAc 2 } { $nAc <= $SizeC } { incr nAc } {
+                               lappend list Si${SizeSi}C${SizeC}^Si${nAc}I[expr $SizeC+$SizeSi-$nAc]
+                               lappend list < [expr $nAc*$EfCSi+($SizeC-$nAc)*$EfCI+$SizeSi*$EfSiI] >
+                          }
+                          for { set nAsi 2 } { $nAsi <= $SizeSi } { incr nAsi } {
+                               lappend list Si${SizeSi}C${SizeC}^C${nAsi}I[expr $SizeC+$SizeSi-$nAsi]
+                                lappend list < [expr $nAsi*$EfSiC+($SizeSi-$nAsi)*$EfSiI+$SizeC*$EfCI] >
+                           }
+                          for { set nAc 1 } { $nAc <= $SizeC } { incr nAc } {
+                               for { set nAsi 1 } { $nAsi <= $SizeSi } { incr nAsi } {
+                                    lappend list Si${SizeSi}C${SizeC}^Si${nAc}C${nAsi}I[expr $SizeSi+$SizeC-$nAc-$nAsi]
+                                    lappend list < [expr $nAc*$EfCSi+$nAsi*$EfSiC+($SizeC-$nAc)*$EfCI+($SizeSi-$nAsi)*$EfSiI] >
+                               }
+                          }
+                      }
+
+                      # Antisite cluster
+                      if { $SizeC <= 10 && $SizeSi <= 10 } {
+                          if { $SizeSi != 1 && $SizeC != 1 } {
+                              lappend list Si${SizeSi}C${SizeC}^Si${SizeC}C${SizeSi}
+                              lappend list < [expr $SizeSi*$EfSiC+$SizeC*$EfCSi] >
+                          }
+                      }   
+                
+                   }
+               }
+       }       
+       return $list      
+}
+
+proc prefactor {
+      set list ""
+      for { set SizeSi 0 } { $SizeSi <50 } { incr SizeSi } {
+              for { set SizeC 0 } { $SizeC < 50 } { incr SizeC } {
+                   set Size [expr $SizeSi+$SizeC]
+                     if { $Size>1 } {
+
+                        # Addition
+                        if { $SizeSi==0 && $SizeC==2 } {
+                            lappend list C2^SiI,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi==0 && $SizeC==3 } {
+                            lappend list C3^Si2I,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi==0 && $SizeC==4 } {
+                            lappend list C4^Si3I,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi==2 && $SizeC==1 } {
+                            lappend list Si2C^SiC2,CSi
+                            lappend list 0
+                        }
+                        if { $SizeSi==1 && $SizeC==2 } {
+                            lappend list SiC2^I3,CI
+                            lappend list 0
+                            lappend list SiC2^I3,SiI
+                            lappend list 0
+                        }
+                        if { $SizeSi==1 && $SizeC==1 } {
+                            lappend list SiC^I2,CI
+                            lappend list 0
+                            lappend list SiC^I2,SiI
+                            lappend list 0
+                        }
+
+                        # Addition 2
+                        if { $SizeSi == 2 && $SizeC ==3 } {
+                            lappend list Si2C3^Si2C2I,CI
+                            lappend list 0
+
+                            lappend list Si2C3^SiC2I2,CI
+                            lappend list 0
+
+                            lappend list Si2C3^C2I3,CI
+                            lappend list 0  
+                           }                      
+                        if { $SizeSi == 2 && $SizeC == 2 } {
+                            lappend list Si2C2^C2I2,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 2 && $SizeC == 0 } {
+                            lappend list Si2^CI,SiI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 2 && $SizeC == 4 } {
+                            lappend list Si2C4^Si2C2I2,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 1 && $SizeC == 3 } {
+                            lappend list SiC3^Si2CI,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 1 && $SizeC == 5 } {
+                            lappend list SiC5^Si2CI3,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 1 && $SizeC == 6 } {
+                            lappend list SiC6^Si2CI4,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 2 && $SizeC == 9 } {
+                            lappend list Si2C9^C2I9,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 3 && $SizeC == 2 } {
+                            lappend list Si3C2^C3I2,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 4 && $SizeC == 6 } {
+                            lappend list Si4C6^Si3C4I3,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 6 && $SizeC == 5 } {
+                            lappend list Si6C5^Si2C6I3,CI
+                            lappend list 0
+                        }                   
+                        if { $SizeSi == 7 && $SizeC == 5 } {
+                            lappend list Si7C5^Si2C7I3,CI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 6 && $SizeC == 7 } {
+                            lappend list Si6C7^Si2C6I5,CI
+                            lappend list 0
+                        }
+                      
+                        # Addition 3
+                        if { $SizeSi == 0 && $SizeC == 7 } {
+                           lappend list C7^SiI6,CI
+                           lappend list 0
+                        }
+                        if { $SizeSi == 2 && $SizeC == 3 } {
+                            lappend list Si2C3^SiCI3,CI
+                            lappend list 0
+                            lappend list Si2C3^SiCI3,SiI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 2 && $SizeC == 1 } {
+                            lappend list Si2C^SiCI,SiI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 3 && $SizeC == 12 } {
+                            lappend list Si3C12^Si2CI12,CI
+                            lappend list 0
+                            lappend list Si3C12^Si2CI12,SiI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 3 && $SizeC == 2 } {
+                            lappend list Si3C2^SiC2I2,CI
+                            lappend list 0
+                            lappend list Si3C2^SiC2I2,SiI
+                            lappend list 0
+                        }
+                        if { $SizeSi == 1 && $SizeC == 2 } {
+                            lappend list SiC2^SiCI,CI
+                            lappend list 0
+                            lappend list SiC2^SiI2,CI
+                            lappend list 0
+                            lappend list SiC2^SiI2,SiI
+                            lappend list 0  
+                        }
+                        if { $SizeSi == 1 && $SizeC == 3 } {
+                            lappend list SiC3^SiCI2,CI
+                            lappend list 0
+                            lappend list SiC3^SiI3,CI
+                            lappend list 0
+                            lappend list SiC3^SiI3,SiI
+                            lappend list 0
+                        }
+                        # ------------------------------
+
+                        if { $SizeSi==0 } {
+                           lappend list C${SizeC}^I${Size},CI
+                           lappend list 0
+
+                           # lappend list C${SizeC}^SiI[expr $Size-1],CI
+                           # lappend list 0
+
+                           for { set nAc 1 } { $nAc < $SizeC } { incr nAc } {
+                                lappend list C${SizeC}^Si${nAc}I[expr $SizeC-$nAc],CI
+                                lappend list 0
+                           }
+                           if { $SizeC <= 10 } {
+                                lappend list C${SizeC}^Si${SizeC},CSi
+                                lappend list 0
+                           }   
+                        }
+                        if { $SizeC==0 } {
+                           lappend list Si${SizeSi}^I${Size},SiI
+                           lappend list 0
+
+                           # lappend list Si${SizeSi}^CI[expr $Size-1],SiI
+                           # lappend list 0
+
+                           for { set nAsi 1 } { $nAsi < $SizeSi } { incr nAsi } {
+                                lappend list Si${SizeSi}^C${nAsi}I[expr $SizeSi-$nAsi],SiI
+                                lappend list 0
+                           }
+                           if { $SizeSi <= 10 } {
+                                lappend list Si${SizeSi}^C${SizeSi},SiC
+                                lappend list 0
+                           }
+                        }
+                        if { $SizeSi>0 && $SizeC>0 } {
+                           lappend list Si${SizeSi}C${SizeC}^I${Size},CI
+                           lappend list 0
+                           lappend list Si${SizeSi}C${SizeC}^I${Size},SiI
+                           lappend list 0
+
+                           if { $SizeSi == 1 } {
+                               lappend list SiC${SizeC}^CI${SizeC},CI
+                               lappend list 0
+                           }
+                           if { $SizeC == 1 } {
+                               lappend list Si${SizeSi}C^SiI${SizeSi},SiI
+                               lappend list 0
+                           }                           
+                           if { $SizeSi > 1} {
+                               lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1],CI
+                               lappend list 0
+                               lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1],SiI
+                               lappend list 0                           
+                           }                           
+                           if { $SizeC > 1 } {
+                               lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1],CI
+                               lappend list 0
+                               lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1],SiI
+                               lappend list 0
+                           } 
+                        }
+
+                        if { $SizeC >= 2 && $SizeC <= 10 && $SizeSi >= 2 && $SizeSi <=10 } {
+                             for { set nAc 2 } { $nAc <= $SizeC } { incr nAc } {
+                                  lappend list Si${SizeSi}C${SizeC}^Si${nAc}I[expr $SizeC+$SizeSi-$nAc],SiI
+                                  lappend list 0
+                                  if { $nAc < $SizeC } {
+                                      lappend list Si${SizeSi}C${SizeC}^Si${nAc}I[expr $SizeC+$SizeSi-$nAc],CI
+                                      lappend list 0
+                                  }
+                             }
+                             for { set nAsi 2 } { $nAsi <= $SizeSi } { incr nAsi } {
+                                  lappend list Si${SizeSi}C${SizeC}^C${nAsi}I[expr $SizeC+$SizeSi-$nAsi],CI
+                                  lappend list 0
+                                  if { $nAsi < $SizeSi } {
+                                      lappend list Si${SizeSi}C${SizeC}^C${nAsi}I[expr $SizeC+$SizeSi-$nAsi],SiI
+                                      lappend list 0
+                                  }
+                             }
+                             for { set nAc 1 } { $nAc <= $SizeC } { incr nAc } {
+                                  for { set nAsi 1 } { $nAsi <= $SizeSi } { incr nAsi } {
+                                       if { $nAc < $SizeC } {
+                                           lappend list Si${SizeSi}C${SizeC}^Si${nAc}C${nAsi}I[expr $SizeSi+$SizeC-$nAc-$nAsi],CI
+                                           lappend list 0
+                                       }
+                                       if { $nAsi < $SizeSi } {
+                                           lappend list Si${SizeSi}C${SizeC}^Si${nAc}C${nAsi}I[expr $SizeSi+$SizeC-$nAc-$nAsi],SiI
+                                           lappend list 0
+                                       }
+                                  }
+                             }
+                         }
+
+                         # Antisite cluster
+                         if { $SizeC <= 10 && $SizeSi <= 10 } {
+                             if { $SizeSi != 1 && $SizeC != 1 } {
+                                 lappend list Si${SizeSi}C${SizeC}^Si${SizeC}C${SizeSi},CSi
+                                 lappend list 0
+                             }
+                         }  
+
+                     }
+              }
+      }
+      return $list
+}

@@ -1,0 +1,567 @@
+string shape           void
+float density.cm3      5.02276e23
+string to   <111>
+string from  Cluster3D
+string migration.type 3d
+// coordinates axis.2 1 0 0
+coordinates axis.1 0 1 0 
+coordinates axis.0 0 0 1
+coordinates not.in.plane 0 0 0
+float       axes.ratio 1
+float lambda         0.317
+
+bool IV.model false
+bool percolation false
+
+// a1 max n in Vn
+// a2 max n in In
+// a3 max n in Hen
+// a4 max n in HenVm
+// a5 max m in HenVm
+// a6 max n in HenIm
+// a7 max m in HenIm
+// a8 max He/V ratio
+
+// In order to avoid a large amount of cluster types that will no be used, the max. number of He in HenVm clusters is truncated (from certain number, it does not follow the He/V ratio law)
+
+// a9 max He number in HenVm clusters. Example: in HenV20 cluster, n would have a value of 280 if He/V ratio=14. Instead of that value, the maximum is set at a9. That is: He$a9V20
+// a10 max vacancies number after truncate the number of He. The He/V ratio is followed until HenV$a5. Since this value, all the clusters will have a max He number (He$a9Vm). This kind of clusters are created up to max a10 value (He$a9V$a10) 
+
+proc transform.to   { 
+set a1 200
+set a2 100
+set a3 9
+set a4 9
+set a5 10
+set a6 9
+set a7 100
+set a8 9
+set a9 99
+set a10 200
+	set list ""
+		lappend list I2 1e20 0
+		lappend list I3 1e20 0
+		lappend list I4 1e20 0
+		lappend list I5 1e20 0
+		lappend list I6 1e20 0
+		lappend list I7 1e20 0
+
+		for {set j 8} {$j<=$a2} {incr j} {
+			lappend list I$j 1e20 0
+		}
+
+	for {set j 2} {$j<=$a7} {incr j} { 
+		lappend list HeI${j} 1e20 0
+	}
+	for {set i 2} {$i<= $a6} {incr i} { 
+		lappend list He${i}I 1e20 0
+	}
+	for {set j 2} {$j<=$a7} {incr j} { 
+		lappend list HeI${j} 1e20 0
+		for {set i 2} {$i<=$a6} {incr i} { 
+			lappend list He${i}I${j} 1e20 0
+		}
+	}
+
+
+ 	return $list
+}
+
+proc transform.from { 
+	set list ""	
+	return $list
+}
+
+proc migration   {
+set a1 200
+set a2 100
+set a3 9
+set a4 9
+set a5 10
+set a6 9
+set a7 100
+set a8 9
+set a9 99
+set a10 200
+	set list ""	
+
+##Parametrización Becquart
+		set q [expr 1./1000.]
+		set D0 1.00489e-3
+		set Emig_Vm 1.66
+		
+		for {set j 2} {$j<=$a1} {incr j} {
+			set aux [expr $j-1]
+			set val(PrefMig_V${j}) [expr $D0*pow($q,$aux)]
+			lappend list V$j $val(PrefMig_V${j}) $Emig_Vm
+		}
+##Parametrización Becquart
+	set PrefMig_He 1.00489e-5
+
+	set val(Emig_He2) 0.03
+	set val(Emig_He3) 0.05
+	set val(Emig_He4) 0.06
+	set val(Emig_He5) 0.07
+	set val(Emig_He6) 0.08
+	set val(Emig_He7) 0.09
+	set val(Emig_He8) 0.1
+	set val(Emig_He9) 0.11
+
+
+	lappend list He2 $PrefMig_He $val(Emig_He2)
+	lappend list He3 $PrefMig_He $val(Emig_He3)
+	lappend list He4 $PrefMig_He $val(Emig_He4)
+	lappend list He5 $PrefMig_He $val(Emig_He5)
+	lappend list He6 $PrefMig_He $val(Emig_He6)
+	lappend list He7 $PrefMig_He $val(Emig_He7)
+	lappend list He8 $PrefMig_He $val(Emig_He8)
+	lappend list He9 $PrefMig_He $val(Emig_He9)
+
+
+##Parametrización César
+	lappend list HeV2 [expr 1.00489e-6/2.] 2.04
+	lappend list HeV3 [expr 1.00489e-6/3.] 1.94
+
+
+
+return $list 
+}
+
+proc formation {
+set a1 200
+set a2 100
+set a3 9
+set a4 9
+set a5 10
+set a6 9
+set a7 100
+set a8 9
+set a9 99
+set a10 200
+	set list ""	
+
+set Efor_V 3.23
+set Efor_I 9.96
+set Efor_He 1.44
+
+##Parametrización Becquart
+		set val(Epot_V2) 0.1
+		set val(Epot_V3) 0.06
+		set val(Epot_V4) -0.58
+		set val(Epot_V5) -1.3
+		set val(Epot_V6) -2.19
+		set val(Epot_V7) -2.91
+		set val(Epot_V8) -3.79
+
+		set val(Efor_V2) [expr 2.*$Efor_V + $val(Epot_V2)]
+		set val(Efor_V3) [expr 3.*$Efor_V + $val(Epot_V3)]
+		set val(Efor_V4) [expr 4.*$Efor_V + $val(Epot_V4)]
+		set val(Efor_V5) [expr 5.*$Efor_V + $val(Epot_V5)]
+		set val(Efor_V6) [expr 6.*$Efor_V + $val(Epot_V6)]
+		set val(Efor_V7) [expr 7.*$Efor_V + $val(Epot_V7)]
+		set val(Efor_V8) [expr 8.*$Efor_V + $val(Epot_V8)]
+
+		lappend list V2 $val(Efor_V2)
+		lappend list V3 $val(Efor_V3)
+		lappend list V4 $val(Efor_V4)
+		lappend list V5 $val(Efor_V5)
+		lappend list V6 $val(Efor_V6)
+		lappend list V7 $val(Efor_V7)
+		lappend list V8 $val(Efor_V8)
+
+		set Eb_V2 -0.1
+		set Ef_V1 3.23
+
+		for {set j 9} {$j<=$a1} {incr j} {
+			set aux [expr $j-1]		
+			set val(Eb_V${j}) [expr ($Ef_V1+(($Eb_V2-$Ef_V1)*(pow($j,[expr 2./3.])-pow([expr $j-1],[expr 2./3.])))/((pow(2,[expr 2./3.]))-1))]
+			set val(Epot_V${j}) [expr $val(Epot_V${aux})-$val(Eb_V${j})]
+			set val(Efor_V${j}) [expr $j.*$Efor_V + $val(Epot_V${j})]
+			lappend list V$j $val(Epot_V${j})
+		}
+
+##Parametrización Becquart
+		set val(Epot_I2) -2.12
+		set val(Epot_I3) -5.14
+		set val(Epot_I4) -8.74
+		set val(Epot_I5) -12.72
+		set val(Epot_I6) -16.99
+		set val(Epot_I7) -22.38
+
+		set val(Efor_I2) [expr 2.*$Efor_I + $val(Epot_I2)]
+		set val(Efor_I3) [expr 3.*$Efor_I + $val(Epot_I3)]
+		set val(Efor_I4) [expr 4.*$Efor_I + $val(Epot_I4)]
+		set val(Efor_I5) [expr 5.*$Efor_I + $val(Epot_I5)]
+		set val(Efor_I6) [expr 6.*$Efor_I + $val(Epot_I6)]
+		set val(Efor_I7) [expr 7.*$Efor_I + $val(Epot_I7)]
+
+		lappend list I2 $val(Efor_I2)
+		lappend list I3 $val(Efor_I3)
+		lappend list I4 $val(Efor_I4)
+		lappend list I5 $val(Efor_I5)
+		lappend list I6 $val(Efor_I6)
+		lappend list I7 $val(Efor_I7)
+
+
+		set Eb_I2 2.12
+		set Ef_I1 9.96
+
+		for {set j 8} {$j<=$a2} {incr j} {
+			set aux [expr $j-1]		
+			set val(Eb_I${j}) [expr ($Ef_I1+(($Eb_I2-$Ef_I1)*(pow($j,[expr 2./3.])-pow([expr $j-1],[expr 2./3.])))/((pow(2,[expr 2./3.]))-1))]
+			set val(Epot_I${j}) [expr $val(Epot_I${aux})-$val(Eb_I${j})]
+			set val(Efor_I${j}) [expr $j.*$Efor_I + $val(Epot_I${j})]
+			lappend list I$j $val(Efor_I${j})
+		}
+
+##Parametrización Becquart
+		set val(Epot_He2) -1.03
+		set val(Epot_He3) -2.39
+		set val(Epot_He4) -3.91
+		set val(Epot_He5) -5.55
+		set val(Epot_He6) -7.64
+		set val(Epot_He7) -9.82
+		set val(Epot_He8) -11.97
+		set val(Epot_He9) -14.08
+		#set val(Epot_He10) -16.68
+		#set val(Epot_He11) -18.62
+		#set val(Epot_He12) -21.4
+		#set val(Epot_He13) -23.75
+		#set val(Epot_He14) -26.47
+
+		set val(Efor_He2) [expr 2.*$Efor_He + $val(Epot_He2)]
+		set val(Efor_He3) [expr 3.*$Efor_He + $val(Epot_He3)]
+		set val(Efor_He4) [expr 4.*$Efor_He + $val(Epot_He4)]
+		set val(Efor_He5) [expr 5.*$Efor_He + $val(Epot_He5)]
+		set val(Efor_He6) [expr 6.*$Efor_He + $val(Epot_He6)]
+		set val(Efor_He7) [expr 7.*$Efor_He + $val(Epot_He7)]
+		set val(Efor_He8) [expr 8.*$Efor_He + $val(Epot_He8)]
+		set val(Efor_He9) [expr 9.*$Efor_He + $val(Epot_He9)]
+		#set val(Efor_He10) [expr 10.*$Efor_He + $val(Epot_He10)]
+		#set val(Efor_He11) [expr 11.*$Efor_He + $val(Epot_He11)]
+		#set val(Efor_He12) [expr 12.*$Efor_He + $val(Epot_He12)]
+		#set val(Efor_He13) [expr 13.*$Efor_He + $val(Epot_He13)]
+		#set val(Efor_He14) [expr 14.*$Efor_He + $val(Epot_He14)]
+
+		lappend list He2 $val(Efor_He2)
+		lappend list He3 $val(Efor_He3)
+		lappend list He4 $val(Efor_He4)
+		lappend list He5 $val(Efor_He5)
+		lappend list He6 $val(Efor_He6)
+		lappend list He7 $val(Efor_He7)
+		lappend list He8 $val(Efor_He8)
+		lappend list He9 $val(Efor_He9)
+		#lappend list He10 $val(Efor_He10)
+		#lappend list He11 $val(Efor_He11)
+		#lappend list He12 $val(Efor_He12)
+		#lappend list He13 $val(Efor_He13)
+		#lappend list He14 $val(Efor_He14)
+
+##Parametrización César (a partir de Vm de Becquart)
+
+		set val(Epot_He2V) -7.8907
+		set val(Epot_He3V) -11.0626
+		set val(Epot_He4V) -14.2885
+		set val(Epot_He5V) -16.5183
+		set val(Epot_He6V) -19.2872
+		set val(Epot_He7V) -21.6398
+		set val(Epot_He8V) -24.1684
+		set val(Epot_He9V) -26.2943
+
+		set val(Efor_He2V) [expr 2.*$Efor_He + 1.*$Efor_V + $val(Epot_He2V)]
+		set val(Efor_He3V) [expr 3.*$Efor_He + 1.*$Efor_V + $val(Epot_He3V)]
+		set val(Efor_He4V) [expr 4.*$Efor_He + 1.*$Efor_V + $val(Epot_He4V)]
+		set val(Efor_He5V) [expr 5.*$Efor_He + 1.*$Efor_V + $val(Epot_He5V)]
+		set val(Efor_He6V) [expr 6.*$Efor_He + 1.*$Efor_V + $val(Epot_He6V)]
+		set val(Efor_He7V) [expr 7.*$Efor_He + 1.*$Efor_V + $val(Epot_He7V)]
+		set val(Efor_He8V) [expr 8.*$Efor_He + 1.*$Efor_V + $val(Epot_He8V)]
+		set val(Efor_He9V) [expr 9.*$Efor_He + 1.*$Efor_V + $val(Epot_He9V)]
+
+		lappend list He2V $val(Efor_He2V)
+		lappend list He3V $val(Efor_He3V)
+		lappend list He4V $val(Efor_He4V)
+		lappend list He5V $val(Efor_He5V)
+		lappend list He6V $val(Efor_He6V)
+		lappend list He7V $val(Efor_He7V)
+		lappend list He8V $val(Efor_He8V)
+		lappend list He9V $val(Efor_He9V)
+
+		set val(Epot_HeV2) -4.6881
+		set val(Epot_He2V2) -9.6221
+		set val(Epot_He3V2) -13.7039
+		set val(Epot_He4V2) -17.8543
+		set val(Epot_He5V2) -21.2725978601
+		set val(Epot_He6V2) -24.5202731879
+
+		set val(Efor_HeV2) [expr 1.*$Efor_He + 2.*$Efor_V + $val(Epot_HeV2)]
+		set val(Efor_He2V2) [expr 2.*$Efor_He + 2.*$Efor_V + $val(Epot_He2V2)]
+		set val(Efor_He3V2) [expr 3.*$Efor_He + 2.*$Efor_V + $val(Epot_He3V2)]
+		set val(Efor_He4V2) [expr 4.*$Efor_He + 2.*$Efor_V + $val(Epot_He4V2)]
+		set val(Efor_He5V2) [expr 5.*$Efor_He + 2.*$Efor_V + $val(Epot_He5V2)]
+		set val(Efor_He6V2) [expr 6.*$Efor_He + 2.*$Efor_V + $val(Epot_He6V2)]
+
+		lappend list HeV2 $val(Efor_HeV2)
+		lappend list He2V2 $val(Efor_He2V2)
+		lappend list He3V2 $val(Efor_He3V2)
+		lappend list He4V2 $val(Efor_He4V2)
+		lappend list He5V2 $val(Efor_He5V2)
+		lappend list He6V2 $val(Efor_He6V2)
+
+		set val(Epot_HeV3) -5.3689
+		set val(Epot_He2V3) -10.3479
+		set val(Epot_He3V3) -15.489
+		set val(Epot_He4V3) -19.8207
+		set val(Epot_He5V3) -23.6511675522
+		set val(Epot_He6V3) -27.2904993497
+
+		set val(Efor_HeV3) [expr 1.*$Efor_He + 3.*$Efor_V + $val(Epot_HeV3)]
+		set val(Efor_He2V3) [expr 2.*$Efor_He + 3.*$Efor_V + $val(Epot_He2V3)]
+		set val(Efor_He3V3) [expr 3.*$Efor_He + 3.*$Efor_V + $val(Epot_He3V3)]
+		set val(Efor_He4V3) [expr 4.*$Efor_He + 3.*$Efor_V + $val(Epot_He4V3)]
+		set val(Efor_He5V3) [expr 5.*$Efor_He + 3.*$Efor_V + $val(Epot_He5V3)]
+		set val(Efor_He6V3) [expr 6.*$Efor_He + 3.*$Efor_V + $val(Epot_He6V3)]
+
+		lappend list HeV3 $val(Efor_HeV3)
+		lappend list He2V3 $val(Efor_He2V3)
+		lappend list He3V3 $val(Efor_He3V3)
+		lappend list He4V3 $val(Efor_He4V3)
+		lappend list He5V3 $val(Efor_He5V3)
+		lappend list He6V3 $val(Efor_He6V3)
+
+		set val(Epot_HeV4) -6.2479
+		set val(Epot_He2V4) -11.5932
+		set val(Epot_He3V4) -16.7288
+		set val(Epot_He4V4) -21.9384
+		set val(Epot_He5V4) -26.0910217239
+		set val(Epot_He6V4) -30.0364744419
+
+		set val(Efor_HeV4) [expr 1.*$Efor_He + 4.*$Efor_V + $val(Epot_HeV4)]
+		set val(Efor_He2V4) [expr 2.*$Efor_He + 4.*$Efor_V + $val(Epot_He2V4)]
+		set val(Efor_He3V4) [expr 3.*$Efor_He + 4.*$Efor_V + $val(Epot_He3V4)]
+		set val(Efor_He4V4) [expr 4.*$Efor_He + 4.*$Efor_V + $val(Epot_He4V4)]
+		set val(Efor_He5V4) [expr 5.*$Efor_He + 4.*$Efor_V + $val(Epot_He5V4)]
+		set val(Efor_He6V4) [expr 6.*$Efor_He + 4.*$Efor_V + $val(Epot_He6V4)]
+
+		lappend list HeV4 $val(Efor_HeV4)
+		lappend list He2V4 $val(Efor_He2V4)
+		lappend list He3V4 $val(Efor_He3V4)
+		lappend list He4V4 $val(Efor_He4V4)
+		lappend list He5V4 $val(Efor_He5V4)
+		lappend list He6V4 $val(Efor_He6V4)
+
+		set val(Epot_HeV5) -6.9682
+		set val(Epot_He2V5) -12.6364
+		set val(Epot_He3V5) -17.738736124
+		set val(Epot_He4V5) -22.4454176537
+		set val(Epot_He5V5) -26.8664176537
+		set val(Epot_He6V5) -31.0668917627
+
+		set val(Efor_HeV5) [expr 1.*$Efor_He + 5.*$Efor_V + $val(Epot_HeV5)]
+		set val(Efor_He2V5) [expr 2.*$Efor_He + 5.*$Efor_V + $val(Epot_He2V5)]
+		set val(Efor_He3V5) [expr 3.*$Efor_He + 5.*$Efor_V + $val(Epot_He3V5)]
+		set val(Efor_He4V5) [expr 4.*$Efor_He + 5.*$Efor_V + $val(Epot_He4V5)]
+		set val(Efor_He5V5) [expr 5.*$Efor_He + 5.*$Efor_V + $val(Epot_He5V5)]
+		set val(Efor_He6V5) [expr 6.*$Efor_He + 5.*$Efor_V + $val(Epot_He6V5)]
+
+		lappend list HeV5 $val(Efor_HeV5)
+		lappend list He2V5 $val(Efor_He2V5)
+		lappend list He3V5 $val(Efor_He3V5)
+		lappend list He4V5 $val(Efor_He4V5)
+		lappend list He5V5 $val(Efor_He5V5)
+		lappend list He6V5 $val(Efor_He6V5)
+
+		set val(Epot_HeV6) -7.8582
+		set val(Epot_He2V6) -13.5264
+		set val(Epot_He3V6) -18.8964975328
+		set val(Epot_He4V6) -23.8502178448
+		set val(Epot_He5V6) -28.5032939003
+		set val(Epot_He6V6) -32.9242939003
+
+		set val(Efor_HeV6) [expr 1.*$Efor_He + 6.*$Efor_V + $val(Epot_HeV6)]
+		set val(Efor_He2V6) [expr 2.*$Efor_He + 6.*$Efor_V + $val(Epot_He2V6)]
+		set val(Efor_He3V6) [expr 3.*$Efor_He + 6.*$Efor_V + $val(Epot_He3V6)]
+		set val(Efor_He4V6) [expr 4.*$Efor_He + 6.*$Efor_V + $val(Epot_He4V6)]
+		set val(Efor_He5V6) [expr 5.*$Efor_He + 6.*$Efor_V + $val(Epot_He5V6)]
+		set val(Efor_He6V6) [expr 6.*$Efor_He + 6.*$Efor_V + $val(Epot_He6V6)]
+
+		lappend list HeV6 $val(Efor_HeV6)
+		lappend list He2V6 $val(Efor_He2V6)
+		lappend list He3V6 $val(Efor_He3V6)
+		lappend list He4V6 $val(Efor_He4V6)
+		lappend list He5V6 $val(Efor_He5V6)
+		lappend list He6V6 $val(Efor_He6V6)
+
+	set coefficient 4.431
+	set exponent -0.28
+
+	for {set i 10} {$i<=$a4} {incr i} {
+
+		set ratio [expr $i./1.]
+		set val(Eb_He${i}V) [expr ($coefficient * (pow($ratio,$exponent))) ]
+
+		set aux [expr $i-1]
+		set val(Epot_He${i}V) [expr $val(Epot_He${aux}V)-$val(Eb_He${i}V)]
+		set val(Efor_He${i}V) [expr $i.*$Efor_He + 1.*$Efor_V + $val(Epot_He${i}V)]
+
+		lappend list He${i}V $val(Efor_He${i}V)
+
+	}
+	for {set j 2} {$j<=6} {incr j} {
+		set p [expr $a8*$j]
+		for {set i 7} {$i<=$p} {incr i} { 
+
+			set ratio [expr $i./$j.]
+			set val(Eb_He${i}V${j}) [expr ($coefficient * (pow($ratio,$exponent))) ]
+			
+			set aux [expr $i-1]
+			set val(Epot_He${i}V${j}) [expr $val(Epot_He${aux}V${j})-$val(Eb_He${i}V${j})]
+			set val(Efor_He${i}V${j}) [expr $i.*$Efor_He + $j.*$Efor_V + $val(Epot_He${i}V${j})]
+
+			lappend list He${i}V${j} $val(Efor_He${i}V${j})
+			
+		}
+	}
+#Juslin Param 2
+	for {set j 7} {$j<=$a5} {incr j} {
+
+			set ratio [expr 1./$j.]
+
+			set val(Eb_HeV${j}) 5.6682			
+			set val(Epot_HeV${j}) [expr $val(Epot_V${j})-$val(Eb_HeV${j})]
+			set val(Efor_HeV${j}) [expr 1.*$Efor_He + $j.*$Efor_V + $val(Epot_HeV${j})]
+			lappend list HeV${j} $val(Efor_HeV${j})
+
+			set ratio [expr 2./$j.]
+			set val(Eb_HeV${j}) 5.6682
+			set val(Epot_He2V${j}) [expr $val(Epot_HeV${j})-$val(Eb_HeV${j})]
+			set val(Efor_He2V${j}) [expr 2.*$Efor_He + $j.*$Efor_V + $val(Epot_He2V${j})]
+			lappend list He2V${j} $val(Efor_He2V${j})
+
+		set p [expr $a8*$j]
+		for {set i 3} {$i<=$p} {incr i} { 
+
+			set ratio [expr $i./$j.]
+			set val(Eb_He${i}V${j}_Becq) [expr ($coefficient * (pow($ratio,$exponent))) ]
+			set val(Eb_He${i}V${j}_Juslin) 5.6682
+			if { $val(Eb_He${i}V${j}_Juslin) < $val(Eb_He${i}V${j}_Becq) } { set val(Eb_He${i}V${j}) $val(Eb_He${i}V${j}_Juslin) } else { set val(Eb_He${i}V${j}) $val(Eb_He${i}V${j}_Becq) }
+			set aux [expr $i-1]
+			set val(Epot_He${i}V${j}) [expr $val(Epot_He${aux}V${j})-$val(Eb_He${i}V${j})]
+			set val(Efor_He${i}V${j}) [expr $i.*$Efor_He + $j.*$Efor_V + $val(Epot_He${i}V${j})]
+			lappend list He${i}V${j} $val(Efor_He${i}V${j})
+		}
+	}
+#Juslin Param 2
+	for {set j [expr $a5+1]} {$j<=$a10} {incr j} {
+
+			set ratio [expr 1./$j.]
+			set val(Eb_HeV${j}_Becq) [expr ($coefficient * (pow($ratio,$exponent))) ]
+			set val(Eb_HeV${j}_Juslin) 5.6682
+			if { $val(Eb_HeV${j}_Juslin) < $val(Eb_HeV${j}_Becq) } { set val(Eb_HeV${j}) $val(Eb_HeV${j}_Juslin) } else { set val(Eb_HeV${j}) $val(Eb_HeV${j}_Becq) }
+			set val(Epot_HeV${j}) [expr $val(Epot_V${j})-$val(Eb_HeV${j})]
+			set val(Efor_HeV${j}) [expr 1.*$Efor_He + $j.*$Efor_V + $val(Epot_HeV${j})]
+			lappend list HeV${j} $val(Efor_HeV${j})
+
+			set ratio [expr 2./$j.]
+			set val(Eb_HeV${j}_Becq) [expr ($coefficient * (pow($ratio,$exponent))) ]
+			set val(Eb_HeV${j}_Juslin) 5.6682
+			if { $val(Eb_HeV${j}_Juslin) < $val(Eb_HeV${j}_Becq) } { set val(Eb_HeV${j}) $val(Eb_HeV${j}_Juslin) } else { set val(Eb_HeV${j}) $val(Eb_HeV${j}_Becq) }
+			set val(Epot_He2V${j}) [expr $val(Epot_HeV${j})-$val(Eb_HeV${j})]
+			set val(Efor_He2V${j}) [expr 2.*$Efor_He + $j.*$Efor_V + $val(Epot_He2V${j})]
+			lappend list He2V${j} $val(Efor_He2V${j})
+
+		for {set i 3} {$i<=$a9} {incr i} { 
+
+			set ratio [expr $i./$j.]
+			set val(Eb_He${i}V${j}_Becq) [expr ($coefficient * (pow($ratio,$exponent))) ]
+			set val(Eb_He${i}V${j}_Juslin) 5.6682
+			if { $val(Eb_He${i}V${j}_Juslin) < $val(Eb_He${i}V${j}_Becq) } { set val(Eb_He${i}V${j}) $val(Eb_He${i}V${j}_Juslin) } else { set val(Eb_He${i}V${j}) $val(Eb_He${i}V${j}_Becq) }
+			set aux [expr $i-1]
+			set val(Epot_He${i}V${j}) [expr $val(Epot_He${aux}V${j})-$val(Eb_He${i}V${j})]
+			set val(Efor_He${i}V${j}) [expr $i.*$Efor_He + $j.*$Efor_V + $val(Epot_He${i}V${j})]
+			lappend list He${i}V${j} $val(Efor_He${i}V${j})
+		}
+	}
+
+##Parametrización Becquart
+	for {set j 2} {$j<=$a7} {incr j} {
+		set Eb_HeI 0.94
+		set val(Epot_HeI${j}) [expr $val(Epot_I${j}) - $Eb_HeI]
+		set val(Efor_HeI${j}) [expr 1.*$Efor_He + $j.*$Efor_I + $val(Epot_HeI${j})]
+		lappend list HeI${j} $val(Efor_HeI${j})
+	 }
+	for {set i 2} {$i<=$a6} {incr i} { 
+		set Eb_HeI 0.94
+		set val(Epot_He${i}I) [expr $val(Epot_He${i}) - $Eb_HeI]
+		set val(Efor_He${i}I) [expr $i.*$Efor_He + 1.*$Efor_I + $val(Epot_He${i}I)]
+		lappend list He${i}I $val(Efor_He${i}I)
+	 }
+	for {set j 2} {$j<=$a7} {incr j} {
+		for {set i 2} {$i<=$a6} {incr i} { 
+			set Eb_HeI 0.94
+			set val(Epot_He${i}I${j}) [expr $val(Epot_I${j}) + $val(Epot_He${i}) - $Eb_HeI]
+			set val(Efor_He${i}I${j}) [expr $i.*$Efor_He + $j.*$Efor_I + $val(Epot_He${i}I${j})]
+			lappend list He${i}I${j} $val(Efor_He${i}I${j})
+		}
+	}
+
+return $list
+}
+
+proc prefactor {
+set a1 200
+set a2 100
+set a3 9
+set a4 9
+set a5 10
+set a6 9
+set a7 100
+set a8 9
+set a9 99
+set a10 200
+	set list ""	
+
+##Parametrización Becquart
+		set PrefDiss_Vm 1.00489e-3
+		set PrefDiss_Hen 1.00489e-3
+		set PrefDiss_HenVm 1.00489e-3
+
+		for {set j 2} {$j<=$a1} {incr j} {
+			lappend list V$j,V 1.00489e-3
+		}
+		
+		for {set j 2} {$j<=$a3} {incr j} {
+			lappend list He$j,He 1.00489e-3
+#lappend list He$j,I 1.00489e-3
+		}
+
+	for {set i 2} {$i<= $a4} {incr i} { 
+		lappend list He${i}V,He 1.00489e-3
+		lappend list He${i}V,V 1.00489e-3
+#lappend list He${i}V,I 1.00489e-3
+	}
+	for {set j 2} {$j<=$a5} {incr j} { 
+		lappend list HeV${j},He 1.00489e-3
+		lappend list HeV${j},V 1.00489e-3
+#lappend list HeV${j},I 1.00489e-3
+		set p [expr $a8*$j]
+		for {set i 2} {$i<=$p} {incr i} { 
+			lappend list He${i}V${j},He 1.00489e-3
+			lappend list He${i}V${j},V 1.00489e-3
+#lappend list He${i}V${j},I 1.00489e-3
+		}
+	}
+	for {set j [expr $a5+1]} {$j<=$a10} {incr j} { 
+		lappend list HeV${j},He 1.00489e-3
+		lappend list HeV${j},V 1.00489e-3
+#lappend list HeV${j},I 1.00489e-3
+		for {set i 2} {$i<=$a9} {incr i} { 
+			lappend list He${i}V${j},He 1.00489e-3
+			lappend list He${i}V${j},V 1.00489e-3
+#lappend list He${i}V${j},I 1.00489e-3
+		}
+	}
+
+
+
+return $list 
+}

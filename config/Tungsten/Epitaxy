@@ -1,0 +1,15 @@
+// this is not used
+
+proc activation {
+	set list ""
+	set FIRST .06
+	set SECOND .1
+	for { set f 0 } { $f <= 8 } { incr f } {
+		for { set s 0 } { $s <= 8 } { incr s } {
+			lappend list "$f,$s"
+			lappend list "1e6"
+			lappend list "[expr 0.8 + $FIRST*8 + $SECOND*6 - $FIRST*$f - $SECOND*$s]"
+		}
+	}
+	return $list
+}

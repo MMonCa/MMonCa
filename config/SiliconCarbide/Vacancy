@@ -1,0 +1,11 @@
+// JNM 408(2011)257 & PRB 68(2003)205201
+// Formation energy  from JNM 408(2001)257 
+
+arrhenius VSi(migration) { 7.428e-4  2.70 }
+arrhenius VC(migration)  { 7.428e-4  3.66 }
+arrhenius VSi(formation) { 0.4831e23 4.966 }
+arrhenius VC(formation)  { 0.4831e23 4.193 }
+
+//     VSi cap.radius 0.3088
+//     VC  cap.radius  0.3088
+

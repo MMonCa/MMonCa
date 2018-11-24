@@ -1,0 +1,127 @@
+string alloy Cr
+bool self.diffusion false
+string material.composition Fe
+
+float atomic.density 8.77e22
+float alloy.density  8.54e22
+float molar.volume   7.09
+float permittivity   88
+float theta 1335
+# Relative second neighbor contribution used in the concentration smoothing algorithm
+float alloy.second.neighbor.contribution 0.5
+float smoothing.factor 1.0
+float lambda         0.287
+bool  epitaxy        false
+
+
+map<string,float> mixing.enthalpy {
+xi     0
+xo     0.
+poly1 53.56018
+poly1 -21.581599
+poly1 -4.1587905
+poly1 2.9647185
+poly1 -0.135476
+poly1 0
+xi     0.2
+xo     0.
+poly2 -0.425331
+poly2 0.459357
+poly2 -0.034026
+xi     1
+}
+
+map<string,bool> particles { 
+	C   true
+	CV  true	
+	I   true
+	V   true
+}
+map<string,bool> defined { 
+	ICluster  true
+	VCluster  true
+	<100>     true
+	<111>     true
+}
+
+array<string,string> interactions { 
+	I+V         	0,.55
+	I+I         	ICluster,1.,.55
+	V+V         	VCluster,1.,.55
+	I+Gas       	true
+	V+Gas       	true
+	CV+V            VCluster,1.,.55
+	CV+C            VCluster,1.,.55
+    
+	ICluster:I*+I		true,.55
+	ICluster:I*+V		true,.55
+	ICluster+ICluster	true,.55
+	VCluster+ICluster	true,.55
+	ICluster+<100>      true,.55
+	ICluster+<111>      true,.55
+	
+	VCluster:V*+I		true,.55
+	VCluster:V*+V		true,.55
+	VCluster:CV*+V		true,.55
+	VCluster+VCluster	true,.55
+	VCluster+<100>      true,.55
+	VCluster+<111>      true,.55
+	VCluster:V*+C       true,.55
+	
+	<100>:I*+I	true,.55
+	<100>:I*+V	true,.55
+	<100>+<111>	true,.55
+        <100>+<100>     true,.55
+
+	<100>:*+C	true,.55	
+	<111>:*+C	true,.55
+	<111>:*+I	true,.55
+	<111>:*+V	true,.55
+	<111>:*+CV	true,.55
+	<111>+<111>     true,.55
+	<111>+Gas	true
+	VCluster+Gas	true
+	
+	C+V	true,.55
+	C+Gas  true
+	CV+Gas false
+}
+
+#	C+CV	<111>,1.
+#	V+CV	<111>,1.
+#	C+C2V	<111>,1.
+#	V+C2V	<111>,1.
+#	V+CV2	<111>,1.
+#	C+CV2	<111>,1.
+#	C+C2V2	<111>,1.
+#	C+C3V2	<111>,1.
+#	C2V+C2V	<111>,1.
+
+array<string> interaction.result {
+
+        ICluster + ICluster = ICluster
+        ICluster + <100> = <100>
+        ICluster + <111> = <111>      
+        VCluster + VCluster = VCluster
+        <100> + <100> = <100> 
+
+        <100> ~=,.05  <111> = <100>
+        <100> >   <111> = <100>
+        <100> <   <111> = <111>
+
+        <111> ~=,.05 <111> = <100>
+        <111> >  <111> = <111>        
+        <111> <  <111> = <111>        
+
+        VCluster == <100> = <100>
+        VCluster < <100> = <100>
+        VCluster > <100> = VCluster
+
+        VCluster == <111> = <111>
+        VCluster < <111> = <111>
+        VCluster > <111> = VCluster
+
+        VCluster == ICluster = VCluster
+        VCluster >  ICluster = VCluster
+        VCluster <  ICluster = ICluster
+}

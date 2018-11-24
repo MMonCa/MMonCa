@@ -1,0 +1,16 @@
+string left Niobium
+
+map<string,float>     recombination.length.right { }
+map<string,float>     barrier.right    { He 0 }
+
+map<string,float>     recombination.length.left { }
+map<string,float>     barrier.left    { He 0 }
+
+map<string,float>	desorption.low       {  }
+map<string,float>	desorption.threshold { He 0 }
+map<string,float>   desorption.high      { He 0.5 HeV 0.5 HeCluster 0.5 }
+
+arrhenius             He(migration)  { 0 5 }
+arrhenius             HeV(migration)  { 0 5 }
+arrhenius             He(formation)  { 1e-3 0 }
+arrhenius             HeV(formation) { 1e-3 0 }

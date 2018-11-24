@@ -1,0 +1,190 @@
+string alloy  none
+bool self.diffusion true
+string material.composition W
+
+bool  epitaxy        false
+
+float atomic.density  6.2784e22
+float alloy.density  8.54e22
+float molar.volume   9.53
+float permittivity   11.68
+float theta 1518.33
+float lambda         0.317
+
+
+map<string,float> mixing.enthalpy {
+xi     0
+xo     0.
+poly1 53.56018
+poly1 -21.581599
+poly1 -4.1587905
+poly1 2.9647185
+poly1 -0.135476
+poly1 0
+xi     0.2
+xo     0.
+poly2 -0.425331
+poly2 0.459357
+poly2 -0.034026
+xi     1
+}
+
+
+map<string,bool> particles { 
+	He   true 
+	HeI  true 
+	HeV  true 
+	I    true
+	V    true
+	C   false
+	CI  false
+	CV  false
+}
+map<string,bool> defined { 
+	Cluster3D true 
+	<111> true
+}
+
+array<string,string> interactions { 
+V+I 0 
+V+V Cluster3D,1.0 
+I+I Cluster3D,1.0 
+
+V+He true 
+I+He true 
+I+HeV true 
+V+HeI true 
+
+He+He Cluster3D,1.0 
+He+HeV Cluster3D,1.0 
+V+HeV Cluster3D,1.0 
+He+HeI Cluster3D,1.0 
+I+HeI Cluster3D,1.0 
+HeV+HeV Cluster3D,1.0 
+HeI+HeV Cluster3D,1.0 
+HeI+HeI Cluster3D,1.0 
+
+V+Gas true 
+I+Gas true 
+He+Gas true 
+HeV+Gas true 
+HeI+Gas true 
+
+Cluster3D:V*+V true 
+Cluster3D:V*+I true 
+Cluster3D:V*+He true 
+Cluster3D:V*+HeV true 
+Cluster3D:V*+HeI true 
+
+Cluster3D:He*+V true 
+Cluster3D:He*+I true 
+Cluster3D:He*+He true 
+Cluster3D:He*+HeV true 
+Cluster3D:He*+HeI true 
+Cluster3D:He*V+V true 
+Cluster3D:He*V+I true 
+Cluster3D:He*V+He true 
+Cluster3D:He*V+HeV true 
+Cluster3D:He*V+HeI true 
+Cluster3D:HeV*+V true 
+Cluster3D:HeV*+I true 
+Cluster3D:HeV*+He true 
+Cluster3D:HeV*+HeV true 
+Cluster3D:HeV*+HeI true 
+Cluster3D:He*V*+V true 
+Cluster3D:He*V*+I true 
+Cluster3D:He*V*+He true 
+Cluster3D:He*V*+HeV true 
+Cluster3D:He*V*+HeI true 
+Cluster3D:I*+V true 
+Cluster3D:I*+I true 
+Cluster3D:I*+He true 
+Cluster3D:I*+HeV true 
+Cluster3D:I*+HeI true 
+Cluster3D:He*I+V true 
+Cluster3D:He*I+I true 
+Cluster3D:He*I+He true 
+Cluster3D:He*I+HeV true 
+Cluster3D:He*I+HeI true 
+Cluster3D:HeI*+V true 
+Cluster3D:HeI*+I true 
+Cluster3D:HeI*+He true 
+Cluster3D:HeI*+HeV true 
+Cluster3D:HeI*+HeI true 
+Cluster3D:He*I*+V true 
+Cluster3D:He*I*+I true 
+Cluster3D:He*I*+He true 
+Cluster3D:He*I*+HeV true 
+Cluster3D:He*I*+HeI true 
+
+Cluster3D+Cluster3D true 
+Cluster3D+Gas true 
+
+<111>:V*+V true 
+<111>:V*+I true 
+<111>:V*+He true 
+<111>:V*+HeV true 
+<111>:V*+HeI true 
+<111>:He*+V true 
+<111>:He*+I true 
+<111>:He*+He true 
+<111>:He*+HeV true 
+<111>:He*+HeI true 
+<111>:He*V+V true 
+<111>:He*V+I true 
+<111>:He*V+He true 
+<111>:He*V+HeV true 
+<111>:He*V+HeI true 
+<111>:HeV*+V true 
+<111>:HeV*+I true 
+<111>:HeV*+He true 
+<111>:HeV*+HeV true 
+<111>:HeV*+HeI true 
+<111>:He*V*+V true 
+<111>:He*V*+I true 
+<111>:He*V*+He true 
+<111>:He*V*+HeV true 
+<111>:He*V*+HeI true 
+<111>:I*+V true 
+<111>:I*+I true 
+<111>:I*+He true 
+<111>:I*+HeV true 
+<111>:I*+HeI true 
+<111>:He*I+V true 
+<111>:He*I+I true 
+<111>:He*I+He true 
+<111>:He*I+HeV true 
+<111>:He*I+HeI true 
+<111>:HeI*+V true 
+<111>:HeI*+I true 
+<111>:HeI*+He true 
+<111>:HeI*+HeV true 
+<111>:HeI*+HeI true 
+<111>:He*I*+V true 
+<111>:He*I*+I true 
+<111>:He*I*+He true 
+<111>:He*I*+HeV true 
+<111>:He*I*+HeI true 
+
+<111>+<111> true 
+<111>+Cluster3D true 
+<111>+Gas true
+}
+
+# defect0 
+array<string> interaction.result {
+	
+	<111> == <111> = <111>
+	<111> >  <111> = <111>
+	<111> <  <111> = <111>
+	
+	<111> == Cluster3D = Cluster3D
+	<111> >  Cluster3D = <111>
+	<111> <  Cluster3D = Cluster3D
+
+	Cluster3D == Cluster3D = Cluster3D
+	Cluster3D >  Cluster3D = Cluster3D
+	Cluster3D <  Cluster3D = Cluster3D
+	
+ 
+}

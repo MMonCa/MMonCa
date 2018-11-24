@@ -1,0 +1,83 @@
+string alloy none
+bool self.diffusion false
+string material.composition Si,C
+
+// atomic density: /cm3
+// molar volume:   cm3/mol
+// permittivity:   unitless
+
+float atomic.density 9.66e22
+float molar.volume   12.461
+float permittivity   9.72
+float lambda 0.3088
+bool  epitaxy        false
+
+map<string,float> mixing.enthalpy { }
+
+map<string,bool> particles {
+        SiI  true
+	CSi  true
+	CI   true
+	VC   true
+	SiC  true
+	VSi  true
+}
+
+map<string,bool> defined {
+	IVCluster true
+        ICluster  true
+        VCluster  true
+}
+
+array<string,string> interactions {
+ 
+  SiI+CSi	IVCluster,1,0.436
+  SiI+VSi	IVCluster,1,0.534
+  CI+VC		IVCluster,1,0.3083
+  SiI+VC        IVCluster,1,0.37
+  
+  CI+VSi        IVCluster,1,0.33
+  CI+SiC        IVCluster,1,0.436
+  VC+CSi        IVCluster,1,0.189
+
+  SiC+CSi       IVCluster,1,0.189
+  SiI+SiI	ICluster,1,0.3083
+  SiI+CI	ICluster,1,0.3083
+  CI+CI		ICluster,1,0.3083
+
+  CI+CSi        ICluster,1,0.3083
+  SiI+SiC       ICluster,1,0.3083
+  
+  VSi+VC	VCluster,1,0.3083
+  VC+VC		VCluster,1,0.3083
+
+
+  IVCluster:CV^SiC+SiI  true,0.44
+  IVCluster:CV^SiC+CI   true,0.47
+
+  ICluster:*+SiI    true,0.3083
+  ICluster:*+CI     true,0.3083
+
+  VCluster:*+VC     true,0.3083
+  VCluster:*+VSi    true,0.3083
+
+  ICluster:*+VSi    true,0.3083
+  ICluster:*+VC     true,0.3083
+  
+  VCluster:*+CI     true,0.3083
+  VCluster:*+SiI    true,0.3083
+
+
+  SiI+Gas	true
+  SiC+Gas	true
+  VSi+Gas	true
+  CI+Gas	true
+  CSi+Gas	true
+  VC+Gas	true
+
+}
+
+array<string> interaction.result {
+        ICluster  + ICluster  = ICluster
+        VCluster  + VCluster  = VCluster
+}

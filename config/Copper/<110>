@@ -1,0 +1,75 @@
+// Data: Caturla (JNM, 276)
+// Emit prefactor is 2e-3 if lambda (config/MC/Mesh) is 0.3464 nm and 5e-3 if lambda is 0.5432 nm.
+// Interstitial Clusters (I>4) that just migrate in 1D but not in planes parallels to the interface.
+
+string shape disk
+float density.cm2 2.43e14
+string to <110>
+string from ICluster
+string migration.type perpendicular
+// coordinates axis.2 1 1 0
+coordinates axis.1 0 0 1
+coordinates axis.0 1 -1 0
+coordinates not.in.plane 1 0 0
+float axes.ratio 1
+float lambda         0.384
+
+bool IV.model false
+
+proc transform.to   { }
+
+proc transform.from   {
+	set list ""
+	for { set size 2 } { $size < 500 } { incr size } {
+		lappend list I$size
+		if { $size < 5 } {
+			lappend list < 1e20 0 >
+		} else {
+			lappend list < 0 5 >
+		}
+	}
+	return $list  
+}
+
+proc migration   {
+ 	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 2e-3/$size]
+		set ener 0.10
+		if { $size == 2 } { set pref 1e-3; set ener 0.11 }
+		if { $size == 3 } { set pref 6e-4; set ener 0.20 }
+		if { $size == 4 } { set pref 5e-4; set ener 0.10 }
+	        if { $size > 60 } { set pref 0; set ener 5 }
+		lappend list I$size < $pref $ener >
+	}
+	return $list
+}
+
+proc formation {
+	set list ""	
+	set pot 0
+	set form 0
+	for { set size 2 } { $size < 500 } { incr size } {
+		set EfI  3.27		
+		set ener 2.62		
+		if { $size == 2 } { set ener 1.16 }
+		if { $size == 3 } { set ener 1.16 }
+		if { $size == 4 } { set ener 1.16 }
+		
+		set pot  [expr $pot - $ener]
+		set form [expr $pot + $size*$EfI]
+
+		lappend list I$size < $form >
+	}
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref 2e-3
+		lappend list I$size,I
+		lappend list $pref
+	}
+	return $list
+}

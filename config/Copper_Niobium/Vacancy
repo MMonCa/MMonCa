@@ -1,0 +1,14 @@
+string left Niobium
+
+map<string,float>    supersaturation.right { V 1 }
+map<string,float>    supersaturation.left  { V 1 }
+
+map<string,float>     recombination.length.right { }
+map<string,float>	  desorption.low       { }
+map<string,float>	  desorption.threshold { }
+map<string,float>     desorption.high      { VCluster 1}
+map<string,float>     barrier.right    { V 0 }
+
+map<string,float>     recombination.length.left { }
+map<string,float>     desorption.left { }
+map<string,float>     barrier.left    { V 0 }

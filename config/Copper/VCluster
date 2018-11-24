@@ -1,0 +1,72 @@
+// Data: Caturla (JNM, 276) 
+// Emit prefactor is 2e-3 if lambda (config/MC/Mesh) is 0.3464 nm and 5e-3 if lambda is 0.5432 nm.
+// Data from Zhao (Computational Materials Science, 14) are discarded.
+
+string shape irregular
+float density.cm3 8.49e22 
+string to   VCluster
+string from VCluster
+string migration.type 3d
+coordinates axis.2 1 0 0
+coordinates axis.1 0 1 0 
+coordinates axis.0 0 0 1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+float lambda         0.384
+
+bool IV.model false
+
+proc transform.to { }
+
+proc transform.from { }
+
+proc migration   { 
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref 0
+		set ener 5
+		if { $size == 2 } { set pref 0.36; set ener 0.55 }
+		if { $size == 3 } { set pref 0.12; set ener 0.56 }
+		if { $size == 4 } { set pref 0.14; set ener 0.38 }
+		
+		lappend list V$size < $pref $ener >
+	}
+	return $list
+}
+
+proc formation {
+	set list ""	
+	set pot  0
+	set form 0
+	for { set size 2 } { $size < 500 } { incr size } {
+		set e [expr 2./3.]
+		set Ef 1.27
+		set Eb2 -2.08
+		set ener [ expr $Ef + $Eb2*(pow($size,$e) - pow($size-1,$e)) ]   
+		if { $size == 2 } { set ener 0.05 }
+		if { $size == 3 } { set ener 0.15 }
+		if { $size == 4 } { set ener 0.28 }
+		if { $size == 5 } { set ener 0.65 }	
+		if { $size == 10 } { set ener 0.37 }
+		if { $size == 15 } { set ener 0.49 }
+		if { $size == 19 } { set ener 0.49 }
+		if { $size == 21 } { set ener 0.57 }
+		if { $size == 28 } { set ener 0.62 }
+		
+		set pot  [expr $pot - $ener]
+		set form [expr $pot + $size*$Ef]
+
+		lappend list V$size < $form >
+	}
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref 1e-6
+		lappend list V$size,V
+		lappend list $pref
+	}
+	return $list
+}

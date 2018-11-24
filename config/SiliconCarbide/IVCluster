@@ -1,0 +1,79 @@
+string shape          irregular
+float density.cm3     9.66e22
+string to             ICluster
+string from           IVCluster
+string migration.type 3d
+// coordinates axis.2 1 0 0
+coordinates axis.1    0 1 0 
+coordinates axis.0    0 0 1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+bool percolation true
+float lambda 0.3088
+
+bool IV.model true
+
+proc transform.to { return "" }
+proc transform.from { return "" }
+proc migration      { return "" }
+
+proc formation {
+	set list ""
+	
+	set EfSiI 8.754
+	set EfCI  6.953
+	set EfVSi 4.966
+	set EfVC  4.193
+	set EfCSi 4.034
+	set EfSiC 3.564
+	
+	lappend list SiC^CI    < [expr $EfCI+$EfSiC] >
+	lappend list CV^SiI    < [expr $EfCI+$EfVSi-2.96] >
+        lappend list CV^SiC    < 5.266 >
+        lappend list C2V^SiCI  < 10.829 >
+        lappend list SiCV^SiCI < 13.29 >
+
+        lappend list SiC^SiI < [expr $EfSiI+$EfCSi+0] >
+        lappend list SiV^SiI < [expr $EfSiI+$EfVSi-0.13] >
+        lappend list CV^CI   < [expr $EfCI+$EfVC-0.6] >
+        lappend list SiV^CI  < [expr $EfSiI+$EfVC-0.5] >
+
+        lappend list SiC^SiC < 5.6 >
+	
+	return $list 
+}
+
+proc prefactor {
+	set list ""
+	lappend list SiC^CI,CI     0
+	lappend list CV^SiI,CI     1.23e-3
+        lappend list CV^SiC,VC     7.428e-3
+        lappend list C2V^SiCI,CI   1.23e-3
+        lappend list SiCV^SiCI,SiI 3.3e-3 
+
+        lappend list SiC^SiI,SiI   3.3e-3
+        lappend list SiV^SiI,SiI   3.3e-3
+        lappend list CV^CI,CI      1.23e-3
+        lappend list SiV^CI,SiI    3.3e-3
+
+        lappend list SiC^SiC,CSi   7.428e-3       
+  
+	return $list
+}
+
+proc IV.barrier {
+        set list ""
+        lappend list SiC^CI    < 1.23e-3   1.34 >
+        lappend list CV^SiI    < 1.23e-3   1.25 >
+        lappend list CV^SiC    < 7.428e-4  2.40 >
+        lappend list C2V^SiCI  < 1.23e-3   0.80 >
+        lappend list SiCV^SiCI < 3.3e-3    3.12 >
+
+        lappend list SiC^SiI   < 3.3e-3    0.64 >
+        lappend list SiV^SiI   < 3.3e-3    0.17 >
+        lappend list CV^CI     < 1.23e-3   0.43 >
+        lappend list SiV^CI    < 3.3e-3    1.11 >
+
+        lappend list SiC^SiC   < 1.584e-3   3.2 >
+        return $list
+}

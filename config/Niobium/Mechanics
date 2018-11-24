@@ -1,0 +1,5 @@
+float E							105
+float nu						0.40
+float thermal.expansion         7.3e-6
+float temp.ref					300
+map<string,string> eigenstrains { }

@@ -1,0 +1,75 @@
+string shape disk
+string to <100>
+string from <111>
+float  density.cm2 1.92e15
+string migration.type 3d
+// coordinates axis.2 1 0 0
+coordinates axis.1 0 1 0 
+coordinates axis.0 0 0 1
+coordinates not.in.plane 0 0 0
+float  axes.ratio 1
+bool percolation true
+float lambda         0.287
+
+bool IV.model false
+proc transform.to   { }
+proc transform.from { }
+proc migration  { }
+
+
+proc transform.to   {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		lappend list I$size < 0 5 >
+	}
+	return $list  
+}
+
+proc transform.from { 
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		lappend list I$size < 0 5 >
+	}
+	return $list
+}
+
+proc migration  { 
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		lappend list I$size < 0 5 >
+	}
+	return $list
+}
+
+proc formation {
+	set list ""	
+	set pot 0
+	for { set size 2 } { $size < 500 } { incr size } {
+	    set e [expr 2./3.]
+		set Ef 3.77
+		set Eb2 0.80
+		set ener [expr $Ef + ($Eb2 - $Ef)*(pow($size,$e)-pow($size-1,$e))/.587401]
+		if { $size == 2 } { set ener 0.8  }
+		if { $size == 3 } { set ener 0.92 }
+		
+		set pot [expr $pot - $ener]
+		lappend list I$size < [ expr $size*$Ef + $pot ] >
+		lappend list CI$size < [ expr $size*$Ef + $pot -0.1 ] >
+		lappend list C2I$size < [ expr $size*$Ef + $pot -0.3 ] >
+	}
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 8.2e-3*$size]
+		lappend list I$size,I
+		lappend list $pref
+		lappend list CI$size,C
+		lappend list $pref
+		lappend list C2I$size,C
+		lappend list $pref
+	}
+	return $list
+}

@@ -1,0 +1,46 @@
+string shape disk
+float density 8.46e22
+string to   VCluster
+string from V<111>
+float density.cm3 8.46e22
+string migration.type perpendicular
+// coordinates axis.2 1  1 1
+coordinates axis.1 0 -1 1 
+coordinates axis.0 2 -1 -1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+bool IV.model false
+bool percolation true
+float lambda         0.287
+
+proc transform.to   { }
+proc transform.from { }
+proc migration      { }
+
+proc potential {
+	set list ""	
+	set pot 0
+	set Efv 2.12
+	for { set size 150 } { $size < 500 } { incr size } {
+	        set e 2.7183
+		set radius 4
+		set density 0.083
+		set R [expr sqrt($size/(3.14159*$density))]
+		set ener [expr 6.28*$R*(0.465*log(4*$R/($e*$radius)) + 0.39 + 0.5]
+		lappend list V$size
+		lappend list $ener
+	}
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 8.2e-3*$size]
+		lappend list V$size,V
+		lappend list $pref
+	}
+	return $list
+}
+
+

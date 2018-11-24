@@ -1,0 +1,11 @@
+// JNM 408(2011)257 & PRB 68(2003)205201
+// Formation energy  from JNM 408(2001)257 
+
+arrhenius SiI(migration) { 3.30e-3 1.40 }
+arrhenius SiC(migration) { 9.5048e-4 3.66 }
+arrhenius SiI(formation) { 0.4831e23 8.754 }
+arrhenius SiC(formation) { 0.4831e23 3.564 }
+
+//      SiC cap.radius 0.534
+//      SiI cap.radius 0.3088
+

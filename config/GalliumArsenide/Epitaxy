@@ -1,0 +1,86 @@
+// Params for GaAs epitaxy
+
+bool model.simplified true
+
+proc prefactor.precursor {
+set name(0) $arg0
+set P(0)    $arg1
+set name(1) $arg2
+set P(1)    $arg3
+set name(2) $arg4
+set P(2)    $arg5
+set T       $arg6
+set type    $arg7
+
+set Pressure 0
+for { set i 0 } { $i < 3 } { incr i } {
+	if { $name($i) == $type } {
+		set Pressure $P($i)
+	}
+}
+
+set N_Si(100)	6.78E14
+set m_SiH4	32.12
+set F_SiH4	[expr $Pressure*1.3333333E21/sqrt($m_SiH4*1.4405617E-3*$T)]
+set ADS		[expr $F_SiH4/$N_Si(100)]
+
+lowmsg "Pressure($type) $Pressure. [format "%s %s %e %s" Vads is $ADS /s]"
+
+return "$ADS"
+}
+
+map<string,float> formation.1st {
+Ga+Ga  0.
+Ga+As -0.4
+
+Ga+Ga2   0.
+Ga+GaAs  0.
+Ga+As2  -0.5
+
+Ga+Ga3   0.0
+Ga+Ga2As 0.0
+Ga+GaAs2 0.0
+Ga+As3   -0.75
+
+Ga+Ga4    0.0
+Ga+Ga3As  0.0
+Ga+Ga2As2 0.0
+Ga+GaAs3  0.0
+Ga+As4   -2.0
+
+As+Ga -0.4
+As+As  0.
+
+As+Ga2  -0.5
+As+GaAs  0.
+As+As2   0.
+
+As+Ga3  -0.75
+As+Ga2As 0.0
+As+GaAs2 0.0
+As+As3   0.0
+
+As+Ga4   -2.0
+As+Ga3As  0.0
+As+Ga2As2 0.0
+As+GaAs3  0.0
+As+As4    0.0
+}
+
+map<string,float> formation.2nd { Ga+Ga -0.15 Ga+As 0    As+Ga  0    As+As -0.15 }
+map<string,float> formation.3rd { Ga+Ga  0 Ga+As   -0.12 As+Ga -0.12 As+As  0. }
+
+map<string,string> pair.epi      { Ga As }
+map<string,float> migration.1st  { Ga 0.1   As 0.1 }
+map<string,float> migration.2nd  { Ga 0.2   As 0.2 }
+map<string,float> barrier.epi    { Ga 3.7   As 3.7 }
+map<string,float> barrier.pair   { Ga 3.6   As 3.6 }
+map<string,float> prefactor.epi  { Ga 5.6e9 As 5.6e9}
+map<string,float> prefactor.etch { Ga 0.0   As 0.0 }
+map<string,float> prefactor.mig  { Ga 1e6   As 1e6 }
+map<string,float> barrier.precursor    { Ga 0.0 As 0.0 }
+map<string,float> barrier.desorption   { Ga 0.32 As 0.32 }
+map<string,float> prefactor.desorption { Ga 1e6 As 1e6 } 
+map<string,float> prefactor.pair	{ Ga 5.6e9 As 5.6e9 }
+map<string,float> speedup.factor       { Ga 100. As 100. }
+

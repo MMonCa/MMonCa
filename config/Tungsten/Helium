@@ -1,0 +1,8 @@
+// Migration
+arrhenius He(migration)  1.00489e-5 0.01
+arrhenius HeI(migration) 0.0 0.0
+arrhenius HeV(migration) 1.00489e-3 4.83
+// Binding
+arrhenius He(formation)    0.136987e7 1.44
+arrhenius HeI(formation)   1.499996e7 10.46
+arrhenius HeV(formation)   1.0 0.0

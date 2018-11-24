@@ -1,0 +1,20 @@
+arrhenius VGa(migration) { 7.428e-4  1.70 }
+arrhenius VGa(formation) { 3.28e26 3.2 }
+
+// arrhenius VAs_--(migration)  { 7.428e-4  3.66 }
+// arrhenius VAs_-(migration)  { 7.428e-4  3.66 }
+// arrhenius VAs_0(migration)  { 7.428e-4  3.66 }
+arrhenius VAs(migration)  { 7.428e-4  3.66 }
+// arrhenius VAs(update)	{5.e-8 0.4}
+arrhenius VAs(formation)  { 0.4831e23 4.193 }
+
+map<string,int> VGa(state.charge) VGa 0
+
+bool	VGa(map.to.grid)	true
+float	VGa(orbital.radius)	0.5
+
+// map<string,int> VAs(state.charge) VAs_0 0 VAs_+ 1 VAs_- -1 VAs_-- -2
+// float	VAs(e(-2,-1))	0.7	
+// float	VAs(e(-1,0))	0.5
+// float	VAs(e(0,1))	0.2
+

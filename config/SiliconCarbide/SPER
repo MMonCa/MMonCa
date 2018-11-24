@@ -1,0 +1,34 @@
+map<string,float> prefactor.111    { }
+map<string,float> prefactor.110    { }
+map<string,float> prefactor.100.6  { }
+map<string,float> prefactor.100.7  { }
+map<string,float> prefactor.100.8  { }
+map<string,float> prefactor.100.9  { }
+map<string,float> prefactor.100.10 { }
+map<string,float> energy.1st { }
+
+float shear.effect        25
+float twin.probability    0.05
+
+// Stress tensors
+float dvpar.100.2        -0.33
+float dvperp.100.2       0.
+
+float dvpar.100.3        -26.
+float dvperp.100.3       13.
+
+float dvpar.110          0.
+float dvperp.110         0.
+
+float dvpar.111          0.
+float dvperp.111         0.
+
+// Electrostic
+string electrostatic.model GFLS
+float degeneracy.P         1.
+float degeneracy.M         2.
+float degeneracy.0         1.
+
+// ALL energy levels referenced with respect to VBM, at 300K
+float energy.M0            0.99
+float energy.P0            0.0

@@ -1,0 +1,112 @@
+string alloy none
+bool self.diffusion true
+string material.composition Cu
+
+float atomic.density 8.49e22
+float molar.volume   7.11
+float permittivity   88
+
+float theta 	     1518.33
+float lambda         0.384
+bool  epitaxy        false
+
+map<string,float> mixing.enthalpy { }
+
+map<string,bool> particles { 
+	I	true
+	V	true
+	He	true 
+	HeV	true 
+	HeI	false 
+}
+
+map<string,bool> defined { 
+	IVCluster		false 
+	ICluster 		true
+	VCluster  		true
+	<110>			true
+	HeCluster		true
+}
+
+array<string,string> interactions { 
+	I+V       		0
+	I+I        		ICluster,1.
+	V+V        		VCluster,1.
+	He+He			HeCluster,1.
+	He+I			false
+	He+V			true
+	HeV+I			true
+	HeV+HeV			HeCluster,1.
+	He+HeV			HeCluster,1.
+	HeV+V			HeCluster,1.
+
+	I+Gas			true
+	V+Gas			true
+	He+Gas			true
+	HeV+Gas			true
+	ICluster+Gas		true
+	VCluster+Gas		true
+	<110>+Gas		true
+	HeCluster+Gas		true
+
+	I+Niobium   		true
+	V+Niobium  		true
+	He+Niobium 		true
+	HeV+Niobium 		true
+        ICluster+Niobium        true
+        VCluster+Niobium        true
+        <110>+Niobium           true
+	HeCluster+Niobium 	true
+	
+	ICluster:*+I 		true
+	<110>:*+I		true
+	ICluster:*+V 		true
+	<110>:*+V		true
+	ICluster:*+He		false
+	<110>:*+He		false
+	ICluster:*+HeV		false
+	<110>:*+HeV		false
+
+	VCluster:*+I 		true
+	VCluster:*+V 		true
+	VCluster:*+He		true
+	VCluster:*+HeV		true
+
+	ICluster+ICluster	true
+	VCluster+VCluster	true
+	VCluster+ICluster	true
+	VCluster+<110>		true
+	<110>+<110>		true
+	ICluster+<110>		true
+
+	HeCluster:*+He		true
+	HeCluster:*+V		true
+	HeCluster:*+I		true
+	HeCluster:*+HeV		true
+	HeCluster+HeCluster	true
+	HeCluster+VCluster	true
+	HeCluster+ICluster	false
+	HeCluster+<110>		false
+}
+
+array<string> interaction.result {
+	<110> +  <110> = <110>
+
+	<110> == VCluster = <110>
+	<110> >  VCluster = <110>
+	<110> <  VCluster = VCluster
+	
+	VCluster == ICluster = VCluster
+	VCluster >  ICluster = VCluster
+	VCluster <  ICluster = ICluster
+	
+	<110> +  ICluster  = <110>
+	
+	VCluster +  VCluster = VCluster
+	
+	VCluster +  HeCluster = HeCluster
+	
+	ICluster +  ICluster = ICluster
+	
+	HeCluster +  HeCluster = HeCluster 
+}

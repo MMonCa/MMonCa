@@ -1,0 +1,157 @@
+string shape             irregular
+float density.cm3        9.66e22
+string to                VCluster
+string from              VCluster
+string migration.type    3d
+// coordinates axis.2    1 0 0
+coordinates axis.1       0 1 0 
+coordinates axis.0       0 0 1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+float lambda 0.3088
+
+bool IV.model false
+bool percolation true
+
+proc transform.to   { return "" }
+proc transform.from { return "" }
+proc migration      { return "" }
+
+proc formation {
+      set list ""
+      set EfSiI 8.754
+      set EfCI  6.953
+      set EfVSi 4.966
+      set EfVC  4.193
+      set EfCSi 4.034
+      set EfSiC 3.564
+      for { set SizeSi 0 } { $SizeSi < 50 } { incr SizeSi } {
+            for { set SizeC 0 } { $SizeC < 50 } { incr SizeC } {
+                 set Size [expr $SizeSi+$SizeC]
+                 if { $Size > 1 } {
+                     # set Ef [expr 2.75*pow($Size,2/3)+0.25*pow($Size,1/3)]
+
+                      # Addition
+                        if { $SizeC==1 && $SizeSi==1 } {
+                            lappend list V2^SiC
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                        if { $SizeSi==1 && $SizeC==2 } {
+                            lappend list V3^SiC2
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                      # Addition2
+                        if { $SizeSi==1 && $SizeC==4 } {                        
+                            lappend list V5^SiC4
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }                      
+                        if { $SizeSi==2 && $SizeC==1 } {  
+                            lappend list V3^Si2C 
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                        if { $SizeSi==1 && $SizeC==5 } { 
+                            lappend list V6^SiC5 
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                        if { $SizeSi==1 && $SizeC==6 } { 
+                            lappend list V7^SiC6 
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                        if { $SizeSi==1 && $SizeC==3 } { 
+                            lappend list V4^SiC3
+                            lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                      # --------------------------------
+
+
+
+                        if { $SizeSi==0 } {
+                             lappend list V${Size}^C${Size}
+                             lappend list < [expr $Size*$EfVC] >
+                        }
+                        if { $SizeC==0 } {
+                             lappend list V${Size}^Si${Size} 
+                             lappend list < [expr $SizeSi*$EfVSi] >
+                        }
+                        if { $SizeSi>0 && $SizeC>0 } {
+                             lappend list V${Size}^Si${SizeSi}C${SizeC}
+                             lappend list < [expr $SizeSi*$EfVSi+$SizeC*$EfVC] >
+                        }
+                 }
+            }
+      }
+      return $list
+}
+
+proc prefactor {
+      set list ""
+      for { set SizeSi 0 } { $SizeSi < 50 } { incr SizeSi } {
+           for {set SizeC 0 } { $SizeC < 50 } { incr SizeC } {
+                set Size [ expr $SizeC+$SizeSi]
+                if { $Size>1 } {
+
+                   # Addition
+                    if { $SizeC==1 && $SizeSi==1 } {
+                        lappend list V2^SiC,VSi  
+                        lappend list 0
+                        lappend list V2^SiC,VC
+                        lappend list 0
+                    }
+                    if { $SizeSi==1 && $SizeC==2 } {
+                        lappend list V3^SiC2,VSi
+                        lappend list 0
+                        lappend list V3^SiC2,VC
+                        lappend list 0
+                    }
+                   # Addition2
+                    if { $SizeSi==1 && $SizeC==4 } {                        
+                        lappend list V5^SiC4,VSi
+                        lappend list 0
+                        lappend list V5^SiC4,VC
+                        lappend list 0
+                    }                      
+                    if { $SizeSi==2 && $SizeC==1 } {  
+                        lappend list V3^Si2C,VSi
+                        lappend list 0
+                        lappend list V3^Si2C,VC
+                        lappend list 0
+                    }
+                    if { $SizeSi==1 && $SizeC==5 } { 
+                        lappend list V6^SiC5,VSi
+                        lappend list 0
+                        lappend list V6^SiC5,VC
+                        lappend list 0 
+                    }
+                    if { $SizeSi==1 && $SizeC==6 } { 
+                        lappend list V7^SiC6,VSi
+                        lappend list 0 
+                        lappend list V7^SiC6,VC
+                        lappend list 0  
+                    }
+                    if { $SizeSi==1 && $SizeC==3 } { 
+                        lappend list V4^SiC3,VSi
+                        lappend list 0 
+                        lappend list V4^SiC3,VC
+                        lappend list 0 
+                    }                     
+                   # --------------------------------
+
+                   if { $SizeSi ==0 } {
+                       lappend list V${Size}^C${SizeC},VC
+                       lappend list 0
+                   }
+                   if { $SizeC ==0 } {
+                       lappend list V${Size}^Si${SizeSi},VSi
+                       lappend list 7.428e-3
+                   }
+                   if { $SizeSi>0 && $SizeC>0 } {
+                       lappend list V${Size}^Si${SizeSi}C${SizeC},VSi
+                       lappend list 0
+                       lappend list V${Size}^Si${SizeSi}C${SizeC},VC
+                       lappend list 0
+                   }
+                }
+           }
+      }
+      return $list
+}

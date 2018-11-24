@@ -1,0 +1,97 @@
+// Becquart notation
+string alloy none
+bool self.diffusion true
+string material.composition Nb
+
+float atomic.density 5.55e22
+float molar.volume   10.83
+// permittivity value required!
+float permittivity   88
+
+float theta 	     1518.33
+float lambda         0.384
+bool  epitaxy        false
+
+map<string,float> mixing.enthalpy { }
+
+map<string,bool> particles { 
+	HeI	false 
+	He	true 
+	I	true
+	V	true
+	HeV	true 
+}
+
+map<string,bool> defined { 
+	IVCluster		false 
+	ICluster 		true
+	VCluster  		true
+	HeCluster		true
+}
+
+
+array<string,string> interactions { 
+	I+V        		0
+
+	I+I        		ICluster,1.
+	V+V        		VCluster,1.
+	He+He			HeCluster,1.
+	He+I			false
+	He+V			true
+	HeV+I			true
+	HeV+HeV			HeCluster,1.
+	He+HeV			HeCluster,1.
+	HeV+V			HeCluster,1.
+
+	I+Gas			true
+	V+Gas			true
+	He+Gas			true
+	HeV+Gas			true
+	ICluster+Gas		true
+	VCluster+Gas		true
+	HeCluster+Gas		true
+
+	I+Copper   		true
+	V+Copper  		true
+	He+Copper 		true
+	HeV+Copper 		true
+        ICluster+Copper         true
+        VCluster+Copper         true
+	HeCluster+Copper 	true
+	
+	ICluster:*+I 		true
+	ICluster:*+V 		true
+	ICluster:*+He		false
+	ICluster:*+HeV		false
+
+	VCluster:*+I  		true
+	VCluster:*+V  		true
+	VCluster:*+He 		true
+	VCluster:*+HeV		true
+
+	VCluster+VCluster	true
+	ICluster+ICluster	true
+	VCluster+ICluster	true
+
+	HeCluster:He*+He	true
+	HeCluster:He*+V		true
+	HeCluster:He*+I		true
+	HeCluster:He*+HeV	true
+	HeCluster+HeCluster	true
+	HeCluster+VCluster	true
+	HeCluster+ICluster	false
+}
+
+array<string> interaction.result {
+	VCluster == ICluster = VCluster
+	VCluster >  ICluster = VCluster
+	VCluster <  ICluster = ICluster
+	
+	VCluster  +  VCluster = VCluster
+	
+	VCluster  + HeCluster = HeCluster
+	
+	ICluster  + ICluster  = ICluster
+
+	HeCluster + HeCluster = HeCluster 
+}

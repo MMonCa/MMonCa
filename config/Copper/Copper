@@ -1,0 +1,7 @@
+// Dato: Caturla (J. Nucl. Mater, 276)
+arrhenius I(migration) 2e-3 0.13
+// Dato: Made up prefactor and Formation Energy for Cesar UNIOVI [ Zhao (Computational Materials Science, 14) -> 2.73 eV ]
+arrhenius I(formation) 1e23 3.27
+
+// I cap.radius 0.5704
+

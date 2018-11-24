@@ -1,0 +1,10 @@
+// arrhenius V(migration) { 0% 8.2e-3 0.67 100% 8.2e-3 0.67 }
+arrhenius V(migration) { 1.00489e-3 1.66 }
+arrhenius V(formation) { 6.2784e22 3.23 }
+
+float correlation.factor 0.0
+
+// Diffusivity of Chromium in pure Iron 
+arrhenius V(self) { 0.0 0.0 }
+// Diffusivity of Iron in pure Chromium 
+arrhenius V(alloying) { 0.0 0.0 }

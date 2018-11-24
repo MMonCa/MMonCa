@@ -1,0 +1,68 @@
+// Capillary Law for Interstitial clusters.
+// Data: Energías de formación de I2 e I3 de Cesar (UNIOVI).
+// The migration energy values are the same as for copper (Data: Caturla (JNM, 276)).
+
+string shape irregular
+float density.cm3 5.55e22 
+string particle I
+string to ICluster
+string from ICluster
+string migration.type 3d
+coordinates axis.2 1 0 0
+coordinates axis.1 0 1 0 
+coordinates axis.0 0 0 1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+float lambda         0.384
+
+bool IV.model false
+
+proc transform.to   { }
+proc transform.from { }
+
+proc migration   {
+ 	set list ""	
+
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 2e-3/$size]
+		set ener 0.10
+		if { $size == 2 } { set pref 1e-3; set ener 0.11 }
+		if { $size == 3 } { set pref 6e-4; set ener 0.20 }
+		if { $size == 4 } { set pref 5e-4; set ener 0.10 }
+	        if { $size > 60 } { set pref 0; set ener 5 }
+		lappend list I$size < $pref $ener >
+	}
+	return $list
+}
+
+proc formation {
+	set list ""
+	
+	set pot  0
+	set form 0
+
+	for { set size 2 } { $size < 500 } { incr size } {
+		set e [expr 2./3.]
+		set Ef 4.40
+		set Eb2 -7.282
+
+		set ener [expr $Ef + $Eb2*(pow($size,$e)-pow($size-1,$e))]   
+		set pot  [expr $pot - $ener]
+		set form [expr $pot + $size*$Ef]
+
+		lappend list I$size < $form >
+	}
+	return $list
+}
+
+proc prefactor {
+	set list ""
+
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref 2e-3
+		lappend list I$size,I
+		lappend list $pref
+	}
+	return $list
+}
+

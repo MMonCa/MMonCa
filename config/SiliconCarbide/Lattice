@@ -1,0 +1,15 @@
+
+string type diamond.1
+float  parameter 0.436
+
+bool remove.defects false
+
+// distance between Si and C atom is 0.1888 nm
+map<string,float>   neighbor.distance first 0.1888 second 0.3083 third 0.3776
+
+map<string,float>   wafer.orientation i 1 j 0 k 0
+map<string,float>   flat.orientation  i 0 j 1 k 1
+
+// Do NOT set map.to.grid to "true"
+bool  map.to.grid         false
+float orbital.radius      0.2

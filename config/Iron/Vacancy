@@ -1,0 +1,9 @@
+// arrhenius V(migration) { 0% 8.2e-3 0.67 100% 8.2e-3 0.67 }
+// Chu Chun Fu
+// arrhenius V(migration) { 0% 7e-2 0.7 100% 7e-2 0.8 }
+// arrhenius V(formation) { 0% 5.3e24 2.17    100% 5.2e24 2.3 }
+arrhenius V(migration) { 1e-5 0.55 }
+arrhenius V(formation) { 5.3e24 2.12 }
+
+float correlation.factor 0.727
+arrhenius alpha { 5 0.1 }

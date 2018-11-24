@@ -1,0 +1,15 @@
+
+string type diamond.2
+float  parameter 0.565
+
+bool remove.defects false
+
+// distance between Ga and As atom is 0.244 nm
+map<string,float>   neighbor.distance first 0.24 second 0.40 third 0.50
+
+map<string,float>   wafer.orientation i 1 j 0 k 0
+map<string,float>   flat.orientation  i 0 j 1 k 1
+
+// Do NOT set map.to.grid to "true"
+bool  map.to.grid         false
+float orbital.radius      0.2

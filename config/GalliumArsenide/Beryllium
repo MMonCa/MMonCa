@@ -1,0 +1,38 @@
+// Migration
+arrhenius BeI_0(migration) {0 5}
+arrhenius BeI_-(migration) {0 5}
+arrhenius BeI(update) {1.7e-3 0.77}
+arrhenius BeGa(migration) {0.0 0.791}
+// arrhenius BeGa_0(migration) {0.0 0.791}
+// arrhenius BeGa_-(migration) {0.0 0.791}
+// arrhenius BeGa(update)		{2e-2 2.2}
+arrhenius BeAs(migration) {0.0 5.0} 
+
+// Binding
+arrhenius BeI(formation)  {1 0}
+arrhenius BeGa(formation) {10199 2.5}
+arrhenius BeAs(formation) {5351 1.73}
+
+float BeGa(state.energy)	0.054
+float BeGa(state.degeneracy)	2
+// float BeGa_0(state.energy)	0.054
+// float BeGa_-(state.degeneracy)	2
+float BeAs(state.energy)	0.054
+float BeAs(state.degeneracy)	2
+float BeI(state.energy)	0.054
+float BeI(state.degeneracy)	2
+
+bool	BeGa(map.to.grid)	true
+float	BeGa(orbital.radius)	0.5
+bool	BeI(map.to.grid)	true
+float	BeI(orbital.radius)	0.5
+
+// bool	BeGa_-(map.to.grid)	true
+// float	BeGa_-(orbital.radius)	0.5
+
+// map<string,int> BeI(state.charge) BeI_0 0 BeI_- -1
+// map<string,int> BeGa(state.charge) BeGa -1 
+// map<string,int> BeAs(state.charge) BeAs -3
+
+// float	BeGa(e(-1,0))	.7
+float   BeI(e(-1,0))    0.3

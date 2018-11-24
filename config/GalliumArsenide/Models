@@ -1,0 +1,83 @@
+string alloy none
+bool self.diffusion false
+string material.composition Ga,As
+
+// atomic density: /cm3
+// molar volume:   cm3/mol
+// permittivity:   unitless
+
+float atomic.density	4.44e22
+float molar.volume	12.461
+float permittivity	13.1
+float lambda		0.565
+bool  epitaxy		false
+
+map<string,float> mixing.enthalpy { }
+map<string,bool> particles { 
+	GaI_0,+ true
+	AsI 	false
+	GaAs	false
+	AsGa	false
+	VGa	    false
+	VAs	    false
+	BeI_0,- true
+	BeGa	false
+	BeAs	false	
+}
+map<string,bool> defined { }
+array<string,string> interactions {
+	GaI+AsI	    false
+	GaI+GaAs	false
+	GaI+AsGa	false
+	GaI+VGa	    false
+	GaI+VAs	    false
+	GaI+BeI	    false
+	GaI+BeGa	false
+	GaI+BeAs	false
+
+	AsI+GaAs	false
+	AsI+AsGa	false
+	AsI+VGa	    false
+	AsI+VAs     false
+	AsI+BeI	    false
+	AsI+BeGa	false
+	AsI+BeAs	false
+
+	GaAs+AsGa	false
+	GaAs+VGa	false
+	GaAs+VAs	false
+	GaAs+BeI	false
+	GaAs+BeGa	false
+	GaAs+BeAs	false
+
+	AsGa+VGa	false
+	AsGa+VAs	false
+	AsGa+BeI	false
+	AsGa+BeGa	false
+	AsGa+BeAs	false
+
+	VGa+VAs	    false
+	VGa+BeI	    false
+	VGa+BeGa	false
+	VGa+BeAs	false
+	
+	VAs+BeI	    false
+	VAs+BeGa	false
+	VAs+BeAs	false
+
+	BeI+BeGa	false
+	BeI+BeAs	false
+	
+	BeGa+BeAs	false
+
+	GaI+Gas	    true
+	AsI+Gas	    false
+	GaAs+Gas	false
+	AsGa+Gas	false
+	VGa+Gas	    false
+	VAs+Gas	    false		
+	BeI+Gas	    true
+	BeGa+Gas	true
+	BeAs+Gas	false
+}
+array<string> interaction.result { }

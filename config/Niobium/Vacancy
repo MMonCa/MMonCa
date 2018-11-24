@@ -1,0 +1,9 @@
+// Dato: Made it up prefactors. Mathieu's file.
+// arrhenius V(formation) 1e24 2.7524
+// Migration energy from Mathieu's file.
+arrhenius V(migration) 0.1 0.8348
+// Dato: Artur Tamm.
+arrhenius V(formation) 1e24 2.62767
+
+// V cap.radius 0.475
+

@@ -1,0 +1,7 @@
+// Dato: Mathieu's file
+arrhenius I(migration) 2e-3 0.2027
+// Dato:  Cesar UNIOVI (Tabla 2013 04 18)
+arrhenius I(formation) 1e24 4.4025
+
+// I cap.radius 0.5463
+

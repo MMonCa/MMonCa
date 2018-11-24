@@ -1,0 +1,120 @@
+string shape disk
+string to   <111>
+string from ICluster
+float density.cm2 1.92e15
+string migration.type perpendicular
+// coordinates axis.2 1  1 1
+coordinates axis.1 0 -1 1 
+coordinates axis.0 2 -1 -1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+bool percolation false
+float lambda         0.287
+bool IV.model false
+
+proc transform.to   {
+	set list ""
+	return $list  
+}
+
+proc transform.from   {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		lappend list I$size
+		if { $size < 5 } {
+			lappend list < 1e10 0 >
+		} else {
+			lappend list < 0  5 >
+		}
+	}
+	return $list  
+}
+
+proc migration   {
+ 	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr (1e-5)*(pow($size,-0.64))]
+		set ener 0.1
+		set ener_CI 5
+		lappend list I$size < 0% $pref $ener 100% $pref [expr  $ener + 0.1 ] >
+		lappend list CI$size < 0% $pref $ener_CI 100% $pref [expr  $ener + 5 ] >
+	}
+#	lappend list C2V < 1.e-5 1.0 >
+	return $list
+}
+
+proc formation {
+	set list ""	
+	set pot 0
+	for { set size 2 } { $size < 500 } { incr size } {
+	    set e [expr 2./3.]
+		set Ef 3.77
+		set Eb2 0.80
+		set ener [expr $Ef + ($Eb2 - $Ef)*(pow($size,$e)-pow($size-1,$e))/.587401]
+		if { $size == 2 } { set ener 0.8  }
+		if { $size == 3 } { set ener 0.92 }
+		
+		set pot [expr $pot - $ener]
+		lappend list I$size < [ expr $size*$Ef + $pot ] >
+		if { $size > 7 } {
+			lappend list CI$size < [ expr  $size*$Ef + $pot -0.8 ] >
+			lappend list C2I$size < [ expr $size*$Ef + $pot -1.4 ] >
+		}
+	}
+#	lappend list C2V < 4.11 >
+#	lappend list -2.56
+#	lappend list C2V2
+#	lappend list -2.87
+#	lappend list C3V
+#	lappend list -2.85
+#	lappend list C4V
+#	lappend list -3.0
+#	lappend list CV2
+#	lappend list -2.13
+#	lappend list CV3
+#	lappend list -2.47
+#	lappend list CV4
+#	lappend list -2.77
+#	lappend list C4V2
+#	lappend list -5.2
+#	lappend list C3V2
+#	lappend list -3.65
+	return $list
+}
+
+proc prefactor {
+	set list ""	
+	for { set size 2 } { $size < 500 } { incr size } {
+		set pref [expr 8.2e-3*$size]
+		lappend list I$size,I
+		lappend list $pref
+		if { $size > 7 } {
+			lappend list CI$size,C
+			lappend list $pref
+			lappend list C2I$size,C
+			lappend list $pref
+		}
+	}
+#	lappend list C2V,C
+#	lappend list 8.2e-3
+#	lappend list C2V2,V
+#	lappend list 8.2e-3
+#	lappend list C3V,C
+#	lappend list 8.2e-3
+#	lappend list C4V,C
+#	lappend list 8.2e-3
+#	lappend list C4V2,C
+#	lappend list 8.2e-3
+#	lappend list CV2,V
+#	lappend list 8.2e-3
+#	lappend list CV3,V
+#	lappend list 8.2e-3
+#	lappend list CV4,V
+#	lappend list 8.2e-3
+#	lappend list C2V3,V
+#	lappend list 8.2e-3
+#	lappend list C3V2,V
+#	lappend list 8.2e-3
+	return $list
+}
+

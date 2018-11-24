@@ -1,0 +1,14 @@
+// Figured out prefactors.
+// Formation
+// Formation energy: Artur Tamm values.
+// Notation: He is a He atom in interstitial position.
+// Notation: HeV is a He atom in substitutional position.
+arrhenius  He(formation)    1e-3 3.19728
+arrhenius HeV(formation)    5e-4 4.03640
+arrhenius HeI(formation)    1    0
+
+// Migration
+// Migration energy: Mathieu McPhie values.
+arrhenius  He(migration)  2e-4 0.0487 
+arrhenius HeV(migration)  2e-3 2.5741
+arrhenius HeI(migration)  0    5

@@ -1,0 +1,166 @@
+string shape          disk
+float density.cm2     8.5e15
+string to             <111>
+string from           ICluster
+string migration.type perpendicular
+// coordinates axis.2 1  1 1
+coordinates axis.1    0 -1 1 
+coordinates axis.0    2 -1 -1
+coordinates not.in.plane 0 0 0
+float axes.ratio 1
+bool IV.model false
+bool percolation true
+float lambda 0.3088
+
+proc transform.to     { return "" }
+proc transform.from   {
+         set list ""
+         for { set SizeSi 0 } { $SizeSi < 100 } { incr SizeSi } {
+                 for { set SizeC 0 } { $SizeC < 100 } { incr SizeC } {
+                         set Size [expr $SizeSi+$SizeC]
+                         if { $Size > 1 } {
+                             if { $SizeSi == 0 && $Size < 50 } {                                 
+                                 lappend list C${SizeC}^I${Size}
+                                 lappend list < 1e10 0 >
+
+                                 lappend list C${SizeC}^SiI[expr $Size-1]
+                                 lappend list < 1e10 0 >
+                             }
+                             if { $SizeC == 0 && $Size < 50 } {
+                                 lappend list Si${SizeSi}^I${Size}
+                                 lappend list < 1e10 0 >
+
+                                 lappend list Si${SizeSi}^CI[expr $Size-1]
+                                 lappend list < 1e10 0 >
+                             }
+                             if { $SizeC>0 && $SizeSi>0 && $Size < 50 } {
+                                 lappend list Si${SizeSi}C${SizeC}^I${Size}
+                                 lappend list < 1e10 0 >
+
+                                 if { $SizeSi == 1 && $SizeC == 49} {
+                                     lappend list SiC49^CI49
+                                     lappend list < 1e10 0 >                                    
+                                 }
+
+                                 if { $SizeSi > 1 } {
+                                     lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1]
+                                     lappend list < 1e10 0 >
+                                 } 
+
+                                 if { $SizeC > 1 } {
+                                     lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1]
+                                     lappend list < 1e10 0 >
+                                 }
+                             }
+                         }
+                    } 
+          }
+          return $list
+}
+
+proc migration      { return "" }
+
+proc formation {
+       set list ""
+       for { set SizeSi 0 } { $SizeSi < 100 } { incr SizeSi } {
+               for { set SizeC 0 } { $SizeC < 100 } { incr SizeC} {
+                   set Size [expr $SizeSi+$SizeC]
+                   if { $Size>1 } {
+
+                      set n     [expr $SizeSi+$SizeC]
+                      set m     [expr $SizeC/$n]
+                      set Alpha [expr 4.04*$m*$m-3.54*$m+1.717]
+                      set Belta [expr -7.576*$m*$m+6.728*$m+0.908]
+                      set Ef    [expr $Alpha*$n+$Belta*sqrt($n)]
+
+                      if { $SizeSi==0 } {
+                         lappend list C${SizeC}^I${Size}
+                         lappend list < $Ef >
+
+                         lappend list C${SizeC}^SiI[expr $Size-1]
+                         lappend list < $Ef >                         
+                      }
+
+                      if { $SizeC==0 } {
+                         lappend list Si${SizeSi}^I${Size}
+                         lappend list < $Ef >
+
+                         lappend list Si${SizeSi}^CI[expr $Size-1]
+                         lappend list < $Ef >
+                      }
+                      
+                      if { $SizeC>0 && $SizeSi>0 } {
+                         lappend list Si${SizeSi}C${SizeC}^I${Size}
+                         lappend list < $Ef >
+
+                         if { $SizeSi ==1 } {
+                             lappend list SiC${SizeC}^CI${SizeC}
+                             lappend list < $Ef >
+                         }
+
+                         if { $SizeSi > 1 } {
+                             lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1]
+                             lappend list < $Ef >
+                         }
+                         if { $SizeC > 1 } {
+                             lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1]
+                             lappend list < $Ef >
+                         }
+                      }                
+                   }
+               }
+       }
+       return $list      
+}
+
+proc prefactor {
+      set list ""
+      for { set SizeSi 0 } { $SizeSi <100 } { incr SizeSi } {
+              for { set SizeC 0 } { $SizeC < 100 } { incr SizeC } {
+                   set Size [expr $SizeSi+$SizeC]
+                     if { $Size>1 } {
+                        if { $SizeSi==0 } {
+                           lappend list C${SizeC}^I${Size},CI
+                           lappend list 0
+
+                           lappend list C${SizeC}^SiI[expr $Size-1],CI
+                           lappend list 0
+                        }
+                        if { $SizeC==0 } {
+                           lappend list Si${SizeSi}^I${Size},SiI
+                           lappend list 0
+
+                           lappend list Si${SizeSi}^CI[expr $Size-1],SiI
+                           lappend list 0
+                        }
+                        if { $SizeSi>0 && $SizeC>0 } {
+                           lappend list Si${SizeSi}C${SizeC}^I${Size},CI
+                           lappend list 0
+                           lappend list Si${SizeSi}C${SizeC}^I${Size},SiI
+                           lappend list 0
+                           
+                           if { $SizeSi == 1 } {
+                               lappend list SiC${SizeC}^CI${SizeC},CI
+                               lappend list 0
+                           }
+
+                           if { $SizeSi > 1} {
+                               lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1],CI
+                               lappend list 0
+                               lappend list Si${SizeSi}C${SizeC}^CI[expr $Size-1],SiI
+                               lappend list 0                        
+                           }                           
+                           if { $SizeC > 1 } {
+                               lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1],CI
+                               lappend list 0
+                               lappend list Si${SizeSi}C${SizeC}^SiI[expr $Size-1],SiI
+                               lappend list 0
+                           } 
+                        }
+                     }
+              }
+      }
+      return $list
+}
+
+

@@ -1,0 +1,12 @@
+// Formation: Artur Tamm values.
+// Notation: He is a He atom in interstitial position.
+// Notation: HeV is a He atom in substitutional position.
+arrhenius  He(formation) 1e-3 3.53749
+arrhenius HeV(formation) 5e-4 2.66316
+arrhenius HeI(formation) 1    0
+
+// Migration: Mathieu McPhie values.
+arrhenius  He(migration) 2e-4 0.0932
+arrhenius HeV(migration) 2e-3 2.8546 
+arrhenius HeI(migration) 0    5
+
