@@ -9,7 +9,7 @@ bool   partial.ionization      false
 
 // Conjugate-Gradient solver 
 float  cg.tolerance            1e-5
-int    cg.max.iteration        1000
+int    cg.max.iteration        5000
 int    cg.verbose              0
 
 // Newton-Raphson solver
