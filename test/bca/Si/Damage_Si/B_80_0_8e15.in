@@ -1,0 +1,32 @@
+ Dose 8e15
+ FullDoseOutput Off
+
+ RS0 1.85 1.85 0.0
+ Divergence 0.5
+ RareEvent 2
+
+ ShowHisto1D On
+ ShowDamage On
+
+ HSTFile[ B_80_0_8e15. ]
+ GPPlot[ t"Simulacion","SIMS/b80_0_8e15.dat"t"SIMS" ]
+
+ ENERGY 80000 eV
+ NumberOfImplants 1000
+ Tha 0  degrees (tilt)
+ Phi 0	degrees
+
+ Temperature 300 kelvin
+
+ Atom B   5 11.000  519.0	// atom 1
+ Atom Si 14 28.086  519.0	// atom	2
+ Projectiles 1 0
+
+ ABC 1 0 0
+
+// Si <100>
+ XTal 2 6 0.00 0.00 0.00 15	// Si
+ XTal 2 6 0.25 0.25 0.25 15	// Si
+ Amorphous 0
+ XMin 0.0 A
+ XMax 1e10 A
