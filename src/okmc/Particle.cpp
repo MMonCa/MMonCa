@@ -126,7 +126,7 @@ void Particle::selfdiffusion(Kernel::SubDomain *pSub, Kernel::MeshElement *pEle)
         pDomain->_pMesh->getCenter(cFrom, _pElement->getIndex());
         pDomain->_pMesh->getCenter(cTo, pEle->getIndex());
 
-        // Geometrical factor from computing the atom jump probabilities
+        // Geometrical factor for computing the atom jump probabilities
         double g = pDomain->_pAlPar->_corrFactor[mt][int(iorv)] *
                     	                pMesh->longHopFactor(_pElement->getIndex()) *
                     	                pDomain->_pMePar->_lambda[mt] / to.abs();

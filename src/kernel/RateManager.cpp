@@ -67,6 +67,10 @@ void RateManager::setTempK(float K)
 		return;
 	_kelvin = K;
 	_kT     = _kB * K;
+
+	if(Domains::global()->IsPoisson())
+		_pDomain->_pPoisson->setT(_kelvin);
+
 	for(vector<SubDomain *>::iterator i = _subDomains.begin(); i != _subDomains.end(); ++i)
 		(*i)->setkT(_kT);
 }
@@ -144,7 +148,7 @@ void RateManager::anneal(double time, bool bDepth, float depth, long unsigned ev
 				(*i)->setkT(_kT);
 		}
 		if(Domains::global()->IsPoisson() && _pDomain->_um_poisson(_time, _nEvents, _depthLA))
-			_pDomain->_pPoisson->compute(_kelvin);
+			_pDomain->_pPoisson->compute();
 
 		if( (bDepth && _depthLA < depth) || (events > 0 && _nEvents >= events)
 				|| (Domains::global()->getDomains() == 1 && _subDomains.size() == 1 && Domains::global()->getNextEvents() < _nEvents) )

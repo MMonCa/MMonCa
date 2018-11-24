@@ -1086,8 +1086,10 @@ bool Cluster::canInteract(Kernel::SubDomain *pSub, const Particle *dyn, const Pa
 		//compute probs.
 		eForm_init += pMC->_myParams->_eForm(_pElement)._ener + _myParams->_eForm(_pElement)._ener;
 	}
+	else if(def->getEType() == INTERFACE)
+		return def->canInteract(pSub, sta, dyn);
 	else
-		ERRORMSG("Cluster. Reaction not allowed");
+		ERRORMSG("Cluster. Reaction not allowed with defect type " << def->getEType());
 	double arg = eForm_end - eForm_init;
 	if(def->getEType() == MOBILEPARTICLE)  //metastable
 		return (arg < 0? true : pSub->_rng.rand() < exp(arg/_pDomain->_pRM->getkT()));

@@ -125,11 +125,11 @@ class Poisson {
 	void testPN();
 
 	double getPermittivity(MeshNode *, MeshNode *, MeshNode *);
-	void   computeElectronicParameters();
+	void   computeElectronicParameters(double TKelvin);
 	void   setFirstGuess();
 
 	// double getCharge(OKMC::Particle *); // OBSOLETE
-	double getLA(MeshNode *); // OBSOLETE
+	//double getLA(MeshNode *); // OBSOLETE
 	void updateLA();
 
 	double getNc(MeshNode *);
@@ -143,7 +143,8 @@ public:
 	Poisson(Tcl_Interp *, Kernel::Domain *);
 	~Poisson();
 
-	bool compute(const double);
+	bool compute();
+	void setT(double kelvin);
 };
 
 }

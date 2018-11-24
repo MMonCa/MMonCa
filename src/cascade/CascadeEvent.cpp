@@ -80,8 +80,11 @@ CascadeEvent::CascadeEvent(Kernel::Domain *pD, const std::vector<std::string> &f
 					ERRORMSG("Error in cascade file. Format 'Number of particles' seems to be wrong. Unexpected end of file");
 			}
 			bFormat = true;
-			position = _pist.tellg();
-			getline(_pist, theLine);
+			do
+			{
+				position = _pist.tellg();
+				getline(_pist, theLine);
+			} while(theLine.empty() && _pist.eof() == false);
 		} while(!_pist.eof());
 
 	LOWMSG(_startPos.size() << " cascades detected. Format detected is " << (bFormat? "Number of particles":"'# New cascade' tag."));
@@ -150,8 +153,12 @@ void CascadeEvent::perform(Kernel::SubDomain *p, unsigned)
 		stringstream buffer;
 		vector<string> fieldsInFile;
 		getline(_pist, line);
-		if(_pist.eof() || line == "# New cascade" || (numberOfParticles && numberOfParticles == howMany++))
+		if(_pist.eof() ||
+		    line == "# New cascade" ||
+		    (firstLine != "# New cascade" && numberOfParticles == 0) ||
+		    (numberOfParticles && numberOfParticles == howMany))
 			break;
+		howMany++;
 		buffer << line;
 		do
 		{
@@ -161,9 +168,12 @@ void CascadeEvent::perform(Kernel::SubDomain *p, unsigned)
 		} while(!buffer.eof());
 		if(buffer.fail())
 			fieldsInFile.pop_back();
+		if(fieldsInFile.size() == 0)
+			ERRORMSG("Wrong cascade number " << randomPos << ". Header says " << firstLine);
 		create(pMesh, x, y, z, _format, fieldsInFile, m, M, _bReact, _periodic, _voluminic);
 	}
-
+	if(howMany == 0)
+		WARNINGMSG("Empty cascades are present.");
 	//removing the cascade position, so it is not repeated.
 	if(_startPos.size() > 1)
 	{

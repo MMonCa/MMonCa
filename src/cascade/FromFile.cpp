@@ -61,21 +61,22 @@ void FromFile::operator()(const string &fileName,
 		return;
 
 	std::vector<CascadeEvent *> events;
-	unsigned totalCasc = 0;
 	for(unsigned domain=0; domain < Domains::global()->getDomains(); ++domain)
 	{
 		Kernel::Domain * pDomain = Domains::global()->getDomain(domain);
 		Kernel::Coordinates m,M;
 		pDomain->_pMesh->getDomain(m,M);
 		Kernel::MeshElement *pME = pDomain->_pMesh->getElement(0);
-		const unsigned howMany = unsigned(fluence*1e-14 *(M._y - m._y)*(M._z - m._z) + pDomain->_rng_dom.rand());
-		totalCasc += howMany;
+		float const howMany = fluence*1e-14 *(M._y - m._y)*(M._z - m._z);
 		float rate = flux*howMany / fluence;
 		events.push_back(new CascadeEvent(pDomain, format, bReact, periodic, voluminic, bDisplace, bCorrectX, fileName, rate));
 		pDomain->_pRM->insert(events.back(), pME); //in the first element.
 		if(flux == 0) //instantaneus...
-			for(unsigned i=0; i<howMany; ++i)
-				events.back()->perform(pDomain->_pRM->getSubDomain(pME->getSubDomainIdx()), 0);
+		  {
+		    unsigned hM = unsigned(howMany + pDomain->_rng_dom.rand());
+		    for(unsigned i=0; i<hM; ++i)
+		      events.back()->perform(pDomain->_pRM->getSubDomain(pME->getSubDomainIdx()), 0);
+		  }
 	}
 
 	if(tempC != -1)

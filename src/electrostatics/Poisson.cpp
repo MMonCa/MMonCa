@@ -118,7 +118,8 @@ Poisson::Poisson(Tcl_Interp *pTcl, Domain *pDomain) {
 Poisson::~Poisson() {
 }
 
-void Poisson::computeElectronicParameters() {
+void Poisson::computeElectronicParameters(double TKelvin) {
+
 	MeshNode           ***pNode = _pMesh->getNodes();
 	IO::FileParameters   *pPar  = Domains::global()->getFileParameters();
 	IO::ParameterManager *pPM   = Domains::global()->PM();
@@ -255,22 +256,32 @@ void Poisson::setFirstGuess() {
 	}
 }
 
-bool Poisson::compute(const double T) {
+void Poisson::setT(double T)
+{
+	if (_T != T)
+	{
+		_T = T;
+		MEDMSG("Building vector for OKMC particles...");
+		buildOKMCVector();
+
+		if (_selfConsistentLKMC)
+			buildLKMCVector();
+
+		MEDMSG("Building Laplacian matrix...");
+		buildLaplacianMatrix();
+		computeElectronicParameters(T);
+		setFirstGuess();
+	}
+}
+
+bool Poisson::compute() {
 	MEDMSG("Building vector for OKMC particles...");
 	buildOKMCVector();
 
-	if (_selfConsistentLKMC) {
+	if (_selfConsistentLKMC)
 		buildLKMCVector();
-	}
 
 	MEDMSG("Solving non-linear Poisson equation...");
-	if (_T != T) {
-		_T = T;
-		MEDMSG("Building Laplacian matrix...");
-		buildLaplacianMatrix();
-		computeElectronicParameters();
-		setFirstGuess();
-	}
 
 	if (! NewtonRaphson())
 		ERRORMSG("Poisson::NewtonRaphson did not converged!");
@@ -362,14 +373,14 @@ double Poisson::getEg0(MeshNode *pNode) {
 
 // OBSOLETE METHOD
 // Do NOT call!
-double Poisson::getLA(MeshNode *pNode) {
+/* double Poisson::getLA(MeshNode *pNode) {
 	double w = 0.;
 
 	for (std::map<LKMC::LatticeAtom *, double>::iterator it = pNode->_mLA.begin(); it !=pNode->_mLA.end(); ++it)
 		w += it->second;
 
 	return w;
-}
+} */
 
 void Poisson::map2Nodes() {
 	MeshNode ***pNode = _pMesh->getNodes();
@@ -430,13 +441,12 @@ void Poisson::map2Nodes() {
 }
 
 void Poisson::map2Elements() {
-	for(Domains::MeshElementIterator it = Domains::global()->beginMEI(); it != Domains::global()->endMEI(); ++it)
+	for(Kernel::Mesh::iterator it = _pMesh->begin(); it != _pMesh->end(); ++it)
 	{
-		MeshElement *pME = const_cast<MeshElement *>(*it);
 		std::set<MeshNode *> s;
-		const M_TYPE mt = pME->getMaterial();
+		const M_TYPE mt = it->getMaterial();
 
-		_pMesh->getNodesFromElement(pME, s);
+		_pMesh->getNodesFromElement(&(*it), s);
 
 		if (s.empty())
 			ERRORMSG("Poisson::map2Elements: cannot find nodes of element " << it->getIndex());
@@ -445,8 +455,8 @@ void Poisson::map2Elements() {
 		for (std::set<MeshNode *>::const_iterator i = s.begin(); i != s.end(); ++i)
 			V  += (*i)->_V;
 
-		pME->electrostaticPotential() = V / static_cast<double>(s.size());
-		pME->bandGap() = HARTREE_TO_ELECTRONVOLT(_matParam[mt]._Eg);
+		it->electrostaticPotential() = V / static_cast<double>(s.size());
+		it->bandGap() = HARTREE_TO_ELECTRONVOLT(_matParam[mt]._Eg);
 	}
 }
 
