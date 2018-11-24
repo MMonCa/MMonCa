@@ -85,9 +85,9 @@ int main(int argc, char *argv[])
 	LOWMSG("        Contact: imartin2@ucam.edu");
 	LOWMSG("        https://github.com/imartinbragado/MMonCa");
 	LOWMSG("OKMC: (C) 2011-2014 IMDEA Materials Institute.");
-	LOWMSG("OKMC: (C) 2015-2018 Ignacio Martin, Ignacio Dopico")
+	LOWMSG("OKMC: (C) 2015-2018 Ignacio Martin, Ignacio Dopico");
 	LOWMSG("LKMC: (C) 2011-2014 IMDEA Materials Institute.");
-	LOWMSG("LKMC: (C) 2015-2018 Ignacio Martin, Ignacio DOpico")
+	LOWMSG("LKMC: (C) 2015-2018 Ignacio Martin, Ignacio Dopico");
 	LOWMSG("BCA:  (C) 2014 Universidad de Valladolid.");
 #if MMONCA_FELIKS
 	LOWMSG("FEM:  (C) 2014 IMDEA Materials Institute and");

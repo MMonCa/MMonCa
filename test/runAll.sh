@@ -1,7 +1,7 @@
 #!/bin/sh
 # 16 means a maximum of 8 CPUs busy (each one is counted as two because of the time command)
 if [ "A$1" = "A" ]; then
-   version=Obj_g++
+   version=Obj_ubuntu-tcl8.6
 else
    version=$1
 fi
