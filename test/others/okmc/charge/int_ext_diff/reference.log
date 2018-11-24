@@ -1,0 +1,866 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.6 Compiled on Nov 12 2013 16:30:56
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Electrostatic/load.poisson' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Electrostatic/update.events' value='1e6'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/Electrostatic/update.time.decade' value='3'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(formation)' value=' 1e5 8 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='false'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='B+B'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='Bi+B'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='B+Bi'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='Bi+V'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='Bi+Bi'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='Bi+I'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='true' index='B+I'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='I+I'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/Bi(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/Bi(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/Bi_-(migration)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/Bi_-(migration)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/Bi_0(migration)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/Bi_0(migration)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='float' key='Silicon/Boron/Bi(e(-1,0))'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/B(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/B(formation)'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init material='material' minx='-2' miny='0' minz='0' maxx='20' maxy='20' maxz='20'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+     X: (-2 - 20) nm. 15 elements. Delta = 1.46667 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2535 elements
+Loading Particle To Node handler
+Setting long hop in number 3
+Building nodes... Done
+GGGGGGGGGGGGG  -2:-0.533333
+SSSSSSSSSSSSS  -0.533333:0.933333
+SSSSSSSSSSSSS  0.933333:2.4
+SSSSSSSSSSSSS  2.4:3.86667
+SSSSSSSSSSSSS  3.86667:5.33333
+SSSSSSSSSSSSS  5.33333:6.8
+SSSSSSSSSSSSS  6.8:8.26667
+SSSSSSSSSSSSS  8.26667:9.73333
+SSSSSSSSSSSSS  9.73333:11.2
+SSSSSSSSSSSSS  11.2:12.6667
+SSSSSSSSSSSSS  12.6667:14.1333
+SSSSSSSSSSSSS  14.1333:15.6
+SSSSSSSSSSSSS  15.6:17.0667
+SSSSSSSSSSSSS  17.0667:18.5333
+SSSSSSSSSSSSS  18.5333:20
+Loading Poisson...
+Interfacing...
+---------------------------- Warning -----------------------------------
+This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+----------------------------------------------------------------- profile -----
+profile proc='constant' name='B'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Sorry, defect 'B' not implemented yet in the material Gas
+Created Silicon,B(84) 
+----------------------------------------------------------------- extract -----
+extract profile name='B' dimension='0'
+-------------------------------------------------------------------------------
+Initial B conc is 9.54545e+18
+ versus 1e19 
+------------------------------------------------------------------ anneal -----
+anneal time='1e50' temp='600' events='5e7'
+-------------------------------------------------------------------------------
+Annealing the sample for 3.40282e+38 seconds at 873.15K (600ºC)
+Updating MC/Electrostatic/update Next: 6.66667e+06 - 1000000
+got stress data for Silicon
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+Updating MC/Electrostatic/update Next: 1e+07 - 1000000
+Updating MC/Electrostatic/update Next: 3.33333e+07 - 1000000
+600C  500000s           1   0.00%    1.0e-05 s^-1 
+600C  600000s       58833   0.12%    5.9e-01 s^-1 
+600C  700000s       59568   0.12%    7.3e-03 s^-1 
+600C  800000s       59569   0.12%    1.0e-05 s^-1 
+600C  900000s       60939   0.12%    1.4e-02 s^-1 
+600C   3e+06s       60940   0.12%    1.0e-06 s^-1 
+600C   4e+06s      112213   0.22%    5.1e-02 s^-1 
+600C   5e+06s      114052   0.23%    1.8e-03 s^-1 
+600C   6e+06s      178220   0.36%    6.4e-02 s^-1   64168 ev/s 
+600C   8e+06s      239346   0.48%    6.1e-02 s^-1 
+600C   9e+06s      241922   0.48%    2.6e-03 s^-1 
+600C   2e+07s      407975   0.82%    1.7e-02 s^-1 
+600C   3e+07s      616962   1.23%    2.1e-02 s^-1  208987 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+07 - 1000000
+600C   4e+07s      724940   1.45%    1.1e-02 s^-1 
+600C   5e+07s      828159   1.66%    1.0e-02 s^-1 
+Updating MC/Electrostatic/update Next: 6.66667e+07 - 2000000
+600C   6e+07s     1106022   2.21%    2.8e-02 s^-1  277863 ev/s 
+Updating MC/Electrostatic/update Next: 1e+08 - 2000000
+600C   7e+07s     1489031   2.98%    3.8e-02 s^-1  383009 ev/s 
+600C   8e+07s     1611850   3.22%    1.2e-02 s^-1 
+600C   9e+07s     1671623   3.34%    6.0e-03 s^-1 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 2000000
+600C   1e+08s     1757060   3.51%    8.5e-03 s^-1 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 3000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 4000000
+600C   2e+08s     3207620   6.42%    1.5e-02 s^-1  362640 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 5000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 6000000
+600C   3e+08s     5052150  10.10%    1.8e-02 s^-1  461132 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 6000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 7000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 8000000
+600C   4e+08s     7178613  14.36%    2.1e-02 s^-1  354410 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 9000000
+600C   5e+08s     8668746  17.34%    1.5e-02 s^-1  372533 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 10000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 11000000
+600C   6e+08s    10039613  20.08%    1.4e-02 s^-1  456955 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 12000000
+Updating MC/Electrostatic/update Next: 1e+09 - 12000000
+600C   7e+08s    11471013  22.94%    1.4e-02 s^-1  357850 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 13000000
+600C   8e+08s    12681205  25.36%    1.2e-02 s^-1  302548 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 14000000
+Updating MC/Electrostatic/update Next: 1e+09 - 15000000
+600C   9e+08s    14172184  28.34%    1.5e-02 s^-1  496993 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 16000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 16000000
+600C   1e+09s    15839930  31.68%    1.7e-02 s^-1  333549 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 17000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 18000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 19000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 20000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 21000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 22000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 23000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 24000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 25000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 26000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 27000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 28000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 29000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 30000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 31000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 32000000
+600C   2e+09s    31824101  63.65%    1.6e-02 s^-1  389857 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 33000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 34000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 35000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 36000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 37000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 38000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 39000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 40000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 41000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 42000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 43000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 44000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 45000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 46000000
+600C   3e+09s    45645277  91.29%    1.4e-02 s^-1  476592 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 47000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 48000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 49000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 50000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 51000000
+600C 3.22772e+09s    50000000 100.00%    1.9e-02 s^-1  483858 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/B                    84
+MobileParticle/I                     1
+----------------- Event Log --------------
+ ----------------------------------------Gas                  Interface
+Type                Emission
+Silicon           I         1508
+
+ ----------------------------------------Silicon         MobileParticle
+Type                 migrate  break up    emit I    emit V     state  long hop  rejected
+I_0                  1151859                                 1179601               29043
+I_-                    12416                                   12582                 229
+I_+                 14202936                                14710269              506626
+Bi_0                 8694056     34073                       8995437              302640
+Bi_-                   79856      2785                         81928                2156
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle B+I_0              2797 B+I_+             34061
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I_0      1507
+
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' state='0' dimension='0'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.1e19.I' float='60064
+' value='64974.91753339348' error='.1'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+600.1e19.I: Requested error is  < 10% maximum error is 7.55818%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract electrostatic name='bandgap' dimension='0' min.x='0' max.x='20'
+-------------------------------------------------------------------------------
+Eg is 0.93105
+, initial is 1.1245192307692307, scale is 0.8279538264215478 
+----------------------------------------------------------------- extract -----
+extract electrostatic name='valence.bandedge' dimension='0' min.x='0' max.x='20'
+-------------------------------------------------------------------------------
+eF is 0.233878 and eBiM is .7 
+----------------------------------------------------------------- extract -----
+extract electrostatic name='hole.density' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.1e19.hole' array='-1. (...)' value='1e19' error='.35' init='5' end='20'
+-------------------------------------------------------------------------------
+600.1e19.hole 6.06667 1.15018e+19 -> (1e+19 15.018% )
+600.1e19.hole 7.53333 1.05808e+19 -> (1e+19 5.80801% )
+600.1e19.hole 9 9.47684e+18 -> (1e+19 5.2316% )
+600.1e19.hole 10.4667 9.60251e+18 -> (1e+19 3.9749% )
+600.1e19.hole 11.9333 9.96416e+18 -> (1e+19 0.358397% )
+600.1e19.hole 13.4 8.93345e+18 -> (1e+19 10.6655% )
+600.1e19.hole 14.8667 8.78802e+18 -> (1e+19 12.1198% )
+600.1e19.hole 16.3333 1.01128e+19 -> (1e+19 1.128% )
+600.1e19.hole 17.8 1.1885e+19 -> (1e+19 18.85% )
+600.1e19.hole 19.2667 1.24794e+19 -> (1e+19 24.794% )
+---------------------------- Warning -----------------------------------
+600.1e19.hole: Requested error is  < 35%  maximum error is 24.794%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='Bi' state='-' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.1e19.CBiM' array='-1. (...)' value='12194.9172844225' error='.40' init='5' end='20'
+-------------------------------------------------------------------------------
+600.1e19.CBiM 6.06667 12178.7 -> (12194.9 0.13298% )
+600.1e19.CBiM 7.53333 12327.4 -> (12194.9 1.08638% )
+600.1e19.CBiM 9 12660.8 -> (12194.9 3.8203% )
+600.1e19.CBiM 10.4667 12042.8 -> (12194.9 1.24738% )
+600.1e19.CBiM 11.9333 13253.4 -> (12194.9 8.67971% )
+600.1e19.CBiM 13.4 13312.9 -> (12194.9 9.16762% )
+600.1e19.CBiM 14.8667 12416.6 -> (12194.9 1.81783% )
+600.1e19.CBiM 16.3333 12631.1 -> (12194.9 3.57676% )
+600.1e19.CBiM 17.8 11454.4 -> (12194.9 6.07234% )
+600.1e19.CBiM 19.2667 12295.5 -> (12194.9 0.824795% )
+---------------------------- Warning -----------------------------------
+600.1e19.CBiM: Requested error is  < 40%  maximum error is 9.16762%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='Bi' state='0' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.1e19.CBi0' array='-1. (...)' value='1206332.3182843355' error='.75' init='5' end='20'
+-------------------------------------------------------------------------------
+600.1e19.CBi0 6.06667 1.42961e+06 -> (1.20633e+06 18.5088% )
+600.1e19.CBi0 7.53333 1.31364e+06 -> (1.20633e+06 8.89536% )
+600.1e19.CBi0 9 1.22892e+06 -> (1.20633e+06 1.87242% )
+600.1e19.CBi0 10.4667 1.19375e+06 -> (1.20633e+06 1.04303% )
+600.1e19.CBi0 11.9333 1.26965e+06 -> (1.20633e+06 5.24877% )
+600.1e19.CBi0 13.4 1.16984e+06 -> (1.20633e+06 3.02507% )
+600.1e19.CBi0 14.8667 1.119e+06 -> (1.20633e+06 7.2395% )
+600.1e19.CBi0 16.3333 1.30492e+06 -> (1.20633e+06 8.17251% )
+600.1e19.CBi0 17.8 1.40716e+06 -> (1.20633e+06 16.6478% )
+600.1e19.CBi0 19.2667 1.50914e+06 -> (1.20633e+06 25.1015% )
+---------------------------- Warning -----------------------------------
+600.1e19.CBi0: Requested error is  < 75%  maximum error is 25.1015%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract diffusivity macroscopic material='Silicon' name='B'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.1e19.diff' float='4.06631e-21' value='7.800467594707654e-21' error='.75'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+600.1e19.diff: Requested error is  < 75% maximum error is 47.8709%
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init material='material' minx='-2' miny='0' minz='0' maxx='20' maxy='20' maxz='20'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+Deleting old simulation
+Time spent: 121s.
+     X: (-2 - 20) nm. 15 elements. Delta = 1.46667 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2535 elements
+Loading Particle To Node handler
+Setting long hop in number 3
+Building nodes... Done
+GGGGGGGGGGGGG  -2:-0.533333
+SSSSSSSSSSSSS  -0.533333:0.933333
+SSSSSSSSSSSSS  0.933333:2.4
+SSSSSSSSSSSSS  2.4:3.86667
+SSSSSSSSSSSSS  3.86667:5.33333
+SSSSSSSSSSSSS  5.33333:6.8
+SSSSSSSSSSSSS  6.8:8.26667
+SSSSSSSSSSSSS  8.26667:9.73333
+SSSSSSSSSSSSS  9.73333:11.2
+SSSSSSSSSSSSS  11.2:12.6667
+SSSSSSSSSSSSS  12.6667:14.1333
+SSSSSSSSSSSSS  14.1333:15.6
+SSSSSSSSSSSSS  15.6:17.0667
+SSSSSSSSSSSSS  17.0667:18.5333
+SSSSSSSSSSSSS  18.5333:20
+Loading Poisson...
+Interfacing...
+----------------------------------------------------------------- profile -----
+profile proc='constant' name='B'
+-------------------------------------------------------------------------------
+Created Silicon,B(39) 
+----------------------------------------------------------------- extract -----
+extract profile name='B' dimension='0'
+-------------------------------------------------------------------------------
+Initial B conc is 4.43182e+18
+ versus 5e18 
+------------------------------------------------------------------ anneal -----
+anneal time='1e50' temp='600' events='5e7'
+-------------------------------------------------------------------------------
+Annealing the sample for 3.40282e+38 seconds at 873.15K (600ºC)
+Updating MC/Electrostatic/update Next: 6.66667e+06 - 1000000
+got stress data for Silicon
+Updating MC/Electrostatic/update Next: 1e+07 - 1000000
+Updating MC/Electrostatic/update Next: 3.33333e+07 - 1000000
+600C  500000s           1   0.00%    1.0e-05 s^-1 
+600C  600000s        3315   0.01%    3.3e-02 s^-1 
+600C  700000s        4404   0.01%    1.1e-02 s^-1 
+600C   6e+06s        4725   0.01%    3.2e-04 s^-1 
+600C   7e+06s        4726   0.01%    1.0e-06 s^-1 
+600C   8e+06s        4775   0.01%    4.9e-05 s^-1 
+600C   9e+06s        7929   0.02%    3.2e-03 s^-1 
+600C   1e+07s       30155   0.06%    2.2e-02 s^-1 
+600C   2e+07s       33610   0.07%    3.5e-04 s^-1 
+600C   3e+07s       60198   0.12%    2.7e-03 s^-1 
+Updating MC/Electrostatic/update Next: 6.66667e+07 - 1000000
+600C   4e+07s      181868   0.36%    1.2e-02 s^-1 
+600C   5e+07s      207995   0.42%    2.6e-03 s^-1 
+600C   6e+07s      415090   0.83%    2.1e-02 s^-1  207095 ev/s 
+Updating MC/Electrostatic/update Next: 1e+08 - 1000000
+600C   7e+07s      516289   1.03%    1.0e-02 s^-1 
+600C   8e+07s      565347   1.13%    4.9e-03 s^-1 
+600C   9e+07s      669311   1.34%    1.0e-02 s^-1 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 1000000
+600C   1e+08s      669870   1.34%    5.6e-05 s^-1 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 2000000
+600C   2e+08s     1076591   2.15%    4.1e-03 s^-1  406721 ev/s 
+600C   3e+08s     1494090   2.99%    4.2e-03 s^-1  417499 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 2000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 3000000
+600C   4e+08s     2430946   4.86%    9.4e-03 s^-1  468428 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 4000000
+600C   5e+08s     3103164   6.21%    6.7e-03 s^-1  336109 ev/s 
+600C   6e+08s     3546598   7.09%    4.4e-03 s^-1  443434 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 4000000
+Updating MC/Electrostatic/update Next: 1e+09 - 5000000
+600C   7e+08s     4120510   8.24%    5.7e-03 s^-1  573912 ev/s 
+600C   8e+08s     4881883   9.76%    7.6e-03 s^-1  761373 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 6000000
+600C   9e+08s     5414308  10.83%    5.3e-03 s^-1  266212 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 7000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 7000000
+600C   1e+09s     6404604  12.81%    9.9e-03 s^-1  495148 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 8000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 9000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 10000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 11000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 12000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 13000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 14000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 15000000
+600C   2e+09s    14256278  28.51%    7.9e-03 s^-1  461863 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 16000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 17000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 18000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 19000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 20000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 21000000
+600C   3e+09s    20333192  40.67%    6.1e-03 s^-1  467454 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 22000000
+Updating MC/Electrostatic/update Next: 3.33333e+09 - 23000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 23000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 24000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 25000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 26000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 27000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 28000000
+600C   4e+09s    27204172  54.41%    6.9e-03 s^-1  458065 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 29000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 30000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 31000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 32000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 33000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 34000000
+600C   5e+09s    33718841  67.44%    6.5e-03 s^-1  465333 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 35000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 36000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 37000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 38000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 39000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 40000000
+600C   6e+09s    39596362  79.19%    5.9e-03 s^-1  452117 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 41000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 42000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 43000000
+Updating MC/Electrostatic/update Next: 6.66667e+09 - 44000000
+Updating MC/Electrostatic/update Next: 1e+10 - 44000000
+Updating MC/Electrostatic/update Next: 1e+10 - 45000000
+Updating MC/Electrostatic/update Next: 1e+10 - 46000000
+600C   7e+09s    45696867  91.39%    6.1e-03 s^-1  469269 ev/s 
+Updating MC/Electrostatic/update Next: 1e+10 - 47000000
+Updating MC/Electrostatic/update Next: 1e+10 - 48000000
+Updating MC/Electrostatic/update Next: 1e+10 - 49000000
+Updating MC/Electrostatic/update Next: 1e+10 - 50000000
+Updating MC/Electrostatic/update Next: 1e+10 - 51000000
+600C 7.56223e+09s    50000000 100.00%    7.7e-03 s^-1  430313 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/B                    38
+MobileParticle/Bi                    1
+----------------- Event Log --------------
+ ----------------------------------------Gas                  Interface
+Type                Emission
+Silicon           I         3609
+
+ ----------------------------------------Silicon         MobileParticle
+Type                 migrate  break up    emit I    emit V     state  long hop  rejected
+I_0                  2864353                                 2927409       136     56953
+I_-                    61742                                   62683         3      1128
+I_+                 16495825                                16947331       942    443779
+Bi_0                 4835483     18601                       4958268       152    126177
+Bi_-                   94437      3289                         95827         3      1870
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle B+I_0              3320 B+I_+             18571
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I_0      3608
+
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' state='0' dimension='0'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.5e18.I' float='63450.6
+' value='64974.91753339348' error='.1'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+600.5e18.I: Requested error is  < 10% maximum error is 2.34601%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract electrostatic name='bandgap' dimension='0' min.x='0' max.x='20'
+-------------------------------------------------------------------------------
+Eg is 0.93105
+, initial is 1.1245192307692307, scale is 0.8279538264215478 
+----------------------------------------------------------------- extract -----
+extract electrostatic name='valence.bandedge' dimension='0' min.x='0' max.x='20'
+-------------------------------------------------------------------------------
+eF is 0.288876 and eBiM is .7 
+----------------------------------------------------------------- extract -----
+extract electrostatic name='hole.density' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.5e18.hole' array='-1. (...)' value='5e18' error='.35' init='5' end='20'
+-------------------------------------------------------------------------------
+600.5e18.hole 6.06667 4.50268e+18 -> (5e+18 9.9464% )
+600.5e18.hole 7.53333 4.95563e+18 -> (5e+18 0.887405% )
+600.5e18.hole 9 4.6016e+18 -> (5e+18 7.968% )
+600.5e18.hole 10.4667 4.45664e+18 -> (5e+18 10.8672% )
+600.5e18.hole 11.9333 5.23669e+18 -> (5e+18 4.7338% )
+600.5e18.hole 13.4 5.81805e+18 -> (5e+18 16.361% )
+600.5e18.hole 14.8667 5.02904e+18 -> (5e+18 0.580795% )
+600.5e18.hole 16.3333 4.62412e+18 -> (5e+18 7.5176% )
+600.5e18.hole 17.8 5.51858e+18 -> (5e+18 10.3716% )
+600.5e18.hole 19.2667 6.05061e+18 -> (5e+18 21.0122% )
+---------------------------- Warning -----------------------------------
+600.5e18.hole: Requested error is  < 35%  maximum error is 21.0122%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='Bi' state='-' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.5e18.CBiM' array='-1. (...)' value='5661.930901052264' error='.40' init='5' end='20'
+-------------------------------------------------------------------------------
+600.5e18.CBiM 6.06667 6295.03 -> (5661.93 11.1817% )
+600.5e18.CBiM 7.53333 6833.52 -> (5661.93 20.6924% )
+600.5e18.CBiM 9 6443.7 -> (5661.93 13.8075% )
+600.5e18.CBiM 10.4667 6271.46 -> (5661.93 10.7654% )
+600.5e18.CBiM 11.9333 6391.12 -> (5661.93 12.8788% )
+600.5e18.CBiM 13.4 6479.06 -> (5661.93 14.432% )
+600.5e18.CBiM 14.8667 6225.23 -> (5661.93 9.94889% )
+600.5e18.CBiM 16.3333 6200.75 -> (5661.93 9.51653% )
+600.5e18.CBiM 17.8 5732.08 -> (5661.93 1.23897% )
+600.5e18.CBiM 19.2667 5631.44 -> (5661.93 0.538522% )
+---------------------------- Warning -----------------------------------
+600.5e18.CBiM: Requested error is  < 40%  maximum error is 20.6924%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='Bi' state='0' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.5e18.CBi0' array='-1. (...)' value='269655.5843318737' error='.75' init='5' end='20'
+-------------------------------------------------------------------------------
+600.5e18.CBi0 6.06667 298408 -> (269656 10.6626% )
+600.5e18.CBi0 7.53333 351139 -> (269656 30.2176% )
+600.5e18.CBi0 9 333915 -> (269656 23.8302% )
+600.5e18.CBi0 10.4667 309206 -> (269656 14.667% )
+600.5e18.CBi0 11.9333 354083 -> (269656 31.3093% )
+600.5e18.CBi0 13.4 382959 -> (269656 42.0178% )
+600.5e18.CBi0 14.8667 332959 -> (269656 23.4757% )
+600.5e18.CBi0 16.3333 316618 -> (269656 17.4157% )
+600.5e18.CBi0 17.8 329073 -> (269656 22.0346% )
+600.5e18.CBi0 19.2667 348927 -> (269656 29.3973% )
+---------------------------- Warning -----------------------------------
+600.5e18.CBi0: Requested error is  < 75%  maximum error is 42.0178%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract diffusivity macroscopic material='Silicon' name='B'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.5e18.diff' float='3.32825e-21' value='3.796064051959629e-21' error='.75'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+600.5e18.diff: Requested error is  < 75% maximum error is 12.3237%
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init material='material' minx='-2' miny='0' minz='0' maxx='20' maxy='20' maxz='20'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+Deleting old simulation
+Time spent: 110s.
+     X: (-2 - 20) nm. 15 elements. Delta = 1.46667 nm.
+     Y: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+     Z: (0 - 20) nm. 13 elements. Delta = 1.53846 nm.
+Total 2535 elements
+Loading Particle To Node handler
+Setting long hop in number 3
+Building nodes... Done
+GGGGGGGGGGGGG  -2:-0.533333
+SSSSSSSSSSSSS  -0.533333:0.933333
+SSSSSSSSSSSSS  0.933333:2.4
+SSSSSSSSSSSSS  2.4:3.86667
+SSSSSSSSSSSSS  3.86667:5.33333
+SSSSSSSSSSSSS  5.33333:6.8
+SSSSSSSSSSSSS  6.8:8.26667
+SSSSSSSSSSSSS  8.26667:9.73333
+SSSSSSSSSSSSS  9.73333:11.2
+SSSSSSSSSSSSS  11.2:12.6667
+SSSSSSSSSSSSS  12.6667:14.1333
+SSSSSSSSSSSSS  14.1333:15.6
+SSSSSSSSSSSSS  15.6:17.0667
+SSSSSSSSSSSSS  17.0667:18.5333
+SSSSSSSSSSSSS  18.5333:20
+Loading Poisson...
+Interfacing...
+----------------------------------------------------------------- profile -----
+profile proc='constant' name='B'
+-------------------------------------------------------------------------------
+Created Silicon,B(178) 
+----------------------------------------------------------------- extract -----
+extract profile name='B' dimension='0'
+-------------------------------------------------------------------------------
+Initial B conc is 2.02273e+19
+ versus 2e19 
+------------------------------------------------------------------ anneal -----
+anneal time='1e50' temp='600' events='5e7'
+-------------------------------------------------------------------------------
+Annealing the sample for 3.40282e+38 seconds at 873.15K (600ºC)
+Updating MC/Electrostatic/update Next: 6.66667e+06 - 1000000
+got stress data for Silicon
+Updating MC/Electrostatic/update Next: 1e+07 - 1000000
+Updating MC/Electrostatic/update Next: 3.33333e+07 - 1000000
+600C  500000s           1   0.00%    1.0e-05 s^-1 
+600C  600000s      221474   0.44%    2.2e+00 s^-1 
+600C   1e+06s      221475   0.44%    1.0e-05 s^-1 
+600C   2e+06s      446698   0.89%    2.3e-01 s^-1 
+600C   3e+06s      839997   1.68%    3.9e-01 s^-1  393299 ev/s 
+600C   4e+06s      839998   1.68%    1.0e-06 s^-1 
+600C   5e+06s      989718   1.98%    1.5e-01 s^-1  149720 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+07 - 2000000
+600C   6e+06s     1274334   2.55%    2.8e-01 s^-1 
+600C   7e+06s     1395296   2.79%    1.2e-01 s^-1 
+600C   8e+06s     1502655   3.01%    1.1e-01 s^-1  107359 ev/s 
+600C   9e+06s     1743733   3.49%    2.4e-01 s^-1 
+600C   1e+07s     1753291   3.51%    9.6e-03 s^-1 
+Updating MC/Electrostatic/update Next: 3.33333e+07 - 3000000
+600C   2e+07s     2598817   5.20%    8.5e-02 s^-1  422763 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+07 - 4000000
+600C   3e+07s     3151406   6.30%    5.5e-02 s^-1  552589 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+07 - 4000000
+600C   4e+07s     3207411   6.41%    5.6e-03 s^-1 
+Updating MC/Electrostatic/update Next: 6.66667e+07 - 5000000
+600C   5e+07s     4106573   8.21%    9.0e-02 s^-1  449581 ev/s 
+600C   6e+07s     4694520   9.39%    5.9e-02 s^-1  587947 ev/s 
+Updating MC/Electrostatic/update Next: 1e+08 - 5000000
+600C   7e+07s     4695909   9.39%    1.4e-04 s^-1 
+Updating MC/Electrostatic/update Next: 1e+08 - 6000000
+600C   8e+07s     5509508  11.02%    8.1e-02 s^-1  406799 ev/s 
+600C   9e+07s     5919742  11.84%    4.1e-02 s^-1  410234 ev/s 
+Updating MC/Electrostatic/update Next: 1e+08 - 7000000
+Updating MC/Electrostatic/update Next: 1e+08 - 8000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 8000000
+600C   1e+08s     7015807  14.03%    1.1e-01 s^-1  548032 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 9000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 10000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 11000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 12000000
+600C   2e+08s    11027978  22.06%    4.0e-02 s^-1  445796 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 13000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 14000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 15000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 16000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 17000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 18000000
+600C   3e+08s    17014125  34.03%    6.0e-02 s^-1  498845 ev/s 
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 19000000
+Updating MC/Electrostatic/update Next: 3.33333e+08 - 20000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 20000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 21000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 22000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 23000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 24000000
+600C   4e+08s    23557272  47.11%    6.5e-02 s^-1  467367 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 25000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 26000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 27000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 28000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 29000000
+600C   5e+08s    28945838  57.89%    5.4e-02 s^-1  449047 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 30000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 31000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 32000000
+600C   6e+08s    31761134  63.52%    2.8e-02 s^-1  469216 ev/s 
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 33000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 34000000
+Updating MC/Electrostatic/update Next: 6.66667e+08 - 35000000
+Updating MC/Electrostatic/update Next: 1e+09 - 35000000
+Updating MC/Electrostatic/update Next: 1e+09 - 36000000
+600C   7e+08s    35348403  70.70%    3.6e-02 s^-1  448408 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 37000000
+Updating MC/Electrostatic/update Next: 1e+09 - 38000000
+Updating MC/Electrostatic/update Next: 1e+09 - 39000000
+Updating MC/Electrostatic/update Next: 1e+09 - 40000000
+Updating MC/Electrostatic/update Next: 1e+09 - 41000000
+600C   8e+08s    40451900  80.90%    5.1e-02 s^-1  463954 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 42000000
+Updating MC/Electrostatic/update Next: 1e+09 - 43000000
+Updating MC/Electrostatic/update Next: 1e+09 - 44000000
+Updating MC/Electrostatic/update Next: 1e+09 - 45000000
+Updating MC/Electrostatic/update Next: 1e+09 - 46000000
+Updating MC/Electrostatic/update Next: 1e+09 - 47000000
+600C   9e+08s    46342452  92.68%    5.9e-02 s^-1  490879 ev/s 
+Updating MC/Electrostatic/update Next: 1e+09 - 48000000
+Updating MC/Electrostatic/update Next: 1e+09 - 49000000
+Updating MC/Electrostatic/update Next: 1e+09 - 50000000
+Updating MC/Electrostatic/update Next: 1e+09 - 51000000
+600C 9.66342e+08s    50000000 100.00%    5.5e-02 s^-1  457193 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/B                   178
+MobileParticle/I                     1
+----------------- Event Log --------------
+ ----------------------------------------Gas                  Interface
+Type                Emission
+Silicon           I          467
+
+ ----------------------------------------Silicon         MobileParticle
+Type                 migrate  break up    emit I    emit V     state  long hop  rejected
+I_0                   371144                                  381644               10997
+I_-                     1709                                    1832                  29
+I_+                 10002075                                10445092              443495
+Bi_0                13483786     53096                      14087574              600716
+Bi_-                   55547      1943                         57097                1757
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle B+I_0              1995 B+I_+             53044
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I_0       466
+
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' state='0' dimension='0'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.2e19.I' float='64921.4
+' value='64974.91753339348' error='.1'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+600.2e19.I: Requested error is  < 10% maximum error is 0.0823695%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract electrostatic name='bandgap' dimension='0' min.x='0' max.x='20'
+-------------------------------------------------------------------------------
+Eg is 0.93105
+, initial is 1.1245192307692307, scale is 0.8279538264215478 
+----------------------------------------------------------------- extract -----
+extract electrostatic name='valence.bandedge' dimension='0' min.x='0' max.x='20'
+-------------------------------------------------------------------------------
+eF is 0.177403 and eBiM is .7 
+----------------------------------------------------------------- extract -----
+extract electrostatic name='hole.density' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.2e19.hole' array='-1. (...)' value='2e19' error='.35' init='5' end='20'
+-------------------------------------------------------------------------------
+600.2e19.hole 6.06667 2.2263e+19 -> (2e+19 11.315% )
+600.2e19.hole 7.53333 2.12808e+19 -> (2e+19 6.404% )
+600.2e19.hole 9 2.08679e+19 -> (2e+19 4.3395% )
+600.2e19.hole 10.4667 2.09834e+19 -> (2e+19 4.91701% )
+600.2e19.hole 11.9333 1.97934e+19 -> (2e+19 1.033% )
+600.2e19.hole 13.4 2.17864e+19 -> (2e+19 8.932% )
+600.2e19.hole 14.8667 2.5721e+19 -> (2e+19 28.605% )
+600.2e19.hole 16.3333 2.36166e+19 -> (2e+19 18.083% )
+600.2e19.hole 17.8 2.05977e+19 -> (2e+19 2.98851% )
+600.2e19.hole 19.2667 1.95718e+19 -> (2e+19 2.141% )
+---------------------------- Warning -----------------------------------
+600.2e19.hole: Requested error is  < 35%  maximum error is 28.605%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='Bi' state='-' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.2e19.CBiM' array='-1. (...)' value='25841.657584210203' error='.40' init='5' end='20'
+-------------------------------------------------------------------------------
+600.2e19.CBiM 6.06667 28944.6 -> (25841.7 12.0075% )
+600.2e19.CBiM 7.53333 26575.1 -> (25841.7 2.83821% )
+600.2e19.CBiM 9 29611.4 -> (25841.7 14.5878% )
+600.2e19.CBiM 10.4667 28667.9 -> (25841.7 10.9368% )
+600.2e19.CBiM 11.9333 29058.1 -> (25841.7 12.4467% )
+600.2e19.CBiM 13.4 29923.6 -> (25841.7 15.796% )
+600.2e19.CBiM 14.8667 29384.4 -> (25841.7 13.7094% )
+600.2e19.CBiM 16.3333 30129.3 -> (25841.7 16.592% )
+600.2e19.CBiM 17.8 28916.2 -> (25841.7 11.8976% )
+600.2e19.CBiM 19.2667 29639.8 -> (25841.7 14.6978% )
+---------------------------- Warning -----------------------------------
+600.2e19.CBiM: Requested error is  < 40%  maximum error is 16.592%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='Bi' state='0' dimension='1'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.2e19.CBi0' array='-1. (...)' value='5414730.25250846' error='.75' init='5' end='20'
+-------------------------------------------------------------------------------
+600.2e19.CBi0 6.06667 6.60383e+06 -> (5.41473e+06 21.9605% )
+600.2e19.CBi0 7.53333 6.24472e+06 -> (5.41473e+06 15.3284% )
+600.2e19.CBi0 9 6.22953e+06 -> (5.41473e+06 15.0478% )
+600.2e19.CBi0 10.4667 6.30299e+06 -> (5.41473e+06 16.4045% )
+600.2e19.CBi0 11.9333 6.04604e+06 -> (5.41473e+06 11.6591% )
+600.2e19.CBi0 13.4 6.57908e+06 -> (5.41473e+06 21.5034% )
+600.2e19.CBi0 14.8667 7.38905e+06 -> (5.41473e+06 36.462% )
+600.2e19.CBi0 16.3333 7.18648e+06 -> (5.41473e+06 32.7209% )
+600.2e19.CBi0 17.8 6.08344e+06 -> (5.41473e+06 12.3498% )
+600.2e19.CBi0 19.2667 5.88388e+06 -> (5.41473e+06 8.66432% )
+---------------------------- Warning -----------------------------------
+600.2e19.CBi0: Requested error is  < 75%  maximum error is 36.462%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract diffusivity macroscopic material='Silicon' name='B'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='600.2e19.diff' float='1.25376e-20' value='1.6435708975026632e-20' error='.75'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+600.2e19.diff: Requested error is  < 75% maximum error is 23.7173%
+Test PASSED... continuing
+Time spent: 107s.
+         1 times: 600.1e19.CBi0: Requested error is  < 75%  maximum error is 25.1015%
+         1 times: 600.1e19.CBiM: Requested error is  < 40%  maximum error is 9.16762%
+         1 times: 600.1e19.I: Requested error is  < 10% maximum error is 7.55818%
+         1 times: 600.1e19.diff: Requested error is  < 75% maximum error is 47.8709%
+         1 times: 600.1e19.hole: Requested error is  < 35%  maximum error is 24.794%
+         1 times: 600.2e19.CBi0: Requested error is  < 75%  maximum error is 36.462%
+         1 times: 600.2e19.CBiM: Requested error is  < 40%  maximum error is 16.592%
+         1 times: 600.2e19.I: Requested error is  < 10% maximum error is 0.0823695%
+         1 times: 600.2e19.diff: Requested error is  < 75% maximum error is 23.7173%
+         1 times: 600.2e19.hole: Requested error is  < 35%  maximum error is 28.605%
+         1 times: 600.5e18.CBi0: Requested error is  < 75%  maximum error is 42.0178%
+         1 times: 600.5e18.CBiM: Requested error is  < 40%  maximum error is 20.6924%
+         1 times: 600.5e18.I: Requested error is  < 10% maximum error is 2.34601%
+         1 times: 600.5e18.diff: Requested error is  < 75% maximum error is 12.3237%
+         1 times: 600.5e18.hole: Requested error is  < 35%  maximum error is 21.0122%
+       658 times: Snapshot not defined or error.
+        13 times: Sorry, defect 'B' not implemented yet in the material Gas
+         3 times: This binary is compiled for parallelization, but you use only 1 thread. Use serial binary
+There are 8 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

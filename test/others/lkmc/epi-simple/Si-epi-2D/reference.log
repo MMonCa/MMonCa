@@ -1,0 +1,381 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.15
+Compiled on Aug 31 2015 11:36:48 for x86_64-Linux
+for #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+BCA:  (C) 2014 Universidad de Valladolid.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Silicon/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Models/epitaxy' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/random.seed' value='56478'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.etch' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.mig' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.hydride' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride1' value='4e12' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride2' value='8e11' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride3' value='1e1' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.precursor' value='2.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride1' value='2.4' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride2' value='1.9' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride3' value='0.1' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.etch' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/wafer.orientation' value='i 1.0  j 0.0 k 0.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/flat.orientation' value='i -0.0 j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='54' maxy='100' maxz='19.96954402884553' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Silicon() 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (-2 - 54) nm. 37 elements. Delta = 1.51351 nm.
+     Y: (0 - 100) nm. 67 elements. Delta = 1.49254 nm.
+     Z: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+Total 32227 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Gas
+1 -> Silicon
+0000000000000000000000000000000000000000000000000000000000000000000 -                                                                      -2:-0.486486
+1111111111111111111111111111111111111111111111111111111111111111111 -                                                                      52.4865:54
+Starting clusters:  Gas() Silicon()
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='600' depth='31' epitaxy='Si 1.'
+-------------------------------------------------------------------------------
+
+Sticking coefficient is 2.500000e-04 /s 
+Pressure(Si) 1 Torr. Vads is 7.734832e+01 /s 
+Annealing the sample for 1 seconds at 873.15K (600ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+600C 0.000103s           1   0.63%    9.7e+03 s^-1 52.4 nm.       0 ev/s 524 Mb
+600C 0.000131s           2   0.63%    3.6e+04 s^-1 52.4 nm. 524 Mb
+600C 0.000233s           4   0.63%    2.0e+04 s^-1 52.4 nm. 524 Mb
+600C 0.000345s           5   0.63%    9.0e+03 s^-1 52.4 nm. 524 Mb
+600C 0.000443s           7   0.63%    2.0e+04 s^-1 52.4 nm. 524 Mb
+600C 0.000634s           8   0.63%    5.2e+03 s^-1 52.4 nm. 524 Mb
+600C 0.000784s          11   0.63%    2.0e+04 s^-1 52.4 nm. 524 Mb
+600C 0.000825s          12   0.63%    2.4e+04 s^-1 52.4 nm. 524 Mb
+600C 0.000921s          15   0.63%    3.1e+04 s^-1 52.4 nm. 524 Mb
+600C  0.00102s          16   0.63%    1.0e+04 s^-1 52.4 nm. 524 Mb
+600C  0.00123s          18   0.63%    9.5e+03 s^-1 52.4 nm. 524 Mb
+600C  0.00206s          25   0.63%    8.4e+03 s^-1 52.4 nm. 524 Mb
+600C  0.00304s          38   0.63%    1.3e+04 s^-1 52.4 nm. 524 Mb
+600C  0.00405s          51   0.63%    1.3e+04 s^-1 52.4 nm. 524 Mb
+600C  0.00505s          69   0.63%    1.8e+04 s^-1 52.4 nm. 524 Mb
+600C  0.00627s          80   0.63%    9.0e+03 s^-1 52.4 nm. 524 Mb
+600C  0.00707s          87   0.63%    8.7e+03 s^-1 52.4 nm. 524 Mb
+600C  0.00802s         104   0.63%    1.8e+04 s^-1 52.4 nm. 524 Mb
+600C  0.00905s         126   0.63%    2.1e+04 s^-1 52.4 nm. 524 Mb
+600C   0.0101s         146   0.63%    2.0e+04 s^-1 52.4 nm. 524 Mb
+600C   0.0111s         165   0.63%    1.9e+04 s^-1 52.4 nm. 524 Mb
+600C     0.02s         351   0.63%    2.1e+04 s^-1 52.4 nm. 524 Mb
+600C     0.03s         556   0.63%    2.0e+04 s^-1 52.4 nm.     205 ev/s 524 Mb
+600C   0.0401s         817   0.63%    2.6e+04 s^-1 52.4 nm. 524 Mb
+600C     0.05s        1079   0.63%    2.6e+04 s^-1 52.4 nm. 524 Mb
+600C   0.0601s        1386   0.63%    3.1e+04 s^-1 52.4 nm. 524 Mb
+600C     0.07s        1682   0.63%    3.0e+04 s^-1 52.4 nm. 524 Mb
+600C     0.08s        2034   0.63%    3.5e+04 s^-1 52.4 nm. 524 Mb
+600C     0.09s        2376   0.63%    3.4e+04 s^-1 52.4 nm. 524 Mb
+600C      0.1s        2690   1.26%    3.1e+04 s^-1 52.3 nm. 524 Mb
+600C     0.11s        3108   1.26%    4.2e+04 s^-1 52.3 nm. 524 Mb
+600C        1s      114019   5.67%    1.2e+05 s^-1 51.3 nm.   22182 ev/s 524 Mb
+600C        2s      256989   9.45%    1.4e+05 s^-1 50.5 nm.   17871 ev/s 538 Mb
+600C        3s      399125  14.49%    1.4e+05 s^-1 49.4 nm.   17767 ev/s 607 Mb
+600C        4s      542024  18.28%    1.4e+05 s^-1 48.6 nm.   17862 ev/s 676 Mb
+600C        5s      684988  22.69%    1.4e+05 s^-1 47.7 nm.   17870 ev/s 877 Mb
+600C        6s      827228  27.10%    1.4e+05 s^-1 46.7 nm.   17780 ev/s 942 Mb
+600C        7s      970397  30.88%    1.4e+05 s^-1 45.9 nm.   15907 ev/s 1011 Mb
+600C        8s     1111318  35.29%    1.4e+05 s^-1 44.9 nm.   20131 ev/s 1080 Mb
+600C        9s     1253517  39.70%    1.4e+05 s^-1 44.0 nm.   17774 ev/s 1148 Mb
+600C       10s     1393379  43.48%    1.4e+05 s^-1 43.2 nm.   17482 ev/s 1216 Mb
+600C       20s     2792819  85.08%    1.4e+05 s^-1 34.2 nm.   17493 ev/s 2149 Mb
+600C     23.6s     3302221 100.20%    1.4e+05 s^-1 31.0 nm.   17565 ev/s 2395 Mb
+0 -> Gas
+1 -> Silicon
+0000000000000000000000000000000000000000000000000000000000000000000 -                                                                      -2:-0.486486
+0000000010110010001000100000101000011010010010000000110100011000000 -     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX      31.2973:32.8108
+0000001011010011111000010001111111001111001111110011100110101011000 -   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   32.8108:34.3243
+0011100010011011111110000011000010000011101011011001000101001100010 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  34.3243:35.8378
+0100001110000111100011011010100100011001010101010100001010101000111 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  35.8378:37.3514
+0011000010110100101000111110011110001000111101010101100010010110011 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  37.3514:38.8649
+1111001111101101011101100000000100000101011000111111101011101100001 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  38.8649:40.3784
+0100110110000001000001111100010100111101100000110110101010000100111 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  40.3784:41.8919
+1101001110111110010101110011111100101111001011000101111011110010110 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  41.8919:43.4054
+0010000000100000001010110011001110011001111111101001110010010010001 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  43.4054:44.9189
+0001010011011100000100110000111100101011011100110000101001011010001 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  44.9189:46.4324
+1110110110000001101001000100110001000010000110011010010100111000101 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  46.4324:47.9459
+0011010000000010011000001011100100001001110101001110010001010110110 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  47.9459:49.4595
+1000110110001011001110111011100010110000000001101010010010001011101 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  49.4595:50.973
+1100001001100001010001000101111110111111111100001100101111010000110 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  50.973:52.4865
+1111111111111111111111111111111111111111111111111111111111111111111 - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  52.4865:54
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Silicon            LatticeAtom
+Type                 Prec. 0   Prec. 1   Prec. 2   Migrat.   Etching   Adsorpt   Desorpt
+LatticeAtom          2043754                                                     1258467
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='nodist-Si-epi-2D'
+-------------------------------------------------------------------------------
+
+Writing 19197 atoms in nodist-Si-epi-2D.dump done!.
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='depth.0' float='35.3397' value='35.33970' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.0: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.5' float='33.1694' value='33.16940' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.5: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.10' float='32.7834' value='32.78340' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.10: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.15' float='32.6078' value='32.60780' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.15: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.20' float='32.2719' value='32.27190' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.20: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.25' float='32.9806' value='32.98060' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.25: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.30' float='32.3103' value='32.31030' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.30: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.35' float='32.66' value='32.660' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.35: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.40' float='32.3055' value='32.30550' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.40: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.45' float='32.5393' value='32.53930' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.45: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.50' float='32.3302' value='32.33020' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.50: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.55' float='32.5487' value='32.54870' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.55: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.60' float='32.5494' value='32.54940' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.60: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.65' float='32.7547' value='32.75470' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.65: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.70' float='32.5738' value='32.57380' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.70: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.75' float='32.3406' value='32.34060' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.75: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.80' float='32.3533' value='32.35330' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.80: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.85' float='33.1842' value='33.18420' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.85: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.90' float='33.4845' value='33.48450' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.90: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth.95' float='35.0307' value='35.03070' error='0.01'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth.95: Requested error is  < 1% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough' float='2.38997' value='2.4' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough: Requested error is  < 2% maximum error is 0.417918%
+Test PASSED... continuing
+Time spent: 202s. Annealing: 187s.
+         1 times: Alloy material is given but selfdiffusion is set to false
+        43 times: Snapshot not defined or error.
+         1 times: depth.0: Requested error is  < 1% maximum error is 0%
+         1 times: depth.10: Requested error is  < 1% maximum error is 0%
+         1 times: depth.15: Requested error is  < 1% maximum error is 0%
+         1 times: depth.20: Requested error is  < 1% maximum error is 0%
+         1 times: depth.25: Requested error is  < 1% maximum error is 0%
+         1 times: depth.30: Requested error is  < 1% maximum error is 0%
+         1 times: depth.35: Requested error is  < 1% maximum error is 0%
+         1 times: depth.40: Requested error is  < 1% maximum error is 0%
+         1 times: depth.45: Requested error is  < 1% maximum error is 0%
+         1 times: depth.50: Requested error is  < 1% maximum error is 0%
+         1 times: depth.55: Requested error is  < 1% maximum error is 0%
+         1 times: depth.5: Requested error is  < 1% maximum error is 0%
+         1 times: depth.60: Requested error is  < 1% maximum error is 0%
+         1 times: depth.65: Requested error is  < 1% maximum error is 0%
+         1 times: depth.70: Requested error is  < 1% maximum error is 0%
+         1 times: depth.75: Requested error is  < 1% maximum error is 0%
+         1 times: depth.80: Requested error is  < 1% maximum error is 0%
+         1 times: depth.85: Requested error is  < 1% maximum error is 0%
+         1 times: depth.90: Requested error is  < 1% maximum error is 0%
+         1 times: depth.95: Requested error is  < 1% maximum error is 0%
+         1 times: rough: Requested error is  < 2% maximum error is 0.417918%
+There are 15 total sentences. Collect them all!
+Hay 10 tipos de personas...
+                        ... las que saben binario y las que no

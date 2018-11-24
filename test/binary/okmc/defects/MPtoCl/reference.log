@@ -1,0 +1,249 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.1 Compiled on Mar 31 2014 16:40:01
+        Contact: ignacio.martin@imdea.org
+     (C) 2011-2014 IMDEA Materials Institute.     
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.x' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value=' SiliconCarbide SiC Gas Gas '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='SiliconCarbide/Models/interactions' value=' CI+SiC IVCluster,1. '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='SiliconCarbide/Silicon/SiI(migration)' value=' 0 2 '
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='14.5' maxy='14.5' maxz='14.5' material='material'
+-------------------------------------------------------------------------------
+     X: (0 - 14.5) nm. 10 elements. Delta = 1.45 nm.
+     Y: (0 - 14.5) nm. 10 elements. Delta = 1.45 nm.
+     Z: (0 - 14.5) nm. 10 elements. Delta = 1.45 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSS  0:1.45
+SSSSSSSSSS  13.05:14.5
+Interfacing...
+------------------------------------------------------------------ insert -----
+insert particle='SiI' coord='7 7 7'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='SiC' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='CSi' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='CI' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='VC' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='SiI' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='VSi' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles ID='SiC^CI' defect='ICluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='SiC1' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SiC1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='CSi1' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+CSi1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='CI1' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+CI1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='VC1' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+VC1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SiI1' value='1' float='1' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SiI1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='VSi1' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+VSi1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='Cl1' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Cl1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='0.01' temp='600' events='1'
+-------------------------------------------------------------------------------
+Annealing the sample for 0.01 seconds at 873.15K (600ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+600C 4370.29s           1 100.00%    2.5e-04 s^-1 
+----------------------------- Defect logfile --------------
+---------------------------------------SiliconCarbide --------
+IVCluster/SiC^CI                     1
+----------------- Event Log --------------
+ ----------------------------------------SiliconCarbide  MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+SiI                                            1
+
+----------------- Reaction Log --------------
+ ----------------------------------------SiliconCarbide  MobileParticle
+MobileParticle SiC+CI                1
+
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+Created SiliconCarbide,SiI(1) 
+----------------- Event Log --------------
+ ----------------------------------------SiliconCarbide  MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+SiI                                            1
+
+----------------- Reaction Log --------------
+ ----------------------------------------SiliconCarbide  MobileParticle
+MobileParticle SiC+CI                1
+
+----------------------------- Defect logfile --------------
+---------------------------------------SiliconCarbide --------
+IVCluster/SiC^CI                     1
+----------------------------------------------------------------- extract -----
+extract count.particles particle='SiC' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='CSi' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='CI' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='VC' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='SiI' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles particle='VSi' defect='MobileParticle'
+-------------------------------------------------------------------------------
+----------------------------------------------------------------- extract -----
+extract count.particles ID='SiC^CI' defect='IVCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='SiC2' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SiC2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='CSi2' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+CSi2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='CI2' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+CI2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='VC2' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+VC2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SiI2' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SiI2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='VSi2' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+VSi2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='Cl2' value='2' float='2' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Cl2: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='0.01' temp='600' events='2'
+-------------------------------------------------------------------------------
+Annealing the sample for 0.01 seconds at 873.15K (600ºC)
+600C 4370.29s           2 100.00%    1.6e+10 s^-1 
+----------------------------- Defect logfile --------------
+---------------------------------------SiliconCarbide --------
+MobileParticle/CI                    1
+MobileParticle/SiC                   1
+----------------- Event Log --------------
+ ----------------------------------------SiliconCarbide  MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+SiI                                            1
+
+ ----------------------------------------SiliconCarbide         Cluster
+Type                   Mig      To    From     Rec Emissions  
+IVCluster/SiC^CI                                   1(CI) 
+
+----------------- Reaction Log --------------
+ ----------------------------------------SiliconCarbide  MobileParticle
+MobileParticle SiC+CI                1
+
+----------------------------------------------------------------- extract -----
+extract count.particles ID='SiC^CI' defect='IVCluster'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='Cl3' value='0' float='0' error='0'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Cl3: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+Time spent: 2s. Annealing: 0s.
+         1 times: CI1: Requested error is  < 0% maximum error is 0%
+         1 times: CI2: Requested error is  < 0% maximum error is 0%
+         1 times: CSi1: Requested error is  < 0% maximum error is 0%
+         1 times: CSi2: Requested error is  < 0% maximum error is 0%
+         1 times: Cl1: Requested error is  < 0% maximum error is 0%
+         1 times: Cl2: Requested error is  < 0% maximum error is 0%
+         1 times: Cl3: Requested error is  < 0% maximum error is 0%
+         1 times: SiC1: Requested error is  < 0% maximum error is 0%
+         1 times: SiC2: Requested error is  < 0% maximum error is 0%
+         1 times: SiI1: Requested error is  < 0% maximum error is 0%
+         1 times: SiI2: Requested error is  < 0% maximum error is 0%
+        65 times: Snapshot not defined or error.
+         1 times: VC1: Requested error is  < 0% maximum error is 0%
+         1 times: VC2: Requested error is  < 0% maximum error is 0%
+         1 times: VSi1: Requested error is  < 0% maximum error is 0%
+         1 times: VSi2: Requested error is  < 0% maximum error is 0%
+There are 8 total sentences. Collect them all!
+¡Adiós amigos!

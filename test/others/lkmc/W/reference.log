@@ -1,0 +1,236 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.6 Compiled on Dec 19 2013 10:08:56
+Reading config in 
+Reading config in AmorphousBarite
+Reading config in AmorphousSilicon
+Reading config in AmorphousSilicon_Gas
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_SiO2
+Reading config in AmorphousTungsten
+Reading config in Barite
+Reading config in Copper
+Reading config in Copper_Gas
+Reading config in Copper_Niobium
+Reading config in Gas
+Reading config in Gas_Iron
+Reading config in Gas_Silicon
+Reading config in Gas_Tungsten
+Reading config in Iron
+Reading config in MC
+Reading config in MD
+Reading config in Mechanics
+Reading config in Niobium
+Reading config in Nitride
+Reading config in Nitride_SiO2
+Reading config in Silicon
+Reading config in SiO2
+Reading config in SiO2_Silicon
+Reading config in Tungsten
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Tungsten W AmorphousTungsten aW'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Tungsten/Models/particles' value=' '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Tungsten/Models/defined' value=' '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='proc' key='Tungsten/Models/clusters' value=' '
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Quotes " should be escaped in procedure Tungsten/Models/clusters  
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Tungsten/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='proc' key='Tungsten/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+Quotes " should be escaped in procedure Tungsten/Models/interaction.result  
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Tungsten/Lattice/wafer.orientation' value='i 0 j 0 k 1'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Tungsten/Lattice/flat.orientation' value='i 0 j 1 k 0'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousTungsten/Lattice/wafer.orientation' value='i 0 j 0 k 1'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousTungsten/Lattice/flat.orientation' value='i 0 j 1 k 0'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='24' maxy='25.28' maxz='25.28' material='material'
+-------------------------------------------------------------------------------
+     X: (0 - 24) nm. 16 elements. Delta = 1.5 nm.
+     Y: (0 - 25.28) nm. 17 elements. Delta = 1.48706 nm.
+     Z: (0 - 25.28) nm. 17 elements. Delta = 1.48706 nm.
+Total 4624 elements
+Loading Particle To Node handler
+Setting long hop in number 3
+Building nodes... Done
+AAAAAAAAAAAAAAAAA -                    0:1.5
+AAAAAAAAAAAAAAAAA -                    1.5:3
+AAAAAAAAAAAAAAAAA -                    3:4.5
+AAAAAAAAAAAAAAAAA -                    4.5:6
+AAAAAAAAAAAAAAAAA -                    6:7.5
+AAAAAAAAAAAAAAAAA -                    7.5:9
+AAAAAAAAAAAAAAAAA -                    9:10.5
+AAAAAAAAAAAAAAAAA -                    10.5:12
+AAAAAAAAAAAAAAAAA -                    12:13.5
+AAAAAAAAAAAAAAAAA -                    13.5:15
+AAAAAAAAAAAAAAAAA -                    15:16.5
+AAAAAAAAAAAAAAAAA -                    16.5:18
+AAAAAAAAAAAAAAAAA -                    18:19.5
+AAAAAAAAAAAAAAAAA -                    19.5:21
+AAAAAAAAAAAAAAAAA -                    21:22.5
+AAAAAAAAAAAAAAAAA -                    22.5:24
+Amorphizing
+0.1.2.3.4.5.6.7.8.9.10.
+..done
+Cleaning for DIAMOND models...
+Applying strain...
+Done. Updating...done
+
+----------------------------------------------------------------- extract -----
+extract coordination coord=' 12 0.2 0 ' radius='.6' type='1'
+-------------------------------------------------------------------------------
+Found 637 atoms
+
+Taking origin at atom (12.008, 0.316, 0) of type 1
+Dist   Typ H0  H1  H2
+     0 1   0   1   0
+ 0.274 1   0   2   0
+ 0.274 1   0   3   0
+ 0.274 1   0   4   0
+ 0.274 1   0   5   0
+ 0.274 1   0   6   0
+ 0.274 1   0   7   0
+ 0.274 1   0   8   0
+ 0.274 1   0   9   0
+ 0.316 1   0  10   0
+ 0.316 1   0  11   0
+ 0.316 1   0  12   0
+ 0.316 1   0  13   0
+ 0.316 1   0  14   0
+ 0.316 1   0  15   0
+ 0.447 1   0  16   0
+ 0.447 1   0  17   0
+ 0.447 1   0  18   0
+ 0.447 1   0  19   0
+ 0.447 1   0  20   0
+ 0.447 1   0  21   0
+ 0.447 1   0  22   0
+ 0.447 1   0  23   0
+ 0.447 1   0  24   0
+ 0.447 1   0  25   0
+ 0.447 1   0  26   0
+ 0.447 1   0  27   0
+ 0.524 1   0  28   0
+ 0.524 1   0  29   0
+ 0.524 1   0  30   0
+ 0.524 1   0  31   0
+ 0.524 1   0  32   0
+ 0.524 1   0  33   0
+ 0.524 1   0  34   0
+ 0.524 1   0  35   0
+ 0.524 1   0  36   0
+ 0.524 1   0  37   0
+ 0.524 1   0  38   0
+ 0.524 1   0  39   0
+ 0.524 1   0  40   0
+ 0.524 1   0  41   0
+ 0.524 1   0  42   0
+ 0.524 1   0  43   0
+ 0.524 1   0  44   0
+ 0.524 1   0  45   0
+ 0.524 1   0  46   0
+ 0.524 1   0  47   0
+ 0.524 1   0  48   0
+ 0.524 1   0  49   0
+ 0.524 1   0  50   0
+ 0.524 1   0  51   0
+ 0.547 1   0  52   0
+ 0.547 1   0  53   0
+ 0.547 1   0  54   0
+ 0.547 1   0  55   0
+ 0.547 1   0  56   0
+ 0.547 1   0  57   0
+ 0.547 1   0  58   0
+ 0.547 1   0  59   0
+ 
+------------------------------------------------------------------ anneal -----
+anneal time='1e15' temp='25' events='150000'
+-------------------------------------------------------------------------------
+Annealing the sample for 1e+15 seconds at 298.15K (25ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+ 25C   2e+17s           2   0.00%    2.0e-17 s^-1 10.428000 nm. 
+ 25C   3e+17s           3   0.00%    1.0e-17 s^-1 10.428000 nm. 
+ 25C   4e+17s           4   0.00%    1.0e-17 s^-1 10.428000 nm. 
+ 25C   5e+17s           7   0.00%    3.0e-17 s^-1 10.428000 nm. 
+ 25C   6e+17s          11   0.01%    4.0e-17 s^-1 10.428000 nm. 
+ 25C   7e+17s          16   0.01%    5.0e-17 s^-1 10.428000 nm. 
+ 25C   8e+17s          29   0.02%    1.3e-16 s^-1 10.428000 nm. 
+ 25C   9e+17s          35   0.02%    6.0e-17 s^-1 10.428000 nm. 
+ 25C   1e+18s          41   0.03%    6.0e-17 s^-1 10.428000 nm. 
+ 25C   2e+18s          80   0.05%    3.9e-17 s^-1 10.270000 nm. 
+ 25C   3e+18s         125   0.08%    4.5e-17 s^-1 10.270000 nm. 
+ 25C   4e+18s         277   0.18%    1.5e-16 s^-1 10.270000 nm. 
+ 25C   5e+18s         415   0.28%    1.4e-16 s^-1 10.270000 nm. 
+ 25C   6e+18s         472   0.31%    5.7e-17 s^-1 10.112000 nm. 
+ 25C   7e+18s         516   0.34%    4.4e-17 s^-1 10.112000 nm. 
+ 25C   8e+18s         611   0.41%    9.5e-17 s^-1 10.112000 nm. 
+ 25C   9e+18s         669   0.45%    5.8e-17 s^-1 10.112000 nm. 
+ 25C   1e+19s         735   0.49%    6.6e-17 s^-1 10.112000 nm. 
+ 25C   2e+19s        1745   1.16%    1.0e-16 s^-1 9.638000 nm. 
+ 25C   3e+19s        3142   2.09%    1.4e-16 s^-1 9.638000 nm. 
+ 25C   4e+19s        4799   3.20%    1.7e-16 s^-1 9.322001 nm. 
+ 25C   5e+19s        7668   5.11%    2.9e-16 s^-1 9.006001 nm. 
+ 25C   6e+19s       11273   7.52%    3.6e-16 s^-1 8.532001 nm. 
+ 25C   7e+19s       16459  10.97%    5.2e-16 s^-1 7.900001 nm. 
+ 25C   8e+19s       22361  14.91%    5.9e-16 s^-1 7.742001 nm. 
+ 25C   9e+19s       30922  20.61%    8.6e-16 s^-1 7.426000 nm. 
+ 25C   1e+20s       41678  27.79%    1.1e-15 s^-1 6.952000 nm. 
+ 25C 1.52129e+20s      150000 100.00%    2.1e-15 s^-1  108322 ev/s 4.424000 nm. 
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  0:1.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  1.5:3
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  3:4.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  4.5:6
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  6:7.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  7.5:9
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  9:10.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  10.5:12
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  12:13.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  13.5:15
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  15:16.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  16.5:18
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  18:19.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  19.5:21
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  21:22.5
+AAAAAAAAAAAAAAAAA - XXXXXXXXXXXXXXXXX  22.5:24
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------AmorphousTungsten    LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom                     150000
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save xyz='W-end' scale='10'
+-------------------------------------------------------------------------------
+Writing 29868 atoms in W-end.xyz done!.
+Time spent: 10s.
+         1 times: Quotes " should be escaped in procedure Tungsten/Models/clusters  
+         1 times: Quotes " should be escaped in procedure Tungsten/Models/interaction.result  
+       316 times: Snapshot not defined or error.
+There are 8 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

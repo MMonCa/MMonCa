@@ -1,0 +1,271 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.5 Compiled on Aug 28 2013 10:54:05
+Reading config in 
+Reading config in Gas_Iron
+Reading config in Mechanics
+Reading config in AmorphousSilicon
+Reading config in Niobium
+Reading config in SiO2_Silicon
+Reading config in Iron
+Reading config in Gas_Tungsten
+Reading config in Nitride_SiO2
+Reading config in MC
+Reading config in MD
+Reading config in Nitride
+Reading config in AmorphousSilicon_SiO2
+Reading config in AmorphousSilicon_Silicon
+Reading config in AmorphousSilicon_Gas
+Reading config in Copper
+Reading config in Copper_Niobium
+Reading config in Copper_Gas
+Reading config in Barite
+Reading config in Gas_Silicon
+Reading config in AmorphousBarite
+Reading config in Tungsten
+Reading config in Gas
+Reading config in SiO2
+Reading config in Silicon
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Electrostatic/load.poisson' value='true'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Interstitial/I(e(-1,0))' value='0.7'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Interstitial/I(e(0,1))' value='0.5'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Vacancy/V(e(-1,0))' value='0.8'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Vacancy/V(e(0,1))' value='0.4'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='10' maxy='25' maxz='25' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+AmorphousSilicon_Silicon/Arsenic/recombination.length.rightAs can't be lower than lambda. Reassigning interface trapping probability to 1
+AmorphousSilicon_Silicon/Arsenic/recombination.length.rightAsi can't be lower than lambda. Reassigning interface trapping probability to 1
+     X: (-2 - 10) nm. 8 elements. Delta = 1.5 nm.
+     Y: (0 - 25) nm. 17 elements. Delta = 1.47059 nm.
+     Z: (0 - 25) nm. 17 elements. Delta = 1.47059 nm.
+Total 2312 elements
+MeshElement: sizeof: 216
+MeshElement: hops  : 48
+MeshElement: strain: 24
+MeshElement: displa: 12
+MeshElement: interf: 24
+MeshElement: _V    : 8
+Loading Particle To Node handler
+Building nodes... Done
+SSSSSSSSSSSSSSSSS  -2:-0.5
+SSSSSSSSSSSSSSSSS  -0.5:1
+SSSSSSSSSSSSSSSSS  1:2.5
+SSSSSSSSSSSSSSSSS  2.5:4
+SSSSSSSSSSSSSSSSS  4:5.5
+SSSSSSSSSSSSSSSSS  5.5:7
+SSSSSSSSSSSSSSSSS  7:8.5
+SSSSSSSSSSSSSSSSS  8.5:10
+Loading Poisson...
+Interfacing...
+Deltas for concs are (1, 1, 1)
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(formation)'
+-------------------------------------------------------------------------------
+expr 7.95e27*exp(-4/(8.6174e-5*(900+273.15))) is 52089867539.83871 
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Vacancy/V(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Vacancy/V(formation)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------ anneal -----
+anneal time='1e25' temp='900' events='1e8'
+-------------------------------------------------------------------------------
+Annealing the sample for 1e+25 seconds at 1173.15K (900ºC)
+got stress data for Silicon
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+900C       0.007s           1   0.00%    1.0e+03 s^-1 
+900C       0.008s        4513   0.00%    4.5e+06 s^-1 
+900C        0.03s        4514   0.00%    1.0e+02 s^-1 
+900C        0.04s        4614   0.00%    1.0e+04 s^-1 
+900C         0.2s        5073   0.01%    4.6e+03 s^-1 
+900C         0.4s        5099   0.01%    2.6e+02 s^-1 
+900C         0.5s        6932   0.01%    1.8e+04 s^-1 
+900C         0.6s        6933   0.01%    1.0e+01 s^-1 
+900C         0.7s        7005   0.01%    7.2e+02 s^-1 
+900C         0.9s       13370   0.01%    6.4e+04 s^-1 
+900C           1s       13385   0.01%    1.5e+02 s^-1 
+900C           2s       37680   0.04%    2.4e+04 s^-1 
+900C           3s       52073   0.05%    1.4e+04 s^-1 
+900C           4s       62370   0.06%    1.0e+04 s^-1 
+900C           5s       73694   0.07%    1.1e+04 s^-1 
+900C           6s       77040   0.08%    3.3e+03 s^-1 
+900C           7s       93796   0.09%    1.7e+04 s^-1 
+900C           8s       99667   0.10%    5.9e+03 s^-1 
+900C           9s      110005   0.11%    1.0e+04 s^-1 
+900C          10s      158811   0.16%    4.9e+04 s^-1 
+900C          20s      316049   0.32%    1.6e+04 s^-1 
+900C          30s      506833   0.51%    1.9e+04 s^-1 
+900C          40s      692404   0.69%    1.9e+04 s^-1 
+900C          50s      890492   0.89%    2.0e+04 s^-1 
+900C          60s     1067931   1.07%    1.8e+04 s^-1 
+900C          70s     1177225   1.18%    1.1e+04 s^-1  109294 ev/s 
+900C          80s     1356322   1.36%    1.8e+04 s^-1 
+900C          90s     1504753   1.50%    1.5e+04 s^-1 
+900C         100s     1676396   1.68%    1.7e+04 s^-1 
+900C         200s     3357781   3.36%    1.7e+04 s^-1 1681385 ev/s 
+900C         300s     5381731   5.38%    2.0e+04 s^-1 1011975 ev/s 
+900C         400s     6958015   6.96%    1.6e+04 s^-1 1576284 ev/s 
+900C         500s     8476803   8.48%    1.5e+04 s^-1 1518788 ev/s 
+900C         600s    10443219  10.44%    2.0e+04 s^-1  983208 ev/s 
+900C         700s    12140318  12.14%    1.7e+04 s^-1 1697099 ev/s 
+900C         800s    13707546  13.71%    1.6e+04 s^-1  783614 ev/s 
+900C         900s    15304620  15.30%    1.6e+04 s^-1 1597074 ev/s 
+900C        1000s    16880424  16.88%    1.6e+04 s^-1 1575804 ev/s 
+900C        2000s    33833570  33.83%    1.7e+04 s^-1 1210939 ev/s 
+900C        3000s    50438511  50.44%    1.7e+04 s^-1 1277303 ev/s 
+900C        4000s    66805553  66.81%    1.6e+04 s^-1 1169074 ev/s 
+900C        5000s    83495182  83.50%    1.7e+04 s^-1 1283817 ev/s 
+900C      5995.7s   100000000 100.00%    1.7e+04 s^-1 1178915 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/I                     1
+----------------- Event Log --------------
+ ----------------------------------------SiO2                 Interface
+Type          Emission
+Silicon     I        38214V        28391
+
+ ----------------------------------------Silicon         MobileParticle
+Type           migrate  break up    emit I    emit V     state
+I_0           16254123                                16258496
+I_-            7501055                                 7501931
+I_+            8481160                                 8477643
+V_0           11970390                                11966835
+V_-            2703805                                 2706664
+V_+            3054201                                 3057091
+
+ ----------------------------------------Silicon              IVCluster
+Type           migrate      emit transform recombine
+IVCluster                                          1
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle V_0+I_0               1
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I_0     38212 Interface+V_0     28390
+
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' state='0'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='900.I0' array=' -1 (...)' value='52089867539.83871' init='1' end='10' error='.08'
+-------------------------------------------------------------------------------
+900.I0 1.75 5.13716e+10 -> (5.20899e+10 1.3789% )
+900.I0 3.25 5.15577e+10 -> (5.20899e+10 1.02164% )
+900.I0 4.75 5.16461e+10 -> (5.20899e+10 0.851929% )
+900.I0 6.25 5.14855e+10 -> (5.20899e+10 1.16024% )
+900.I0 7.75 5.15896e+10 -> (5.20899e+10 0.960396% )
+900.I0 9.25 5.16489e+10 -> (5.20899e+10 0.846551% )
+---------------------------- Warning -----------------------------------
+900.I0: Requested error is  < 8%  maximum error is 1.3789%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' state='+'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='900.I+' array=' -1 (...)' value='27154257891.99837' init='1' end='10' error='.08'
+-------------------------------------------------------------------------------
+900.I+ 1.75 2.68309e+10 -> (2.71543e+10 1.19082% )
+900.I+ 3.25 2.69105e+10 -> (2.71543e+10 0.897675% )
+900.I+ 4.75 2.68823e+10 -> (2.71543e+10 1.00153% )
+900.I+ 6.25 2.69059e+10 -> (2.71543e+10 0.914622% )
+900.I+ 7.75 2.69634e+10 -> (2.71543e+10 0.702863% )
+900.I+ 9.25 2.69396e+10 -> (2.71543e+10 0.79051% )
+---------------------------- Warning -----------------------------------
+900.I+: Requested error is  < 8%  maximum error is 1.19082%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='I' state='-'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='900.I-' array=' -1 (...)' value='24024896578.468643' init='1' end='10' error='.08'
+-------------------------------------------------------------------------------
+900.I- 1.75 2.36919e+10 -> (2.40249e+10 1.38605% )
+900.I- 3.25 2.37258e+10 -> (2.40249e+10 1.24495% )
+900.I- 4.75 2.37917e+10 -> (2.40249e+10 0.97065% )
+900.I- 6.25 2.38245e+10 -> (2.40249e+10 0.834121% )
+900.I- 7.75 2.38827e+10 -> (2.40249e+10 0.591872% )
+900.I- 9.25 2.38736e+10 -> (2.40249e+10 0.629755% )
+---------------------------- Warning -----------------------------------
+900.I-: Requested error is  < 8%  maximum error is 1.38605%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='V' state='0'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='900.V0' array=' -1 (...)' value='78905786610259.08' init='1' end='10' error='.08'
+-------------------------------------------------------------------------------
+900.V0 1.75 7.7414e+13 -> (7.89058e+13 1.89059% )
+900.V0 3.25 7.82373e+13 -> (7.89058e+13 0.847198% )
+900.V0 4.75 7.80475e+13 -> (7.89058e+13 1.08774% )
+900.V0 6.25 7.84399e+13 -> (7.89058e+13 0.590434% )
+900.V0 7.75 7.86028e+13 -> (7.89058e+13 0.383987% )
+900.V0 9.25 7.82585e+13 -> (7.89058e+13 0.820333% )
+---------------------------- Warning -----------------------------------
+900.V0: Requested error is  < 8%  maximum error is 1.89059%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='V' state='+'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='900.V+' array=' -1 (...)' value='20169262505571.066' init='1' end='10' error='.08'
+-------------------------------------------------------------------------------
+900.V+ 1.75 1.97352e+13 -> (2.01693e+13 2.1521% )
+900.V+ 3.25 1.99725e+13 -> (2.01693e+13 0.97556% )
+900.V+ 4.75 1.99779e+13 -> (2.01693e+13 0.948785% )
+900.V+ 6.25 1.99409e+13 -> (2.01693e+13 1.13223% )
+900.V+ 7.75 2.00291e+13 -> (2.01693e+13 0.694934% )
+900.V+ 9.25 1.99899e+13 -> (2.01693e+13 0.889289% )
+---------------------------- Warning -----------------------------------
+900.V+: Requested error is  < 8%  maximum error is 2.1521%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile.mobile name='V' state='-'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='900.V-' array=' -1 (...)' value='17844878975798.414' init='1' end='10' error='.08'
+-------------------------------------------------------------------------------
+900.V- 1.75 1.75399e+13 -> (1.78449e+13 1.70905% )
+900.V- 3.25 1.76602e+13 -> (1.78449e+13 1.0349% )
+900.V- 4.75 1.76456e+13 -> (1.78449e+13 1.11672% )
+900.V- 6.25 1.77227e+13 -> (1.78449e+13 0.684667% )
+900.V- 7.75 1.76662e+13 -> (1.78449e+13 1.00128% )
+900.V- 9.25 1.77386e+13 -> (1.78449e+13 0.595562% )
+---------------------------- Warning -----------------------------------
+900.V-: Requested error is  < 8%  maximum error is 1.70905%
+Test PASSED... continuing
+Deleting 290 objects...done
+Time spent: 82s.
+         1 times: 900.I+: Requested error is  < 8%  maximum error is 1.19082%
+         1 times: 900.I-: Requested error is  < 8%  maximum error is 1.38605%
+         1 times: 900.I0: Requested error is  < 8%  maximum error is 1.3789%
+         1 times: 900.V+: Requested error is  < 8%  maximum error is 2.1521%
+         1 times: 900.V-: Requested error is  < 8%  maximum error is 1.70905%
+         1 times: 900.V0: Requested error is  < 8%  maximum error is 1.89059%
+       167 times: Snapshot not defined or error.
+No por mucho simular amanece más temprano

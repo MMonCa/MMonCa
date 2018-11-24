@@ -1,0 +1,265 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.8
+Compiled on Aug 26 2014 13:55:01 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas AmorphousSilicon aSi'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/wafer.orientation' value='i 6.123233995736766e-17  j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/flat.orientation' value='i -1.0 j 4.3297802811774664e-17 k 4.3297802811774664e-17'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/wafer.orientation' value='i 6.123233995736766e-17  j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='AmorphousSilicon/Lattice/flat.orientation' value='i -1.0 j 4.3297802811774664e-17 k 4.3297802811774664e-17'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='V+I'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='I+V'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='I+I'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value='false' index='V+V'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='60' maxy='180' maxz='19.96954402884553' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: AmorphousSilicon() Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+     X: (-2 - 60) nm. 41 elements. Delta = 1.5122 nm.
+     Y: (0 - 180) nm. 120 elements. Delta = 1.5 nm.
+     Z: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+Total 63960 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -                                                                                                                           -2:-0.487805
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                                           13.122:14.6341
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                                           58.4878:60
+Starting clusters:  AmorphousSilicon() Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: BI+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: CI+SiO2
+Interfacing...
+Checking SPER.............Refining A/C interface ............. Done.
+----------------------------------------------------------------- profile -----
+profile name='I' proc='myName'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+Sorry, defect 'I' not implemented yet in the material Gas
+---------------------------- Warning -----------------------------------
+Sorry, defect 'I' not implemented yet in the material AmorphousSilicon
+Doing SPER after profile:
+Checking SPER.............Refining A/C interface ............. Done.
+Out I(1) 
+Discarded I(1460222) 
+Created Silicon,I(2228621) 
+----------------------------------------------------------------- extract -----
+extract amorphous.fraction
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='1' error='0' init='15' end='52' tag='AmorphIV'
+-------------------------------------------------------------------------------
+
+AmorphIV 15.3902 1 -> (1 0% )
+AmorphIV 16.9024 1 -> (1 0% )
+AmorphIV 18.4146 1 -> (1 0% )
+AmorphIV 19.9268 1 -> (1 0% )
+AmorphIV 21.439 1 -> (1 0% )
+AmorphIV 22.9512 1 -> (1 0% )
+AmorphIV 24.4634 1 -> (1 0% )
+AmorphIV 25.9756 1 -> (1 0% )
+AmorphIV 27.4878 1 -> (1 0% )
+AmorphIV 29 1 -> (1 0% )
+AmorphIV 30.5122 1 -> (1 0% )
+AmorphIV 32.0244 1 -> (1 0% )
+AmorphIV 33.5366 1 -> (1 0% )
+AmorphIV 35.0488 1 -> (1 0% )
+AmorphIV 36.561 1 -> (1 0% )
+AmorphIV 38.0732 1 -> (1 0% )
+AmorphIV 39.5854 1 -> (1 0% )
+AmorphIV 41.0976 1 -> (1 0% )
+AmorphIV 42.6098 1 -> (1 0% )
+AmorphIV 44.1219 1 -> (1 0% )
+AmorphIV 45.6341 1 -> (1 0% )
+AmorphIV 47.1463 1 -> (1 0% )
+AmorphIV 48.6585 1 -> (1 0% )
+AmorphIV 50.1707 1 -> (1 0% )
+AmorphIV 51.6829 1 -> (1 0% )
+---------------------------- Warning -----------------------------------
+AmorphIV: Requested error is  < 0%  maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='550' depth='51'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1 seconds at 823.15K (550ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+550C   0.002s           1 100.00%    1.1e+03 s^-1 52.420048 nm. 
+550C   0.003s           5 100.00%    4.0e+03 s^-1 52.420048 nm. 
+550C   0.004s           8 100.00%    3.0e+03 s^-1 52.420048 nm. 
+550C   0.005s           9 100.00%    1.0e+03 s^-1 52.420048 nm. 
+550C   0.006s          10 100.00%    1.0e+03 s^-1 52.420048 nm. 
+550C   0.007s          11 100.00%    1.0e+03 s^-1 52.420048 nm. 
+550C   0.008s          11 100.00%    0.0e+00 s^-1 52.420048 nm. 
+550C   0.009s          11 100.00%    0.0e+00 s^-1 52.420048 nm. 
+550C    0.01s          12 100.00%    1.0e+03 s^-1 52.420048 nm. 
+550C   0.011s          16 100.00%    4.0e+03 s^-1 52.420048 nm. 
+550C    0.02s          30 100.00%    1.6e+03 s^-1 52.420048 nm. 
+550C    0.03s          44 100.00%    1.4e+03 s^-1 52.420048 nm. 
+550C    0.04s          67 100.00%    2.3e+03 s^-1 52.420048 nm. 
+550C    0.05s          87 100.00%    2.0e+03 s^-1 52.420048 nm. 
+550C    0.06s         106 100.00%    1.9e+03 s^-1 52.420048 nm. 
+550C    0.07s         130 100.00%    2.4e+03 s^-1 52.420048 nm. 
+550C    0.08s         155 100.00%    2.5e+03 s^-1 52.420048 nm. 
+550C    0.09s         170 100.00%    1.5e+03 s^-1 52.420048 nm. 
+550C     0.1s         188 100.00%    1.8e+03 s^-1 52.420048 nm. 
+550C    0.11s         217 100.00%    2.9e+03 s^-1 52.420048 nm. 
+550C       1s        3828 100.00%    4.1e+03 s^-1 52.228031 nm. 
+550C       2s       10437 100.00%    6.6e+03 s^-1 52.228031 nm.    6609 ev/s 
+550C       3s       18560 100.00%    8.1e+03 s^-1 52.036015 nm. 
+550C       4s       27296 100.00%    8.7e+03 s^-1 52.036015 nm.    8736 ev/s 
+550C       5s       36253 100.00%    9.0e+03 s^-1 51.843998 nm. 
+550C       6s       44999 100.00%    8.7e+03 s^-1 51.843998 nm.    8746 ev/s 
+550C       7s       53914 100.00%    8.9e+03 s^-1 51.651985 nm. 
+550C       8s       62962 100.00%    9.0e+03 s^-1 51.651981 nm.    9048 ev/s 
+550C       9s       71866 100.00%    8.9e+03 s^-1 51.651981 nm. 
+550C      10s       80896 100.00%    9.0e+03 s^-1 51.651981 nm.    9030 ev/s 
+550C      20s      169330 100.00%    8.8e+03 s^-1 51.075932 nm.   17686 ev/s 
+550C 20.1945s      171038 100.00%    8.8e+03 s^-1 50.883919 nm. 
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -                                                                                                                           -2:-0.487805
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -                                                                                                                           13.122:14.6341
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  52.439:53.9512
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                                           58.4878:60
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom             1045      9345     72648     39287     21971     26733         9
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean min.y='60' max.y='120' min.z='0' max.z='19.96954402884553'
+-------------------------------------------------------------------------------
+
+Original depth is 51.5098 
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='550' depth='31'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1 seconds at 823.15K (550ºC)
+550C      30s      257378   2.90%    8.8e+03 s^-1 50.307865 nm.   12334 ev/s 
+550C      40s      344189   5.79%    8.7e+03 s^-1 49.731815 nm.   14468 ev/s 
+550C      50s      431056   9.66%    8.7e+03 s^-1 48.963749 nm.   14477 ev/s 
+550C      60s      516676  11.59%    8.6e+03 s^-1 48.579716 nm.   12231 ev/s 
+550C      70s      601512  14.49%    8.5e+03 s^-1 48.003666 nm.   16967 ev/s 
+550C      80s      684942  17.38%    8.3e+03 s^-1 47.427616 nm.   13905 ev/s 
+550C      90s      768617  20.28%    8.4e+03 s^-1 46.851566 nm.   11953 ev/s 
+550C     100s      851439  23.82%    8.3e+03 s^-1 46.147511 nm.   16564 ev/s 
+550C     200s     1650973  52.15%    8.0e+03 s^-1 40.515018 nm.   12691 ev/s 
+550C     300s     2401955  81.44%    7.5e+03 s^-1 34.690521 nm.   11734 ev/s 
+550C  359.53s     2823109 100.11%    7.1e+03 s^-1 30.978210 nm.   12032 ev/s 
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -                                                                                                                           -2:-0.487805
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -                                                                                                                           13.122:14.6341
+AAAAAAAAAAAAAAAAASSSSSSSSSSSAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAAAAAAAAAAA -               XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                 32.7805:34.2927
+AAAAAAAAAAAAAAASSSSSSSSSSSSSSAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAAAAAAAAAA -              XXXXX         XXXXXXX                                                                    XXXXX               34.2927:35.8049
+AAAAAAAAAAAAAAASSSSSSSSSSSSSSSSAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAAAAAAAA -            XXXXX            XXXXXXX        XXXXXX                                                      XXXXXX             35.8049:37.3171
+AAAAAAAAAAAASSSSSSSSSSSSSSSSSSSSAASSSSSSSSSSASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAAAAAA -           XXXXXX              XXXXX       XXXX                                                           XXXXX            37.3171:38.8293
+AAAAAAAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAAAAA -         XXXXXX                 XXXX      XXXXX                                                             XXXXX          38.8293:40.3415
+AAAAAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAAA -        XXXXX                           XXXXXX                                                               XXXXX         40.3415:41.8537
+AAAAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAAAA -       XXXX                             XXXXX                                                                  XXXXX       41.8537:43.3659
+AAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAAA -     XXXXX                              XXX                                                                     XXXXX      43.3659:44.878
+AAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAAA -    XXXX                           XXX                                                                            XXXX     44.878:46.3902
+AAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAAA -  XXXXX                            XXX                                                                             XXXXX   46.3902:47.9024
+AASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAA - XXXX                              XXX                                                                              XXXXX  47.9024:49.4146
+ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSA - XXX                                             XXX                                                                  XXX  49.4146:50.9268
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS - XX                                                           XX                                                       XX  50.9268:52.439
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -                                                                                                                           58.4878:60
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------AmorphousSilicon    LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom            20240    191427   1170957    691479    355357    393450       199
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean min.y='60' max.y='120' min.z='0' max.z='19.96954402884553'
+-------------------------------------------------------------------------------
+
+90 - Final depth is 32.2496 
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+Velocity  for angle 90 is 3.405514601331131 in nm/min. 
+Roughness for angle 90 is 4.82596 52.0722 5.79149 in nm. 
+-------------------------------------------------------------------- test -----
+test tag='0' float='3.332' value='3.405514601331131' error='0.10'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+0: Requested error is  < 10% maximum error is 2.1587%
+Test PASSED... continuing
+Time spent: 253s. Annealing: 221s.
+         1 times: 0: Requested error is  < 10% maximum error is 2.1587%
+         1 times: AmorphIV: Requested error is  < 0%  maximum error is 0%
+         1 times: Silicon/Models/interactions Interaction not used: BI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: CI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: I+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: V+SiO2
+        62 times: Snapshot not defined or error.
+    557461 times: Sorry, defect 'I' not implemented yet in the material AmorphousSilicon
+   1630561 times: Sorry, defect 'I' not implemented yet in the material Gas
+There are 11 total sentences. Collect them all!
+El mayor obstáculo para encontrar la felicidad...
+                                     ... es buscarla

@@ -1,0 +1,270 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.11
+Compiled on Mar  5 2015 15:19:00 for x86_64-Linux
+for #76-Ubuntu SMP Thu Feb 26 18:52:13 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Iron Fe'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Iron/Models/interactions' value=' 
+	<111>+<111>	true
+ '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Iron/Models/defined' value=' 
+	ICluster true
+	<111>   true
+	<100>	true
+ '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Iron/Models/interaction.result' value=' 
+	<111> == <111> = <111>
+	<111> ~= <111> = <100>
+	<111> > <111>  = <111>
+	<111> < <111>  = <100>
+ '
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='15' maxy='15' maxz='15' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Iron(<100> <111> ICluster ) 
+     X: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Y: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Z: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+Starting clusters:  Iron(<100> <111> ICluster )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I200' coord=' 7 7 7 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I200' coord=' 7.1 7.1 7.1 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ anneal -----
+anneal temp='-70' time='1e25' events='1'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+25 seconds at 203.15K (-70ºC)
+-70C 2.63e-10s           1 100.00%    3.8e+09 s^-1 90 Mb
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+<111>/I400                           1
+----------------- Event Log --------------
+ ----------------------------------------Iron                   Cluster
+Type                   Mig      To    From     Rec Emissions  
+<111>/I400               1                         
+
+----------------- Reaction Log --------------
+ ----------------------------------------Iron                   Cluster
+Cluster    <111>+<111>           1
+
+----------------------------------------------------------------- extract -----
+extract count.defects defect='<111>' ID='I400'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='==' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+==: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='15' maxy='15' maxz='15' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Iron(<100> <111> ICluster ) 
+Deleting old simulation
+     X: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Y: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Z: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+Starting clusters:  Iron(<100> <111> ICluster )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I200' coord=' 7 7 7 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I210' coord=' 7.1 7.1 7.1 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ anneal -----
+anneal temp='-70' time='1e25' events='1'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+25 seconds at 203.15K (-70ºC)
+---------------------------- Warning -----------------------------------
+No more events to anneal... over.
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+<100>/I410                           1
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+ ----------------------------------------Iron                   Cluster
+Cluster    <111>+<111>           1
+
+----------------------------------------------------------------- extract -----
+extract count.defects defect='<100>' ID='I410'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='~=' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+~=: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='15' maxy='15' maxz='15' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Iron(<100> <111> ICluster ) 
+Deleting old simulation
+     X: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Y: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Z: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+Starting clusters:  Iron(<100> <111> ICluster )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I40' coord=' 7 7 7 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I20' coord=' 7.1 7.1 7.1 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ anneal -----
+anneal temp='-70' time='1e25' events='1'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+25 seconds at 203.15K (-70ºC)
+-70C 2.64e-10s           1 100.00%    3.8e+09 s^-1 96 Mb
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+<111>/I60                            1
+----------------- Event Log --------------
+ ----------------------------------------Iron                   Cluster
+Type                   Mig      To    From     Rec Emissions  
+<111>/I60                1                         
+
+----------------- Reaction Log --------------
+ ----------------------------------------Iron                   Cluster
+Cluster    <111>+<111>           1
+
+----------------------------------------------------------------- extract -----
+extract count.defects defect='<111>' ID='I60'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='>' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+>: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='15' maxy='15' maxz='15' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Iron(<100> <111> ICluster ) 
+Deleting old simulation
+     X: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Y: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+     Z: (0 - 15) nm. 10 elements. Delta = 1.5 nm.
+Total 1000 elements
+Loading Particle To Node handler
+Building nodes... Done
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+Starting clusters:  Iron(<100> <111> ICluster )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I20' coord=' 7 7 7 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ insert -----
+insert defect='<111>' ID='I40' coord=' 7.1 7.1 7.1 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------ anneal -----
+anneal temp='-70' time='1e25' events='1'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+25 seconds at 203.15K (-70ºC)
+IIIIIIIIII -             0:1.5
+IIIIIIIIII -             13.5:15
+----------------------------- Defect logfile --------------
+---------------------------------------      Iron --------
+<100>/I60                            1
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+ ----------------------------------------Iron                   Cluster
+Cluster    <111>+<111>           1
+
+----------------------------------------------------------------- extract -----
+extract count.defects defect='<100>' ID='I60'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='<' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+<: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+Time spent: 1s. Annealing: 0s.
+         1 times: <: Requested error is  < 0% maximum error is 0%
+         1 times: ==: Requested error is  < 0% maximum error is 0%
+         1 times: >: Requested error is  < 0% maximum error is 0%
+         2 times: No more events to anneal... over.
+         2 times: Snapshot not defined or error.
+         1 times: ~=: Requested error is  < 0% maximum error is 0%
+There are 14 total sentences. Collect them all!
+¡Curioso... 
+        ...cuando menos!

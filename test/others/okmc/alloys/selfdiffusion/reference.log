@@ -1,0 +1,263 @@
+#   #        #   #  ###  #   #      ###  ###        Modular 
+## ##        ## ## #   # ##  #     #    #   #         MC     
+# # #        # # # #   # # # #     #    #####      Simulator  
+#   #        #   # #   # #  ##     #    #   #    (C)I. Martin-
+#   # odular #   #  ###  #   # te   ### #   # rlo    Bragado   
+                                                    2011-2013  
+Version: 1.0.5 Compiled on Aug 26 2013 12:19:50
+Reading config in 
+Reading config in AmorphousSilicon
+Reading config in Gas_Tungsten
+Reading config in SiO2_Silicon
+Reading config in Nitride
+Reading config in Gas_Silicon
+Reading config in Silicon
+Reading config in Mechanics
+Reading config in Iron
+Reading config in MC
+Reading config in AmorphousSilicon_Silicon
+Reading config in MD
+Reading config in Gas_Iron
+Reading config in AmorphousSilicon_SiO2
+Reading config in Tungsten
+Reading config in AmorphousBarite
+Reading config in Copper
+Reading config in SiO2
+Reading config in Nitride_SiO2
+Reading config in Copper_Niobium
+Reading config in Niobium
+Reading config in AmorphousSilicon_Gas
+Reading config in Gas
+Reading config in Copper_Gas
+Reading config in Barite
+Recognizing element 14 for material Silicon
+------------------------------------------------------------------- param -----
+param set type='string' key='MC/General/model' value='OKMC'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='1'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/lambda' value='0.384'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Interstitial/I(self)' value=' 267.12 4.6 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Interstitial/I(alloying)' value=' 220.83 4.7 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(self)' value=' 2.305 4.24 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(alloying)' value=' 0.998 4.34 '
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(self)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Interstitial/I(self)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Vacancy/V(self)'
+-------------------------------------------------------------------------------
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Vacancy/V(self)'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- init -----
+init minx='-1.5' miny='0' minz='0' maxx='34.5' maxy='30' maxz='30' material='material'
+-------------------------------------------------------------------------------
+Recognizing element 14 for material Silicon
+AmorphousSilicon_Silicon/Arsenic/recombination.length.rightAs can't be lower than lambda. Reassigning interface trapping probability to 1
+AmorphousSilicon_Silicon/Arsenic/recombination.length.rightAsi can't be lower than lambda. Reassigning interface trapping probability to 1
+     X: (-1.5 - 34.5) nm. 36 elements. Delta = 1 nm.
+     Y: (0 - 30) nm. 20 elements. Delta = 1.5 nm.
+     Z: (0 - 30) nm. 20 elements. Delta = 1.5 nm.
+Total 14400 elements
+MeshElement: sizeof: 208
+MeshElement: hops  : 48
+MeshElement: strain: 24
+MeshElement: displa: 12
+MeshElement: interf: 24
+MeshElement: _V    : 8
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGG  -1.5:-0.5
+SSSSSSSSSSSSSSSSSSSS  -0.5:0.5
+SSSSSSSSSSSSSSSSSSSS  0.5:1.5
+SSSSSSSSSSSSSSSSSSSS  1.5:2.5
+SSSSSSSSSSSSSSSSSSSS  2.5:3.5
+SSSSSSSSSSSSSSSSSSSS  3.5:4.5
+SSSSSSSSSSSSSSSSSSSS  4.5:5.5
+SSSSSSSSSSSSSSSSSSSS  5.5:6.5
+SSSSSSSSSSSSSSSSSSSS  6.5:7.5
+SSSSSSSSSSSSSSSSSSSS  7.5:8.5
+SSSSSSSSSSSSSSSSSSSS  8.5:9.5
+SSSSSSSSSSSSSSSSSSSS  9.5:10.5
+SSSSSSSSSSSSSSSSSSSS  10.5:11.5
+SSSSSSSSSSSSSSSSSSSS  11.5:12.5
+SSSSSSSSSSSSSSSSSSSS  12.5:13.5
+SSSSSSSSSSSSSSSSSSSS  13.5:14.5
+SSSSSSSSSSSSSSSSSSSS  14.5:15.5
+SSSSSSSSSSSSSSSSSSSS  15.5:16.5
+SSSSSSSSSSSSSSSSSSSS  16.5:17.5
+SSSSSSSSSSSSSSSSSSSS  17.5:18.5
+SSSSSSSSSSSSSSSSSSSS  18.5:19.5
+SSSSSSSSSSSSSSSSSSSS  19.5:20.5
+SSSSSSSSSSSSSSSSSSSS  20.5:21.5
+SSSSSSSSSSSSSSSSSSSS  21.5:22.5
+SSSSSSSSSSSSSSSSSSSS  22.5:23.5
+SSSSSSSSSSSSSSSSSSSS  23.5:24.5
+SSSSSSSSSSSSSSSSSSSS  24.5:25.5
+SSSSSSSSSSSSSSSSSSSS  25.5:26.5
+SSSSSSSSSSSSSSSSSSSS  26.5:27.5
+SSSSSSSSSSSSSSSSSSSS  27.5:28.5
+SSSSSSSSSSSSSSSSSSSS  28.5:29.5
+SSSSSSSSSSSSSSSSSSSS  29.5:30.5
+SSSSSSSSSSSSSSSSSSSS  30.5:31.5
+SSSSSSSSSSSSSSSSSSSS  31.5:32.5
+SSSSSSSSSSSSSSSSSSSS  32.5:33.5
+SSSSSSSSSSSSSSSSSSSS  33.5:34.5
+Interfacing...
+Deltas for concs are (1, 1, 1)
+----------------------------------------------------------------- profile -----
+profile name='Ge' proc='prof'
+-------------------------------------------------------------------------------
+Created Silicon,Ge(18000) 
+------------------------------------------------------------------ anneal -----
+anneal time='100' temp='1000'
+-------------------------------------------------------------------------------
+Annealing the sample for 100 seconds at 1273.15K (1000ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+1000C      0.0009s           1   0.00%    1.0e+04 s^-1 
+1000C       0.001s          16   0.00%    1.5e+05 s^-1 
+1000C       0.002s         316   0.00%    3.0e+05 s^-1 
+1000C       0.004s         317   0.00%    1.0e+03 s^-1 
+1000C       0.005s         319   0.00%    2.0e+03 s^-1 
+1000C       0.006s         591   0.01%    2.7e+05 s^-1 
+1000C       0.007s         673   0.01%    8.2e+04 s^-1 
+1000C       0.008s         686   0.01%    1.3e+04 s^-1 
+1000C       0.009s         724   0.01%    3.8e+04 s^-1 
+1000C        0.01s        1536   0.01%    8.1e+05 s^-1 
+1000C        0.02s       53304   0.02%    5.2e+06 s^-1 
+1000C        0.03s       55069   0.03%    1.8e+05 s^-1 
+1000C        0.04s       57607   0.04%    2.5e+05 s^-1 
+1000C        0.05s       61380   0.05%    3.8e+05 s^-1 
+1000C        0.06s       61693   0.06%    3.1e+04 s^-1 
+1000C        0.07s       61755   0.07%    6.2e+03 s^-1 
+1000C        0.08s       99335   0.08%    3.8e+06 s^-1 
+1000C        0.09s      100036   0.09%    7.0e+04 s^-1 
+1000C         0.1s      112946   0.10%    1.3e+06 s^-1 
+1000C         0.2s      160717   0.20%    4.8e+05 s^-1 
+1000C         0.3s      248811   0.30%    8.8e+05 s^-1 
+1000C         0.4s      307562   0.40%    5.9e+05 s^-1 
+1000C         0.5s      372888   0.50%    6.5e+05 s^-1 
+1000C         0.6s      570864   0.60%    2.0e+06 s^-1  197976 ev/s 
+1000C         0.7s      631623   0.70%    6.1e+05 s^-1 
+1000C         0.8s      691954   0.80%    6.0e+05 s^-1 
+1000C         0.9s      721280   0.90%    2.9e+05 s^-1 
+1000C           1s      759489   1.00%    3.8e+05 s^-1 
+1000C           2s     1753417   2.00%    9.9e+05 s^-1  993928 ev/s 
+1000C           3s     2585417   3.00%    8.3e+05 s^-1  416000 ev/s 
+1000C           4s     3161691   4.00%    5.8e+05 s^-1 
+1000C           5s     3897149   5.00%    7.4e+05 s^-1  735458 ev/s 
+1000C           6s     4728266   6.00%    8.3e+05 s^-1  415558 ev/s 
+1000C           7s     5628424   7.00%    9.0e+05 s^-1  900158 ev/s 
+1000C           8s     6623045   8.00%    9.9e+05 s^-1  497310 ev/s 
+1000C           9s     7695373   9.00%    1.1e+06 s^-1 1072328 ev/s 
+1000C          10s     8680051  10.00%    9.8e+05 s^-1  492339 ev/s 
+1000C          20s    16100981  20.00%    7.4e+05 s^-1  674630 ev/s 
+1000C          30s    24125677  30.00%    8.0e+05 s^-1  668724 ev/s 
+1000C          40s    32015362  40.00%    7.9e+05 s^-1  657473 ev/s 
+1000C          50s    39822934  50.00%    7.8e+05 s^-1  600582 ev/s 
+1000C          60s    46986115  60.00%    7.2e+05 s^-1  651198 ev/s 
+1000C          70s    54895354  70.00%    7.9e+05 s^-1  659103 ev/s 
+1000C          80s    61831844  80.00%    6.9e+05 s^-1  693649 ev/s 
+1000C          90s    69242454  90.00%    7.4e+05 s^-1  617550 ev/s 
+1000C         100s    76039367 100.00%    6.8e+05 s^-1  617901 ev/s 
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+MobileParticle/Ge                18000
+----------------- Event Log --------------
+ ----------------------------------------Gas                  Interface
+Type          Emission
+Silicon     I        35297V        16996
+
+ ----------------------------------------Silicon         MobileParticle
+Type           migrate  break up    emit I    emit V     state
+I             51740124
+V             24246933
+
+ ----------------------------------------Silicon              IVCluster
+Type           migrate      emit transform recombine
+IVCluster                      7                  10
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle V+I                  10 V+V                   7
+
+ ----------------------------------------Silicon              Interface
+Interface  Interface+I       35287 Interface+V       16986
+
+----------------------------------------------------------------- extract -----
+extract profile name='Ge' file='Ge.profile'
+-------------------------------------------------------------------------------
+Results written in Ge.profile
+----------------------------------------------------------------- extract -----
+extract profile name='Ge'
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.120' float='4.01111e+20' value='5.093186083453476e+20' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.120: Requested error is  < 40% maximum error is 21.2456%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.130' float='1.06889e+21' value='1.2227351229017248e+21' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.130: Requested error is  < 40% maximum error is 12.5821%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.140' float='2.19667e+21' value='2.301571341523241e+21' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.140: Requested error is  < 40% maximum error is 4.55781%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.150' float='3.77889e+21' value='3.3967665890155514e+21' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.150: Requested error is  < 40% maximum error is 11.2496%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.160' float='4.68222e+21' value='3.930575827937296e+21' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.160: Requested error is  < 40% maximum error is 19.123%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.170' float='3.76778e+21' value='3.5661192606007023e+21' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.170: Requested error is  < 40% maximum error is 5.65491%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='SelfDiffusion.in.180' float='2.20778e+21' value='2.536791402691515e+21' error='0.4'
+-------------------------------------------------------------------------------
+---------------------------- Warning -----------------------------------
+SelfDiffusion.in.180: Requested error is  < 40% maximum error is 12.9696%
+Test PASSED... continuing
+Deleting 400 objects...done
+Time spent: 118s.
+         1 times: SelfDiffusion.in.120: Requested error is  < 40% maximum error is 21.2456%
+         1 times: SelfDiffusion.in.130: Requested error is  < 40% maximum error is 12.5821%
+         1 times: SelfDiffusion.in.140: Requested error is  < 40% maximum error is 4.55781%
+         1 times: SelfDiffusion.in.150: Requested error is  < 40% maximum error is 11.2496%
+         1 times: SelfDiffusion.in.160: Requested error is  < 40% maximum error is 19.123%
+         1 times: SelfDiffusion.in.170: Requested error is  < 40% maximum error is 5.65491%
+         1 times: SelfDiffusion.in.180: Requested error is  < 40% maximum error is 12.9696%
+       153 times: Snapshot not defined or error.
+¡Esto sí que es ...
+                ... una chirigota!

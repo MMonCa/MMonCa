@@ -1,0 +1,174 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.15
+Compiled on Aug 31 2015 11:36:48 for x86_64-Linux
+for #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+BCA:  (C) 2014 Universidad de Valladolid.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Silicon/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Models/epitaxy' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Epitaxy/model.simplified' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.etch' value='5.6e9' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.mig' value='1.0e6' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride1' value='4e12' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride2' value='8e11' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride3' value='1e1' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.precursor' value='1.85' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride1' value='2.4' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride2' value='1.9' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride3' value='0.1' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.etch' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/General/snapshot.events' value='500000'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/snapshot.time.decade' value='1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='-20' miny='0' minz='0' maxx='50' maxy='6.144475085798624' maxz='6.144475085798624' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Silicon() 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (-20 - 50) nm. 47 elements. Delta = 1.48936 nm.
+     Y: (0 - 6.14447) nm. 4 elements. Delta = 1.53612 nm.
+     Z: (0 - 6.14447) nm. 4 elements. Delta = 1.53612 nm.
+Total 752 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Gas
+1 -> Silicon
+0000 -       -20:-18.5106
+1111 -       5.31915:6.80851
+1111 -       48.5106:50
+Starting clusters:  Gas() Silicon()
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+-------------------------------------------------------------------- save -----
+save lammps='nodist-Si'
+-------------------------------------------------------------------------------
+
+Writing 256 atoms in nodist-Si.dump done!.
+------------------------------------------------------------------ anneal -----
+anneal time='5.0' temp='600' epitaxy='Si 1.0'
+-------------------------------------------------------------------------------
+
+Sticking coefficient is 2.500000e-04 /s 
+Pressure(Si) 1 Torr. Vads is 7.734832e+01 /s 
+Annealing the sample for 5 seconds at 873.15K (600ºC)
+600C 0.000481s           1   0.01%    2.1e+03 s^-1 5.3 nm. 94 Mb
+600C   0.0011s           4   0.02%    4.8e+03 s^-1 5.3 nm. 94 Mb
+600C  0.00203s          15   0.04%    1.2e+04 s^-1 5.3 nm. 94 Mb
+600C     0.01s         145   0.20%    1.6e+04 s^-1 5.3 nm. 94 Mb
+600C   0.0206s         276   0.41%    1.2e+04 s^-1 5.2 nm. 94 Mb
+600C      0.1s         630   2.00%    4.5e+03 s^-1 5.0 nm. 94 Mb
+600C      0.2s        1084   4.00%    4.5e+03 s^-1 4.9 nm. 94 Mb
+0 -> Gas
+1 -> Silicon
+0000 -       -20:-18.5106
+1111 - XXXX  -0.638298:0.851064
+0000 - XXXX  0.851064:2.34043
+0100 - XXXX  2.34043:3.82979
+1111 - XXXX  5.31915:6.80851
+1111 -       48.5106:50
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Silicon            LatticeAtom
+Type                 Prec. 0   Prec. 1   Prec. 2   Migrat.   Etching   Adsorpt   Desorpt
+LatticeAtom            12620                                    2406                6369
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='nodist-Si' append
+-------------------------------------------------------------------------------
+
+Writing 381 atoms in nodist-Si.dump done!.
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='depth' float='0.431884' value='0.431884' error='0.025'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth: Requested error is  < 2.5% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough' float='0.819074' value='0.819074' error='0.03'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough: Requested error is  < 3% maximum error is 0%
+Test PASSED... continuing
+Time spent: 1s. Annealing: 1s.
+         1 times: Alloy material is given but selfdiffusion is set to false
+         1 times: depth: Requested error is  < 2.5% maximum error is 0%
+         1 times: rough: Requested error is  < 3% maximum error is 0%
+There are 15 total sentences. Collect them all!
+Lo más importante en la vida es...
+                               ... ¡Vaya! ¡Se me olvidó!

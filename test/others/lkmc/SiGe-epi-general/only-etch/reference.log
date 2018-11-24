@@ -1,0 +1,145 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.8
+Compiled on Aug  7 2014 16:01:03 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Silicon/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Models/epitaxy' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Epitaxy/model.simplified' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Epitaxy/prefactor.epi' value='0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Epitaxy/prefactor.mig' value='0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Epitaxy/prefactor.etch' value='1e9'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/General/snapshot.events' value='100000'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/snapshot.time.decade' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Tungsten/Lattice/wafer.orientation' value='i 0 j 0 k 1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Tungsten/Lattice/flat.orientation' value='i 0 j 1 k 0'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='24' maxy='30.72237542899312' maxz='30.72237542899312' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Silicon() 
+     X: (0 - 24) nm. 16 elements. Delta = 1.5 nm.
+     Y: (0 - 30.7224) nm. 20 elements. Delta = 1.53612 nm.
+     Z: (0 - 30.7224) nm. 20 elements. Delta = 1.53612 nm.
+Total 6400 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGGGGGGGGGGGGGGGGG -                       0:1.5
+SSSSSSSSSSSSSSSSSSSS -                       13.5:15
+SSSSSSSSSSSSSSSSSSSS -                       22.5:24
+Starting clusters:  Gas() Silicon()
+Checking SPER.............Refining A/C interface ............. Done.
+------------------------------------------------------------------ anneal -----
+anneal time='356000' temp='600'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 356000 seconds at 873.15K (600ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+600C    0.01s           2   0.00%    2.5e+02 s^-1 10.590450 nm. 
+600C     0.1s           9   0.00%    8.8e+01 s^-1 10.590450 nm. 
+600C     0.2s          11   0.00%    2.0e+01 s^-1 10.590450 nm. 
+600C      10s          53   0.00%    4.3e+00 s^-1 10.590450 nm. 
+600C     100s         125   0.03%    8.0e-01 s^-1 10.590450 nm. 
+600C    1000s         378   0.28%    2.8e-01 s^-1 10.590450 nm. 
+600C   10000s        3958   2.81%    4.0e-01 s^-1 10.590450 nm. 
+600C  100000s       71320  28.09%    7.5e-01 s^-1   33681 ev/s 10.590450 nm. 
+600C  146579s      100001  41.17%    6.2e-01 s^-1   28681 ev/s 10.590450 nm. 
+600C  265034s      200001  74.45%    8.4e-01 s^-1   33333 ev/s 10.590450 nm. 
+600C  356000s      274725 100.00%    8.2e-01 s^-1   24908 ev/s 10.590450 nm. 
+GGGGGGGGGGGGGGGGGGGG -                       0:1.5
+SGSSSSSGSSSSGSSSSGSS - XXXXXXXXXXXXXXXXXXXX  18:19.5
+SSSSSSSSSSSSSSSSSSSS - XXXXX XXXXXXXXXXXXXX  19.5:21
+SSSSSSSSSSSSSSSSSSSS -                       22.5:24
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Gas                LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom                               274725
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save ovito='nodist-Si'
+-------------------------------------------------------------------------------
+
+Writing 7652 atoms in nodist-Si.dump done!.
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='depth' float='19.3911' value='19.40' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth: Requested error is  < 2% maximum error is 0.0458747%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='rough' float='0.283126' value='0.283' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough: Requested error is  < 2% maximum error is 0.0445245%
+Test PASSED... continuing
+Time spent: 11s. Annealing: 9s.
+        17 times: Snapshot not defined or error.
+         1 times: depth: Requested error is  < 2% maximum error is 0.0458747%
+         1 times: rough: Requested error is  < 2% maximum error is 0.0445245%
+There are 11 total sentences. Collect them all!
+Camarón que se duerme...
+                     ... se lo lleva la corriente

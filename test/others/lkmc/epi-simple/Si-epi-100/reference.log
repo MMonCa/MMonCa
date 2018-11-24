@@ -1,0 +1,245 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.15
+Compiled on Aug 31 2015 11:36:48 for x86_64-Linux
+for #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+BCA:  (C) 2014 Universidad de Valladolid.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Silicon/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Models/epitaxy' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.etch' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.mig' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride1' value='4e12' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride2' value='8e11' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.dehydride3' value='1e1' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.precursor' value='2.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride1' value='2.4' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride2' value='1.9' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.dehydride3' value='0.1' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.etch' value='0.0' index='Si'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.y' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='MC/Mesh/periodic.z' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/wafer.orientation' value='i 1.0  j 0.0 k 0.0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Lattice/flat.orientation' value='i -0.0 j 0.7071067811865475 k 0.7071067811865475'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='54' maxy='19.96954402884553' maxz='19.96954402884553' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Silicon() 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (-2 - 54) nm. 37 elements. Delta = 1.51351 nm.
+     Y: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+     Z: (0 - 19.9695) nm. 13 elements. Delta = 1.53612 nm.
+Total 6253 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Gas
+1 -> Silicon
+0000000000000 -                -2:-0.486486
+1111111111111 -                52.4865:54
+Starting clusters:  Gas() Silicon()
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='600' depth='51' epitaxy='Si 1.0'
+-------------------------------------------------------------------------------
+
+Sticking coefficient is 2.500000e-04 /s 
+Pressure(Si) 1 Torr. Vads is 7.734832e+01 /s 
+Annealing the sample for 1 seconds at 873.15K (600ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+600C 0.000625s           1   8.79%    1.6e+03 s^-1 52.4 nm.       1 ev/s 163 Mb
+600C  0.00106s           2   8.79%    2.3e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00157s           4   8.79%    3.9e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00214s           8   8.79%    7.1e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00312s          14   8.79%    6.1e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00421s          17   8.79%    2.8e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00515s          19   8.79%    2.1e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00623s          20   8.79%    9.3e+02 s^-1 52.4 nm. 163 Mb
+600C  0.00706s          22   8.79%    2.4e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00826s          29   8.79%    5.8e+03 s^-1 52.4 nm. 163 Mb
+600C  0.00922s          31   8.79%    2.1e+03 s^-1 52.4 nm. 163 Mb
+600C     0.01s          32   8.79%    1.3e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0111s          37   8.79%    4.7e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0203s          64   8.79%    2.9e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0304s         108   8.79%    4.4e+03 s^-1 52.4 nm. 163 Mb
+600C     0.04s         162   8.79%    5.6e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0501s         205   8.79%    4.3e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0601s         269   8.79%    6.3e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0702s         332   8.79%    6.3e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0801s         402   8.79%    7.0e+03 s^-1 52.4 nm. 163 Mb
+600C   0.0901s         497  17.58%    9.5e+03 s^-1 52.3 nm. 163 Mb
+600C      0.1s         586  17.58%    8.7e+03 s^-1 52.3 nm. 163 Mb
+600C     0.11s         675  17.58%    9.1e+03 s^-1 52.3 nm. 163 Mb
+600C        1s       22912  70.31%    2.5e+04 s^-1 51.5 nm.   22237 ev/s 163 Mb
+600C     1.53s       37743 105.46%    2.8e+04 s^-1 50.9 nm.   14831 ev/s 163 Mb
+0 -> Gas
+1 -> Silicon
+0000000000000 -                -2:-0.486486
+0100100000100 - XXXXXXXXXXXXX  50.973:52.4865
+1111111111111 - XXXXXXXXXXXXX  52.4865:54
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Silicon            LatticeAtom
+Type                 Prec. 0   Prec. 1   Prec. 2   Migrat.   Etching   Adsorpt   Desorpt
+LatticeAtom            23380                                                       14363
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+Original depth is 51.5453 
+------------------------------------------------------------------ anneal -----
+anneal time='1' temp='600' depth='31' epitaxy='Si 1.0'
+-------------------------------------------------------------------------------
+
+Sticking coefficient is 2.500000e-04 /s 
+Pressure(Si) 1 Torr. Vads is 7.734832e+01 /s 
+Annealing the sample for 1 seconds at 873.15K (600ºC)
+600C        2s       51530   2.05%    2.9e+04 s^-1 50.5 nm. 166 Mb
+600C        3s       80563   6.82%    2.9e+04 s^-1 49.6 nm.   29033 ev/s 194 Mb
+600C        4s      109360  11.59%    2.9e+04 s^-1 48.6 nm.   28797 ev/s 208 Mb
+600C        5s      137778  15.68%    2.8e+04 s^-1 47.8 nm.   14209 ev/s 222 Mb
+600C        6s      166332  20.45%    2.9e+04 s^-1 46.8 nm.   28554 ev/s 236 Mb
+600C        7s      195495  24.54%    2.9e+04 s^-1 46.0 nm.   29163 ev/s 280 Mb
+600C        8s      224442  29.32%    2.9e+04 s^-1 45.1 nm.   28947 ev/s 294 Mb
+600C        9s      252921  34.09%    2.8e+04 s^-1 44.1 nm.   28479 ev/s 308 Mb
+600C       10s      281290  38.18%    2.8e+04 s^-1 43.3 nm.   28369 ev/s 321 Mb
+600C       20s      567074  82.49%    2.9e+04 s^-1 34.5 nm.   23815 ev/s 519 Mb
+600C     23.8s      676301 100.22%    2.9e+04 s^-1 31.0 nm.   27306 ev/s 572 Mb
+0 -> Gas
+1 -> Silicon
+0000000000000 -                -2:-0.486486
+0101100110010 - XXXXXXXXXXXXX  31.2973:32.8108
+0001010111011 - XXXXXXXXXXXXX  32.8108:34.3243
+0111110001000 - XXXXXXXXXXXXX  34.3243:35.8378
+1011001101010 - XXXXXXXXXXXXX  35.8378:37.3514
+0100000011011 - XXXXXXXXXXXXX  37.3514:38.8649
+0111000100010 - XXXXXXXXXXXXX  38.8649:40.3784
+0111110000001 - XXXXXXXXXXXXX  40.3784:41.8919
+0110001111010 - XXXXXXXXXXXXX  41.8919:43.4054
+0111001010100 - XXXXXXXXXXXXX  43.4054:44.9189
+1111010110100 - XXXXXXXXXXXXX  44.9189:46.4324
+0111100001011 - XXXXXXXXXXXXX  46.4324:47.9459
+0100011111101 - XXXXXXXXXXXXX  47.9459:49.4595
+1001100111000 - XXXXXXXXXXXXX  49.4595:50.973
+0111100001110 - XXXXXXXXXXXXX  50.973:52.4865
+1111111111111 - XXXXXXXXXXXXX  52.4865:54
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Silicon            LatticeAtom
+Type                 Prec. 0   Prec. 1   Prec. 2   Migrat.   Etching   Adsorpt   Desorpt
+LatticeAtom           418038                                                      258263
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+00 - Final depth is 32.5037 
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+Velocity  for angle 00 is 51.38349129221049 in nm/min. 
+Roughness for angle 00 is 2.30231 5.8062 5.81256 in nm. 
+-------------------------------------------------------------------- test -----
+test tag='0' float='51' value='51.38349129221049' error='0.03'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+0: Requested error is  < 3% maximum error is 0.746332%
+Test PASSED... continuing
+-------------------------------------------------------------------- save -----
+save lammps='nodist-Si-100'
+-------------------------------------------------------------------------------
+
+Writing 3807 atoms in nodist-Si-100.dump done!.
+Time spent: 29s. Annealing: 27s.
+         1 times: 0: Requested error is  < 3% maximum error is 0.746332%
+         1 times: Alloy material is given but selfdiffusion is set to false
+        36 times: Snapshot not defined or error.
+There are 15 total sentences. Collect them all!
+¡Esto sí que es ...
+                ... una chirigota!

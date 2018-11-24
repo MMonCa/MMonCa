@@ -1,0 +1,161 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.9
+Compiled on Oct  7 2014 11:23:46 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on Iris.
+BCA:  (C) 2000-2014 University of Valladolid and
+      (C)      2014 IMDEA Materials Institute
+      Module based on IIS-UVA.
+ For licensing details, write "license"
+----------------------------------------------------------------- restart -----
+restart load='dump'
+-------------------------------------------------------------------------------
+
+Reading restart information from dump.mmonca
+{
+
+Reading defects: Gas() Silicon() 
+     X: (-20 - 50) nm. 47 elements. Delta = 1.48936 nm.
+     Y: (0 - 7.68059) nm. 5 elements. Delta = 1.53612 nm.
+     Z: (0 - 7.68059) nm. 5 elements. Delta = 1.53612 nm.
+Total 1175 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGG -        -20:-18.5106
+SSSSS -        3.82979:5.31915
+SSSSS -        48.5106:50
+Starting clusters:  Gas() Silicon()
+Interfacing...
+} . Restarting done
+------------------------------------------------------------------ report -----
+report all
+-------------------------------------------------------------------------------
+
+Created 
+----------------- Event Log --------------
+----------------- Reaction Log --------------
+----------------------------- Defect logfile --------------
+GGGGG -        -20:-18.5106
+SSSSS - XXXXX  3.82979:5.31915
+SSSSS -        48.5106:50
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='time1' float='1' value='1' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+time1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth1' float='3.02979' value='3.02979' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough1' float='0.282694' value='0.282694' error='0'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough1: Requested error is  < 0% maximum error is 0%
+Test PASSED... continuing
+------------------------------------------------------------------ anneal -----
+anneal temp='600' time='.5'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 0.5 seconds at 873.15K (600ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+600C  1.03269s      100001   6.54%    1.2e+05 s^-1 2.172400 nm.   33333 ev/s 
+600C   1.0683s      200001  13.66%    2.8e+06 s^-1 2.036625 nm.   50000 ev/s 
+600C  1.10585s      300001  21.17%    2.7e+06 s^-1 1.900850 nm.   50000 ev/s 
+600C  1.14125s      400001  28.25%    2.8e+06 s^-1 1.629300 nm.   33333 ev/s 
+600C  1.17376s      500001  34.75%    3.1e+06 s^-1 1.493525 nm.   50000 ev/s 
+600C  1.20762s      600001  41.52%    3.0e+06 s^-1 1.357750 nm.   50000 ev/s 
+600C  1.23864s      700001  47.73%    3.2e+06 s^-1 1.221975 nm.   33333 ev/s 
+600C  1.26897s      800001  53.79%    3.3e+06 s^-1 1.221975 nm.   50000 ev/s 
+600C  1.29684s      900001  59.37%    3.6e+06 s^-1 0.950425 nm.   50000 ev/s 
+600C  1.32508s     1000001  65.02%    3.5e+06 s^-1 0.950425 nm.   33333 ev/s 
+600C  1.35017s     1100001  70.03%    4.0e+06 s^-1 0.814650 nm.   50000 ev/s 
+600C   1.3733s     1200001  74.66%    4.3e+06 s^-1 0.678875 nm.   50000 ev/s 
+600C  1.39573s     1300001  79.15%    4.5e+06 s^-1 0.543100 nm.   50000 ev/s 
+600C  1.41908s     1400001  83.82%    4.3e+06 s^-1 0.543100 nm.   33333 ev/s 
+600C  1.44168s     1500001  88.34%    4.4e+06 s^-1 0.543100 nm.   50000 ev/s 
+600C  1.46286s     1600001  92.57%    4.7e+06 s^-1 0.407325 nm.   50000 ev/s 
+600C  1.48354s     1700001  96.71%    4.8e+06 s^-1 0.407325 nm.   50000 ev/s 
+600C      1.5s     1773602 100.00%    4.5e+06 s^-1 0.271550 nm.   36800 ev/s 
+GGGGG -        -20:-18.5106
+SSSGG - XXXXX  2.34043:3.82979
+SSSSS - XXXXX  3.82979:5.31915
+SSSSS -        48.5106:50
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Gas                LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom             4183   1769410         9
+
+----------------- Reaction Log --------------
+----------------------------------------------------------------- extract -----
+extract time
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.mean
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='time2' float='1.5' value='1.5' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+time2: Requested error is  < 2% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth2' float='1.62954' value='1.60152' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth2: Requested error is  < 2% maximum error is 1.74959%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough2' float='0.541274' value='0.54508' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough2: Requested error is  < 2% maximum error is 0.698245%
+Test PASSED... continuing
+Time spent: 41s. Annealing: 41s.
+        28 times: Snapshot not defined or error.
+         1 times: depth1: Requested error is  < 0% maximum error is 0%
+         1 times: depth2: Requested error is  < 2% maximum error is 1.74959%
+         1 times: rough1: Requested error is  < 0% maximum error is 0%
+         1 times: rough2: Requested error is  < 2% maximum error is 0.698245%
+         1 times: time1: Requested error is  < 0% maximum error is 0%
+         1 times: time2: Requested error is  < 2% maximum error is 0%
+There are 14 total sentences. Collect them all!
+¡Hasta la vista!

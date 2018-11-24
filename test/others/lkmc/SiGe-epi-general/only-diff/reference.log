@@ -1,0 +1,241 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.8
+Compiled on Aug  7 2014 16:01:03 for x86_64-unknown-linux-gnu
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Silicon/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Models/epitaxy' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Epitaxy/model.simplified' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='Silicon/Epitaxy/prefactor.epi' value='0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Tungsten/Lattice/wafer.orientation' value='i 0 j 0 k 1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Tungsten/Lattice/flat.orientation' value='i 0 j 1 k 0'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='24' maxy='7.68059385724828' maxz='7.68059385724828' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Silicon() 
+     X: (0 - 24) nm. 16 elements. Delta = 1.5 nm.
+     Y: (0 - 7.68059) nm. 5 elements. Delta = 1.53612 nm.
+     Z: (0 - 7.68059) nm. 5 elements. Delta = 1.53612 nm.
+Total 400 elements
+Loading Particle To Node handler
+Building nodes... Done
+GGGGG -        0:1.5
+SSGSS -        6:7.5
+SSSSS -        7.5:9
+SSSSS -        22.5:24
+Starting clusters:  Gas() Silicon()
+Checking SPER.............Refining A/C interface ............. Done.
+-------------------------------------------------------------------- save -----
+save ovito='nodist-Si'
+-------------------------------------------------------------------------------
+
+Writing 600 atoms in nodist-Si.dump done!.
+------------------------------------------------------------------ anneal -----
+anneal time='1e15' temp='600' events='6000000'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 1e+15 seconds at 873.15K (600ºC)
+Writing 613 atoms in nodist-Si.dump done!.
+600C   1e-05s          70   0.00%    7.0e+06 s^-1 5.974100 nm. 
+Writing 614 atoms in nodist-Si.dump done!.
+600C 1.1e-05s          77   0.00%    7.0e+06 s^-1 5.974100 nm. 
+Writing 613 atoms in nodist-Si.dump done!.
+600C   2e-05s         110   0.00%    3.7e+06 s^-1 5.974100 nm. 
+Writing 615 atoms in nodist-Si.dump done!.
+600C   3e-05s         150   0.00%    4.0e+06 s^-1 5.974100 nm. 
+Writing 615 atoms in nodist-Si.dump done!.
+600C   4e-05s         189   0.00%    3.9e+06 s^-1 5.974100 nm. 
+Writing 615 atoms in nodist-Si.dump done!.
+600C   5e-05s         242   0.00%    5.3e+06 s^-1 5.974100 nm. 
+Writing 615 atoms in nodist-Si.dump done!.
+600C   6e-05s         294   0.00%    5.2e+06 s^-1 5.974100 nm. 
+Writing 617 atoms in nodist-Si.dump done!.
+600C   7e-05s         348   0.01%    5.4e+06 s^-1 5.974100 nm. 
+Writing 621 atoms in nodist-Si.dump done!.
+600C   8e-05s         400   0.01%    5.2e+06 s^-1 5.974100 nm. 
+Writing 617 atoms in nodist-Si.dump done!.
+600C   9e-05s         461   0.01%    6.1e+06 s^-1 5.974100 nm. 
+Writing 618 atoms in nodist-Si.dump done!.
+600C  0.0001s         515   0.01%    5.4e+06 s^-1 5.838325 nm. 
+Writing 618 atoms in nodist-Si.dump done!.
+600C 0.00011s         580   0.01%    6.5e+06 s^-1 5.838325 nm. 
+Writing 620 atoms in nodist-Si.dump done!.
+600C  0.0002s        1074   0.02%    5.5e+06 s^-1 5.838325 nm. 
+Writing 627 atoms in nodist-Si.dump done!.
+600C  0.0003s        1576   0.03%    5.0e+06 s^-1 5.838325 nm. 
+Writing 626 atoms in nodist-Si.dump done!.
+600C  0.0004s        2282   0.04%    7.1e+06 s^-1 5.838325 nm. 
+Writing 623 atoms in nodist-Si.dump done!.
+600C  0.0005s        2986   0.05%    7.0e+06 s^-1 5.838325 nm. 
+Writing 624 atoms in nodist-Si.dump done!.
+600C  0.0006s        3727   0.06%    7.4e+06 s^-1 5.838325 nm. 
+Writing 621 atoms in nodist-Si.dump done!.
+600C  0.0007s        4458   0.07%    7.3e+06 s^-1 5.838325 nm. 
+Writing 620 atoms in nodist-Si.dump done!.
+600C  0.0008s        5054   0.08%    6.0e+06 s^-1 5.838325 nm. 
+Writing 621 atoms in nodist-Si.dump done!.
+600C  0.0009s        5760   0.10%    7.1e+06 s^-1 5.838325 nm. 
+Writing 619 atoms in nodist-Si.dump done!.
+600C   0.001s        6441   0.11%    6.8e+06 s^-1 5.838325 nm. 
+Writing 621 atoms in nodist-Si.dump done!.
+600C  0.0011s        7076   0.12%    6.3e+06 s^-1 5.838325 nm. 
+Writing 610 atoms in nodist-Si.dump done!.
+600C   0.002s       13586   0.23%    7.2e+06 s^-1 5.838325 nm. 
+Writing 618 atoms in nodist-Si.dump done!.
+600C   0.003s       19815   0.33%    6.2e+06 s^-1 5.838325 nm. 
+Writing 623 atoms in nodist-Si.dump done!.
+600C   0.004s       25750   0.43%    5.9e+06 s^-1    5935 ev/s 5.838325 nm. 
+Writing 617 atoms in nodist-Si.dump done!.
+600C   0.005s       31733   0.53%    6.0e+06 s^-1 5.838325 nm. 
+Writing 604 atoms in nodist-Si.dump done!.
+600C   0.006s       36965   0.62%    5.2e+06 s^-1 5.838325 nm. 
+Writing 602 atoms in nodist-Si.dump done!.
+600C   0.007s       41163   0.69%    4.2e+06 s^-1 5.838325 nm. 
+Writing 595 atoms in nodist-Si.dump done!.
+600C   0.008s       46182   0.77%    5.0e+06 s^-1 5.838325 nm. 
+Writing 590 atoms in nodist-Si.dump done!.
+600C   0.009s       50921   0.85%    4.7e+06 s^-1 5.838325 nm. 
+Writing 589 atoms in nodist-Si.dump done!.
+600C    0.01s       55112   0.92%    4.2e+06 s^-1 5.838325 nm. 
+Writing 586 atoms in nodist-Si.dump done!.
+600C   0.011s       59312   0.99%    4.2e+06 s^-1 5.838325 nm. 
+Writing 542 atoms in nodist-Si.dump done!.
+600C    0.02s       97060   1.62%    4.2e+06 s^-1   37748 ev/s 5.702550 nm. 
+Writing 534 atoms in nodist-Si.dump done!.
+600C    0.03s      130355   2.17%    3.3e+06 s^-1   33295 ev/s 5.702550 nm. 
+Writing 534 atoms in nodist-Si.dump done!.
+600C    0.04s      155754   2.60%    2.5e+06 s^-1   25399 ev/s 5.702550 nm. 
+Writing 537 atoms in nodist-Si.dump done!.
+600C    0.05s      187203   3.12%    3.1e+06 s^-1   31449 ev/s 5.702550 nm. 
+Writing 535 atoms in nodist-Si.dump done!.
+600C    0.06s      217945   3.63%    3.1e+06 s^-1 5.702550 nm. 
+Writing 539 atoms in nodist-Si.dump done!.
+600C    0.07s      247323   4.12%    2.9e+06 s^-1   29378 ev/s 5.702550 nm. 
+Writing 539 atoms in nodist-Si.dump done!.
+600C    0.08s      275849   4.60%    2.9e+06 s^-1   28526 ev/s 5.702550 nm. 
+Writing 542 atoms in nodist-Si.dump done!.
+600C    0.09s      305697   5.09%    3.0e+06 s^-1 5.702550 nm. 
+Writing 544 atoms in nodist-Si.dump done!.
+600C     0.1s      336300   5.61%    3.1e+06 s^-1   30603 ev/s 5.566775 nm. 
+Writing 540 atoms in nodist-Si.dump done!.
+600C    0.11s      366901   6.12%    3.1e+06 s^-1   30601 ev/s 5.566775 nm. 
+Writing 532 atoms in nodist-Si.dump done!.
+600C       1s     2778066  46.30%    2.7e+06 s^-1   40867 ev/s 5.431000 nm. 
+Writing 539 atoms in nodist-Si.dump done!.
+600C       2s     5331745  88.86%    2.6e+06 s^-1   40534 ev/s 5.431000 nm. 
+600C 2.25692s     6000000 100.00%    2.6e+06 s^-1   41765 ev/s 5.295225 nm. 
+GGGGG -        0:1.5
+SSGSS - XXXXX  6:7.5
+SSSSS -  XXX   7.5:9
+SSSSS -        22.5:24
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Gas                LatticeAtom
+Type                   100_6     100_7     100_8     100_9    100_10       110       111 defective
+LatticeAtom                    6000000
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save ovito='nodist-Si' append
+-------------------------------------------------------------------------------
+
+Writing 544 atoms in nodist-Si.dump done!.
+----------------------------------------------------------------- extract -----
+extract ac.stdev
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='depth' float='5.7297' value='5.72970' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depth: Requested error is  < 2% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='6.19598' value='6.195980' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='6.80177' value='6.801770' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='7.29306' value='7.293060' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='7.06365' value='7.063650' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='6.45101' value='6.451010' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='5.9741' value='5.97410' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depth' float='5.69932' value='5.699320' error='0.02'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='rough' float='0.560961' value='0.560961' error='0.02'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+rough: Requested error is  < 2% maximum error is 0%
+Test PASSED... continuing
+Time spent: 147s. Annealing: 147s.
+         8 times: depth: Requested error is  < 2% maximum error is 0%
+         1 times: rough: Requested error is  < 2% maximum error is 0%
+There are 11 total sentences. Collect them all!
+Hay 10 tipos de personas...
+                        ... las que saben binario y las que no

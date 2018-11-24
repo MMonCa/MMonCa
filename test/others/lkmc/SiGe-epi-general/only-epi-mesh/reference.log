@@ -1,0 +1,193 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.14
+Compiled on Jul  6 2015 17:01:46 for x86_64-Linux
+for #94-Ubuntu SMP Thu Jun 18 00:27:10 UTC 2015
+        Contact: ignacio.martin@imdea.org
+        http://materials.imdea.org/MMonCa
+OKMC: (C) 2011-2014 IMDEA Materials Institute.
+LKMC: (C) 2011-2014 IMDEA Materials Institute.
+BCA:  (C) 2014 Universidad de Valladolid.
+FEM:  (C) 2014 IMDEA Materials Institute and
+      (C) 2014 Technical University of Madrid (UPM)
+      Module based on FELIKS.
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/defined' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string>' key='Silicon/Models/interaction.result' value=' '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Models/epitaxy' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='bool' key='Silicon/Epitaxy/model.simplified' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/prefactor.epi' index='Si' value='5.6e9'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,float>' key='Silicon/Epitaxy/barrier.epi' index='Si' value='3.7'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/General/snapshot.events' value='5000'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/snapshot.time.decade' value='1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init mesh='../only-etch-mesh/test.grd' scale='30'
+-------------------------------------------------------------------------------
+
+Processing mesh file ...
+649	 vertices stored.
+	 Diagonal vertices: MIN(-15,-21,-21) <--> MAX(7.5,15,15)
+1672	 edges stored.
+1396	 faces stored.
+390	 elements stored.
+MeshParser file successfully processed.
+Preparing uniform grid from valuable information ...
+Starting loop through 390 elements:
+		Tetrahedra	= 0
+		Cubes		= 390
+		Triangles	= 0
+Uniform grid successfully created and stored. Grid information:
+	Size in memory: 0.0403519 MB
+	Content information:
+		Maximum size	= 127
+		Minimum size	= 1
+		Total elements	= 10578
+Reading defects: Gas() Silicon() 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (-15 - 7.5) nm. 15 elements. Delta = 1.5 nm.
+     Y: (-21 - 15) nm. 24 elements. Delta = 1.5 nm.
+     Z: (-21 - 15) nm. 24 elements. Delta = 1.5 nm.
+Total 8640 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Gas
+1 -> Silicon
+000000000000000000000000 -                           -15:-13.5
+111111111111111111111111 -                           6:7.5
+Starting clusters:  Gas() Silicon()
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+-------------------------------------------------------------------- save -----
+save lammps='nodist-Si'
+-------------------------------------------------------------------------------
+
+Writing 10171 atoms in nodist-Si.dump done!.
+----------------------------------------------------------------- extract -----
+extract ac.stdev min.y='-5.0' max.y='-1.0' min.z='-5.0' max.z='-1.0'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract ac.stdev min.y='-20.0' max.y='-7.0' min.z='-20.0' max.z='14.0'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test tag='depthA' float='0' value='0.0' error='0.025'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depthA: Requested error is  < 2.5% maximum error is 0%
+Test PASSED... continuing
+-------------------------------------------------------------------- test -----
+test tag='depthB' float='6.10988' value='6.1' error='0.025'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+depthB: Requested error is  < 2.5% maximum error is 0.161968%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='Si' dimension='2' file='test-Si2D.dat'
+-------------------------------------------------------------------------------
+
+Results written in test-Si2D.dat
+Pillar height 0.000000e+00 roughness 0.000000e+00 
+Substrate height 6.109880e+00 roughness 3.828050e-13 
+------------------------------------------------------------------ anneal -----
+anneal time='10.0' temp='600' epitaxy='Si 1.0'
+-------------------------------------------------------------------------------
+
+Pressure(Si) 1. Vads is 3.093933e+05 /s 
+Annealing the sample for 10 seconds at 873.15K (600ºC)
+600C 2.19e-06s        5001   0.00%    2.3e+09 s^-1 -0.1 nm.     454 ev/s 328 Mb
+600C    1e-05s        9752   0.00%    6.1e+08 s^-1 -0.1 nm. 328 Mb
+600C 1.27e-05s       10001   0.00%    9.3e+07 s^-1 -0.1 nm. 328 Mb
+600C 2.03e-05s       10185   0.00%    2.4e+07 s^-1 -0.1 nm. 328 Mb
+600C 0.000101s       10281   0.00%    1.2e+06 s^-1 -0.1 nm.      96 ev/s 328 Mb
+600C 0.000235s       10296   0.00%    1.1e+05 s^-1 -0.1 nm. 328 Mb
+600C  0.00128s       10336   0.01%    3.8e+04 s^-1 -0.1 nm. 328 Mb
+600C  0.00244s       10338   0.02%    1.7e+03 s^-1 -0.1 nm. 328 Mb
+600C   0.0101s       10393   0.10%    7.2e+03 s^-1 -0.1 nm. 328 Mb
+600C   0.0201s       10451   0.20%    5.8e+03 s^-1 -0.1 nm. 328 Mb
+600C      0.1s       10742   1.00%    3.6e+03 s^-1 -0.3 nm. 328 Mb
+600C      0.2s       11326   2.00%    5.9e+03 s^-1 -0.3 nm.     584 ev/s 328 Mb
+600C    0.665s       15001   6.65%    7.9e+03 s^-1 -0.3 nm. 328 Mb
+600C     1.12s       20001  11.18%    1.1e+04 s^-1 -0.4 nm. 328 Mb
+600C     1.46s       25001  14.60%    1.5e+04 s^-1 -0.4 nm.    5000 ev/s 328 Mb
+600C     1.79s       30001  17.94%    1.5e+04 s^-1 -0.4 nm. 328 Mb
+600C     2.16s       35001  21.63%    1.4e+04 s^-1 -0.4 nm.    5000 ev/s 328 Mb
+600C      2.6s       40001  26.04%    1.1e+04 s^-1 -0.4 nm.    5000 ev/s 328 Mb
+600C     2.97s       45001  29.70%    1.4e+04 s^-1 -0.5 nm. 328 Mb
+600C     3.35s       50001  33.48%    1.3e+04 s^-1 -0.5 nm.    5000 ev/s 328 Mb
+600C     3.75s       55001  37.54%    1.2e+04 s^-1 -0.5 nm. 328 Mb
+600C     4.19s       60001  41.93%    1.1e+04 s^-1 -0.5 nm.    5000 ev/s 328 Mb
+600C      4.6s       65001  45.97%    1.2e+04 s^-1 -0.5 nm. 328 Mb
+600C     4.98s       70001  49.80%    1.3e+04 s^-1 -0.7 nm.    5000 ev/s 328 Mb
+600C     5.41s       75001  54.06%    1.2e+04 s^-1 -0.7 nm. 328 Mb
+600C     5.87s       80001  58.66%    1.1e+04 s^-1 -0.7 nm.    5000 ev/s 328 Mb
+600C     6.26s       85001  62.57%    1.3e+04 s^-1 -0.7 nm. 328 Mb
+600C     6.67s       90001  66.68%    1.2e+04 s^-1 -0.7 nm.    5000 ev/s 328 Mb
+600C     7.13s       95001  71.31%    1.1e+04 s^-1 -0.7 nm. 328 Mb
+600C     7.63s      100001  76.31%    1.0e+04 s^-1 -0.7 nm.    5000 ev/s 328 Mb
+600C     8.07s      105001  80.72%    1.1e+04 s^-1 -0.8 nm. 328 Mb
+600C     8.51s      110001  85.08%    1.1e+04 s^-1 -0.8 nm.    5000 ev/s 328 Mb
+600C     8.97s      115001  89.72%    1.1e+04 s^-1 -0.8 nm. 328 Mb
+600C     9.42s      120001  94.17%    1.1e+04 s^-1 -1.0 nm.    5000 ev/s 328 Mb
+600C     9.83s      125001  98.32%    1.2e+04 s^-1 -1.0 nm. 328 Mb
+0 -> Gas
+1 -> Silicon
+000000000000000000000000 -                           -15:-13.5
+111111111111111111111111 - XXXXXXXXXXXXXXXXXXXXXXXX  6:7.5
+----------------------------- Defect logfile --------------
+----------------- Event Log --------------
+ ----------------------------------------Gas                LatticeAtom
+Type                 Prec. 0   Prec. 1   Prec. 2   Migrat.   Etching   Adsorpt   Desorpt
+LatticeAtom            68750                                             58174
+
+----------------- Reaction Log --------------
+-------------------------------------------------------------------- save -----
+save lammps='nodist-Si' append
+-------------------------------------------------------------------------------
+
+Writing 10502 atoms in nodist-Si.dump done!.
+Time spent: 25s. Annealing: 14s.
+         1 times: Alloy material is given but selfdiffusion is set to false
+         1 times: depthA: Requested error is  < 2.5% maximum error is 0%
+         1 times: depthB: Requested error is  < 2.5% maximum error is 0.161968%
+There are 15 total sentences. Collect them all!
+No por mucho simular...
+                    ... amanece más temprano
