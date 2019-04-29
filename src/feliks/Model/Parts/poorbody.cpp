@@ -749,7 +749,9 @@ void poorbody :: scanNodes(const commandLine &cl, ifstream &modelfile)
 		if (DEBUG_SCANNER) cout << "|" << str.str() << "|" << "\n";
 		str >> label >> coor[0] >> coor[1] >> coor[2];
 		
-		tmpNodes[label] = std::make_pair<ivector,node*>(coor,0);
+//		tmpNodes[label] = std::make_pair<ivector,node*>(coor,0);
+		pair<ivector, node*> tmp_pair(coor, 0);
+		tmpNodes[label] = tmp_pair;
 	}
 }
 

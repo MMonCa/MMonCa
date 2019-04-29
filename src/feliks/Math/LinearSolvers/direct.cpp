@@ -251,11 +251,17 @@ bool direct :: solveReal(linearSOE &theSOE, double &mflops)
 	SuperLUStat_t   stat;
     StatInit(&stat);
 
+   // TODO: New argument introduced in SUPERLU 5 GlobalLU_t, I added for compiling reasons
+   // but it will not be used. This should be reviewed for guarantiee no impact is dervied
+   // from this action
+   GlobalLU_t to_throw;
+
+
     // the main solution function
 	mem_usage_t  mem_usage;
     dgssvx(&options, &A, colPerm, rowPerm, elTree, equed, NULL, NULL,
            L, U, work, lwork, &B, &X, &rpg, &rcond, ferr, berr,
-           &mem_usage, &stat, &info);
+           &to_throw, &mem_usage, &stat, &info);
 	
 	m.setFactorized();
 

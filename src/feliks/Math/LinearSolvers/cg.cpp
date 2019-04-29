@@ -42,6 +42,7 @@
 #include <iomanip>
 #include <stdexcept>
 #include <utility>
+#include <limits>
 
 #define RTOL 1.e-10
 #define ATOL 1.e-14
@@ -176,7 +177,7 @@ bool cg :: solveJacobi(linearSOE &theSOE, double &mflops)
 		
 		// some statistics of the diagonal
 		dneg = dzero = 0;
-		dmin = HUGE;
+		dmin = std::numeric_limits<double>::max();
 		dmax = 0.0;
 		for (int k=0; k<n; k++)
 		{

@@ -32,6 +32,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
+#include <limits>
 #include "Elements/eltype.h"
 #include "Io/logger.h"
 #include "Io/message.h"
@@ -54,7 +55,7 @@ tscontrol :: tscontrol() :
 	error(0.0),
 	dt(0.0),
 	mindt(-1.0),				// a negative number disables it
-	maxdt(HUGE),  				// a large number disables it
+	maxdt(std::numeric_limits<double>::max()),  				// a large number disables it
 	energy(0)
 {
 	errorHistory[0] = errorHistory[1] = 1.0;
@@ -72,7 +73,7 @@ tscontrol :: tscontrol(commandLine &cl) :
 	error(0.0),
 	dt(1.0),
 	mindt(-1.0),				// a negative number disables it
-	maxdt(HUGE),  				// a large number disables it
+	maxdt(std::numeric_limits<double>::max()),  				// a large number disables it
 	energy(0)
 {
 	errorHistory[0] = errorHistory[1] = 1.0;

@@ -29,6 +29,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <limits>
 
 #include "Analysis/analysis.h"
 #include "Analysis/assembler.h"
@@ -68,7 +69,7 @@ bool global_lazyenergy=false;
 stepsolver :: stepsolver(const commandLine& cl) :
     nsteps(0),
     stepIters(0),
-	hmindt(HUGE),				// a large number initializes it
+	hmindt(std::numeric_limits<double>::max()),				// a large number initializes it
 	hmaxdt(-1),					// a negative number initializes it
     cputime(0.0),
     NRtrials(0),
@@ -102,7 +103,7 @@ stepsolver :: stepsolver() :
 	nsteps(0),
 	NRtrials(0),
 	maxNRtrials(MAX_NRTRIALS),
-	hmindt(HUGE),				// a large number initializes it
+	hmindt(std::numeric_limits<double>::max()),				// a large number initializes it
 	hmaxdt(-1),					// a negative number initializes it
 	variableStepSize(false),
 	cputime(0.0),

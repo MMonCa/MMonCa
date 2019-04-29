@@ -40,6 +40,7 @@
 #include <cstdarg>
 #include <cmath>
 #include <vector>
+#include <limits>
 
 #include "Elements/eltype.h"
 #include "Elements/Interpolation/interpolation.h"
@@ -257,7 +258,7 @@ bool element :: check()
 // shortest distance between nodes
 double element :: characteristicDim()
 {
-    double h=HUGE_VAL;
+    double h=std::numeric_limits<double>::max();
     
     vector<node*>::iterator  it1 = nodes.begin();
     while ( it1 != nodes.end() )

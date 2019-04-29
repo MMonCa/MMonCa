@@ -45,6 +45,7 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
+#include <limits>
 #include "boost/foreach.hpp"
 
 #include "Analysis/Propfactors/propfactor.h"
@@ -265,7 +266,7 @@ void factorcombo :: initializePropfactorCombinations()
 {
 	if ( combos.find(0) == combos.end() )
     {
-		propfactor  *prf        = new linearprf(0.0, HUGE, 0, 1.0);
+		propfactor  *prf        = new linearprf(0.0, std::numeric_limits<double>::max(), 0, 1.0);
         factorcombo *firstcombo = new factorcombo(0);
 		firstcombo->factors.push_front(prf);
 		combos.insert( make_pair(0, firstcombo) );
@@ -351,7 +352,7 @@ void factorcombo :: scan(const commandLine &cl)
 // a constructor of all propfactors, just to set up default values
 propfactor :: propfactor() :
 start(0.0),
-end(HUGE),
+end(std::numeric_limits<double>::max()),
 repeat(0.0),
 printme(false)
 {
@@ -363,7 +364,7 @@ printme(false)
 // a constructor of all propfactors, just to set up default values
 propfactor :: propfactor(const commandLine& cl) :
 start(0.0),
-end(HUGE),
+end(std::numeric_limits<double>::max()),
 repeat(0.0),
 printme(false)
 {
@@ -413,7 +414,7 @@ double constantprf :: eval(const double t, const ivector& p) const
 void constantprf :: print(ostream &of) const
 {
 	of << "\n  +constant pr. factor active in (" << start << ", ";
-	if   (end > 0.9*HUGE) of << "infinite]";
+	if   (end > 0.9*std::numeric_limits<double>::max()) of << "infinite]";
 	else                  of << end << "]";
 	of << "\n   value = " << c << flush;
 }
@@ -462,7 +463,7 @@ double linearprf :: eval(const double t, const ivector& p) const
 void linearprf :: print(ostream &of) const
 {
 	of  << "\n  +linear pr. factor active in (" << start << ", ";
-    if   (end > 0.9*HUGE) of << "infinite]";
+    if   (end > 0.9*std::numeric_limits<double>::max()) of << "infinite]";
     else                  of << end << "]";
 	of << "\n   initial value = " << init << ",  slope = " << slope;
 }
@@ -505,7 +506,7 @@ double triangleprf :: eval(const double t, const ivector& p) const
 void triangleprf :: print(ostream &of) const
 {
 	of  << "\n  +triangular pr. factor active in (" << start << ", ";
-	if   (end > 0.9*HUGE) of << "infinite]";
+	if   (end > 0.9*std::numeric_limits<double>::max()) of << "infinite]";
 	else                  of << end << "]";
 	of << "\n   peak time = " << peak << ",  height = " << height << flush;
 }
@@ -560,7 +561,7 @@ double sineprf :: eval(const double t, const ivector& p) const
 void sineprf :: print(ostream &of) const
 {
 	of  << "\n  +sine pr. factor active in (" << start << ", ";
-	if   (end > 0.9*HUGE) of << "infinite]";
+	if   (end > 0.9*std::numeric_limits<double>::max()) of << "infinite]";
 	else                  of << end << "]";
     
 	of << "\n   amplitude = " << amplitude << ", frequency = " << frequency << " Hz," << flush;
