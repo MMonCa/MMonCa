@@ -36,9 +36,6 @@ int Tcl_AppInit(Tcl_Interp *interp)
 		
 	//Register commands
 	Tcl_CreateCommand(interp, "anneal",     Command::Anneal,     (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
-#ifdef _CHARGE_MODEL_
-	Tcl_CreateCommand(interp, "charge",     Command::Charge,     (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
-#endif
 	Tcl_CreateCommand(interp, "exit",       Command::Exit,       (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
 	Tcl_CreateCommand(interp, "extract",    Command::Extract,    (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
 	Tcl_CreateCommand(interp, "cascade",    Command::Cascade,    (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);

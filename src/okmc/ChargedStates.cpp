@@ -122,8 +122,9 @@ bool ChargedStates::checkStateBarrier(Kernel::SubDomain *pSub, P_TYPE pt, unsign
 	float eF2   = pME2->bandGap()/2. + pME2->electrostaticPotential();
 
 	int charge = _pDomain->_pMPPar->_state2charge[mt][pt][st];
+	//WARNINGMSG("Partícula " << Domains::global()->PM()->getParticleName(mt, pt) << " tiene carga " << charge);
 	float level =_pDomain->_pMPPar->_chargeLevel[mt][pt][st];
-	double energy = eF2 - eF1 + level*(scale1 - scale2)*charge;
+	double energy = (eF2 - eF1 + level*(scale1 - scale2))*charge;
 	if(energy < 0)
 		return true;
 	return pSub->_rng.rand() < exp(-energy/_pDomain->_pRM->getkT());
@@ -150,7 +151,7 @@ double ChargedStates::bindingShift(P_TYPE pt, Kernel::P_POS pos, unsigned st, co
 	if(diff == 0)
 		return 0;
 	double correction = 0;
-	if(diff > 0) // +1  Bi0 -> Bi-  I0 -> I+
+	if(diff > 0) // +1  Bi0 -> B-  I0 -> I+
 	{
 		int newSt = imp_charge != -1? imp_charge + 1 : imp_charge;
 		correction += levDop[MID_STATE + newSt] - levIV[MID_STATE+1];

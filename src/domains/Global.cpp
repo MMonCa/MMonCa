@@ -36,10 +36,6 @@
 #include "okmc/InterfaceParam.h"
 #include "okmc/Interface.h"
 #include "okmc/Defect.h"
-#ifdef _CHARGE_MODEL_
-#include "charge/Fermi.h"
-#include "charge/ChargeManager.h"
-#endif
 
 #ifdef _OPENMP
 #	include <omp.h>
@@ -286,15 +282,6 @@ void Global::setTempK(float K)
 void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 {
 	MEDMSG("Annealing " << time);
-
-#ifdef _CHARGE_MODEL_
-	for(vector<Kernel::Domain *>::iterator it = _domains.begin(); it != _domains.end(); ++it)
-	{
-		Charge::ChargeManager *pCM = static_cast<Charge::ChargeManager *>((*it)->_pSM);
-		if(!pCM->_pCharge->isLevelComputed())
-			pCM->_pCharge->computeFL(_pPar->getString("Charge/method"));
-	}
-#endif
 
 	time_t initCPUTime;
 	std::time(&initCPUTime);

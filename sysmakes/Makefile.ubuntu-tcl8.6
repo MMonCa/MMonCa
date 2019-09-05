@@ -10,13 +10,13 @@
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 CXX      = g++
-CXXFLAGS = -O3 -Wall -fopenmp
+CXXFLAGS = -O3 -Wall -fopenmp -g
 CC       = gcc
 CCFLAGS  = -O3 -Wall
 DEPFLAGS = -MMD -MP
 
 LINK      = g++
-LINKFLAGS = -O3 -fopenmp
+LINKFLAGS = -O3 -fopenmp -g
 LIB       = -lpthread -lm
 
 ARCHIVE =

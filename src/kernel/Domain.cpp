@@ -36,12 +36,6 @@
 #include "okmc/ClusterReactionParam.h"
 #include "okmc/OKMCModel.h"
 #include "mechanics/MechInterface.h"
-
-#ifdef _CHARGE_MODEL_
-#include "charge/Fermi.h"
-#include "charge/FermiParam.h"
-#include "charge/ChargeManager.h"
-#endif
 #include "okmc/ChargedStates.h"
 
 using namespace Electrostatics;
@@ -61,11 +55,8 @@ Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Domains::MCClient *, const 
 	_pMesh = new Mesh(this, mm, MM,
 		nut.getLines(0), nut.getLines(1), nut.getLines(2),
 		Domains::global()->client());
-#ifndef _CHARGE_MODEL_
-		_pSM = new OKMC::ChargedStates(this);
-#else
-	_pSM = new Charge::ChargeManager(this);
-#endif
+	
+	_pSM = new OKMC::ChargedStates(this);
 
     _pClPar = new OKMC::ClusterParam(pTcl, Domains::global()->PM(), Domains::global()->getFileParameters());
 	const_cast<OKMC::MobileParticleParam *>(_pMPPar)->init(Domains::global()->PM(), Domains::global()->getFileParameters(), _pClPar, _pAlPar, _pSM);
@@ -95,14 +86,6 @@ void Domain::init(bool bFromStream)
 {
 	_pOKMC = new OKMC::OKMCModel(this);
 	_pLKMC = new LKMC::LKMCModel(bFromStream, this);
-
-
-#ifdef _CHARGE_MODEL_
-	Charge::ChargeManager *pCM = dynamic_cast<Charge::ChargeManager *>(_pSM);
-	if(pCM)
-		pCM->initCharge();
-#endif
-
 }
 
 Domain::~Domain()

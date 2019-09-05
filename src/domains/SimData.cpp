@@ -36,10 +36,6 @@
 #include "okmc/MobileParticle.h"
 #include "okmc/Cluster.h"
 #include "io/ParameterManager.h"
-#ifdef _CHARGE_MODEL_
-#include "charge/Fermi.h"
-#include "charge/ChargeManager.h"
-#endif
 #include "kernel/StateManager.h"
 #include "io/Diagnostic.h"
 #include "io/Polynomial.h"
@@ -1034,34 +1030,6 @@ IO::OutDataVectorC<double> SimData::getLKMCProfile(const string &name) const {
 	}
 	return collapse(odv);
 }
-
-IO::OutDataVectorC<double> SimData::getChargeProfile(const string &name) const
-{
-	IO::OutDataVectorC<double> odv;
-#ifndef _CHARGE_MODEL_
-	WARNINGMSG("Impossible to obtain charge parameters. Charge model not active!.");
-	return odv;
-#else
-	for(Domains::MeshElementIterator it=Domains::global()->beginMEI(); it!=Domains::global()->endMEI(); ++it)
-	{
-		Charge::Fermi * pCharge = static_cast<Charge::ChargeManager *>((*it)->getDomain()->_pSM)->_pCharge;
-		Coordinates m, M;
-		it->getCorners(m, M);
-		if(name=="level")
-			odv.push(3, m, M, pCharge->getLevel((*it)->getIndex()));
-		else if(name=="doping")
-			odv.push(3, m, M, pCharge->getDoping((*it)->getIndex()));
-		else if(name=="electrons")
-			odv.push(3, m, M, pCharge->getElectrons((*it)->getIndex()));
-		else if(name=="holes")
-			odv.push(3, m, M, pCharge->getHoles((*it)->getIndex()));
-		else
-			ERRORMSG(name << " is not recognized as a valid name for this command.");
-	}
-	return collapse(odv);
-#endif
-}
-
 
 IO::OutDataVectorC<double> SimData::getStrain(const string &name) const
 {
