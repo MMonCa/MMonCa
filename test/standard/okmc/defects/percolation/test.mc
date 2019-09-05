@@ -36,5 +36,5 @@ report all
 save lammps=nodist-evolution append
 
 set rad2 [extract defect.radius defect=HeCluster]
-test tag=radius.2 float=0.853661 value=$rad2 error=.02
+test tag=radius.2 float=0.89 value=$rad2 error=.05
 test tag=2        float=1 value=[extract count.defects defect=HeCluster] error=0
