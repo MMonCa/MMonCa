@@ -971,7 +971,7 @@ int ParameterManager::getEDType(M_TYPE mt, const string &def) const
 	for(unsigned i=0; i<_edDefectName[mt].size(); ++i)
 		if(_edDefectName[mt][i] == def)
 			return i;
-		return -1;
+	return -1;
 }
 
 string ParameterManager::getDefName(M_TYPE mt, unsigned ev, unsigned def) const

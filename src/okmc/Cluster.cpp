@@ -968,7 +968,7 @@ Defect * Cluster::checkSize(Kernel::SubDomain *pSub, bool bInsert, 	vector<Parti
 		for(vector<Particle *>::iterator it=_particles.begin(); it!=_particles.end(); ++it)
 			if(Domains::global()->PM()->getIorV(_map._mt, (*it)->getPType()) == Kernel::IV_NONE)
 				otherEmit = *it;
-		MobileParticle *mp = new MobileParticle(pSub, ClusterParam::ID2pt(_map),0,
+		new MobileParticle(pSub, ClusterParam::ID2pt(_map),0,
 				_pDomain, otherEmit->getCoordinates(), otherEmit->getOrig());
 		delete this;
 		return 0;

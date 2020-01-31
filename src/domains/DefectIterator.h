@@ -22,7 +22,7 @@
 #ifndef DEFECTDATAITERATOR_H_
 #define DEFECTDATAITERATOR_H_
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace OKMC { class Defect; }
 namespace Kernel { class Event;
@@ -47,7 +47,7 @@ public:
 	const OKMC::Defect * operator->() const;
 
 private:
-	boost::shared_ptr<Kernel::SelectorIterator<Kernel::Event, double> > _pSi;
+	std::shared_ptr<Kernel::SelectorIterator<Kernel::Event, double> > _pSi;
 
 	unsigned _nDomain;
 	unsigned _nSubDomain;

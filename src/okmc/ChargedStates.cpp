@@ -56,9 +56,9 @@ unsigned ChargedStates::changeState(Kernel::SubDomain *pSub, P_TYPE pt, const Ke
 	const OKMC::MobileParticleParam *pMPPar = _pDomain->_pMPPar;
 	if(pMPPar->_bCharged[mt] == false)
 		return 0;
-    unsigned NStates = Domains::global()->PM()->getStates(mt, pt);
-    if(NStates == 1)
-    	return 0;
+	unsigned NStates = Domains::global()->PM()->getStates(mt, pt);
+	if(NStates == 1)
+		return 0;
 	double eF = pME->bandGap()/2. + pME->electrostaticPotential(); //fermi to valence band
 	double scale = pME->bandGap() / Domains::global()->PM()->getMaterial(mt)._Eg0;  //how to scale band gap values
 	double probs[Kernel::MAX_STATES];

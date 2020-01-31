@@ -961,7 +961,7 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &name, const
 			      (def.empty() || isGenericDefect || isExtendedDefect) &&
 			      (st.empty()  || isSt))
 			    	odvp.push(3, pPart->getCoordinates(), 1.);
-				pPart = pPart->getNext();
+						pPart = pPart->getNext();
 			}
 		}
 	}

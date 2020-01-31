@@ -195,7 +195,8 @@ void Interface::emit(Kernel::SubDomain *pSub, unsigned ev)
 	if(selfDefect)
 		origin = coordi;
 	MobileParticle *mp = new MobileParticle(pSub, particle, 0, _pDomain, coordi, origin); //self inserts
-	assert(mp->getElement() == _me[otherside]);
+	if(mp->getElement() != _me[otherside]);
+		assert(false);
 }
 
 //perform one diffusion hop in the particle type specified by ev
