@@ -277,6 +277,9 @@ void ParameterManager::readDefects(Tcl_Interp *pTcl,  const IO::FileParameters *
 		for(P_TYPE pt=0; pt < getNParticles(); ++pt)
 			if(isParticleDefined(pt, mt) || pt == _materials[mt]._alloy)
 				_defects[mt][getParticleName(mt, pt)] = Kernel::Event::MOBILEPARTICLE;
+		for(unsigned ev=0; ev < Event::UNDEFINED_EVENT; ++ev)
+			if(ev != Kernel::Event::INTERFACE && ev != Kernel::Event::CLUSTER && ev != Kernel::Event::INTERFACE)
+				_defects[mt][Event::getEName(Event::E_TYPE(ev))] = Event::E_TYPE(ev);
 		//now extended defects
 		map<string,bool> theArray = p->getBoolMap(getMaterialName(mt) + '/' + "Models/defined");
 		LOWMSG2(getMaterialName(mt) + '(');

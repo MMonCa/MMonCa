@@ -14,7 +14,7 @@ do
 	if [ -d $name -a -f $name/test.mc ]; then
 		./runSingle.sh $current $name $version &
 	fi
-	while [ `ps aux | grep mmonca | grep test | wc -l` -ge 16 ]; do
+	while [ `ps aux | grep mmonca | grep test | wc -l` -ge 6 ]; do
 		sleep 1
 	done
 done

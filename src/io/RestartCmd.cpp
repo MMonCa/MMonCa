@@ -159,7 +159,6 @@ void RestartCmd::restart(std::istream &is) const
 			else
 				LOWMSG("Restarting MMonCa file is corrupted. Defect " << atom_type << " not expected.");
 			pLA->getElement()->incLA(pLA->getPerformed());
-			pLA->getDomain()->_pRM->insert(pLA, pLA->getElement());
 		}
 		//rebuild rates for atoms
 		for(Domains::MeshElementIterator it = Domains::global()->beginMEI(); it != Domains::global()->endMEI(); ++it)
@@ -169,7 +168,7 @@ void RestartCmd::restart(std::istream &is) const
 			{
 				LKMC::LatticeAtom *pLA = dynamic_cast<LKMC::LatticeAtom *>(pLS);
 				if(pLA)
-					pLA->getDomain()->_pRM->update(pLA, pLA->getElement());
+					pLA->getDomain()->_pRM->insert(pLA, pLA->getElement());
 				pLS = pLS->getNext();
 			}
 		}

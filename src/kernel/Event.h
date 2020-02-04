@@ -29,7 +29,7 @@ class SubDomain;
 class Event
 {
 public:
-    enum E_TYPE { LATTICEATOM, MOBILEPARTICLE, INTERFACE, CLUSTER, EMPTY, SINK, CASCADE, CELL, UNDEFINED_EVENT };
+    enum E_TYPE { LATTICEATOM=0, MOBILEPARTICLE, INTERFACE, CLUSTER, EMPTY, SINK, CASCADE, CELL, UNDEFINED_EVENT };
 
     Event(Domain *p) : _pDomain(p) {}
     Event(std::istream &);

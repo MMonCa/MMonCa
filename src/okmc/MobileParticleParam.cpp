@@ -55,7 +55,6 @@ namespace OKMC {
 
 MobileParticleParam::MobileParticleParam(const IO::ParameterManager *pPM, const IO::FileParameters * pPar)
 {
-#ifndef _CHARGE_MODEL_
 	//Charge properties
 	for(M_TYPE mt = 0; mt < pPM->getNMaterials(); ++mt)
 	{
@@ -135,7 +134,6 @@ MobileParticleParam::MobileParticleParam(const IO::ParameterManager *pPM, const 
 			}
 		}
 	}
-#endif
 }
 
 void MobileParticleParam::init(const IO::ParameterManager *pPM, const IO::FileParameters * pPar,

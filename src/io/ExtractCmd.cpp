@@ -29,9 +29,6 @@
 #include "io/ParameterManager.h"
 #include "kernel/Domain.h"
 #include "okmc/Defect.h"
-#ifdef   _CHARGE_MODEL
-#include "charge/ChargeManager.h"
-#endif
 #include <sstream>
 #include <fstream>
 
@@ -156,8 +153,6 @@ int ExtractCmd::operator()()
 			if(mt == Kernel::MAX_MATERIALS)
 				ERRORMSG("profile: Material name '" << mate << "'not recognized");
 		}
-		if(name=="level" || name=="doping" || name=="electrons" || name=="holes")
-			ss << Domains::global()->data()->getChargeProfile(name);
 		else if (name == "lkmc.defects" || name == "lkmc.ac") {
 			ss << Domains::global()->data()->getLKMCProfile(name);
 		}

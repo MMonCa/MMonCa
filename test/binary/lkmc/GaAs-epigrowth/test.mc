@@ -1,12 +1,14 @@
-set results(0.05,1200) 21556.424278402235
-set results(0.05,800) 2569.5352955136004
-set results(0.05,550) 6.190715284091812
-set results(0.24,1200) 212212.15918031102
-set results(0.24,800) 17714.455971180152
-set results(0.24,550) 23.58461819733065
+set results(0.05,1600) 1263.753538935439
+set results(0.05,1400) 54.6540940507993
+set results(0.05,800) 0.00017910551980573506
+set results(0.24,1600) 1991.9238100144241
+set results(0.24,1400) 205.57011656188945
+set results(0.24,800) 0.0006813938120349445
 
 param set type=map<string,string>   key=MC/General/materials value="GalliumArsenide GaAs Gas Gas"
 param set type=map<string,string>   key=MC/Particles/elements value="As Arsenic,33,74.9216 Ga Gallium,11,22"
+param set type=array<string,string> key=GalliumArsenide/Models/interactions value={ }
+param set type=map<string,bool>     key=GalliumArsenide/Models/particles value={As false}
 param set type=bool                 key=GalliumArsenide/Models/epitaxy value=true
 
 set FILE [open "nodist-RP-CVD5.dat" w]
@@ -41,7 +43,7 @@ param set type=map<string,float> 	key=GalliumArsenide/Epitaxy/barrier.epi		 inde
 param set type=map<string,float> 	key=GalliumArsenide/Epitaxy/prefactor.desorption index=As value=$Vdes
 param set type=map<string,float> 	key=GalliumArsenide/Epitaxy/barrier.desorption   index=As value=$Edes
 
-set tempList	[list 1200 800 550]
+set tempList	[list 1600 1400 800]
 set presList	[list 0.05 0.24]
 
 foreach P $presList {

@@ -73,7 +73,6 @@ public:
 
 	void getLKMCInterface(std::vector<ParticleData> &c, bool bDefective) const; //LKMC interface
 	void getOKMCParticles(std::vector<ParticleData> &c, const std::vector<std::string> &) const; //OKMC particles
-	IO::OutDataVectorC<double> getChargeProfile(const std::string &name) const;
 
 	IO::OutDataVectorC<double> getLKMCProfile(const std::string &) const;
 

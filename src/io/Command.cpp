@@ -31,9 +31,6 @@
 #include "ReportCmd.h"
 #include "RestartCmd.h"
 #include "ClusterCmd.h"
-#ifdef _CHARGE_MODEL_
-#include "charge/ChargeCmd.h"
-#endif
 #include <cstring>
 #include <cstdlib>
 
@@ -254,13 +251,6 @@ int Command::Test(ClientData, Tcl_Interp *interp, int argc, const char *argv[])
 	TestCmd test(interp, argc, argv);
 	return test();
 }
-#ifdef _CHARGE_MODEL_
-int Command::Charge(ClientData, Tcl_Interp *interp, int argc, const char *argv[])
-{
-	ChargeCmd charge(interp, argc, argv);
-	return charge();
-}
-#endif
 
 //only takes into account the first occurrence of the token.
 // vec.size() <= 2 always.
