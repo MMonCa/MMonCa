@@ -23,7 +23,6 @@
 #include "kernel/Material.h"
 #include "kernel/ParticleType.h"
 #include "io/GetMaterial.h"
-#include "io/MeshParser.h"
 #include <map>
 #include <string>
 #include <tcl.h>
@@ -42,7 +41,6 @@ public:
     MCClient(Tcl_Interp *p, const Kernel::Coordinates &m, const Kernel::Coordinates &M,
     	const std::string &proc);
     MCClient(std::istream &);
-    MCClient(const IO::MeshParser *);
 
     ~MCClient();
     

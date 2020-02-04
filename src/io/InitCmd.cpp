@@ -33,23 +33,10 @@ int InitCmd::operator()()
 {
 	Domains::MCClient *pCli = 0;
 	Kernel::Coordinates m,M;
-	if(specified("mesh"))
-	{
-		string filename = getString("mesh");
-		float scale = specified("scale")? getFloat("scale") :1000;
-		IO::MeshParser dfObject(filename, scale);
-		dfObject.getCellSize(m, M);
-		pCli = new Domains::MCClient(&dfObject);
-		Domains::global()->setClient(pCli, m, M);
-		pCli->resetGetMaterial();
-	}
-	else
-	{
-		m = Coordinates(getFloat("minx"), getFloat("miny"), getFloat("minz"));
-		M = Coordinates(getFloat("maxx"), getFloat("maxy"), getFloat("maxz"));
-		pCli = new Domains::MCClient(_pTcl, m, M, getString("material"));
-		Domains::global()->setClient(pCli, m, M);
-	}
+	m = Coordinates(getFloat("minx"), getFloat("miny"), getFloat("minz"));
+	M = Coordinates(getFloat("maxx"), getFloat("maxy"), getFloat("maxz"));
+	pCli = new Domains::MCClient(_pTcl, m, M, getString("material"));
+	Domains::global()->setClient(pCli, m, M);
 
 	if(specified("temp"))
 		Domains::global()->setTempK(getFloat("temp") + 273.15);
