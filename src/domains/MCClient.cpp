@@ -53,15 +53,6 @@ MCClient::MCClient(std::istream &is) :
 	beginInsert();
 }
 
-MCClient::MCClient(const IO::MeshParser *mesh) :
-	_rng2(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
-	_isFromStream(false)
-{
-	_getMaterial = new IO::GetMaterial(mesh);
-	mesh->getCellSize(_min, _max);
-	beginInsert();
-}
-
 void MCClient::restart(std::ostream &os) const
 {
 	IO::GetMaterial::restart(os);

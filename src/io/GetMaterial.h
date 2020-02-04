@@ -25,7 +25,6 @@
 
 #include "kernel/Coordinates.h"
 #include "kernel/Material.h"
-#include "io/MeshParser.h"
 #include <vector>
 #include <tcl.h>
 
@@ -33,9 +32,8 @@ namespace IO {
 
 class GetMaterial {
 public:
-	GetMaterial(Tcl_Interp *p, const std::string &procName) : _pTcl(p), _procName(procName), _pdfParser(0) {}
+	GetMaterial(Tcl_Interp *p, const std::string &procName) : _pTcl(p), _procName(procName) {}
 	GetMaterial(std::istream &is);
-	GetMaterial(const IO::MeshParser *);
 
 	Kernel::M_TYPE operator()(const Kernel::Coordinates &c, unsigned idx) const;
 	static void restart(std::ostream &);
@@ -44,7 +42,6 @@ private:
 	Tcl_Interp *_pTcl;
 	const std::string &_procName;  //when using a procedure
 	std::vector<std::vector<Kernel::M_TYPE> >_materials; //when reading from file
-	const IO::MeshParser * _pdfParser;
 
 };
 

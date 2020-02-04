@@ -36,7 +36,6 @@ namespace IO {
 
 GetMaterial::GetMaterial(std::istream &is) : _pTcl(0), _procName("")
 {
-	_pdfParser = 0;
 	int nDomains;
 	is >> nDomains;
 	for(int dom=0; dom<nDomains; ++dom)
@@ -53,11 +52,6 @@ GetMaterial::GetMaterial(std::istream &is) : _pTcl(0), _procName("")
 		}
 	}
 
-}
-
-GetMaterial::GetMaterial(const IO::MeshParser *pmesh) : _pTcl(0), _procName("")
-{
-	_pdfParser = pmesh;
 }
 
 void GetMaterial::restart(std::ostream &os)
@@ -79,15 +73,6 @@ Kernel::M_TYPE GetMaterial::operator()(const Kernel::Coordinates &c, unsigned id
 	{
 		int domain = Domains::global()->getSplitter()->getDomain(c);
 		return _materials[domain][idx];
-	}
-
-	if(_pdfParser)
-	{
-		string mat = _pdfParser->getMaterial(c._x, c._y, c._z);
-		Kernel::M_TYPE mt = Domains::global()->PM()->getMaterialNumber(mat);
-		if(mt == Kernel::MAX_MATERIALS)
-			ERRORMSG("Material " << mat << " not recognized!");
-		return mt;
 	}
 
 	//run a tcl procedure and extract the info from it.
