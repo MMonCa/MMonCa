@@ -1,23 +1,16 @@
-set T 600
+set T 700
 
 param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.etch       value=5.6e9  index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.mig        value=1.0e6  index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride1 value=4e12   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride2 value=8e11   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride3 value=1e1    index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.mig        value=0  index=Si
 param set type=map<string,float>    key=Silicon/Epitaxy/barrier.precursor    value=1.85    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride1   value=2.4    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride2   value=1.9    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride3   value=0.1    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.etch         value=0.0    index=Si
 
 proc material { x y z } { 
-	if { ($x-12)*($x-12) + ($y -12)*($y-12) + ($z-12)*($z-12) < 2*2 } { 
+	if { ($x-12)*($x-12) + ($y -12)*($y-12) + ($z-12)*($z-12) < 10*10 } { 
 		return "Silicon" }
 	return "Gas" 
 }
 
-set sizeX [expr 24]
+set sizeX [expr 40]
 set sizeY [expr .3160*80]
 set sizeZ [expr .3160*80]
 
@@ -30,7 +23,7 @@ param set type=int                  key=MC/General/random.seed value=451
 
 #proc snapshot { } { save lammps=Si append no.print }
 init minx=0 miny=0 minz=0 maxx=$sizeX maxy=$sizeY maxz=$sizeZ material=material
-anneal time=1e15 temp=$T events=[expr 50000] epitaxy="Si 1."
+anneal time=1e15 temp=$T events=[expr 150000] epitaxy="Si 1."
 save lammps=nodist-Si
 
 set end_depth [lindex [extract ac.mean] 0]
@@ -38,4 +31,4 @@ set roughness [lindex [extract ac.stdev] 0]
 lowmsg "depth: $end_depth roughness: $roughness"
 
 test tag=depth float=$end_depth value=11.9688 error=0.03
-test tag=rough float=$roughness value=2.52 error=0.01
+test tag=rough float=$roughness value=3.8954 error=0.01
