@@ -1,5 +1,7 @@
 param set type=map<string,string>   key=MC/General/materials value="GalliumArsenide GaAs Gas Gas"
 param set type=map<string,string>   key=MC/Particles/elements value="As Arsenic,33,74.9216 Ga Gallium,11,22"
+param set type=array<string,string> key=GalliumArsenide/Models/interactions value={ }
+param set type=map<string,bool>     key=GalliumArsenide/Models/particles value={As false}
 param set type=bool                 key=GalliumArsenide/Models/epitaxy value=true
 
 param set type=int   key=MC/General/snapshot.time.decade value=1
@@ -25,12 +27,12 @@ param set type=bool key=MC/Mesh/periodic.z value=true
 set waferorient "i 1 j 0 k 0"
 set flatorient  "i 0 j 1 k 1"
 
-param set type=map<string,float> key=Silicon/Lattice/wafer.orientation value="$waferorient"
-param set type=map<string,float> key=Silicon/Lattice/flat.orientation  value="$flatorient"
+param set type=map<string,float> key=GalliumArsenide/Lattice/wafer.orientation value="$waferorient"
+param set type=map<string,float> key=GalliumArsenide/Lattice/flat.orientation  value="$flatorient"
 
 proc snapshot { } { save lammps=nodist-GaAs-100 append }
 
-init minx=-2 miny=0 minz=0 maxx=54 maxy=$sizeY maxz=$sizeZ material=material
+init minx=-2 miny=0 minz=0 maxx=58 maxy=$sizeY maxz=$sizeZ material=material
 
 save lammps=nodist-GaAs-100
 

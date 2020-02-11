@@ -50,7 +50,7 @@ set roughness [lindex [extract ac.stdev] 0]
 
 foreach i "0 1 2 3 4 5 6 7" {
 	set depth [lindex [extract no.print ac.mean min.y=$i max.y=[expr $i+1]] 0]
-	test tag=depth.$i float=$depth value=$value($i)0 error=0.02
+	test tag=depth.$i float=$depth value=$value($i)0 error=0.10
 }
 
-test tag=rough float=$roughness value=0.58 error=0.03
+test tag=rough float=$roughness value=0.58 error=0.05
