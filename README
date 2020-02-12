@@ -1,4 +1,18 @@
-* Source code available at http://www.materials.imdea.org/MMonCa/
+Current status: Not all tests are passing:
+83 / 92 tests PASSED
+9 failure/s
+--------- failed tests -------------
+./others/lkmc/epi-simple/GaAs-epi-100/test.mc FAILED
+./others/lkmc/epi-simple/Si-epi-100/test.mc FAILED
+./others/lkmc/epi-simple/Si-epi-2D/test.mc FAILED
+./others/lkmc/epi-simple/GaAs-sphere/test.mc FAILED
+./others/commands/restart/lkmc-DEpi/test.mc FAILED
+./others/okmc/alloys/input/test.mc FAILED
+./others/okmc/alloys/mixingEnthalpy/test.mc FAILED
+./others/okmc/alloys/mass_conservation/test.mc FAILED
+./others/okmc/fuzz/He-Fe-1/test.mc FAILED
+
+
 * Read doc/MMonCa.pdf to learn about the MMonCa simulator
   and how to use it.
 * Read the LICENSE files to learn about the Apache2 license
@@ -8,5 +22,3 @@
     (2013) 2703-2710. For OKMC and MMonCa in general.
   - Martin-Bragado. Applied Physics Letters 98 (2011). 233109.
     For LKMC.
-  - Hernandez-Mangas et al., Journal of Applied Physics 91 (2002), 658-667
-    when using the Ion Implant Simulator (Binary Collision Approximation) 
