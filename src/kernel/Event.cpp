@@ -27,7 +27,7 @@ Event::Event(std::istream &is)
 	unsigned nDomain;
 	is >> nDomain;
 	_pDomain = Domains::global()->getDomain(nDomain);
-};
+}
 
 void Event::restart(std::ostream &os) const
 {

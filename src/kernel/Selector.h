@@ -42,7 +42,7 @@ namespace Kernel
     void   getValues(unsigned idx, T_EVENT *&, int &tag, T_RATE &val) const;
     int insert(T_EVENT *, T_RATE, int tag);
     void remove(int idx);
-    void update(int idx, T_RATE);
+    void update(unsigned idx, T_RATE);
     void update(); //all
     void select(T_RATE rand, T_EVENT *&, int &tag) const;
     
@@ -169,7 +169,7 @@ namespace Kernel
   }
   
   template <typename T_EVENT, typename T_RATE>
-  void Selector<T_EVENT, T_RATE>::update(int idx, T_RATE rate)
+  void Selector<T_EVENT, T_RATE>::update(unsigned idx, T_RATE rate)
   {
     assert(_values[_levels-1].size() > idx);
     _values[_levels-1][idx] = rate;
