@@ -323,7 +323,7 @@ Polynomial Parameters::getPolynomial(const string &key) const
 		unsigned polNum;
 		double val, xo;
 		isText >> pol;
-		if(!pol.compare("xi"))
+		if(pol == "xi")
 		{
 			double bound;
 			isText >> bound;
@@ -332,7 +332,7 @@ Polynomial Parameters::getPolynomial(const string &key) const
 			bounds.push_back(bound);
 			continue;
 		}
-		if(!pol.compare("xo"))
+		if(pol == "xo")
 		{
 			isText >> xo;
 			if(!isText)
@@ -355,6 +355,8 @@ Polynomial Parameters::getPolynomial(const string &key) const
 			currentPol = polNum;
 		}
 	}
+	if(poly.size())
+		vPoly.push_back(poly);
 	return Polynomial(vPoly, bounds, center);
 }
 
