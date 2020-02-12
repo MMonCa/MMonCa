@@ -12,20 +12,6 @@
 SHELL  := /bin/bash
 COLOR  ?= yes
 
-# Specific rules for Feliks compilation
-ifeq ($(FELIKS),yes)
-    FELIKS_DIR := $(dir $(addsuffix /,$(shell find ../src/feliks/* -type d -print)))
-    FELIKS_INC := -I../src/feliks/ -DMMONCA_FELIKS
-    FELIKS_LIB := $(SUPERLU_LIB) $(LAPACK_LIB) $(BLAS_LIB)
-endif
-
-# Specific rules for Charge compilation
-ifeq ($(CHARGE),yes)
-    CHARGE_DIR := $(dir $(addsuffix /,$(shell find ../src/charge* -type d -print)))
-    CHARGE_INC := -I../src/charge/ -D_CHARGE_MODEL_
-    CHARGE_LIB :=
-endif
-
 # Specific rules for Secondary Interdiffusion Binary Alloy Model compilation
 ifeq ($(NUMODEL),yes)
 	NUMODEL_INC := -DNUMODEL
@@ -33,11 +19,11 @@ endif
 
 # Build rules and dependencies
 SRC_INC    := -I../src/
-EXTRA_INC  := $(SRC_INC) $(TCL_INC) $(BOOST_INC) $(SUPERLU_INC) $(LAPACK_INC) $(BLAS_INC) $(FELIKS_INC) $(CHARGE_INC) $(NUMODEL_INC)
-EXTRA_PATH := $(TCL_PATH) $(BOOST_PATH) $(SUPERLU_PATH) $(LAPACK_PATH) $(BLAS_PATH)
+EXTRA_INC  := $(SRC_INC) $(TCL_INC) $(BOOST_INC) $(NUMODEL_INC)
+EXTRA_PATH := $(TCL_PATH) $(BOOST_PATH)
 EXTRA_LIB  := $(TCL_LIB) $(BOOST_LIB) 
 
-DIR := $(dir ../src/ ../src/kernel/ ../src/domains/ ../src/io/ ../src/lkmc/ ../src/okmc/ ../src/cascade/ ../src/electrostatics/ ../src/mechanics/ $(FELIKS_DIR) $(CHARGE_DIR))
+DIR := $(dir ../src/ ../src/kernel/ ../src/domains/ ../src/io/ ../src/lkmc/ ../src/okmc/ ../src/cascade/ ../src/electrostatics/ ../src/mechanics/ )
 
 $(shell mkdir -p $(DIR:../src/%=%))
 
@@ -65,7 +51,7 @@ endif
 # Link
 all: $(OBJ)
 	@echo -e "$(LINK_BINARY)"	
-	$(LINK) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(EXTRA_LIB) $(FELIKS_LIB) $(CHARGE_LIB) $(LIB) -o $(EXE)
+	$(LINK) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(EXTRA_LIB) $(LIB) -o $(EXE)
 
 # Compilation
 $(OBJ_CC): %.o: ../src/%.c

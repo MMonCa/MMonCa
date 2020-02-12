@@ -12,7 +12,6 @@ MAKE      := make
 ROOT      := mmonca
 
 MC_BIN    := $(ROOT)
-IIS_BIN   := iis
 
 MACHINES  := $(shell find ./sysmakes/ -name "Makefile.*" | cut -d '.' -f3-)
 VERSION   := $(shell cat src/version.h | cut -d '"' -f 2)
@@ -30,8 +29,6 @@ help:
 	@echo '  make dist                  create $(DNAME).tar.gz'
 	@echo '  make clean-all             delete all object files'
 	@echo '  make clean-<machine>       delete object files from MMonCa compilation for <machine>'
-	@echo '  make clean-bca-<machine>   delete object files from IIS compilation for <machine>'
-	@echo '  make bca-<machine>         builds IIS (BCA module) for <machine>'
 	@echo '  make <machine>             builds MMonCa for <machine>'
 	@echo ''
 	@echo '  <machine> can be one of these in src/sysmakes:'
@@ -44,7 +41,6 @@ dist:
 	@rm -f `find $(DNAME)/test -name test.mc.log`
 	@rm -f `find $(DNAME)/test -name time`
 	@rm -f `find $(DNAME)/test -name errors`
-	@rm -f `find $(DNAME)/test -name feliks.*`
 	@rm -f `find $(DNAME)/test -name *nodist* `
 	@rm -f `find $(DNAME)/test -name test.result `
 	@rm -f `find $(DNAME)/test -name Inel*`
@@ -54,12 +50,12 @@ dist:
 	@rm -f $(DNAME)/doc/images/triptico*
 	@tar cvzf $(DNAME).tar.gz \
 	$(DNAME)/AUTHORS $(DNAME)/README $(DNAME)/LICENSE $(DNAME)/NEWS $(DNAME)/NOTICE \
-	$(DNAME)/src/*.cpp $(DNAME)/src/*.h $(DNAME)/src/*/*.cpp $(DNAME)/src/*/*.h $(DNAME)/src/feliks/ \
+	$(DNAME)/src/*.cpp $(DNAME)/src/*.h $(DNAME)/src/*/*.cpp $(DNAME)/src/*/*.h \
 	$(DNAME)/test/standard/ $(DNAME)/test/*.sh \
 	$(DNAME)/config/*AmorphousSilicon*/ $(DNAME)/config/Silicon/ $(DNAME)/config/Gas/ $(DNAME)/config/Nitride/ \
 	$(DNAME)/config/Nitride_SiO2/ $(DNAME)/config/Gas_Silicon/ $(DNAME)/config/S_Iron/ $(DNAME)/config/Gas_S_Iron/ \
 	$(DNAME)/config/MC/ $(DNAME)/config/SiO2/ $(DNAME)/config/SiO2_Silicon/ $(DNAME)/config/Mechanics/ \
-	$(DNAME)/sysmakes/ $(DNAME)/Makefile $(DNAME)/Makefile.mmonca $(DNAME)/Makefile.bca \
+	$(DNAME)/sysmakes/ $(DNAME)/Makefile $(DNAME)/Makefile.mmonca \
 	$(DNAME)/examples/NatureMaterials2004/ \
 	$(DNAME)/doc/document.sh $(DNAME)/doc/*.tex $(DNAME)/doc/*/*.tex $(DNAME)/doc/images/ $(DNAME)/doc/MMonCa.pdf
 
@@ -68,11 +64,9 @@ dist-static:
 	@cp -r test/ config/ examples/ doc/ data/ $(DNAME)
 	@cp AUTHORS README LICENSE NEWS NOTICE $(DNAME)
 	@cp Obj_static/mmonca  $(DNAME)/mmonca
-	@cp Obj_bca_static/iis $(DNAME)/iis
 	@rm -f `find $(DNAME)/test -name test.mc.log`
 	@rm -f `find $(DNAME)/test -name time`
 	@rm -f `find $(DNAME)/test -name errors`
-	@rm -f `find $(DNAME)/test -name feliks.*`
 	@rm -f `find $(DNAME)/test -name *nodist* `
 	@rm -f `find $(DNAME)/test -name test.result `
 	@rm -f `find $(DNAME)/test -name Inel*`
@@ -87,20 +81,7 @@ dist-static:
 	$(DNAME)/config/Nitride_SiO2/ $(DNAME)/config/Gas_Silicon/ $(DNAME)/config/S_Iron/ $(DNAME)/config/Gas_S_Iron/ \
 	$(DNAME)/config/MC/ $(DNAME)/config/SiO2/ $(DNAME)/config/SiO2_Silicon/ $(DNAME)/config/Mechanics/ \
 	$(DNAME)/examples/NatureMaterials2004/ \
-	$(DNAME)/doc/MMonCa.pdf $(DNAME)/mmonca $(DNAME)/iis $(DNAME)/data/bca/N*.den
-
-bca-%:
-	@if [ -f ./sysmakes/Makefile.$(@:bca-%=%) ]; \
-	then \
-		mkdir -p Obj_bca_$(@:bca-%=%) ; \
-		cp ./sysmakes/Makefile.$(@:bca-%=%) Obj_bca_$(@:bca-%=%)/Makefile ; \
-	else \
-		echo 'Machine $(@:bca-%=%) not found in ./sysmakes/Makefile/*' ; \
-		false ; \
-	fi ;
-	@echo 'Compiling BCA (IIS) for machine $(@:bca-%=%)...'
-	@$(MAKE) $(MAKESILENT) -C Obj_bca_$(@:bca-%=%) "EXE = $(IIS_BIN)" "TARGET = bca"
-	@echo "Built target $(shell pwd)/Obj_$@/$(IIS_BIN)"
+	$(DNAME)/doc/MMonCa.pdf $(DNAME)/mmonca
 
 .DEFAULT:
 	@if [ -f ./sysmakes/Makefile.$@ ]; \
@@ -121,5 +102,3 @@ clean-all:
 clean-%:
 	rm -rf Obj_$(@:clean-%=%)
 
-clean-bca-%:
-	rm -rf Obj_bca_$(@:clean-bca-%=%)

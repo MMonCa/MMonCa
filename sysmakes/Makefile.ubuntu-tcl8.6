@@ -25,9 +25,6 @@ SHLIBFLAGS =
 
 # ---------------------------------------------------------------------
 # MMonCa-specific settings
-FELIKS = no
-CHARGE = no
-
 # TCL lib, required
 
 TCL_INC = -I/usr/include/tcl8.6/
@@ -39,27 +36,6 @@ TCL_LIB = -ltcl8.6
 BOOST_INC =  -DNDEBUG -DBOOST_UBLAS_NDEBUG 
 BOOST_PATH =
 BOOST_LIB = -lboost_iostreams
-
-# SuperLu lib, optional
-# Can be empty if "FELIKS = no" (see above)
-
-SUPERLU_INC =
-SUPERLU_PATH =
-SUPERLU_LIB = -lsuperlu
-
-# Lapack lib, optional
-# Can be empty if "FELIKS = no" (see above)
-
-LAPACK_INC =
-LAPACK_PATH =
-LAPACK_LIB = -llapack -lblas
-
-# Blas lib, optional
-# Can be empty if "FELIKS = no" (see above)
-
-BLAS_INC =
-BLAS_PATH =
-BLAS_LIB = -lblas
 
 # Do not remove the following include
 
