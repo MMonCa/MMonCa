@@ -22,7 +22,6 @@
 
 #include "NoMechanics.h"
 #include "Uniform.h"
-#include "FeliksMechanics.h"
 #include "io/Diagnostic.h"
 #include "io/FileParameters.h"
 #include "kernel/Domain.h"
@@ -38,9 +37,7 @@ MechInterface::MechInterface(Kernel::Domain *p) : _pDomain(p)
 MechInterface * MechInterface::get(Kernel::Domain *p)
 {
 	std::string model = Domains::global()->mechModel();
-	if(model == "Feliks")
-		return new FELIKSMechanics(p);
-	else if(model == "Uniform")
+	if(model == "Uniform")
 		return new Uniform(p);
 	else if(model == "None")
 		return new NoMechanics(p);

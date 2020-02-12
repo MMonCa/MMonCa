@@ -18,11 +18,6 @@ Main author:
 Contributions:
 	Benoit Sklenard (VTK writer, Makefiles)
 	Laura Agudo (Voluminic cascade option)
-	Juan-Pablo Balbuena (Mesh parser)
-
-FEM files:
-Main author:
-	Ignacio Romero
 
 RNG.cpp: Takuji Nishimura and Makoto Matsumoto
 
