@@ -1,0 +1,43 @@
+# ---------------------------------------------------------------------
+# Makefile to define specific settings
+#
+# Author: Benoit Sklenard <benoit.sklenard@cea.fr>
+#
+# October 15, 2014
+#
+
+# ---------------------------------------------------------------------
+# compiler/linker settings
+# specify flags and libraries needed for your compiler
+CXX      = g++
+CXXFLAGS = -O3 -Wall -fopenmp -g -std=c++11
+CC       = gcc
+CCFLAGS  = -O3 -Wall
+DEPFLAGS = -MMD -MP
+
+LINK      = g++
+LINKFLAGS = -O3 -fopenmp -g
+LIB       = -lpthread -lm
+
+ARCHIVE =
+ARFLAGS =
+SHLIBFLAGS =
+
+# ---------------------------------------------------------------------
+# MMonCa-specific settings
+# TCL lib, required
+
+TCL_INC = -I/usr/include/tcl8.6/
+TCL_PATH = -L/usr/lib/x86_64-linux-gnu/
+TCL_LIB = -ltcl8.6
+
+# Boost lib
+
+BOOST_INC =  -DNDEBUG -DBOOST_UBLAS_NDEBUG 
+BOOST_PATH =
+BOOST_LIB = -lboost_iostreams
+
+# Do not remove the following include
+
+include ../Makefile.$(TARGET)
+
