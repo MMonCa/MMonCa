@@ -24,11 +24,12 @@ proc alloy { x y z } {
 }
 param set type=map<string,string>   key=MC/General/materials value="Gas Gas Iron Fe"
 param set type=array<string,string> key=Iron/Models/interactions index=V+V value=false
+param set type=map<string,float>    key=Iron/Models/mixing.enthalpy value={ {xi 0 xo 0 x1 0 poly1 1 xi 1 xo 0} }
 
-param set type=arrhenius key=Iron/Iron/I(formation)    value={ 1 5 }
-param set type=arrhenius key=Iron/Iron/I(migration)    value={ 0% 9 0.9 5% 10 1.0 15% 11 1.1 75% 12 1.2 90% 13 1.3 100% 17 1.7 }
+#param set type=arrhenius key=Iron/Iron/I(formation)    value={ 1 5 }
+#param set type=arrhenius key=Iron/Iron/I(migration)    value={ 0% 9 0.9 5% 10 1.0 15% 11 1.1 75% 12 1.2 90% 13 1.3 100% 17 1.7 }
 param set type=arrhenius key=Iron/Vacancy/V(migration) value={ 0.002 0.7 }
-param set type=arrhenius key=Iron/Helium/He(formation) value={ 0% 14 1.4 3% 15 1.5 98% 16 1.6 100% 18 1.8 }
+#param set type=arrhenius key=Iron/Helium/He(formation) value={ 0% 14 1.4 3% 15 1.5 98% 16 1.6 100% 18 1.8 }
 
 set T 1100
 set kB 8.6174e-5
@@ -58,12 +59,12 @@ set Vform [concat $Vform "100% [lindex $form1 0] [lindex $form1 1]"]
 param set type=arrhenius key=Iron/Vacancy/V(formation) value={ $Vform }
 
 # Compute the equilibrium concentrations from rate theory
-set C0 [rate [lindex $form0 0] [lindex $form0 1]]
+set C0  [rate [lindex $form0  0] [lindex $form0  1]]
 set C02 [rate [lindex $form02 0] [lindex $form02 1]]
 set C04 [rate [lindex $form04 0] [lindex $form04 1]]
 set C06 [rate [lindex $form06 0] [lindex $form06 1]]
 set C08 [rate [lindex $form08 0] [lindex $form08 1]]
-set C1 [rate [lindex $form1 0] [lindex $form1 1]]
+set C1  [rate [lindex $form1  0] [lindex $form1  1]]
 
 init minx=-1.5 miny=0 minz=0 maxx=36 maxy=12 maxz=12 material=material
 

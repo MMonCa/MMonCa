@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 
+/* This structure contains a set of regions, each with boundaries, and a polynomia
+ * between them. The polynomia are defined as a bunch of N numbers (lets say 3,2,...,4)
+ * defining 3**N-1 + 2**(N-2) + ... + 4
+ */
+
 #include "Polynomial.h"
 #include <math.h>
 
@@ -30,7 +35,7 @@ Polynomial::Polynomial(std::vector<std::vector <double> > vPoly, std::vector <do
 	_centered = centered;
 	derive();
 	double x;
-	for(unsigned idx = 0; idx < _precission; idx++)
+	for(unsigned idx = 0; idx <= _precission; idx++)
 	{
 		x = double(idx) / double(_precission);
 		_px.push_back(evaluate(_vPoly, x));
@@ -44,6 +49,7 @@ Polynomial::Polynomial()
 	_centered = _bounds;
 	_vPoly.push_back(_bounds);
 	_vdPoly.push_back(_bounds);
+	_precission = 1001;
 	_derivated = true;
 }
 
@@ -97,14 +103,17 @@ void Polynomial::derive()
 {
 	if(_derivated)
 		return;
-	for(std::vector<std::vector <double> >::iterator it = _vPoly.begin(); it != _vPoly.end(); ++it)
+	for(const auto &pol : _vPoly)
 	{
 		std::vector <double> dervPol;
-		for (unsigned i = 0; i < ((*it).size() - 1); i++)
-		{
-			int exp = ((*it).size() - 1 - i);
-			dervPol.push_back(exp * (*it)[i]);
-		}
+		if(pol.size())
+			for (unsigned i = 0; i < (pol.size() - 1); i++)
+			{
+				int exp = (pol.size() - 1 - i);
+				dervPol.push_back(exp * pol[i]);
+			}
+		else
+			dervPol.push_back(0.0);
 		_vdPoly.push_back(dervPol);
 	}
 	_derivated = true;
