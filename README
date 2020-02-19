@@ -1,14 +1,12 @@
 Current status: Not all tests are passing:
-83 / 92 tests PASSED
-9 failure/s
+84 / 91 tests PASSED
+7 failure/s
 --------- failed tests -------------
 ./others/lkmc/epi-simple/GaAs-epi-100/test.mc FAILED
 ./others/lkmc/epi-simple/Si-epi-100/test.mc FAILED
 ./others/lkmc/epi-simple/Si-epi-2D/test.mc FAILED
 ./others/lkmc/epi-simple/GaAs-sphere/test.mc FAILED
 ./others/commands/restart/lkmc-DEpi/test.mc FAILED
-./others/okmc/alloys/input/test.mc FAILED
-./others/okmc/alloys/mixingEnthalpy/test.mc FAILED
 ./others/okmc/alloys/mass_conservation/test.mc FAILED
 ./others/okmc/fuzz/He-Fe-1/test.mc FAILED
 
