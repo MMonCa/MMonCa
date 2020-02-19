@@ -46,11 +46,7 @@ public:
 				const OKMC::AlloyParam *, const Kernel::StateManager *);
 
 	~MobileParticleParam() {}
-#ifdef NUMODEL
-	IO::ArrheniusAlloys _arr[Kernel::MAX_MATERIALS][Kernel::MAX_PARTICLES][Kernel::MAX_STATES][15]; //0-5 mig; 1,6 br1; 2,7 br2; 3,8 FT(I); 4,9 FT(V); 5 states.
-#else
 	IO::ArrheniusAlloys _arr[Kernel::MAX_MATERIALS][Kernel::MAX_PARTICLES][Kernel::MAX_STATES][10]; //0 mig; 1,6 br1; 2,7 br2; 3,8 FT(I); 4,9 FT(V); 5 states.
-#endif
 	IO::ArrheniusAlloys _orig[Kernel::MAX_MATERIALS][Kernel::MAX_PARTICLES][Kernel::MAX_STATES][10]; //original values from the parameters
 	IO::ArrheniusAlloys _form[Kernel::MAX_MATERIALS][Kernel::MAX_PARTICLES]; // formation energies and prefactors	
 	Kernel::Coordinates _axes[Kernel::MAX_MATERIALS][Kernel::MAX_PARTICLES][Kernel::MAX_STATES]; //for 1D migration

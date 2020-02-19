@@ -189,11 +189,7 @@ void MobileParticleParam::init(const IO::ParameterManager *pPM, const IO::FilePa
 			{
 				double convFactor = 6./(lambda*lambda)*1e14;
 				_orig[mt][pt][0][5] = pPar->getArrheniusAlloys(base.str() + "(update)");
-#ifdef NUMODEL
-				_arr [mt][pt][0][10] = _orig[mt][pt][0][5]* convFactor;
-#else
 				_arr [mt][pt][0][5] = _orig[mt][pt][0][5]* convFactor;
-#endif
 			}
 			for(unsigned st=0; st<pPM->getStates(mt, pt); ++st)  //migration
 			{
@@ -212,16 +208,8 @@ void MobileParticleParam::init(const IO::ParameterManager *pPM, const IO::FilePa
 					ss << "_" << pPM->getStateName(mt, pt, st);
 				double convFactorMig = _oneD[mt][pt][st]? 2./(lambda*lambda)*1e14 : 6./(lambda*lambda)*1e14;
 				_orig[mt][pt][st][0] = pPar->getArrheniusAlloys(ss.str() + "(migration)");
-#ifdef NUMODEL
-				for (unsigned i = 0; i < 6; i++)
-				{
-					_arr[mt][pt][st][i] = _orig[mt][pt][st][0] * convFactorMig;
-					Domains::global()->PM()->setMigrationRate(mt, st, pt, _arr[mt][pt][st][i]);
-				}
-#else
 				_arr[mt][pt][st][0] = _orig[mt][pt][st][0] * convFactorMig;
 				Domains::global()->PM()->setMigrationRate(mt, st, pt, _arr[mt][pt][st][0]);
-#endif
 			}
 		}
 	}

@@ -12,14 +12,9 @@
 SHELL  := /bin/bash
 COLOR  ?= yes
 
-# Specific rules for Secondary Interdiffusion Binary Alloy Model compilation
-ifeq ($(NUMODEL),yes)
-	NUMODEL_INC := -DNUMODEL
-endif
-
 # Build rules and dependencies
 SRC_INC    := -I../src/
-EXTRA_INC  := $(SRC_INC) $(TCL_INC) $(BOOST_INC) $(NUMODEL_INC)
+EXTRA_INC  := $(SRC_INC) $(TCL_INC) $(BOOST_INC)
 EXTRA_PATH := $(TCL_PATH) $(BOOST_PATH)
 EXTRA_LIB  := $(TCL_LIB) $(BOOST_LIB) 
 

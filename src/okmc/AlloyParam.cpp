@@ -99,22 +99,6 @@ double AlloyParam::getMixingEnergy(M_TYPE mt, double x, float T)
 	return _mixingEnthalpy[mt].getIntValue(x) * (1 - T / _theta[mt]);
 }
 
-#ifdef NUMODEL
-double AlloyParam::nu(double x, double kT)
-{
-        double a = 0.07;
-        double b = -2.288;
-        double c = 4.439;
-        double d = -2.48;
-        double theta = 1480;
-        double k = 8.6e-5;
-
-        return -(1 - kT / theta / k) * (-5 * b * std::pow(x, 4) + 4 * (b - c + a * b) * pow(x, 3) +
-                3 * (c - d - a * b + a * c) * pow(x, 2) + 2 * (d - a * c + a * d) * x - a * d) +
-                kT * std::log(x / (1 - x));
-}
-#endif
-
 }
 
 

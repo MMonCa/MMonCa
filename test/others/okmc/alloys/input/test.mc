@@ -26,10 +26,7 @@ param set type=map<string,string>   key=MC/General/materials value="Gas Gas Iron
 param set type=array<string,string> key=Iron/Models/interactions index=V+V value=false
 param set type=map<string,float>    key=Iron/Models/mixing.enthalpy value={ {xi 0 xo 0 x1 0 poly1 1 xi 1 xo 0} }
 
-#param set type=arrhenius key=Iron/Iron/I(formation)    value={ 1 5 }
-#param set type=arrhenius key=Iron/Iron/I(migration)    value={ 0% 9 0.9 5% 10 1.0 15% 11 1.1 75% 12 1.2 90% 13 1.3 100% 17 1.7 }
 param set type=arrhenius key=Iron/Vacancy/V(migration) value={ 0.002 0.7 }
-#param set type=arrhenius key=Iron/Helium/He(formation) value={ 0% 14 1.4 3% 15 1.5 98% 16 1.6 100% 18 1.8 }
 
 set T 1100
 set kB 8.6174e-5

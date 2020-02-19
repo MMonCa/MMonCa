@@ -39,11 +39,7 @@ public:
 
 	virtual void setIndex(unsigned eventType, int idx) { _idx[eventType] = idx; }
 	virtual int  getIndex(unsigned eventType) const { return _idx[eventType]; }
-#ifdef NUMODEL
-	virtual unsigned getNEvents() const { return 10; } //migrate[6 directions], br1, br2, FTI, FTV, states
-#else
 	virtual unsigned getNEvents() const { return 6; } //migrate, br1, br2, FTI, FTV, states
-#endif
 	virtual float getRate(unsigned eventType, float kT) const;
 	virtual Event::E_TYPE getEType() const { return MOBILEPARTICLE; }
 	virtual void perform (Kernel::SubDomain *, unsigned eventType);
@@ -60,14 +56,8 @@ public:
 	virtual void     restart(std::ostream &) const;
 
 private:
-#ifdef NUMODEL
-	int _idx[10];
-	mutable bool _AorB[6]; // True if A false if B atom to be displaced in the next jump
-	void migrate(Kernel::SubDomain *, unsigned ev);
-#else
 	int _idx[6];
 	void migrate(Kernel::SubDomain *);
-#endif
 	mutable unsigned _longHopFactor;
 	Kernel::Coordinates _axes;
 	void setAxes(Kernel::SubDomain *); //initialize migration axis.

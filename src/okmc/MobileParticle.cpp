@@ -105,10 +105,6 @@ MobileParticle::MobileParticle(Kernel::SubDomain *pSub, P_TYPE type,unsigned sta
 			_pElement->_BBalance--;
 		}
 	}
-#ifdef NUMODEL
-	for (unsigned i = 0; i < 6; i++)
-		_AorB[i] = _pDomain->_rng_dom.rand() > _pElement->getAlloyFraction() ? true : false;
-#endif
 }
 
 MobileParticle::MobileParticle(std::istream &is) : Defect(is), Particle(is, this)
@@ -204,76 +200,6 @@ void MobileParticle::setAxes(Kernel::SubDomain *pSub)
 float MobileParticle::getRate(unsigned ev, float kT) const
 {
 	Kernel::M_TYPE mt = _pElement->getMaterial();
-#ifdef NUMODEL
-	unsigned migEv = 5;
-	if(ev < 6) //migration
-	{
-		Kernel::MeshElement *pEle = _pElement;
-		_longHopFactor =  _pDomain->_pMesh->longHopFactor(_pElement->getIndex());
-		Coordinates orig_delta(0,0,0);
-		const float l = _pDomain->_pMePar->_lambda[pEle->getMaterial()];
-		if(ev == 0)
-			orig_delta._x = l;
-		else if(ev == 1)
-			orig_delta._x = -l;
-		else if(ev == 2)
-			orig_delta._y = l;
-		else if(ev == 3)
-			orig_delta._y = -l;
-		else if(ev == 4)
-			orig_delta._z = l;
-		else
-			orig_delta._z = -l;
-		Coordinates to = _coord + (orig_delta * _longHopFactor);
-		Kernel::M_TYPE mt = _pElement->getMaterial();
-		Mesh::JUMP_ACTIONS jmp = _pDomain->_pMesh->checkMove(pEle, to);
-		IO::Arrhenius arr = _pDomain->_pMPPar->_arr[mt][_ptype][_state][ev](_pElement);
-		double x1 = _pElement->getAlloyFraction();
-		double x2 = pEle->getAlloyFraction();
-		char iorv = Domains::global()->PM()->getIorV(mt, _ptype);
-
-		if(iorv == Kernel::IV_I)
-			_AorB[ev] = _pDomain->_rng_dom.rand() > _pElement->getAlloyFraction() ? true : false;
-		else if(iorv == Kernel::IV_V)
-			_AorB[ev] = _pDomain->_rng_dom.rand() > pEle->getAlloyFraction() ? true : false;
-		else
-			ERRORMSG("MobileParticle not I or V is trying to get a rate for moving lattice atoms");
-		if(jmp == Mesh::JUMP_OK && x1 != x2)
-		{
-			// Workaround for unresolved singularities [ln at 0]
-			if(x1 == 0)
-			{
-				if(iorv == Kernel::IV_I && !_AorB[ev])
-					return 0;
-				x1 = 0.001;
-			}
-			if(x2 == 0)
-			{
-				if(iorv == Kernel::IV_V && !_AorB[ev])
-					return 0;
-				x2 = 0.001;
-			}
-			if(x1 == 1)
-			{
-				if(iorv == Kernel::IV_I && _AorB[ev])
-					return 0;
-				x1 = 0.999;
-			}
-			if(x2 == 1)
-			{
-				if(iorv == Kernel::IV_V && _AorB[ev])
-					return 0;
-				x2 = 0.999;
-			}
-			if(_AorB[ev])
-				arr._ener -= .5 * (_pDomain->_pAlPar->nu(iorv==Kernel::IV_I?x2:x1, kT) - _pDomain->_pAlPar->nu(iorv==Kernel::IV_I?x1:x2, kT));
-			else
-				arr._ener += .5 * (_pDomain->_pAlPar->nu(iorv==Kernel::IV_I?x2:x1, kT) - _pDomain->_pAlPar->nu(iorv==Kernel::IV_I?x1:x2, kT));
-		}
-		double rate = arr.getRate(kT);
-		return rate / (_longHopFactor * _longHopFactor);
-	}
-#else
 	unsigned migEv = 0;
 	if(ev == 0) //migration
 	{
@@ -281,7 +207,6 @@ float MobileParticle::getRate(unsigned ev, float kT) const
 		_longHopFactor =  _pDomain->_pMesh->longHopFactor(_pElement->getIndex());
 		return rate / (_longHopFactor * _longHopFactor);
 	}
-#endif
 	else if(ev == (migEv + 1) || ev == (migEv + 2)) //breakup prefactors not considered yet in stateChanges
 	{
 		double stateFormation = _pDomain->_pSM->bindingShift(_ptype, (ev == 1? POS_0 : POS_1), _state, _pElement);
@@ -343,30 +268,6 @@ void MobileParticle::perform (Kernel::SubDomain *pSub, unsigned eventType)
 		pSub->_evLog.performed(_pElement->getMaterial(), Event::MOBILEPARTICLE, _ptype, 0, eventType, _state);
 	switch(eventType)
 	{
-#ifdef NUMODEL
-	case 0:
-		return migrate(pSub, 0);
-	case 1:
-		return migrate(pSub, 1);
-	case 2:
-		return migrate(pSub, 2);
-	case 3:
-		return migrate(pSub, 3);
-	case 4:
-		return migrate(pSub, 4);
-	case 5:
-		return migrate(pSub, 5);
-	case 6:
-		return breakup(pSub, POS_0);
-	case 7:
-		return breakup(pSub, POS_1);
-	case 8:
-		return emit(pSub, Kernel::IV_I);
-	case 9:
-		return emit(pSub, Kernel::IV_V);
-	case 10:
-		return updateState(pSub);
-#else
 	case 0:
 		return migrate(pSub);
 	case 1:
@@ -379,7 +280,6 @@ void MobileParticle::perform (Kernel::SubDomain *pSub, unsigned eventType)
 		return emit(pSub, Kernel::IV_V);
 	case 5:
 		return updateState(pSub);
-#endif
 	default:
 		ERRORMSG("Unknown case in MobileParticle::perform");
 		break;
@@ -414,133 +314,6 @@ void MobileParticle::emit(Kernel::SubDomain *pSub, unsigned char iorv)
 		_pDomain->_pMesh->getParticleToNodeHandler()->insert(this);
 }
 
-#ifdef NUMODEL
-void MobileParticle::migrate(Kernel::SubDomain *pSub, unsigned ev)
-{
-	Kernel::MeshElement *pEle = _pElement;
-	Coordinates oldc = _coord;
-	Coordinates oldorig = _orig;
-	Coordinates orig_delta(0,0,0);
-	const float l = _pDomain->_pMePar->_lambda[pEle->getMaterial()];
-	if(_axes.abs() == 0)
-	{
-		if(ev == 0)
-			orig_delta._x = l;
-		else if(ev == 1)
-			orig_delta._x = -l;
-		else if(ev == 2)
-			orig_delta._y = l;
-		else if(ev == 3)
-			orig_delta._y = -l;
-		else if(ev == 4)
-			orig_delta._z = l;
-		else
-			orig_delta._z = -l;
-	}
-	else
-		orig_delta = _axes * (pSub->_rng.rand() < 0.5? l:-l);
-	const Coordinates delta(orig_delta*_longHopFactor);
-
-	std::pair<P_TYPE, unsigned> stateID = std::make_pair(_ptype, _state);   //correction to make state structure fit into jump actions.
-	Kernel::M_TYPE mt = _pElement->getMaterial();
-	P_TYPE pt = _ptype;
-	unsigned st = _state;
-	unsigned uLHF = _longHopFactor;
-	Mesh::JUMP_ACTIONS jmp = _pDomain->_pMesh->jumpPosition(_coord, delta, pEle, &stateID, _orig, _longHopFactor*_longHopFactor);
-	vector<Particle *> parts;
-	if (jmp != Mesh::JUMP_OK)
-	{
-		pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 12, _state);
-		return;
-	}
-
-	if(_pElement != pEle ) //change of elements
-	{
-		if(Domains::global()->PM()->isAmorphous(pEle->getMaterial()))
-		{
-			if(!Domains::global()->PM()->isImpurity(mt,_ptype))
-			{
-				HIGHMSG("Deleting " << Domains::global()->PM()->getParticleName(mt,_ptype));
-				delete this;
-			}
-			else
-			{
-				HIGHMSG("Desorption in a/c interface of " << Domains::global()->PM()->getParticleName(mt,_ptype) << ". Removing "
-						<< Domains::global()->PM()->getParticleName(mt,_pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[1])
-						<< " and leaving " << Domains::global()->PM()->getParticleName(mt,_pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[0] ));
-				P_TYPE emit  = _pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[0];
-				_pDomain->_pRM->remove(this, _pElement);
-				_ptype = emit;
-				_state = 0;
-				_pDomain->_pRM->insert(this, _pElement);
-			}
-			return;
-		}
-		INTERFACE_ACTIONS result = interactSurface(pSub, _pElement, pEle);
-		if(result == INTERACTION_REJECTED)
-			goto rejected;
-		if(result == INTERACTION_EXECUTED)
-			goto executed;
-		if ( !_pDomain->_pSM->checkStateBarrier(pSub, _ptype, _state , _pElement ,pEle))
-			goto rejected;
-
-		double newLHF = _pDomain->_pMesh->longHopFactor(pEle->getIndex());  // Martin-Bragado et al. SSE . 155-155 (2008) 202-206
-		if(_longHopFactor < newLHF && pSub->_rng.rand() > _longHopFactor/double(newLHF))  //long - short hop probability
-			goto rejected;
-
-		if(newLHF != _longHopFactor)
-		{
-			unsigned ix, iy, iz;
-			_pDomain->_pMesh->getIndicesFromIndex(pEle->getIndex(), ix, iy, iz);
-
-			if(delta._x > 0)
-				_coord._x = _pDomain->_pMesh->getLines(0)[ix]   + pSub->_rng.rand()*newLHF*orig_delta._x;
-			else if(delta._x < 0)
-				_coord._x = _pDomain->_pMesh->getLines(0)[ix+1] + pSub->_rng.rand()*newLHF*orig_delta._x;
-			if(delta._y > 0)
-				_coord._y = _pDomain->_pMesh->getLines(1)[iy]   + pSub->_rng.rand()*newLHF*orig_delta._y;
-			else if(delta._y < 0)
-				_coord._y = _pDomain->_pMesh->getLines(1)[iy+1] + pSub->_rng.rand()*newLHF*orig_delta._y;
-		}
-
-		// Self-Diffusion
-		char iorv = Domains::global()->PM()->getIorV(mt, _ptype);
-		if(iorv == Kernel::IV_I)
-		{
-			if(_AorB[ev])
-			{
-				_pElement->decAAtoms();
-				pEle->incAAtoms();
-			}
-			else
-			{
-				_pElement->decBAtoms();
-				pEle->incBAtoms();
-			}
-		}
-		else if (iorv == Kernel::IV_V)
-		{
-			if(_AorB[ev])
-			{
-				_pElement->incAAtoms();
-				pEle->decAAtoms();
-			}
-			else
-			{
-				_pElement->incBAtoms();
-				pEle->decBAtoms();
-			}
-		}
-		else
-			ERRORMSG("Only interstitials and vacancies are allowed to move lattice atoms");
-		assert(Domains::global()->PM()->isParticleDefined(_ptype, mt));
-	}
-	_pDomain->_pMesh->remove(this);
-	_pDomain->_pMesh->insert(this, pEle);
-	_pDomain->_pRM->remove(this, _pElement);
-	_pDomain->_pRM->insert(this, pEle);
-	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, (uLHF == 1? ev : 11), st);
-#else
 void MobileParticle::migrate(Kernel::SubDomain *pSub)
 {
 	Kernel::MeshElement *pEle = _pElement;
@@ -666,7 +439,6 @@ void MobileParticle::migrate(Kernel::SubDomain *pSub)
 		_pDomain->_pRM->  insert(this, pEle);
 	}
 	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, (uLHF == 1? 0 : 6), st);
-#endif
 
 	//order is very important, because the scheduler uses the element to pick up the subdomain.
 	if(uLHF == 1)
@@ -682,19 +454,11 @@ void MobileParticle::migrate(Kernel::SubDomain *pSub)
 rejected:
 	_orig = oldorig;
 	_coord = oldc;
-#ifdef NUMODEL
-	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, 12, st);
-#else
 	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, 7, st);
-#endif
 	return;
 
 executed:
-#ifdef NUMODEL
-	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, (uLHF == 1? ev : 11), st);
-#else
 	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, (uLHF == 1? 0 : 6), st);
-#endif
 	return;
 }
 

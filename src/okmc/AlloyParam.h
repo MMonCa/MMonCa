@@ -52,9 +52,6 @@ public:
 
     IO::Polynomial _mixingEnthalpy[Kernel::MAX_MATERIALS];
 
-#ifdef NUMODEL
-    double nu(double x, double kT);
-#endif
 };
 }
 

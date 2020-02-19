@@ -40,16 +40,7 @@ EventLog::EventLog()
 {
 	for(int i=0; i<Event::UNDEFINED_EVENT; ++i)
 		_descriptions.push_back(std::vector<std::string>());
-#ifdef NUMODEL
-	_descriptions[Event::MOBILEPARTICLE].push_back("migrate +x");
-	_descriptions[Event::MOBILEPARTICLE].push_back("migrate -x");
-	_descriptions[Event::MOBILEPARTICLE].push_back("migrate +y");
-	_descriptions[Event::MOBILEPARTICLE].push_back("migrate -y");
-	_descriptions[Event::MOBILEPARTICLE].push_back("migrate +z");
-	_descriptions[Event::MOBILEPARTICLE].push_back("migrate -z");
-#else
 	_descriptions[Event::MOBILEPARTICLE].push_back("migrate");
-#endif
 	_descriptions[Event::MOBILEPARTICLE].push_back("break 0");
 	_descriptions[Event::MOBILEPARTICLE].push_back("break 1");
 	_descriptions[Event::MOBILEPARTICLE].push_back("emit I");
