@@ -4,27 +4,26 @@ param set type=array<string,string> key=Silicon/Models/interactions value={ }
 param set type=array<string>        key=Silicon/Models/interaction.result value={ }
 param set type=bool                 key=Silicon/Models/epitaxy value=true
 param set type=int                  key=MC/General/random.seed value=56478
-set value(0) 35.3397 
-set value(5) 33.1694 
-set value(10) 32.7834 
-set value(15) 32.6078 
-set value(20) 32.2719 
-set value(25) 32.9806 
-set value(30) 32.3103 
-set value(35) 32.66 
-set value(40) 32.3055 
-set value(45) 32.5393 
-set value(50) 32.3302 
-set value(55) 32.5487 
-set value(60) 32.5494 
-set value(65) 32.7547 
-set value(70) 32.5738 
-set value(75) 32.3406 
-set value(80) 32.3533 
-set value(85) 33.1842 
-set value(90) 33.4845 
-set value(95) 35.0307
-
+set value(0) 42.0812 
+set value(5) 37.7524 
+set value(10) 35.5528 
+set value(15) 33.3937 
+set value(20) 31.6846 
+set value(25) 31.5092 
+set value(30) 31.5587 
+set value(35) 31.5176 
+set value(40) 31.447 
+set value(45) 31.4114 
+set value(50) 31.4328 
+set value(55) 31.4375 
+set value(60) 31.4406 
+set value(65) 31.4306 
+set value(70) 31.4645 
+set value(75) 31.8147 
+set value(80) 33.6297 
+set value(85) 35.8261 
+set value(90) 38.108 
+set value(95) 42.1077 
 
 set T 600
 set name SPER
@@ -60,17 +59,9 @@ set R [expr sqrt(2.0)]
 set waferorient "i $C  j [expr $S/$R] k [expr $S/$R]"
 set flatorient  "i -$S j [expr $C/$R] k [expr $C/$R]"
 
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.etch       value=0.0  index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.mig        value=0.0  index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.hydride    value=0.0   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride1 value=4e12   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride2 value=8e11   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride3 value=1e1    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.precursor    value=2.0    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride1   value=2.4    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride2   value=1.9    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride3   value=0.1    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.etch         value=0.0    index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.etch    value=0.0  index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.mig     value=0.0  index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/barrier.precursor value=0.7    index=Si
 
 
 param set type=map<string,float> key=Silicon/Lattice/wafer.orientation value="$waferorient"
@@ -91,4 +82,4 @@ foreach i "0 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95" {
         test tag=depth.$i float=$depth value=$value($i)0 error=0.01
 }
 
-test tag=rough float=$roughness value=2.4 error=0.02
+test tag=rough float=$roughness value=3.96429 error=0.02

@@ -4,16 +4,9 @@ param set type=array<string,string> key=Silicon/Models/interactions value={ }
 param set type=array<string>        key=Silicon/Models/interaction.result value={ }
 param set type=bool                 key=Silicon/Models/epitaxy value=true
 
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.etch       value=0.0    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.mig        value=0.0    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride1 value=4e12   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride2 value=8e11   index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.dehydride3 value=1e1    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.precursor    value=2.0    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride1   value=2.4    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride2   value=1.9    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.dehydride3   value=0.1    index=Si
-param set type=map<string,float>    key=Silicon/Epitaxy/barrier.etch         value=0.0    index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.etch    value=0.0    index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/prefactor.mig     value=0.0    index=Si
+param set type=map<string,float>    key=Silicon/Epitaxy/barrier.precursor value=1    index=Si
 
 set T 600
 set name SPER
@@ -28,7 +21,7 @@ proc material { x y z } {
 	return $res
 }
 
-set vel(0)  51
+set vel(0)  2.310586580165102
 set vel(9)  0.463
 set vel(14) 3.332
 
