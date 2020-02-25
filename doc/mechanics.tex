@@ -1,7 +1,7 @@
 \section{Mechanical settings}
 \index{Mechanics}
 
-There are three different modules to produce mechanical output (strain and stress) for \MMonCa. These modules can be set up with the command:
+There are two different modules to produce mechanical output (strain and stress) for \MMonCa. These modules can be set up with the command:
 
 \begin{lstlisting}
 param set type=string key=Mechanics/General/model  value=module
@@ -9,8 +9,6 @@ param set type=string key=Mechanics/General/model  value=module
 
 The different available modules are:
 \begin{description}
-\item[\param{Feliks}] Realistic calculation of stresses and strains by calling the finite element solver included in \MMonCa\ and developed by
-\idx{Ignacio} Romero at the Technical University.
 \item[\param{Uniform}] Simple model that allows to specify a fixed value in \param{Mechanics/Uniform}. The values are \param{stress.xx}, \param{stress.yy} and \param{stress.zz}.
 \item[\param{None}] No model.
 \end{description}

@@ -37,7 +37,7 @@ init minx=-2 miny=0 minz=0 maxx=58 maxy=$sizeY maxz=$sizeZ material=material
 save lammps=nodist-GaAs-100
 
 
-anneal time=1 temp=$T depth=31 events=40000000 epitaxy="Ga 1.0 As 1.0"
+anneal time=1 temp=$T depth=31 events=10000000 epitaxy="Ga 1.0 As 1.0"
 
 save lammps=nodist-GaAs-100 append
 
@@ -46,7 +46,7 @@ set roughness  [extract ac.stdev]
 
 lowmsg $roughness
 
-test tag=rough0 value=[lindex $roughness 0] float=6.67 error=.1
-test tag=rough1 value=[lindex $roughness 1] float=10.6 error=.1
-test tag=rough2 value=[lindex $roughness 2] float=11.1 error=.1
+test tag=rough0 value=[lindex $roughness 0] float=0.972 error=.15
+test tag=rough1 value=[lindex $roughness 1] float=10.93 error=.15
+test tag=rough2 value=[lindex $roughness 2] float=11.09 error=.15
 

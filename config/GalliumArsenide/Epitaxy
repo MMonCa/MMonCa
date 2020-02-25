@@ -77,7 +77,7 @@ map<string,float> barrier.epi    { Ga 3.7   As 3.7 }
 map<string,float> barrier.pair   { Ga 3.6   As 3.6 }
 map<string,float> prefactor.epi  { Ga 5.6e9 As 5.6e9}
 map<string,float> prefactor.etch { Ga 0.0   As 0.0 }
-map<string,float> prefactor.mig  { Ga 1e6   As 1e6 }
+map<string,float> prefactor.mig  { Ga 1e4   As 1e4 }
 map<string,float> barrier.precursor    { Ga 0.0 As 0.0 }
 map<string,float> barrier.desorption   { Ga 0.32 As 0.32 }
 map<string,float> prefactor.desorption { Ga 1e6 As 1e6 } 

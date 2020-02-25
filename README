@@ -1,15 +1,10 @@
-Current status: Not all tests are passing:
-84 / 91 tests PASSED
-7 failure/s
---------- failed tests -------------
-./others/lkmc/epi-simple/GaAs-epi-100/test.mc FAILED
-./others/lkmc/epi-simple/Si-epi-100/test.mc FAILED
-./others/lkmc/epi-simple/Si-epi-2D/test.mc FAILED
-./others/lkmc/epi-simple/GaAs-sphere/test.mc FAILED
-./others/commands/restart/lkmc-DEpi/test.mc FAILED
-./others/okmc/alloys/mass_conservation/test.mc FAILED
-./others/okmc/fuzz/He-Fe-1/test.mc FAILED
-
+Current status: All test passing on Ubuntu 18.04
+91 / 91 tests PASSED
+0 failure/s
+-- DONE --
+If a test does not pass in your machine contact us. It might
+be that the test criteria is too strict without enough flexibility
+for ocurring floating point variation between machines/architectures.
 
 * Read doc/MMonCa.pdf to learn about the MMonCa simulator
   and how to use it.

@@ -56,6 +56,6 @@ cascade file=cascades periodic fluence=3e14 flux=1e12 temp=-75 correct.for.surfa
 	set average [expr $average + $k]
 	lowmsg "($i, $j) -> $k"
      }
-     save xyz=nodist-evolution
+     save lammps=nodist-evolution
 
      test tag=average float=-1.33 value=[expr $average/$howmany] error=.03

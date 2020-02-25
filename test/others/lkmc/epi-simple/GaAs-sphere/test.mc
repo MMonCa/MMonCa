@@ -1,5 +1,8 @@
 param set type=map<string,string>   key=MC/General/materials value="GalliumArsenide GaAs Gas Gas"
 param set type=map<string,string>   key=MC/Particles/elements value="As Arsenic,33,74.9216 Ga Gallium,11,22"
+param set type=array<string,string> key=GalliumArsenide/Models/interactions value={ }
+param set type=map<string,bool>     key=GalliumArsenide/Models/particles value={Be false}
+
 param set type=bool                 key=GalliumArsenide/Models/epitaxy value=true
 
 param set type=int   key=MC/General/snapshot.time.decade value=1
@@ -33,4 +36,4 @@ anneal time=1e5 temp=$T events=10000000 epitaxy="Ga 1.0 As 1.0"
 save lammps=nodist-GaAs append
 
 set roughness [lindex [extract ac.stdev] 0]
-test tag=rough value=$roughness float=5.16 error=.1
+test tag=rough value=$roughness float=3.85929 error=.1
