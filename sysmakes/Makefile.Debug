@@ -10,7 +10,7 @@
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 CXX      = g++
-CXXFLAGS = -O0 -g -fno-implement-inlines -pedantic -Wall
+CXXFLAGS = -O0 -g -fno-implement-inlines -pedantic -Wall -std=c++11
 CC       = gcc
 CCFLAGS  = -O0 -g -pedantic -Wall
 DEPFLAGS = -MMD -MP

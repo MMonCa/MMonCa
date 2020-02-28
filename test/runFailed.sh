@@ -1,7 +1,7 @@
 #!/bin/sh
 # 16 means a maximum of 8 CPUs busy (each one is counted as two because of the time command)
 if [ "A$1" = "A" ]; then
-   version=Obj_ubuntu-tcl8.6
+   version=Obj_g++
 else
    version=$1
 fi
@@ -19,7 +19,7 @@ do
 			cat $name/test.result
 		fi
 	fi
-	while [ `ps aux | grep mmonca | grep test | wc -l` -ge 16 ]; do
+	while [ `ps aux | grep mmonca | grep test | wc -l` -ge 2 ]; do
 		sleep 1
 	done
 done
