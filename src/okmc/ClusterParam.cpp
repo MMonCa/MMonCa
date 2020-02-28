@@ -58,6 +58,13 @@ ClusterParam::ClusterParam(Tcl_Interp *pTcl, const IO::ParameterManager *pPM, co
 	readInteractions(pPar);
 }
 
+ClusterParam::~ClusterParam()
+{
+	for(M_TYPE mt=0; mt < Kernel::MAX_MATERIALS; ++mt)
+		for(auto &ptr : _params[mt])
+			delete ptr;
+}
+
 void ClusterParam::readParameters(Tcl_Interp *pTcl, const IO::ParameterManager *pPM, const IO::FileParameters * pPar)
 {
 	LOWMSG2("Starting clusters: ");

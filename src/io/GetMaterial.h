@@ -40,7 +40,7 @@ public:
 
 private:
 	Tcl_Interp *_pTcl;
-	const std::string &_procName;  //when using a procedure
+	std::string _procName;  //when using a procedure
 	std::vector<std::vector<Kernel::M_TYPE> >_materials; //when reading from file
 
 };

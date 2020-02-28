@@ -67,6 +67,7 @@ void MCClient::resetGetMaterial()
 
 MCClient::~MCClient()
 {
+	delete _getMaterial;
 }
 
 //Since this is created from global domains, it uses the SubDomain associated with the coordinate

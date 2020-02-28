@@ -41,7 +41,7 @@ namespace OKMC {
 class ClusterParam {
 public:
 	ClusterParam(Tcl_Interp *, const IO::ParameterManager *pPM, const IO::FileParameters * pPar);
-	virtual ~ClusterParam() {}
+	virtual ~ClusterParam();
 
 	static bool   isCluster(const Kernel::ID &theMap);
 	static Kernel::P_TYPE ID2pt(const Kernel::ID &);

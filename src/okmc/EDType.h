@@ -41,6 +41,8 @@ namespace OKMC
 	class EDType
 	{
 	public:
+		virtual ~EDType() {}
+
 		void checkAxes();
 
 		enum ASPECT_TYPE { aspect_disk, aspect_irregular, aspect_void, aspect_plane311 };

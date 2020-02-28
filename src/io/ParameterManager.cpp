@@ -604,7 +604,11 @@ P_TYPE ParameterManager::iorv2pt(M_TYPE mt, unsigned char iorv, P_POS pos) const
 	if(iorv == Kernel::IV_V)
 		return _families[Kernel::V_TYPE]._type[pos];
 	if(iorv == Kernel::IV_I)
+	{
+		if(_materials[mt]._pt[pos] == Kernel::UNDEFINED_TYPE)
+			return Kernel::UNDEFINED_TYPE;
 		return _families[_materials[mt]._pt[pos]]._type[Kernel::POS_I];
+	}
 	ERRORMSG("Incorrect petition in iorv2pt " << int(iorv) << " " << int(pos));
 	return Kernel::UNDEFINED_TYPE;
 }

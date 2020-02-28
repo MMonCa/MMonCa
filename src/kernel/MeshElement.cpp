@@ -50,6 +50,8 @@ MeshElement::MeshElement(Domain *p) : _pDomain(p)
 	_nonCrystallineLA = _crystallineLA = 0; //no LA atoms yet
 	_AAtoms = 0;
     _BAtoms = 0;
+    _ABalance = 0;
+    _BBalance = 0;
 	_stress = ublas::zero_vector<double>(6);
 	_strain = ublas::zero_vector<double>(6);
 
