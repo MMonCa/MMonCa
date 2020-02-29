@@ -1,9 +1,9 @@
-set results(0.05,1600) 1263.753538935439
-set results(0.05,1400) 54.6540940507993
-set results(0.05,800) 0.00017910551980573506
-set results(0.24,1600) 1991.9238100144241
-set results(0.24,1400) 205.57011656188945
-set results(0.24,800) 0.0006813938120349445
+set results(0.05,1600) 21904.642855425835
+set results(0.05,1400) 10416.507323415757
+set results(0.05,800) 114.51426604751082
+set results(0.24,1600) 98181.86995458216
+set results(0.24,1400) 49468.69849046521
+set results(0.24,800) 376.2058720727014
 
 param set type=map<string,string>   key=MC/General/materials value="GalliumArsenide GaAs Gas Gas"
 param set type=map<string,string>   key=MC/Particles/elements value="As Arsenic,33,74.9216 Ga Gallium,11,22"

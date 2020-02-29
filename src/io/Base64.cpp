@@ -7,11 +7,6 @@ static const std::string base64_chars =
              "abcdefghijklmnopqrstuvwxyz"
              "0123456789+/";
 
-
-static inline bool is_base64(char c) {
-    return (isalnum(c) || (c == '+') || (c == '/'));
-}
-
 void base64_encode(const char * bytes_to_encode, unsigned int in_len, std::string &out) {
     int i = 0;
     int j = 0;
