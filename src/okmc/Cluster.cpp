@@ -582,7 +582,7 @@ void Cluster::migrate(Kernel::SubDomain * pSub)
 		{
 			if(interactSurface(pSub, (*it)->getElement(), tmp._pEle) == NO_INTERFACE)
 				ERRORMSG("Cluster: Could not find interface to react to");
-			_center = orig;
+			// cluster deleted, do not operate here
 			return;
 		}
 		after.push_back(tmp);

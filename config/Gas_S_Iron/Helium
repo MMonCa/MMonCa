@@ -1,10 +1,10 @@
 string left Gas
 
-map<string,float>	recombination.length.right { }
-map<string,float>	barrier.right { He	 0 HeV 0 }
-map<string,float>	desorption.low       { }
-map<string,float>	desorption.threshold { He 0 }
-map<string,float>   desorption.high      { He 0 HeV 1.0 }
+map<string,float> recombination.length.right { }
+map<string,float> barrier.right { He	 0 HeV 0 }
+map<string,float> desorption.low       { }
+map<string,float> desorption.threshold { He 0 }
+map<string,float> desorption.high      { He 0 HeV 1.0 }
 
-arrhenius             He(formation)  { 1e-3 0 }
-arrhenius             He(migration)  { 0 5 }
+arrhenius         He(formation)  { 1e-3 0 }
+arrhenius         He(migration)  { 0 5 }

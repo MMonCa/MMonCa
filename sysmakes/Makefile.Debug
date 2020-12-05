@@ -10,13 +10,13 @@
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 CXX      = g++
-CXXFLAGS = -O0 -g -fno-implement-inlines -pedantic -Wall -std=c++11
+CXXFLAGS = -O0 -g -fno-implement-inlines -pedantic -Wall -std=c++11 -fsanitize=address -fsanitize=undefined
 CC       = gcc
 CCFLAGS  = -O0 -g -pedantic -Wall
 DEPFLAGS = -MMD -MP
 
 LINK      = g++
-LINKFLAGS = -g -fno-implement-inlines -fopenmp
+LINKFLAGS = -g -fno-implement-inlines -fopenmp -fsanitize=address -fsanitize=undefined
 LIB       = -lpthread -lm
 
 ARCHIVE =
