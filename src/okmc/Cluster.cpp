@@ -890,6 +890,10 @@ Defect * Cluster::interact(Kernel::SubDomain *pSub, Defect *def, Particle *, std
 
 		Coordinates newCenter;
 		_pDomain->_pMesh->middle(newCenter, _center, mc->_center);
+		const Kernel::MeshElement *centerEle = _pDomain->_pMesh->getElement(
+			_pDomain->_pMesh->getIndexFromCoordinates(newCenter));
+		if (centerEle->getMaterial() != _map._mt && centerEle->getMaterial() != mc->_map._mt)
+			newCenter = _center; // fix corner case
 		Cluster *mcNew = new Cluster(pSub, _pDomain, edType, newCenter);
 		bool ivmodel = _pDomain->_pClPar->getParams(_map._mt, edType)->_ivmodel;
 		ID newMap = _map;
