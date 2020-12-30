@@ -580,8 +580,11 @@ void Cluster::migrate(Kernel::SubDomain * pSub)
 		}
 		if(tmp._pEle->getMaterial() != _map._mt) //interface
 		{
-			if(interactSurface(pSub, (*it)->getElement(), tmp._pEle) == NO_INTERFACE)
+			INTERFACE_ACTIONS IntAction = interactSurface(pSub, (*it)->getElement(), tmp._pEle);
+			if(IntAction == NO_INTERFACE)
 				ERRORMSG("Cluster: Could not find interface to react to");
+			if(IntAction == INTERACTION_REJECTED)
+				_center = orig;
 			// cluster deleted, do not operate here
 			return;
 		}
@@ -598,18 +601,25 @@ void Cluster::migrate(Kernel::SubDomain * pSub)
 		else
 			_pElement = pEle;
 	}
-	for(vector<Kernel::Mesh::ClusterInfo>::iterator it=after.begin(); it!=after.end(); ++it)
+	_radius = 0;
+	for(Kernel::Mesh::ClusterInfo &ci: after)
 	{
-		if(it->_pEle != it->_pPart->getElement())
+		if(ci._pEle != ci._pPart->getElement())
 		{
-			_pDomain->_pMesh->remove(it->_pPart);
-			it->_pPart->setCoordinates(it->_coord);
-			it->_pPart->setOrig(it->_orig);
-			_pDomain->_pMesh->insert(it->_pPart, it->_pEle);
+			_pDomain->_pMesh->remove(ci._pPart);
+			ci._pPart->setCoordinates(ci._coord);
+			ci._pPart->setOrig(ci._orig);
+			_pDomain->_pMesh->insert(ci._pPart, ci._pEle);
 		}
 		else
-			it->_pPart->setCoordinates(it->_coord);
+			ci._pPart->setCoordinates(ci._coord);
+		_pDomain->_pMesh->setPeriodicRelative(_center, ci._coord);
+		float dist = ci._coord * ci._coord;
+		if (dist > _radius)
+			_radius = dist;
+
 	}
+	_radius = sqrt(_radius);
 	//All particles out, but updated
 	//Look for neighbors: Caution! This function can be VERY slow if many particles are around
 	vector<Particle *> interact;
@@ -625,9 +635,20 @@ void Cluster::migrate(Kernel::SubDomain * pSub)
 		if(totalParticles == _particles.size())
 			lookFor = false;
 		if(totalParticles < _particles.size())
+		{
+			LOWMSG("Center is at: " << _center);
+			LOWMSG("And particles are at:");
+			for(const Particle * pPart: _particles)
+			{
+				Kernel::Coordinates c = pPart->getCoordinates();
+				auto distanceV = c - _center;
+				_pDomain->_pMesh->setPeriodicRelative(_center, c);
+				LOWMSG("  " << pPart->getCoordinates() << " " << std::sqrt(distanceV * distanceV) << " " << sqrt(c * c));
+			}
 			ERRORMSG(capture << " " << _radius << " " << getRadius() <<	" " << _center << " " << pEle->getCoords(0.5, 0.5, 0.5) << std::endl <<
 					" " << elementsToLook.size() << " elements " << std::endl <<
 			        "Cluster::migrate " << totalParticles << " cannot be < than " << _particles.size());
+		}
 	}
 	if(lookFor)
 		for(vector<Kernel::Mesh::ClusterInfo>::iterator it=after.begin(); it!=after.end(); ++it)
@@ -637,7 +658,9 @@ void Cluster::migrate(Kernel::SubDomain * pSub)
 		Particle *intPar = interact[int(pSub->_rng.rand() * interact.size())];
 		std::vector<Particle *> dummy;
 		intPar->getDefect()->interact(pSub, this, intPar, dummy);
+		// defect might be erased after this
 	}
+	
 }
 
 void Cluster::transform(Kernel::SubDomain *pSub, unsigned edT)
@@ -983,6 +1006,7 @@ Defect * Cluster::checkSize(Kernel::SubDomain *pSub, bool bInsert, 	vector<Parti
 		{
 			_pElement = _particles.front()->getElement();
 			_center   = _particles.front()->getCoordinates();
+			updateRadius(nullptr, -1);
 		}
 		_myParams = getMyParam();
 		if(bInsert)
@@ -1165,6 +1189,8 @@ void Cluster::deletePart(Kernel::SubDomain *pSub, std::vector<Particle *> &parts
 	delete this;
 }
 
+// for positive, add after adding particle
+// for negative, add after substracting particle, does not matter if it's deleted or not.
 void Cluster::updateRadius(const Particle *part, int adding)
 {
 	if(adding > 0)
@@ -1182,5 +1208,4 @@ void Cluster::updateRadius(const Particle *part, int adding)
 		updateRadius(*it, +1);
 }
 
-}
-
+} //end namespace OKC
