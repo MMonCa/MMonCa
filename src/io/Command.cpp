@@ -31,6 +31,7 @@
 #include "ReportCmd.h"
 #include "RestartCmd.h"
 #include "ClusterCmd.h"
+#include "UnitTestCmd.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -249,6 +250,12 @@ int Command::Restart(ClientData, Tcl_Interp *interp, int argc, const char *argv[
 int Command::Test(ClientData, Tcl_Interp *interp, int argc, const char *argv[])
 {
 	TestCmd test(interp, argc, argv);
+	return test();
+}
+
+int Command::UnitTest(ClientData, Tcl_Interp *interp, int argc, const char *argv[])
+{
+	UnitTestCmd test(interp, argc, argv);
 	return test();
 }
 
