@@ -50,6 +50,7 @@ int Tcl_AppInit(Tcl_Interp *interp)
 	Tcl_CreateCommand(interp, "restart",    Command::Restart,    (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
 	Tcl_CreateCommand(interp, "save",       Command::Save,       (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
 	Tcl_CreateCommand(interp, "test",       Command::Test,       (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
+	Tcl_CreateCommand(interp, "unittests",  Command::UnitTest,   (ClientData)NULL, (Tcl_CmdDeleteProc *)NULL);
 	//start ...
 	return TCL_OK;
 }

@@ -51,6 +51,7 @@ public:
     static int Restart    (ClientData, Tcl_Interp *interp, int argc, const char *argv[]);
     static int Test       (ClientData, Tcl_Interp *interp, int argc, const char *argv[]);
     static int Charge	  (ClientData, Tcl_Interp *interp, int argc, const char *argv[]);
+    static int UnitTest	  (ClientData, Tcl_Interp *interp, int argc, const char *argv[]);
     
     Command(Tcl_Interp *, int argc, const char *argv[], bool bPrint=true);
     virtual ~Command();

@@ -68,6 +68,7 @@ void FromFile::operator()(const string &fileName,
 		pDomain->_pMesh->getDomain(m,M);
 		Kernel::MeshElement *pME = pDomain->_pMesh->getElement(0);
 		float const howMany = fluence*1e-14 *(M._y - m._y)*(M._z - m._z);
+		LOWMSG("Trying " << howMany << " cascades for domain " << domain);
 		float rate = flux*howMany / fluence;
 		events.push_back(new CascadeEvent(pDomain, format, bReact, periodic, voluminic, bDisplace, bCorrectX, fileName, rate));
 		pDomain->_pRM->insert(events.back(), pME); //in the first element.
