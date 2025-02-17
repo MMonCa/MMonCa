@@ -923,7 +923,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 		{
 			if(_periodicX)
 			{
-				maxX = 0;
+				maxX = 1;
 				limit -= _xsize;
 			}
 			else
@@ -972,7 +972,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 		{
 			if(_periodicY)
 			{
-				maxY = 0;
+				maxY = 1;
 				limit -= _ysize;
 			}
 			else
@@ -1021,7 +1021,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 		{
 			if(_periodicZ)
 			{
-				maxZ = 0;
+				maxZ = 1;
 				limit -= _zsize;
 			}
 			else
