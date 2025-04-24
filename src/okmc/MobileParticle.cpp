@@ -349,6 +349,11 @@ void MobileParticle::migrate(Kernel::SubDomain *pSub)
 	Mesh::JUMP_ACTIONS jmp = _pDomain->_pMesh->jumpPosition(_coord, delta, pEle, &stateID, _orig, _longHopFactor*_longHopFactor);
 	vector<Particle *> parts;
 	if (jmp != Mesh::JUMP_OK)
+        {
+                pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 7, _state);
+                return;
+    	}
+	if (!fits(pEle))
 	{
 		pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 7, _state);
 		return;

@@ -25,6 +25,8 @@
 
 #include "Particle.h"
 #include "Defect.h"
+#include "domains/Global.h"
+#include "io/ParameterManager.h"
 #include "kernel/MeshElement.h"
 
 namespace OKMC {
@@ -52,6 +54,7 @@ public:
 	virtual std::vector<Particle *> getParticles() { return std::vector<Particle *>(1,this); }
 	void deletePart(Kernel::SubDomain *, std::vector<Particle *> &);
 	virtual unsigned getState() const { return _state; }
+        bool    fits(Kernel::MeshElement const * const pElem) const { return Domains::global()->PM()->getStates(pElem->getMaterial(), _ptype) > _state; }
 
 	virtual void     restart(std::ostream &) const;
 
