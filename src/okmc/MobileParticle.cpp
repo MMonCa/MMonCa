@@ -349,99 +349,101 @@ void MobileParticle::migrate(Kernel::SubDomain *pSub)
 	Mesh::JUMP_ACTIONS jmp = _pDomain->_pMesh->jumpPosition(_coord, delta, pEle, &stateID, _orig, _longHopFactor*_longHopFactor);
 	vector<Particle *> parts;
 	if (jmp != Mesh::JUMP_OK)
-  {
-    pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 7, _state);
-    return;
- 	}
-	if (!fits(pEle))
-	{
-		pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 7, _state);
-		return;
-	}
-
+    {
+        pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 7, _state);
+        return;
+    }
 	if(_pElement != pEle ) //change of elements
 	{
-		if(Domains::global()->PM()->isAmorphous(pEle->getMaterial()))
-		{
-			if(!Domains::global()->PM()->isImpurity(mt,_ptype))
-			{
-				HIGHMSG("Deleting " << Domains::global()->PM()->getParticleName(mt,_ptype));
-				delete this;
-			}
-			else
-			{
-				HIGHMSG("Desorption in a/c interface of " << Domains::global()->PM()->getParticleName(mt,_ptype) << ". Removing "
-						<< Domains::global()->PM()->getParticleName(mt,_pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[1])
-						<< " and leaving " << Domains::global()->PM()->getParticleName(mt,_pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[0] ));
-				P_TYPE emit  = _pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[0];
-				_pDomain->_pRM->remove(this, _pElement);
-				_ptype = emit;
-				_state = 0;
-				_pDomain->_pRM->insert(this, _pElement);
-			}
-			return;
-		}
-		INTERFACE_ACTIONS result = interactSurface(pSub, _pElement, pEle);
-		if(result == INTERACTION_REJECTED)
-			goto rejected;
-		if(result == INTERACTION_EXECUTED)
-			goto executed;
-		if ( !_pDomain->_pSM->checkStateBarrier(pSub, _ptype, _state , _pElement ,pEle))
-			goto rejected;
+        if (!fits(pEle))
+        {
+            pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, _ptype, 0, 7, _state);
+            return;
+        }
+        else
+        {
+            if(Domains::global()->PM()->isAmorphous(pEle->getMaterial()))
+            {
+                if(!Domains::global()->PM()->isImpurity(mt,_ptype))
+                {
+                    HIGHMSG("Deleting " << Domains::global()->PM()->getParticleName(mt,_ptype));
+                    delete this;
+                }
+                else
+                {
+                    HIGHMSG("Desorption in a/c interface of " << Domains::global()->PM()->getParticleName(mt,_ptype) << ". Removing "
+                            << Domains::global()->PM()->getParticleName(mt,_pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[1])
+                            << " and leaving " << Domains::global()->PM()->getParticleName(mt,_pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[0] ));
+                    P_TYPE emit  = _pDomain->_pMPPar->_breakUp[mt][_ptype][_state]._emit[0];
+                    _pDomain->_pRM->remove(this, _pElement);
+                    _ptype = emit;
+                    _state = 0;
+                    _pDomain->_pRM->insert(this, _pElement);
+                }
+                return;
+            }
+            INTERFACE_ACTIONS result = interactSurface(pSub, _pElement, pEle);
+            if(result == INTERACTION_REJECTED)
+                goto rejected;
+            if(result == INTERACTION_EXECUTED)
+                goto executed;
+            if ( !_pDomain->_pSM->checkStateBarrier(pSub, _ptype, _state , _pElement ,pEle))
+                goto rejected;
 
-		double newLHF = _pDomain->_pMesh->longHopFactor(pEle->getIndex());  // Martin-Bragado et al. SSE . 155-155 (2008) 202-206
-		if(_longHopFactor < newLHF && pSub->_rng.rand() > _longHopFactor/double(newLHF))  //long - short hop probability
-			goto rejected;
+            double newLHF = _pDomain->_pMesh->longHopFactor(pEle->getIndex());  // Martin-Bragado et al. SSE . 155-155 (2008) 202-206
+            if(_longHopFactor < newLHF && pSub->_rng.rand() > _longHopFactor/double(newLHF))  //long - short hop probability
+                goto rejected;
 
-		if(newLHF != _longHopFactor)
-		{
-			unsigned ix, iy, iz;
-			_pDomain->_pMesh->getIndicesFromIndex(pEle->getIndex(), ix, iy, iz);
+            if(newLHF != _longHopFactor)
+            {
+                unsigned ix, iy, iz;
+                _pDomain->_pMesh->getIndicesFromIndex(pEle->getIndex(), ix, iy, iz);
 
-			if(delta._x > 0)
-				_coord._x = _pDomain->_pMesh->getLines(0)[ix]   + pSub->_rng.rand()*newLHF*orig_delta._x;
-			else if(delta._x < 0)
-				_coord._x = _pDomain->_pMesh->getLines(0)[ix+1] + pSub->_rng.rand()*newLHF*orig_delta._x;
-			if(delta._y > 0)
-				_coord._y = _pDomain->_pMesh->getLines(1)[iy]   + pSub->_rng.rand()*newLHF*orig_delta._y;
-			else if(delta._y < 0)
-				_coord._y = _pDomain->_pMesh->getLines(1)[iy+1] + pSub->_rng.rand()*newLHF*orig_delta._y;
-		}
+                if(delta._x > 0)
+                    _coord._x = _pDomain->_pMesh->getLines(0)[ix]   + pSub->_rng.rand()*newLHF*orig_delta._x;
+                else if(delta._x < 0)
+                    _coord._x = _pDomain->_pMesh->getLines(0)[ix+1] + pSub->_rng.rand()*newLHF*orig_delta._x;
+                if(delta._y > 0)
+                    _coord._y = _pDomain->_pMesh->getLines(1)[iy]   + pSub->_rng.rand()*newLHF*orig_delta._y;
+                else if(delta._y < 0)
+                    _coord._y = _pDomain->_pMesh->getLines(1)[iy+1] + pSub->_rng.rand()*newLHF*orig_delta._y;
+            }
 
-		if(_pElement->getBAtoms() != 0 || pEle->getBAtoms() != 0)
-		{
-			float kT = _pDomain->_pRM->getkT();
-			float T = _pDomain->_pRM->getT();
-			// Segregation and concentrations
-			IO::Arrhenius migFrom = _pDomain->_pMPPar->_arr[mt][_ptype][_state][0](_pElement);
-			IO::Arrhenius formFrom = _pDomain->_pMPPar->_form[mt][_ptype](_pElement);
-			IO::Arrhenius migTo = _pDomain->_pMPPar->_arr[mt][_ptype][_state][0](pEle);
-			IO::Arrhenius formTo = _pDomain->_pMPPar->_form[mt][_ptype](pEle);
-			float x1 = _pElement->getEffectiveAlloyFraction();
-			float x2 = pEle->getEffectiveAlloyFraction();
+            if(_pElement->getBAtoms() != 0 || pEle->getBAtoms() != 0)
+            {
+                float kT = _pDomain->_pRM->getkT();
+                float T = _pDomain->_pRM->getT();
+                // Segregation and concentrations
+                IO::Arrhenius migFrom = _pDomain->_pMPPar->_arr[mt][_ptype][_state][0](_pElement);
+                IO::Arrhenius formFrom = _pDomain->_pMPPar->_form[mt][_ptype](_pElement);
+                IO::Arrhenius migTo = _pDomain->_pMPPar->_arr[mt][_ptype][_state][0](pEle);
+                IO::Arrhenius formTo = _pDomain->_pMPPar->_form[mt][_ptype](pEle);
+                float x1 = _pElement->getEffectiveAlloyFraction();
+                float x2 = pEle->getEffectiveAlloyFraction();
 
-			float sign = Domains::global()->PM()->getIorV(mt, _ptype) ? -1 : 1;
-			float effFormEnerFrom = formFrom._ener + sign * (_pDomain->_pAlPar->getMixingEnergy(mt, x1, T) +
-					(.5 - x1) * _pDomain->_pAlPar->getDerMixingEnergy(mt, x1, T));
-			float effFormEnerTo = formTo._ener + sign * (_pDomain->_pAlPar->getMixingEnergy(mt, x2, T) +
-					(.5 - x2) * _pDomain->_pAlPar->getDerMixingEnergy(mt, x2, T));
-			double QFrom = effFormEnerFrom + migFrom._ener;
-			double QTo = effFormEnerTo + migTo._ener;
+                float sign = Domains::global()->PM()->getIorV(mt, _ptype) ? -1 : 1;
+                float effFormEnerFrom = formFrom._ener + sign * (_pDomain->_pAlPar->getMixingEnergy(mt, x1, T) +
+                        (.5 - x1) * _pDomain->_pAlPar->getDerMixingEnergy(mt, x1, T));
+                float effFormEnerTo = formTo._ener + sign * (_pDomain->_pAlPar->getMixingEnergy(mt, x2, T) +
+                        (.5 - x2) * _pDomain->_pAlPar->getDerMixingEnergy(mt, x2, T));
+                double QFrom = effFormEnerFrom + migFrom._ener;
+                double QTo = effFormEnerTo + migTo._ener;
 
-			double pBarrier = (formTo._pref / formFrom._pref) * (migTo._pref / migFrom._pref) * std::exp( -(QTo - QFrom) / kT);
-			if (pBarrier < 1)
-				if (pSub->_rng.rand() > pBarrier)
-					goto rejected;
-		}
+                double pBarrier = (formTo._pref / formFrom._pref) * (migTo._pref / migFrom._pref) * std::exp( -(QTo - QFrom) / kT);
+                if (pBarrier < 1)
+                    if (pSub->_rng.rand() > pBarrier)
+                        goto rejected;
+            }
 
-		//Self-Diffusion
-		selfdiffusion(pSub, pEle);
+            //Self-Diffusion
+            selfdiffusion(pSub, pEle);
 
-		assert(Domains::global()->PM()->isParticleDefined(_ptype, mt));
-		_pDomain->_pRM->  remove(this, _pElement);
-		_pDomain->_pMesh->remove(this);
-		_pDomain->_pMesh->insert(this, pEle);
-		_pDomain->_pRM->  insert(this, pEle);
+            assert(Domains::global()->PM()->isParticleDefined(_ptype, mt));
+            _pDomain->_pRM->  remove(this, _pElement);
+            _pDomain->_pMesh->remove(this);
+            _pDomain->_pMesh->insert(this, pEle);
+            _pDomain->_pRM->  insert(this, pEle);
+        }
 	}
 	pSub->_evLog.performed(mt, Event::MOBILEPARTICLE, pt, 0, (uLHF == 1? 0 : 6), st);
 
