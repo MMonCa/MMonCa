@@ -26,17 +26,46 @@ using std::string;
 using Kernel::Coordinates;
 
 InitCmd::InitCmd(Tcl_Interp *p, int argc, const char *argv[]) : Command(p, argc, argv)
-{	
+{
+}
+
+void checkOrderingUniqueness(std::vector<float> const& aVector) {
+    bool was = false;
+    float previous;
+    for(auto const value : aVector) {
+        if(was) {
+            if(previous >= value) {
+                ERRORMSG("InitCmd: lines* must be strictly ascending array.");
+            }
+        }
+        else {
+            was = true;
+        }
+        previous = value;
+    }
 }
 	
 int InitCmd::operator()()
 {
 	Domains::MCClient *pCli = 0;
-	Kernel::Coordinates m,M;
-	m = Coordinates(getFloat("minx"), getFloat("miny"), getFloat("minz"));
-	M = Coordinates(getFloat("maxx"), getFloat("maxy"), getFloat("maxz"));
-	pCli = new Domains::MCClient(_pTcl, m, M, getString("material"));
-	Domains::global()->setClient(pCli, m, M);
+        if(specified("linesx") && specified("linesy") && specified("linesz")) {
+            auto const linesX = getFloats("linesx");
+            auto const linesY = getFloats("linesy");
+            auto const linesZ = getFloats("linesz");
+            checkOrderingUniqueness(linesX);
+            checkOrderingUniqueness(linesY);
+            checkOrderingUniqueness(linesZ);
+            Kernel::Coordinates const m = Coordinates(linesX.front(), linesY.front(), linesZ.front());
+            Kernel::Coordinates const M = Coordinates(linesX.back(), linesY.back(), linesZ.back());
+            pCli = new Domains::MCClient(_pTcl, m, M, getString("material"));
+            Domains::global()->setClient(pCli, m, M, &linesX, &linesY, &linesZ);
+        }
+        else {
+            Kernel::Coordinates const m = Coordinates(getFloat("minx"), getFloat("miny"), getFloat("minz"));
+            Kernel::Coordinates const M = Coordinates(getFloat("maxx"), getFloat("maxy"), getFloat("maxz"));
+            pCli = new Domains::MCClient(_pTcl, m, M, getString("material"));
+            Domains::global()->setClient(pCli, m, M);
+        }
 
 	if(specified("temp"))
 		Domains::global()->setTempK(getFloat("temp") + 273.15);

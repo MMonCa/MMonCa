@@ -44,6 +44,7 @@ public:
 	virtual ~Parameters();
 
     float                                      getFloat(const std::string &key) const;
+    std::vector<float>                         getFloats(const std::string &key) const;
     int                                  	   getInt(const std::string &key) const;
     std::string                          	   getString(const std::string &key) const;
     std::vector<std::string>				   getStrings(const std::string &key, unsigned howMany) const;
