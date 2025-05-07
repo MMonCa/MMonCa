@@ -153,7 +153,7 @@ int ExtractCmd::operator()()
 			if(mt == Kernel::MAX_MATERIALS)
 				ERRORMSG("profile: Material name '" << mate << "'not recognized");
 		}
-		else if (name == "lkmc.defects" || name == "lkmc.ac") {
+		if (name == "lkmc.defects" || name == "lkmc.ac") {
 			ss << Domains::global()->data()->getLKMCProfile(name);
 		}
 		else if (name == "A.atoms" || name == "B.atoms")
