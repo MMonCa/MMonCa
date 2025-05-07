@@ -155,7 +155,8 @@ SimData * Global::data()
 	return 0;
 }
 
-void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::Coordinates &M)
+void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::Coordinates &M,
+           std::vector<float> const * const aLinesX, std::vector<float> const * const aLinesY, std::vector<float> const * const aLinesZ)
 {
 	delete _pPM;
 	_pPM = new IO::ParameterManager(_pGlobalTcl, _pPar);
@@ -184,13 +185,24 @@ void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::
 
 	_pClient = p;
 	// create domains using the "splitter"
-	_pSplitter = new SimpleSplitter(m, M, p->getMaterial());
-	for(unsigned i=0; i<_pSplitter->getDomains(); ++i)
-	{
-		Kernel::Coordinates area, Area;
-		_pSplitter->splitDomain(i, area, Area);
-		_domains.push_back(new Kernel::Domain(i, _pGlobalTcl, p, area, Area));
-	}
+        _pSplitter = new SimpleSplitter(m, M, p->getMaterial());
+
+        if(aLinesX != nullptr && aLinesY != nullptr && aLinesZ != nullptr) {
+            if(_pSplitter->getDomains() == 1u && _pSplitter->getSubDomains(0) == 1u) {
+                _domains.push_back(new Kernel::Domain(0, _pGlobalTcl, p, m, M, aLinesX, aLinesY, aLinesZ));
+            }
+            else {
+                WARNINGMSG("Lines setting in init (inhomogeneous mesh) is only allowed when domains == 1 && subdomains == 1");
+            }
+        }
+        else {
+            for(unsigned i=0; i<_pSplitter->getDomains(); ++i)
+            {
+                Kernel::Coordinates area, Area;
+                _pSplitter->splitDomain(i, area, Area);
+                _domains.push_back(new Kernel::Domain(i, _pGlobalTcl, p, area, Area));
+            }
+        }
 	for(std::vector<Kernel::Domain *>::iterator it=_domains.begin(); it!=_domains.end(); ++it)
 		(*it)->init(p->isFromStream());
 	_pSimData = new SimData(_pPar);

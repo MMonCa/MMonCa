@@ -41,8 +41,9 @@
 using namespace Electrostatics;
 using namespace Kernel;
 
-Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Domains::MCClient *, const Coordinates &m, const Coordinates &M) :
-		_rng_dom(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
+Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Domains::MCClient *, const Coordinates &m, const Coordinates &M,
+    std::vector<float> const * const aLinesX, std::vector<float> const * const aLinesY, std::vector<float> const * const aLinesZ) :
+        _rng_dom(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
 		_um_mechani("Mechanics/General/update"), _um_poisson("MC/Electrostatic/update"), _domain_number(num)
 {
 	_pMePar = new MeshParam(Domains::global()->PM(), Domains::global()->getFileParameters());
@@ -50,7 +51,7 @@ Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Domains::MCClient *, const 
     _pMPPar = new OKMC::MobileParticleParam(Domains::global()->PM(), Domains::global()->getFileParameters());
 
 	Coordinates mm = m, MM = M;
-	NUTCreator nut(this, mm, MM);
+        NUTCreator nut(this, mm, MM, aLinesX, aLinesY, aLinesZ);
 	_pRM = new RateManager(this);
 	_pMesh = new Mesh(this, mm, MM,
 		nut.getLines(0), nut.getLines(1), nut.getLines(2),
