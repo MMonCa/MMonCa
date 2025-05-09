@@ -28,23 +28,35 @@ using std::pair;
 
 namespace Kernel {
 
-NUTCreator::NUTCreator(const Domain *p, Coordinates &m, Coordinates &M)
+NUTCreator::NUTCreator(const Domain *p, Coordinates &m, Coordinates &M,
+               std::vector<float> const * const aLinesX, std::vector<float> const * const aLinesY, std::vector<float> const * const aLinesZ)
 {
-	for(int i=0; i<3; ++i)
-	{
-		_delta[i] = p->_pMePar->_spacing[i];
-		int nBoxes = int(std::floor((M[i] - m[i])/_delta[i] + .5));
-		if(nBoxes < 2)
-			ERRORMSG("Less than 2 boxes in dimension " << i);
-		double inc = (M[i] - m[i])/double(nBoxes);
-		for(int j=0; j<nBoxes; ++j)
-			_lines[i].push_back(m[i] + j*inc);
-		_lines[i].push_back(M[i]);
-		std::string axis = "X";
-		axis[0] += i;
-		LOWMSG("     " << axis << ": (" << m[i] << " - " << M[i] << 
-		 ") nm. " << nBoxes << " elements. Delta = " << inc << " nm.");
-	}
+        if(aLinesX != nullptr && aLinesX->size() > 1u && aLinesY != nullptr && aLinesY->size() > 1u && aLinesZ != nullptr && aLinesZ->size() > 1u) {
+            _lines[0] = *aLinesX;
+            _lines[1] = *aLinesY;
+            _lines[2] = *aLinesZ;
+            LOWMSG("     X: (" << m._x << " - " << M._x << ") nm. " << aLinesX->size() - 1 << " elements. Custom line spacing.");
+            LOWMSG("     Y: (" << m._y << " - " << M._y << ") nm. " << aLinesY->size() - 1 << " elements. Custom line spacing.");
+            LOWMSG("     Z: (" << m._z << " - " << M._z << ") nm. " << aLinesZ->size() - 1 << " elements. Custom line spacing.");
+        }
+        else {
+            for(int i=0; i<3; ++i)
+            {
+                _delta[i] = p->_pMePar->_spacing[i];
+                int nBoxes = int(std::floor((M[i] - m[i])/_delta[i] + .5));
+                if(nBoxes < 2)
+                    ERRORMSG("Less than 2 boxes in dimension " << i);
+                double inc = (M[i] - m[i])/double(nBoxes);
+                for(int j=0; j<nBoxes; ++j) {
+                    _lines[i].push_back(m[i] + j*inc);
+                }
+                _lines[i].push_back(M[i]);
+                std::string axis = "X";
+                axis[0] += i;
+                LOWMSG("     " << axis << ": (" << m[i] << " - " << M[i] <<
+                 ") nm. " << nBoxes << " elements. Delta = " << inc << " nm.");
+            }
+        }
 	LOWMSG("Total " << (_lines[0].size()-1)*(_lines[1].size()-1)*(_lines[2].size()-1) << " elements" );
 }
 

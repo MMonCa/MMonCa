@@ -29,7 +29,8 @@ class Domain;
 class NUTCreator
 {
 public:
-    NUTCreator(const Domain *, Coordinates &m, Coordinates &M);
+    NUTCreator(const Domain *, Coordinates &m, Coordinates &M,
+               std::vector<float> const * const aLinesX, std::vector<float> const * const aLinesY, std::vector<float> const * const aLinesZ);
     ~NUTCreator();
     const std::vector<float> & getLines(int dim) const  { return _lines[dim];  }
 private:

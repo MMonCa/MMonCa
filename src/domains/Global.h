@@ -88,7 +88,8 @@ public:
 	ParticleIterator    beginPI();
 	ParticleIterator    endPI();
 
-	void setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::Coordinates &);
+        void setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::Coordinates &,
+           std::vector<float> const * const aLinesX = nullptr, std::vector<float> const * const aLinesY = nullptr, std::vector<float> const * const aLinesZ = nullptr);
 
 	void  setTempK(float K);
 	float getTempK() const { return _kelvin; }

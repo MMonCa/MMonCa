@@ -86,7 +86,26 @@ float Parameters::getFloat(const string &key) const
 		ERRORMSG("'" << get(key, "float") << "' does not seem to be a proper float");
  	return ret;
 }
- 
+
+std::vector<float> Parameters::getFloats(const string &key) const
+{
+    stringstream text;
+    text << get(key, "array<float>");
+
+    std::vector<float> result;
+    while(!text.eof())
+    {
+        float tmp;
+        text >> tmp;
+        if(!text) {
+            ERRORMSG("'" << get(key, "array<float>") << "' does not seem to be a proper array<float>");
+        }
+        else {} // nothing to do
+        result.push_back(tmp);
+    }
+    return result;
+}
+
 int Parameters::getInt(const string &key) const
 {
 	stringstream ss;

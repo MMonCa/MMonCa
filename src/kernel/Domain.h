@@ -24,6 +24,7 @@
 #include "UpdateManager.h"
 
 #include <string>
+#include <vector>
 
 namespace LKMC
 {
@@ -71,7 +72,8 @@ class StateManager;
 class Domain
 {
 public:
-    Domain(unsigned num, Tcl_Interp *, const Domains::MCClient *, const Coordinates &m, const Coordinates &M);
+    Domain(unsigned num, Tcl_Interp *, const Domains::MCClient *, const Coordinates &m, const Coordinates &M,
+           std::vector<float> const * const aLinesX = nullptr, std::vector<float> const * const aLinesY = nullptr, std::vector<float> const * const aLinesZ = nullptr);
     void init(bool bFromStream); //is the simulation recreated from a stream?
     ~Domain();
     
