@@ -20,6 +20,7 @@
 #define KMCMESH_H
 
 #include <vector>
+#include <unordered_map>
 #include "Coordinates.h"
 
 #include "MeshElement.h"
@@ -171,7 +172,7 @@ private:
     
     std::vector<unsigned> _xParticles;
     std::vector<unsigned> _yParticles;
-    double _longHopFactor[MAX_MATERIALS];
+    std::unordered_map<unsigned, double> _longHopFactor[MAX_MATERIALS];
 
     unsigned _zCells; //sizeZ
     unsigned _yzCells; //size Y * Z

@@ -95,9 +95,16 @@ const Domains::MCClient *pCli) : _min(m), _max(M)
 
 	_pNodes = NULL;
 
-	for(M_TYPE mt=0; mt<Domains::global()->PM()->getNMaterials(); ++mt)
-		_longHopFactor[mt] = std::max(unsigned(1), unsigned(std::min(_xlines[1] - _xlines[0],
-				_ylines[1] - _ylines[0]) / _pDomain->_pMePar->_lambda[mt]));
+	for(M_TYPE mt=0; mt<Domains::global()->PM()->getNMaterials(); ++mt) {
+		for(uint32_t x = 1u; x < _xlines.size(); ++x) {
+      for(uint32_t y = 1u; y < _ylines.size(); ++y) {
+				uint32_t xm1 = x - 1u;
+				uint32_t ym1 = y - 1u;
+				_longHopFactor[mt][xm1 * (_ylines.size() - 1u) + ym1] =
+std::max(unsigned(1), unsigned(std::min(_xlines[x] - _xlines[xm1], _ylines[y] - _ylines[ym1]) / _pDomain->_pMePar->_lambda[mt]));
+			}
+		}
+	}
 	buildNodes();
 	initNodes();
 	buildNeighbors();
@@ -561,7 +568,7 @@ unsigned Mesh::longHopFactor(unsigned idx) const
 		unsigned i,j,k;
 		getIndicesFromIndex(idx, i, j, k);
 		if(_xParticles[i] == 1 || _yParticles[j] == 1)
-			return _longHopFactor[_elements[idx].getMaterial()];
+			return _longHopFactor[_elements[idx].getMaterial()].at(idx / _zCells);
 	}
 	return 1;
 }
