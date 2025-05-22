@@ -317,7 +317,7 @@ void Interface::insertParticle(Particle *part)
 	assert(part->getPType() < Domains::global()->PM()->getNFamilies());
 
 	Kernel::Coordinates newC;
-	Kernel::Coordinates oldC = static_cast<MobileParticle *>(part)->getCoordinates();
+	Kernel::Coordinates oldC = part->getCoordinates();
 	newC._x = _coords_min._x + Domains::global()->client()->rand()*(_coords_max._x - _coords_min._x);
 	newC._y = _coords_min._y + Domains::global()->client()->rand()*(_coords_max._y - _coords_min._y);
 	newC._z = _coords_min._z + Domains::global()->client()->rand()*(_coords_max._z - _coords_min._z);
