@@ -475,8 +475,8 @@ void Interface::deletePart(Kernel::SubDomain *pSub, vector<Particle *> &parts)
 			delete *it;
 			*it = _particles.back();
 			_particles.pop_back();
-			parts.pop_back();
 			removeFromMap(parts.back()->getPType());
+			parts.pop_back();
 			break;
 		}
 	_pDomain->_pRM->update(this, _me[0]);
