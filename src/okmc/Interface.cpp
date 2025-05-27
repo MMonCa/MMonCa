@@ -248,7 +248,7 @@ void Interface::migrate(Kernel::SubDomain *pSub, unsigned ev)
 	{
 		removeFromMap(ev);
 		for(vector<Particle *>::iterator itpart = _particles.begin(); itpart != _particles.end(); ++itpart)
-			if((*itpart)->getPType() == ev) //find particle and "emit" it
+			if(*itpart == pPart) //find particle and "emit" it
 			{
 				*itpart = _particles.back();
 				_particles.pop_back();
