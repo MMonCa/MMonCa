@@ -209,11 +209,10 @@ void Interface::migrate(Kernel::SubDomain *pSub, unsigned ev)
 	unsigned idx = unsigned(_myID._pt[ev] * pSub->_rng.rand());
 	Particle *pPart = 0;
 	unsigned count = 0;
-	vector<Particle *>::iterator itPart;
-	for(vector<Particle *>::iterator itPart=_particles.begin(); itPart!=_particles.end(); itPart++)
-		if((*itPart)->getPType() == ev && count++ == idx)
+	for(vector<Particle *>::iterator it=_particles.begin(); it!=_particles.end(); it++)
+		if((*it)->getPType() == ev && count++ == idx)
 		{
-			pPart = *itPart;
+			pPart = *it;
 			break;
 		}
 	assert(pPart);
@@ -248,8 +247,13 @@ void Interface::migrate(Kernel::SubDomain *pSub, unsigned ev)
 	if(pnewInt != this)
 	{
 		removeFromMap(ev);
-		*itPart = _particles.back();
-		_particles.pop_back();
+		for(vector<Particle *>::iterator itpart = _particles.begin(); itpart != _particles.end(); ++itpart)
+			if(*itpart == pPart) //find particle and "emit" it
+			{
+				*itpart = _particles.back();
+				_particles.pop_back();
+				break;
+			}
 		_pDomain->_pMesh->remove(pPart);
 		_pDomain->_pRM->update(this, _me[0]);
 		pnewInt->insertParticle(pPart); //it inserts the particle in the mesh
