@@ -916,48 +916,62 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &name, const
 		if(mt != it->getMaterial())
 			continue;
 		Kernel::P_TYPE pt = names[it->getMaterial()];
-		if(pt == Kernel::UNDEFINED_TYPE)
-			continue;
-		if (!Domains::global()->PM()->isImpurity(mt,pt) && Domains::global()->PM()->isAmorphous((*it)->getMaterial())) //No counting Is nor Vs for amorhpus MEs
-			continue;
-		Kernel::P_TYPE alloy_pt = Domains::global()->PM()->getMaterial((it->getMaterial()))._alloy;
-		if(Domains::global()->PM()->getMaterial(mt)._binary == false && alloy_pt != Kernel::UNDEFINED_TYPE)
-			alloy_pt = Domains::global()->PM()->getParticle(mt, alloy_pt, Kernel::POS_0);
-		if(alloy_pt == pt)
-		{
-			Coordinates m, M;
-			it->getCorners(m, M);
-			odvc.push(3, m, M, float(it->getBAtoms()) / float(it->getVolume()) * 1e21);
-//			odvc.push(3, m, M, it->getAlloyFraction() * Domains::global()->PM()->getMaterial(it->getMaterial())._densityAlloyCm3);
-		}
-		else if(name.empty())
-		{
-			Coordinates m, M;
-			it->getCorners(m, M);
-			odvc.push(3, m, M, float(it->getAAtoms()) / float(it->getVolume()) * 1e21);
-		}
-		else
-		{
+		if(pt == Kernel::UNDEFINED_TYPE) {
 			OKMC::Particle *pPart = it->getFirstPart();
-			unsigned stN = Domains::global()->PM()->getStateNumber(it->getMaterial(), pt, st);
-
 			while(pPart)
 			{
-				Kernel::Event::E_TYPE ev = pPart->getDefect()->getEType();
-			    OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
-			    OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
-			    Kernel::P_TYPE thisPt = pPart->getPType();
-			    if(Domains::global()->PM()->getMaterial(mt)._binary == false && (pMC || pIF))
-					thisPt = Domains::global()->PM()->getParticleForCluster(mt, thisPt, Kernel::POS_0);
-			    bool isPart = thisPt == pt;
-			    bool isGenericDefect  = Kernel::Event::getEName(ev) == def;
-			    bool isExtendedDefect = pMC && it->getDomain()->_pClPar->getParams(mt, pMC->getEDType())->_name == def;
-			    bool isSt = pPart->getDefect()->getState() == stN;
-			    if(isPart &&
-			      (def.empty() || isGenericDefect || isExtendedDefect) &&
-			      (st.empty()  || isSt))
-			    	odvp.push(3, pPart->getCoordinates(), 1.);
-						pPart = pPart->getNext();
+				OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+				if(pCluster != nullptr &&
+	    			Domains::global()->PM()->getIDName(pCluster->getID()) == name &&
+					it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
+					odvp.push(3, pPart->getCoordinates(), 1.);
+				}
+				pPart = pPart->getNext();
+			}
+		}
+		else {
+			if (!Domains::global()->PM()->isImpurity(mt,pt) && Domains::global()->PM()->isAmorphous((*it)->getMaterial())) //No counting Is nor Vs for amorhpus MEs
+				continue;
+			Kernel::P_TYPE alloy_pt = Domains::global()->PM()->getMaterial((it->getMaterial()))._alloy;
+			if(Domains::global()->PM()->getMaterial(mt)._binary == false && alloy_pt != Kernel::UNDEFINED_TYPE)
+				alloy_pt = Domains::global()->PM()->getParticle(mt, alloy_pt, Kernel::POS_0);
+			if(alloy_pt == pt)
+			{
+				Coordinates m, M;
+				it->getCorners(m, M);
+				odvc.push(3, m, M, float(it->getBAtoms()) / float(it->getVolume()) * 1e21);
+	//			odvc.push(3, m, M, it->getAlloyFraction() * Domains::global()->PM()->getMaterial(it->getMaterial())._densityAlloyCm3);
+			}
+			else if(name.empty())
+			{
+				Coordinates m, M;
+				it->getCorners(m, M);
+				odvc.push(3, m, M, float(it->getAAtoms()) / float(it->getVolume()) * 1e21);
+			}
+			else
+			{
+				OKMC::Particle *pPart = it->getFirstPart();
+				unsigned stN = Domains::global()->PM()->getStateNumber(it->getMaterial(), pt, st);
+
+				while(pPart)
+				{
+					Kernel::Event::E_TYPE ev = pPart->getDefect()->getEType();
+					OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
+					OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+					Kernel::P_TYPE thisPt = pPart->getPType();
+					if(Domains::global()->PM()->getMaterial(mt)._binary == false && (pMC || pIF))
+						thisPt = Domains::global()->PM()->getParticleForCluster(mt, thisPt, Kernel::POS_0);
+					bool isPart = thisPt == pt;
+					bool isGenericDefect  = Kernel::Event::getEName(ev) == def;
+					bool isExtendedDefect = pMC && it->getDomain()->_pClPar->getParams(mt, pMC->getEDType())->_name == def;
+					bool isSt = pPart->getDefect()->getState() == stN;
+					if(isPart &&
+					(def.empty() || isGenericDefect || isExtendedDefect) &&
+					(st.empty()  || isSt)) {
+						odvp.push(3, pPart->getCoordinates(), 1.);
+					}
+					pPart = pPart->getNext();
+				}
 			}
 		}
 	}
