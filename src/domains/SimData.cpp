@@ -899,11 +899,27 @@ IO::OutDataVectorC<double> SimData::getProfileMobile(const string &name, const s
 	return collapse(odv);
 }
 
-IO::OutDataVectorC<double> SimData::getParticleProfile(const string &name, const string &def,
+IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, const string &def,
 		const string &st, const string &mate) const
 {
 	IO::OutDataVectorP<double> odvp;
 	IO::OutDataVectorC<double> odvc;
+
+	std::string name = needle;
+	enum class Mode:uint8_t {
+		Individual   = 0u,
+		AllInActive  = 1u,
+		AllInCluster = 2u
+	} mode = Mode::Individual;
+	if(needle.back() == '*') {
+		mode = Mode::AllInActive;
+		name.pop_back();
+	}
+	else if(needle.back() == '@') {
+		mode = Mode::AllInCluster;
+		name.pop_back();
+	}
+	else {}
 
 	Kernel::M_TYPE mt = Domains::global()->PM()->getMaterialNumber(mate);
 	Kernel::P_TYPE names[Kernel::MAX_MATERIALS];
@@ -916,7 +932,7 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &name, const
 		if(mt != it->getMaterial())
 			continue;
 		Kernel::P_TYPE pt = names[it->getMaterial()];
-		if(pt == Kernel::UNDEFINED_TYPE) {
+		if(pt == Kernel::UNDEFINED_TYPE || mode == Mode::AllInCluster) {
 			OKMC::Particle *pPart = it->getFirstPart();
 			while(pPart)
 			{
@@ -951,26 +967,42 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &name, const
 			else
 			{
 				OKMC::Particle *pPart = it->getFirstPart();
-				unsigned stN = Domains::global()->PM()->getStateNumber(it->getMaterial(), pt, st);
 
-				while(pPart)
-				{
-					Kernel::Event::E_TYPE ev = pPart->getDefect()->getEType();
-					OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
-					OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
-					Kernel::P_TYPE thisPt = pPart->getPType();
-					if(Domains::global()->PM()->getMaterial(mt)._binary == false && (pMC || pIF))
-						thisPt = Domains::global()->PM()->getParticleForCluster(mt, thisPt, Kernel::POS_0);
-					bool isPart = thisPt == pt;
-					bool isGenericDefect  = Kernel::Event::getEName(ev) == def;
-					bool isExtendedDefect = pMC && it->getDomain()->_pClPar->getParams(mt, pMC->getEDType())->_name == def;
-					bool isSt = pPart->getDefect()->getState() == stN;
-					if(isPart &&
-					(def.empty() || isGenericDefect || isExtendedDefect) &&
-					(st.empty()  || isSt)) {
-						odvp.push(3, pPart->getCoordinates(), 1.);
+				if(mode == Mode::Individual) {
+					unsigned stN = Domains::global()->PM()->getStateNumber(it->getMaterial(), pt, st);
+					while(pPart)
+					{
+						Kernel::Event::E_TYPE ev = pPart->getDefect()->getEType();
+						OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
+						OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+						Kernel::P_TYPE thisPt = pPart->getPType();
+						if(Domains::global()->PM()->getMaterial(mt)._binary == false && (pMC || pIF))
+							thisPt = Domains::global()->PM()->getParticleForCluster(mt, thisPt, Kernel::POS_0);
+						bool isPart = thisPt == pt;
+						bool isGenericDefect  = Kernel::Event::getEName(ev) == def;
+						bool isExtendedDefect = pMC && it->getDomain()->_pClPar->getParams(mt, pMC->getEDType())->_name == def;
+						bool isSt = pPart->getDefect()->getState() == stN;
+						if(isPart &&
+						(def.empty() || isGenericDefect || isExtendedDefect) &&
+						(st.empty()  || isSt)) {
+							odvp.push(3, pPart->getCoordinates(), 1.);
+						}
+						pPart = pPart->getNext();
 					}
-					pPart = pPart->getNext();
+				}
+				else {
+					IO::ParameterManager const * const pm = Domains::global()->PM();
+					Kernel::P_TYPE const family = pm->getFamily(pt);
+
+					while(pPart)
+					{
+						OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
+						OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+						if(family != 0 && family == pm->getFamily(pPart->getPType()) && pMC == nullptr && pIF == nullptr) {
+							odvp.push(3, pPart->getCoordinates(), 1.);
+						}
+						pPart = pPart->getNext();
+					}
 				}
 			}
 		}
