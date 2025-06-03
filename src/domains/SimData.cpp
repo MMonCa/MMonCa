@@ -932,7 +932,37 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 		if(mt != it->getMaterial())
 			continue;
 		Kernel::P_TYPE pt = names[it->getMaterial()];
-		if(pt == Kernel::UNDEFINED_TYPE || mode == Mode::AllInCluster) {
+		if(mode == Mode::AllInCluster) {
+			OKMC::Particle *pPart = it->getFirstPart();
+			IO::ParameterManager const * const pm = Domains::global()->PM();
+			Kernel::P_TYPE const family = pm->getFamily(pt);
+			while(pPart)
+			{
+				OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+				OKMC::Interface *pIf = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+				if(pIf != nullptr) {       // We consider the trapped amount as inactive.
+					std::vector<OKMC::Particle *> const particles = pIf->getParticles();
+					for(OKMC::Particle const * const pPartInIf : particles) {
+						OKMC::Cluster *pMcInIf = dynamic_cast<OKMC::Cluster *>(pPartInIf->getDefect());
+						if(family == pm->getFamily(pPartInIf->getPType()) && pMcInIf == nullptr) {
+							odvp.push(3, pPartInIf->getCoordinates(), 1.);
+						}
+					}
+				}
+				else if(pCluster != nullptr) {
+					Kernel::ID const theMap = pCluster->getID();
+					for(auto const item : theMap._pt) {
+						if(family == pm->getFamily(item.first)) {
+std::cout << pm->getIDName(theMap) << ' ' << pPart->getCoordinates() << '\n';
+							odvp.push(3, pPart->getCoordinates(), item.second);
+						}
+					}
+					odvp.push(3, pPart->getCoordinates(), 1.);
+				}
+				pPart = pPart->getNext();
+			}
+		}
+		else if(pt == Kernel::UNDEFINED_TYPE) {   // amount of a specific cluster, not the dopants in it
 			OKMC::Particle *pPart = it->getFirstPart();
 			while(pPart)
 			{
@@ -945,7 +975,7 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 				pPart = pPart->getNext();
 			}
 		}
-		else {
+		else {   // name refers a valid mobile particle
 			if (!Domains::global()->PM()->isImpurity(mt,pt) && Domains::global()->PM()->isAmorphous((*it)->getMaterial())) //No counting Is nor Vs for amorhpus MEs
 				continue;
 			Kernel::P_TYPE alloy_pt = Domains::global()->PM()->getMaterial((it->getMaterial()))._alloy;
@@ -990,18 +1020,19 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 						pPart = pPart->getNext();
 					}
 				}
-				else {
+				else {   // Mode::AllInActive
 					IO::ParameterManager const * const pm = Domains::global()->PM();
 					Kernel::P_TYPE const family = pm->getFamily(pt);
-
-					while(pPart)
-					{
-						OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
-						OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
-						if(family != 0 && family == pm->getFamily(pPart->getPType()) && pMC == nullptr && pIF == nullptr) {
-							odvp.push(3, pPart->getCoordinates(), 1.);
+					if(family != 0) {
+						while(pPart)
+						{
+							OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
+							OKMC::Interface *pIf = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+							if(family == pm->getFamily(pPart->getPType()) && pMC == nullptr && pIf == nullptr) {
+								odvp.push(3, pPart->getCoordinates(), 1.);
+							}
+							pPart = pPart->getNext();
 						}
-						pPart = pPart->getNext();
 					}
 				}
 			}
