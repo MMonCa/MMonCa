@@ -953,7 +953,6 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 					Kernel::ID const theMap = pCluster->getID();
 					for(auto const item : theMap._pt) {
 						if(family == pm->getFamily(item.first)) {
-std::cout << pm->getIDName(theMap) << ' ' << pPart->getCoordinates() << '\n';
 							odvp.push(3, pPart->getCoordinates(), item.second);
 						}
 					}
@@ -962,17 +961,39 @@ std::cout << pm->getIDName(theMap) << ' ' << pPart->getCoordinates() << '\n';
 				pPart = pPart->getNext();
 			}
 		}
-		else if(pt == Kernel::UNDEFINED_TYPE) {   // amount of a specific cluster, not the dopants in it
-			OKMC::Particle *pPart = it->getFirstPart();
-			while(pPart)
+		else if(pt == Kernel::UNDEFINED_TYPE || name.size() == 0u) {
+			if(name.empty())
 			{
-				OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
-				if(pCluster != nullptr &&
-	    			Domains::global()->PM()->getIDName(pCluster->getID()) == name &&
-					it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
-					odvp.push(3, pPart->getCoordinates(), 1.);
+				if(def.empty()) {
+					Coordinates m, M;
+					it->getCorners(m, M);
+					odvc.push(3, m, M, float(it->getAAtoms()) / float(it->getVolume()) * 1e21);
 				}
-				pPart = pPart->getNext();
+				else {  // we get all the clusters in the family referred by def
+					OKMC::Particle *pPart = it->getFirstPart();
+					while(pPart)
+					{
+						OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+						if(pCluster != nullptr &&
+							it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
+							odvp.push(3, pPart->getCoordinates(), 1.);
+						}
+						pPart = pPart->getNext();
+					}
+				}
+			}
+			else {  // name refers a cluster species and def a cluster family, we go for its amount, not the contained dopants
+				OKMC::Particle *pPart = it->getFirstPart();
+				while(pPart)
+				{
+					OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+					if(pCluster != nullptr &&
+						Domains::global()->PM()->getIDName(pCluster->getID()) == name &&
+						it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
+						odvp.push(3, pPart->getCoordinates(), 1.);
+					}
+					pPart = pPart->getNext();
+				}
 			}
 		}
 		else {   // name refers a valid mobile particle
@@ -987,12 +1008,6 @@ std::cout << pm->getIDName(theMap) << ' ' << pPart->getCoordinates() << '\n';
 				it->getCorners(m, M);
 				odvc.push(3, m, M, float(it->getBAtoms()) / float(it->getVolume()) * 1e21);
 	//			odvc.push(3, m, M, it->getAlloyFraction() * Domains::global()->PM()->getMaterial(it->getMaterial())._densityAlloyCm3);
-			}
-			else if(name.empty())
-			{
-				Coordinates m, M;
-				it->getCorners(m, M);
-				odvc.push(3, m, M, float(it->getAAtoms()) / float(it->getVolume()) * 1e21);
 			}
 			else
 			{
