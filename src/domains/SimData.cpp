@@ -899,6 +899,126 @@ IO::OutDataVectorC<double> SimData::getProfileMobile(const string &name, const s
 	return collapse(odv);
 }
 
+void SimData::gatherSpecificAtomFromInterfaceAndCluster(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, Kernel::P_TYPE pt) const {
+	OKMC::Particle *pPart = it->getFirstPart();
+	IO::ParameterManager const * const pm = Domains::global()->PM();
+	Kernel::P_TYPE const family = pm->getFamily(pt);
+	while(pPart)
+	{
+		OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+		OKMC::Interface *pIf = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+		if(pIf != nullptr) {       // We consider the trapped amount as inactive.
+			std::vector<OKMC::Particle *> const particles = pIf->getParticles();
+			for(OKMC::Particle const * const pPartInIf : particles) {
+				OKMC::Cluster *pMcInIf = dynamic_cast<OKMC::Cluster *>(pPartInIf->getDefect());
+				if(family == pm->getFamily(pPartInIf->getPType()) && pMcInIf == nullptr) {
+					odvp.push(3, pPartInIf->getCoordinates(), 1.);
+				}
+			}
+		}
+		else if(pCluster != nullptr) {
+			Kernel::ID const theMap = pCluster->getID();
+			for(auto const item : theMap._pt) {
+				if(family == pm->getFamily(item.first)) {
+					odvp.push(3, pPart->getCoordinates(), item.second);
+				}
+			}
+		}
+		pPart = pPart->getNext();
+	}
+}
+
+void SimData::gatherSpecificAtomFromSpecificClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it,
+	Kernel::M_TYPE mt, Kernel::P_TYPE pt, std::string const& def) const {
+	OKMC::Particle *pPart = it->getFirstPart();
+	IO::ParameterManager const * const pm = Domains::global()->PM();
+	Kernel::P_TYPE const family = pm->getFamily(pt);
+	while(pPart)
+	{
+		OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+		if(pCluster != nullptr && 
+				it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
+			Kernel::ID const theMap = pCluster->getID();
+			for(auto const item : theMap._pt) {
+				if(family == pm->getFamily(item.first)) {
+					odvp.push(3, pPart->getCoordinates(), item.second);
+				}
+			}
+		}
+		pPart = pPart->getNext();
+	}
+}
+
+void SimData::gatherClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, Kernel::M_TYPE mt, std::string const& def) const {
+	OKMC::Particle *pPart = it->getFirstPart();
+	while(pPart)
+	{
+		OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+		if(pCluster != nullptr &&
+			it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
+			odvp.push(3, pPart->getCoordinates(), 1.);
+		}
+		pPart = pPart->getNext();
+	}
+}
+
+void SimData::gatherSpecificClusterFromClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, 
+	Kernel::M_TYPE mt, std::string const& name, std::string const& def) const {
+	OKMC::Particle *pPart = it->getFirstPart();
+	while(pPart)
+	{
+		OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
+		if(pCluster != nullptr &&
+			Domains::global()->PM()->getIDName(pCluster->getID()) == name &&
+			it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
+			odvp.push(3, pPart->getCoordinates(), 1.);
+		}
+		pPart = pPart->getNext();
+	}
+}
+
+void SimData::gatherVanillaParticle(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, 
+	Kernel::M_TYPE mt, Kernel::P_TYPE pt, std::string const& name, std::string const& st, std::string const& def) const {
+	OKMC::Particle *pPart = it->getFirstPart();
+	unsigned stN = Domains::global()->PM()->getStateNumber(it->getMaterial(), pt, st);
+	while(pPart)
+	{
+		Kernel::Event::E_TYPE ev = pPart->getDefect()->getEType();
+		OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
+		OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+		Kernel::P_TYPE thisPt = pPart->getPType();
+		if(Domains::global()->PM()->getMaterial(mt)._binary == false && (pMC || pIF))
+			thisPt = Domains::global()->PM()->getParticleForCluster(mt, thisPt, Kernel::POS_0);
+		bool isPart = thisPt == pt;
+		bool isGenericDefect  = Kernel::Event::getEName(ev) == def;
+		bool isExtendedDefect = pMC && it->getDomain()->_pClPar->getParams(mt, pMC->getEDType())->_name == def;
+		bool isSt = pPart->getDefect()->getState() == stN;
+		if(isPart &&
+		(def.empty() || isGenericDefect || isExtendedDefect) &&
+		(st.empty()  || isSt)) {
+			odvp.push(3, pPart->getCoordinates(), 1.);
+		}
+		pPart = pPart->getNext();
+	}
+}
+					
+void SimData::gatherAllInActive(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, Kernel::P_TYPE pt) const {
+	OKMC::Particle *pPart = it->getFirstPart();
+	IO::ParameterManager const * const pm = Domains::global()->PM();
+	Kernel::P_TYPE const family = pm->getFamily(pt);
+	if(family != 0) {
+		while(pPart)
+		{
+			OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
+			OKMC::Interface *pIf = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
+			if(family == pm->getFamily(pPart->getPType()) && pMC == nullptr && pIf == nullptr) {
+				odvp.push(3, pPart->getCoordinates(), 1.);
+			}
+			pPart = pPart->getNext();
+		}
+	}
+}
+
 IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, const string &def,
 		const string &st, const string &mate) const
 {
@@ -906,20 +1026,11 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 	IO::OutDataVectorC<double> odvc;
 
 	std::string name = needle;
-	enum class Mode:uint8_t {
-		Individual   = 0u,
-		AllInActive  = 1u,
-		AllInCluster = 2u
-	} mode = Mode::Individual;
+	bool atomAmount = false;
 	if(needle.back() == '*') {
-		mode = Mode::AllInActive;
+		atomAmount = true;
 		name.pop_back();
 	}
-	else if(needle.back() == '@') {
-		mode = Mode::AllInCluster;
-		name.pop_back();
-	}
-	else {}
 
 	Kernel::M_TYPE mt = Domains::global()->PM()->getMaterialNumber(mate);
 	Kernel::P_TYPE names[Kernel::MAX_MATERIALS];
@@ -932,36 +1043,9 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 		if(mt != it->getMaterial())
 			continue;
 		Kernel::P_TYPE pt = names[it->getMaterial()];
-		if(mode == Mode::AllInCluster) {
-			OKMC::Particle *pPart = it->getFirstPart();
-			IO::ParameterManager const * const pm = Domains::global()->PM();
-			Kernel::P_TYPE const family = pm->getFamily(pt);
-			while(pPart)
-			{
-				OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
-				OKMC::Interface *pIf = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
-				if(pIf != nullptr) {       // We consider the trapped amount as inactive.
-					std::vector<OKMC::Particle *> const particles = pIf->getParticles();
-					for(OKMC::Particle const * const pPartInIf : particles) {
-						OKMC::Cluster *pMcInIf = dynamic_cast<OKMC::Cluster *>(pPartInIf->getDefect());
-						if(family == pm->getFamily(pPartInIf->getPType()) && pMcInIf == nullptr) {
-							odvp.push(3, pPartInIf->getCoordinates(), 1.);
-						}
-					}
-				}
-				else if(pCluster != nullptr) {
-					Kernel::ID const theMap = pCluster->getID();
-					for(auto const item : theMap._pt) {
-						if(family == pm->getFamily(item.first)) {
-							odvp.push(3, pPart->getCoordinates(), item.second);
-						}
-					}
-					odvp.push(3, pPart->getCoordinates(), 1.);
-				}
-				pPart = pPart->getNext();
-			}
-		}
-		else if(pt == Kernel::UNDEFINED_TYPE || name.size() == 0u) {
+		if (pt != Kernel::UNDEFINED_TYPE && !Domains::global()->PM()->isImpurity(mt,pt) && Domains::global()->PM()->isAmorphous((*it)->getMaterial())) //No counting Is nor Vs for amorhpus MEs
+			continue;
+		if(pt == Kernel::UNDEFINED_TYPE || name.size() == 0u) {
 			if(name.empty())
 			{
 				if(def.empty()) {
@@ -970,35 +1054,17 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 					odvc.push(3, m, M, float(it->getAAtoms()) / float(it->getVolume()) * 1e21);
 				}
 				else {  // we get all the clusters in the family referred by def
-					OKMC::Particle *pPart = it->getFirstPart();
-					while(pPart)
-					{
-						OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
-						if(pCluster != nullptr &&
-							it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
-							odvp.push(3, pPart->getCoordinates(), 1.);
-						}
-						pPart = pPart->getNext();
-					}
+					gatherClusterFamily(odvp, it, mt, def);
 				}
 			}
-			else {  // name refers a cluster species and def a cluster family, we go for its amount, not the contained dopants
-				OKMC::Particle *pPart = it->getFirstPart();
-				while(pPart)
-				{
-					OKMC::Cluster const* pCluster = dynamic_cast<OKMC::Cluster*>(pPart->getDefect());
-					if(pCluster != nullptr &&
-						Domains::global()->PM()->getIDName(pCluster->getID()) == name &&
-						it->getDomain()->_pClPar->getParams(mt, pCluster->getEDType())->_name == def) {
-						odvp.push(3, pPart->getCoordinates(), 1.);
-					}
-					pPart = pPart->getNext();
-				}
+			else if(!def.empty()) {  // name refers a cluster species and def a cluster family, we go for its amount, not the contained dopants
+				gatherSpecificClusterFromClusterFamily(odvp, it, mt, name, def);
+			}
+			else {
+				ERRORMSG("Particle " << name << " does not seem to be defined in this material...");
 			}
 		}
 		else {   // name refers a valid mobile particle
-			if (!Domains::global()->PM()->isImpurity(mt,pt) && Domains::global()->PM()->isAmorphous((*it)->getMaterial())) //No counting Is nor Vs for amorhpus MEs
-				continue;
 			Kernel::P_TYPE alloy_pt = Domains::global()->PM()->getMaterial((it->getMaterial()))._alloy;
 			if(Domains::global()->PM()->getMaterial(mt)._binary == false && alloy_pt != Kernel::UNDEFINED_TYPE)
 				alloy_pt = Domains::global()->PM()->getParticle(mt, alloy_pt, Kernel::POS_0);
@@ -1009,46 +1075,19 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &needle, con
 				odvc.push(3, m, M, float(it->getBAtoms()) / float(it->getVolume()) * 1e21);
 	//			odvc.push(3, m, M, it->getAlloyFraction() * Domains::global()->PM()->getMaterial(it->getMaterial())._densityAlloyCm3);
 			}
+			else if(def == "*") {    // We go for all the interesting atoms in all interfaces and clusters
+				gatherSpecificAtomFromInterfaceAndCluster(odvp, it, pt);
+			}
+			else if(def.size() != 0u && atomAmount) {   // We go for all the interesting atoms in a specific cluster family
+				gatherSpecificAtomFromSpecificClusterFamily(odvp, it, mt, pt, def);
+			}
 			else
 			{
-				OKMC::Particle *pPart = it->getFirstPart();
-
-				if(mode == Mode::Individual) {
-					unsigned stN = Domains::global()->PM()->getStateNumber(it->getMaterial(), pt, st);
-					while(pPart)
-					{
-						Kernel::Event::E_TYPE ev = pPart->getDefect()->getEType();
-						OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
-						OKMC::Interface *pIF = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
-						Kernel::P_TYPE thisPt = pPart->getPType();
-						if(Domains::global()->PM()->getMaterial(mt)._binary == false && (pMC || pIF))
-							thisPt = Domains::global()->PM()->getParticleForCluster(mt, thisPt, Kernel::POS_0);
-						bool isPart = thisPt == pt;
-						bool isGenericDefect  = Kernel::Event::getEName(ev) == def;
-						bool isExtendedDefect = pMC && it->getDomain()->_pClPar->getParams(mt, pMC->getEDType())->_name == def;
-						bool isSt = pPart->getDefect()->getState() == stN;
-						if(isPart &&
-						(def.empty() || isGenericDefect || isExtendedDefect) &&
-						(st.empty()  || isSt)) {
-							odvp.push(3, pPart->getCoordinates(), 1.);
-						}
-						pPart = pPart->getNext();
-					}
+				if(atomAmount) {
+					gatherAllInActive(odvp, it, pt);
 				}
-				else {   // Mode::AllInActive
-					IO::ParameterManager const * const pm = Domains::global()->PM();
-					Kernel::P_TYPE const family = pm->getFamily(pt);
-					if(family != 0) {
-						while(pPart)
-						{
-							OKMC::Cluster *pMC = dynamic_cast<OKMC::Cluster *>(pPart->getDefect());
-							OKMC::Interface *pIf = dynamic_cast<OKMC::Interface *>(pPart->getDefect());
-							if(family == pm->getFamily(pPart->getPType()) && pMC == nullptr && pIf == nullptr) {
-								odvp.push(3, pPart->getCoordinates(), 1.);
-							}
-							pPart = pPart->getNext();
-						}
-					}
+				else {   // Original MMonCa particle profile
+					gatherVanillaParticle(odvp, it, mt, pt, name, st, def);
 				}
 			}
 		}
