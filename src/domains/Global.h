@@ -23,6 +23,7 @@
 #define GLOBAL_H_
 
 #include <string>
+#include <limits>
 #include <set>
 #include <map>
 #include <fstream>
@@ -91,6 +92,7 @@ public:
         void setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::Coordinates &,
            std::vector<float> const * const aLinesX = nullptr, std::vector<float> const * const aLinesY = nullptr, std::vector<float> const * const aLinesZ = nullptr);
 
+	void  setTotalAllowedSeconds(float seconds) { _totalAllowedSeconds = seconds; }
 	void  setTempK(float K);
 	float getTempK() const { return _kelvin; }
 	void anneal(double time, bool bDepth, float depth, long unsigned events);
@@ -131,6 +133,7 @@ private:
 	std::string _mechModel;
 
 	bool _bDebug;
+	double _totalAllowedSeconds = std::numeric_limits<double>::max();
 
 	//time steps
 	double _kelvin;
