@@ -323,6 +323,12 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 	double newDepth = 0;
 	while(_time < endTime && bStop == false)
 	{
+		time_t now;
+		std::time(&now);
+		if(std::difftime(now, _initCPUTime) > _totalAllowedSeconds) {  // TODO implement this in other time-intensive operations
+			WARNINGMSG("Total allowed computation time reached, premature end of annealing.");
+			break;
+		}
 		printTime = _pTimeUpdate->getNextTime();
 		nEvents = 0;
 		double newTime = 0;
