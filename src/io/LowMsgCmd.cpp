@@ -24,15 +24,13 @@
 
 namespace IO {
 
-LowMsgCmd::LowMsgCmd(Tcl_Interp *p, int argc, const char *argv[]) : Command(p, argc, argv, false)
+LowMsgCmd::LowMsgCmd(Tcl_Interp *p, int argc, const char *argv[]) : Command(p)
 {
 	for(int i=1; i<argc; ++i)
 	{
 		_out += argv[1];
 		_out += " ";
 	}
-	for(std::map<std::string, bool>::iterator it=_used.begin(); it != _used.end(); ++it)
-		it->second = true;
 }
 
 

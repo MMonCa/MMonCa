@@ -42,6 +42,24 @@ FileParameters::~FileParameters()
 			MEDMSG("Parameter " << it->first << " not used");
 }
 
+void FileParameters::dump(std::ostream &aOut, std::string const& aFilename)
+{
+	if(!aFilename.empty()) {
+		aOut << "written into file: " << aFilename;
+		std::ofstream file(aFilename);
+		for(auto const& item : _map)
+		{
+			file << item.first << ':' << item.second.first << ':' << item.second.second << '\n';
+		}
+	}
+	else {
+		for(auto const& item : _map)
+		{
+			aOut << item.first << ':' << item.second.first << ':' << item.second.second << '\n';
+		}
+	}
+}
+
 void FileParameters::openDir(const std::string &szPath, const std::string &key)
 {
    DIR *pDir = opendir(szPath.c_str());

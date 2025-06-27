@@ -29,6 +29,7 @@ class FileParameters : public Parameters
    FileParameters(const std::string &szPath);
    FileParameters(std::istream &is) : Parameters(is) {}
    ~FileParameters();
+   void dump(std::ostream &aOut, std::string const& aFilename);
 
   private:
    void openDir (const std::string &szPath,     const std::string &key);
