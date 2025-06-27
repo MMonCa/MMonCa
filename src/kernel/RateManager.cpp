@@ -114,7 +114,7 @@ void RateManager::anneal(double time, bool bDepth, float depth, long unsigned ev
 			deltaTime += (_bAveraged? 1. : -std::log(rand)) / (_nLevels*maxRate);
 			_lastMaxRate   = maxRate;
 			_timeLastEvent = _timeNextEvent;
-			_timeNextEvent+= deltaTime;
+			_timeNextEvent = std::min(endTime, _timeNextEvent + deltaTime);
 			_time          = _timeNextEvent;
 		}
 		else

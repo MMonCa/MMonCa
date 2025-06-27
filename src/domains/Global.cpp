@@ -325,11 +325,10 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 	{
 		printTime = _pTimeUpdate->getNextTime();
 		nEvents = 0;
-		double newTime = 0;
 		newDepth = 0;
 		bool bFinished = true;
 		double finalTime = (printTime <= endTime) ? printTime : endTime;
-        #pragma omp parallel shared(bFinished) num_threads(_domains.size()) reduction(+:nEvents,newTime,newDepth)
+        #pragma omp parallel shared(bFinished) num_threads(_domains.size()) reduction(+:nEvents,newDepth)
 		{
 			#pragma omp for schedule(dynamic,1)
 			for(unsigned nD = 0; nD < _domains.size(); ++nD)
@@ -340,15 +339,13 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 				if(_domains[nD]->_pRM->getSubDomain(0)->getMaxRate() != 0)
 					bFinished = false;
 				nEvents  += _domains[nD]->_pRM->getEvents();
-				newTime  += _domains[nD]->_pRM->getTime();
 				newDepth += _domains[nD]->_pRM->getDepthLA();
 			}
 		}
-		newTime /= _domains.size();
 		newDepth /= _domains.size();
 		if(newDepth > 1e35)
 			newDepth = origDepth;
-		_time = newTime;
+		_time = _domains[0]->_pRM->getTime();
 		if(bFinished && event == 0 && bDepth == false)
 			_time = endTime;
 		(*_pTimeUpdate)(_time, nEvents, newDepth);
