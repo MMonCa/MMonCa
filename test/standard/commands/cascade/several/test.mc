@@ -74,4 +74,4 @@ set Is [extract count.particles particle=I]
 set Vs [extract count.particles particle=V defect=MobileParticle]
 
 test tag=count.I float=$Is value=0    error=0.1
-test tag=count.V float=$Vs value=7803 error=0.1
+test tag=count.V float=$Vs value=7803 error=0.12

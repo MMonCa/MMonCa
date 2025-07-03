@@ -40,7 +40,7 @@ public:
     ~RateManager();
 
     void setTempK(float K);
-    void anneal(double time, bool bDepth, float depth, long unsigned events);
+    void anneal(double endTime, bool bDepth, float depth, long unsigned events);
     void setDepthLA(float depth);
     float getDepthLA() const { return _depthLA; }
     long unsigned getEvents() const { return _nEvents; }
