@@ -26,6 +26,7 @@
 #include "kernel/ParticleType.h"
 #include "domains/MeshElementIterator.h"
 #include "io/OutData.h"
+#include "okmc/Cluster.h"
 #include "SimDataAux.h"
 
 #include <map>
@@ -60,12 +61,13 @@ public:
 
 private:
 	void gatherSpecificAtomFromInterfaceAndCluster(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it,
-		Kernel::P_TYPE pt) const;
+		Kernel::M_TYPE mt, Kernel::P_TYPE pt) const;
 	void gatherSpecificAtomFromSpecificClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it,
 		Kernel::M_TYPE mt, Kernel::P_TYPE pt, std::string const& def) const;
-    void gatherClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, Kernel::M_TYPE mt, std::string const& def) const;
+    void gatherClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, Kernel::M_TYPE mt,
+		std::string const& def, std::set<OKMC::Cluster const*> &was) const;
 	void gatherSpecificClusterFromClusterFamily(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, 
-		Kernel::M_TYPE mt, std::string const& name, std::string const& def) const;
+		Kernel::M_TYPE mt, std::string const& name, std::string const& def, std::set<OKMC::Cluster const*> &was) const;
 	void gatherVanillaParticle(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, 
 		Kernel::M_TYPE mt, Kernel::P_TYPE pt, std::string const& name, std::string const& st, std::string const& def) const;
 	void gatherAllInActive(IO::OutDataVectorP<double> &odvp, Domains::MeshElementIterator const& it, Kernel::P_TYPE pt) const;
