@@ -188,11 +188,24 @@ void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::
         _pSplitter = new SimpleSplitter(m, M, p->getMaterial());
 
         if(aLinesX != nullptr && aLinesY != nullptr && aLinesZ != nullptr) {
-            if(_pSplitter->getDomains() == 1u && _pSplitter->getSubDomains(0) == 1u) {
-                _domains.push_back(new Kernel::Domain(0, _pGlobalTcl, p, m, M, aLinesX, aLinesY, aLinesZ));
+            if(_pSplitter->getSubDomains(0) == 1u) {
+		for(unsigned i=0u; i<_pSplitter->getDomains(); ++i)
+		{
+			Kernel::Coordinates cornerMin, cornerMax;
+			_pSplitter->splitDomain(i, cornerMin, cornerMax);
+			std::vector<float> zPart = SimpleSplitter::getLinesZpart(cornerMin._z, cornerMax._z, aLinesZ);
+			if(zPart.size() < 2u) {
+			ERRORMSG("Inhomogeneous mesh should be refined between Z values " <<
+					cornerMin._z << " and " << cornerMax._z <<
+					" because the following domain has no Z slices << std::to_string: " << i);
+			}
+			cornerMin._z = zPart.front();
+			cornerMax._z = zPart.back();
+			_domains.push_back(new Kernel::Domain(i, _pGlobalTcl, p, cornerMin, cornerMax, aLinesX, aLinesY, &zPart));
+		}
             }
             else {
-                WARNINGMSG("Lines setting in init (inhomogeneous mesh) is only allowed when domains == 1 && subdomains == 1");
+                ERRORMSG("Lines setting in init (inhomogeneous mesh) is only allowed when subdomains == 1");
             }
         }
         else {
