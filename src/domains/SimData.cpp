@@ -921,7 +921,7 @@ IO::OutDataVectorC<double> SimData::getParticleProfile(const string &name, const
 		if (!Domains::global()->PM()->isImpurity(mt,pt) && Domains::global()->PM()->isAmorphous((*it)->getMaterial())) //No counting Is nor Vs for amorhpus MEs
 			continue;
 		Kernel::P_TYPE alloy_pt = Domains::global()->PM()->getMaterial((it->getMaterial()))._alloy;
-		if(Domains::global()->PM()->getMaterial(mt)._binary == false)
+		if(Domains::global()->PM()->getMaterial(mt)._binary == false && alloy_pt != Kernel::UNDEFINED_TYPE)
 			alloy_pt = Domains::global()->PM()->getParticle(mt, alloy_pt, Kernel::POS_0);
 		if(alloy_pt == pt)
 		{
