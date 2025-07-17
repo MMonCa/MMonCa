@@ -35,6 +35,17 @@ using Kernel::M_TYPE;
 
 namespace Domains {
 
+MCClient::MCClient(Tcl_Interp *p, const Kernel::Coordinates &m, const Kernel::Coordinates &M,
+    	std::unique_ptr<MeshMaterialReader> &&aMeshMaterialReader) :
+_min(m), _max(M),
+_rng2(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
+_meshMaterialReader(std::move(aMeshMaterialReader)),
+ _isFromStream(false)
+{
+	_getMaterial = new IO::GetMaterial(p, "");
+	beginInsert();
+}
+
 MCClient::MCClient(Tcl_Interp *p, const Coordinates &m, const Coordinates &M, const std::string &proc) :
 _min(m), _max(M),
 _rng2(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
@@ -48,7 +59,7 @@ MCClient::MCClient(std::istream &is) :
 		_rng2(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
 		_isFromStream(true)
 {
-	_getMaterial = new IO::GetMaterial(is);
+	_getMaterial = new IO::GetMaterial(is);    // TODO write and read lines* for restart
 	is >> _min >> _max;
 	beginInsert();
 }

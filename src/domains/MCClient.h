@@ -23,6 +23,7 @@
 #include "kernel/Material.h"
 #include "kernel/ParticleType.h"
 #include "io/GetMaterial.h"
+#include "io/MeshMaterialReader.h"
 #include <map>
 #include <string>
 #include <tcl.h>
@@ -38,6 +39,8 @@ namespace Domains {
 class MCClient
 {
 public:
+    MCClient(Tcl_Interp *p, const Kernel::Coordinates &m, const Kernel::Coordinates &M,
+    	std::unique_ptr<MeshMaterialReader> &&aMeshMaterialReader);
     MCClient(Tcl_Interp *p, const Kernel::Coordinates &m, const Kernel::Coordinates &M,
     	const std::string &proc);
     MCClient(std::istream &);
@@ -63,10 +66,19 @@ public:
 
     void restart(std::ostream &) const;
     bool isFromStream() const { return _isFromStream; }
+    void translateMaterial(std::string const& aFrom, Kernel::M_TYPE const aTo) { 
+        if(_meshMaterialReader) _meshMaterialReader->translate(aFrom, aTo);
+    }
+    void fillGetMaterial(uint32_t const aDomain, uint32_t const aLinesXsize, uint32_t const aLinesYsize, 
+        uint32_t const aLinesZsize, uint32_t const aLinesZindexMin, uint32_t const aLinesZindexMax) {
+        _getMaterial->fill(aDomain, aLinesXsize, aLinesYsize, aLinesZsize, 
+            aLinesZindexMin, aLinesZindexMax, _meshMaterialReader ? &_meshMaterialReader->getMaterials() : nullptr);
+    }
 
 private:
     Kernel::Coordinates _min, _max;
     Kernel::RNG _rng2; //for Interfaces
+    std::unique_ptr<MeshMaterialReader> _meshMaterialReader;
 	IO::GetMaterial *_getMaterial;
 
 	std::map<std::string, unsigned> _created[Kernel::MAX_MATERIALS];

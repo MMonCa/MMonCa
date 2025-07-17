@@ -30,9 +30,7 @@ namespace Domains {
 
 class SimpleSplitter: public Splitter {
 public:
-	SimpleSplitter(const Kernel::Coordinates &m, const Kernel::Coordinates &M,  //global simulation size
-			const IO::GetMaterial *  //pointer to getMaterial function
-			);
+	SimpleSplitter(const Kernel::Coordinates &m, const Kernel::Coordinates &M);  //global simulation size
 	virtual ~SimpleSplitter() {}
 
 	virtual unsigned getDomains() const { return _nDomains; }

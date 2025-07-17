@@ -54,6 +54,26 @@ GetMaterial::GetMaterial(std::istream &is) : _pTcl(0), _procName("")
 
 }
 
+void GetMaterial::fill(uint32_t const aDomain, uint32_t const aLinesXsize, uint32_t const aLinesYsize, uint32_t const aLinesZsize,
+        uint32_t const aLinesZindexMin, uint32_t const aLinesZindexMax, std::vector<Kernel::M_TYPE> const * const aMaterials) {
+	if(aMaterials != nullptr && _procName.empty()) {
+		assert(_materials.size() == aDomain);
+		_materials.push_back(std::vector<Kernel::M_TYPE>());
+		auto& slice = _materials.back();
+		auto const sizeX = aLinesXsize - 1u;
+		auto const sizeY = aLinesYsize - 1u;
+		auto const sizeZ = aLinesZsize - 1u;
+		slice.reserve(sizeX * sizeY * (aLinesZindexMax - aLinesZindexMin));
+		for(uint32_t x = 0u; x < sizeX; ++x) {
+			for(uint32_t y = 0u; y < sizeY; ++y) {
+				for(uint32_t z = aLinesZindexMin; z < aLinesZindexMax; ++z) {
+					slice.push_back(aMaterials->at(z + sizeZ * (y + sizeY * x)));
+				}
+			}
+		}
+	}
+}
+
 void GetMaterial::restart(std::ostream &os)
 {
 	int nDomains = Domains::global()->getSplitter()->getDomains();

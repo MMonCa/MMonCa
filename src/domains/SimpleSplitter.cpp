@@ -28,9 +28,8 @@
 namespace Domains {
 
 SimpleSplitter::SimpleSplitter(
-		const Kernel::Coordinates &mm, const Kernel::Coordinates &MM,  //global simulation size
-		const IO::GetMaterial *gm  //pointer to getMaterial function
-		) : Splitter(mm, MM, gm)
+		const Kernel::Coordinates &mm, const Kernel::Coordinates &MM)  //global simulation size
+		 : Splitter(mm, MM)
 {
 	_nDomains = global()->getFileParameters()->getInt("MC/General/domains");
 	unsigned subDomains = global()->getFileParameters()->getInt("MC/General/subdomains");

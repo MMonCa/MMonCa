@@ -25,9 +25,8 @@
 
 namespace Domains
 {
-	Splitter::Splitter(const Kernel::Coordinates &m, const Kernel::Coordinates &M,  //global simulation size
-			const IO::GetMaterial *gm  //pointer to getMaterial function
-			) : _minCell(m), _maxCell(M), _getMaterial(gm)
+	Splitter::Splitter(const Kernel::Coordinates &m, const Kernel::Coordinates &M)  //global simulation size
+			 : _minCell(m), _maxCell(M)
 	{
 		_levels = global()->getFileParameters()->getInt("MC/General/levels");
 	}
