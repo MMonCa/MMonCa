@@ -160,6 +160,9 @@ void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::
 {
 	delete _pPM;
 	_pPM = new IO::ParameterManager(_pGlobalTcl, _pPar);
+	for(Kernel::M_TYPE m = 0u; m < _pPM->getNMaterials(); ++m) {
+		p->translateMaterial(_pPM->getMaterialName(m), m);
+	}
 	_bDebug = _pPar->getBool("MC/General/debug");
 	if (_pClient || _pSimData || _domains.size())
 	{
