@@ -21,6 +21,7 @@
  */
 
 #include "ExtractCmd.h"
+#include "FileParameters.h"
 #include "domains/SimData.h"
 #include "domains/MCClient.h"
 #include "kernel/Domain.h"
@@ -94,6 +95,14 @@ int ExtractCmd::operator()()
 	else if(specified("ac.coverage"))
 	{
 		ss << Domains::global()->data()->getACInterfaceCoverage(m, M);
+	}
+	else if(specified("configuration"))
+	{
+		std::string filename;
+		if(specified("filename")) {
+			filename = getString("filename");
+		}
+		Domains::global()->getFileParameters()->dump(ss, filename);
 	}
 	else if(specified("diffusivity"))
 	{

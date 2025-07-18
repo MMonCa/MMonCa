@@ -53,6 +53,7 @@ public:
     static int Charge	  (ClientData, Tcl_Interp *interp, int argc, const char *argv[]);
     static int UnitTest	  (ClientData, Tcl_Interp *interp, int argc, const char *argv[]);
     
+    Command(Tcl_Interp *p) : _pTcl(p) {}
     Command(Tcl_Interp *, int argc, const char *argv[], bool bPrint=true);
     virtual ~Command();
 
