@@ -69,6 +69,8 @@ int InitCmd::operator()()
 
 	if(specified("temp"))
 		Domains::global()->setTempK(getFloat("temp") + 273.15);
+	if(specified("totalseconds"))
+		Domains::global()->setTotalAllowedSeconds(getFloat("totalseconds"));
 
 	return TCL_OK;	
 }
