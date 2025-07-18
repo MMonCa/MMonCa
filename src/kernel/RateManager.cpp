@@ -94,9 +94,8 @@ void RateManager::remove(Event *pEv, MeshElement *pEle)
 }
 
 //annealing time OR LKMC depth in nanometers
-void RateManager::anneal(double time, bool bDepth, float depth, long unsigned events)
+void RateManager::anneal(double endTime, bool bDepth, float depth, long unsigned events)
 {
-	double endTime = _time+time;
 	while(_timeNextEvent < endTime)
 	{
 		double maxRate = 0;

@@ -342,7 +342,7 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 			{
 				_domains[nD]->_pRM->setTempK(_kelvin); //to update rates
 				//pRM-> anneal always returns the requested time
-				_domains[nD]->_pRM->anneal(finalTime - _time, bDepth, depth, event);
+				_domains[nD]->_pRM->anneal(finalTime, bDepth, depth, event);
 				if(_domains[nD]->_pRM->getSubDomain(0)->getMaxRate() != 0)
 					bFinished = false;
 				nEvents  += _domains[nD]->_pRM->getEvents();
