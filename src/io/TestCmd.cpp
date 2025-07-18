@@ -72,6 +72,9 @@ int TestCmd::operator ()()
 			Tcl_AppendResult(_pTcl, out.str().c_str(), 0);
 			return TCL_ERROR;
 		}
+		if(nFields == 0u) {
+			ERRORMSG("No values extracted in \"test array*\". Revise the init and end values and the profile domain.");
+		}
 		out << total/nFields;
 		Tcl_AppendResult(_pTcl, out.str().c_str(), 0);
 		LOWMSG("Test PASSED... continuing");
@@ -113,6 +116,9 @@ int TestCmd::operator ()()
 			out << tag << " Test failed: " << max_err << (bTrue? " > ": " < ") << relerr;
 			Tcl_AppendResult(_pTcl, out.str().c_str(), 0);
 			return TCL_ERROR;
+		}
+		if(nFields == 0u) {
+			ERRORMSG("No values extracted in \"test array*\". Revise the init and end values and the profile domain.");
 		}
 		out << total/nFields;
 		Tcl_AppendResult(_pTcl, out.str().c_str(), 0);
@@ -203,6 +209,9 @@ int TestCmd::operator ()()
 			out << tag << " Test failed: " << max_err << (bTrue? " > ": " < ") << relerr;
 			Tcl_AppendResult(_pTcl, out.str().c_str(), 0);
 			return TCL_ERROR;
+		}
+		if(nFields == 0u) {
+			ERRORMSG("No values extracted in \"test array*\". Revise the init and end values and the profile domain.");
 		}
 		out << total/nFields;
 		Tcl_AppendResult(_pTcl, out.str().c_str(), 0);
