@@ -48,7 +48,17 @@ void checkOrderingUniqueness(std::vector<float> const& aVector) {
 int InitCmd::operator()()
 {
 	Domains::MCClient *pCli = 0;
-        if(specified("linesx") && specified("linesy") && specified("linesz")) {
+        if(specified("mesh")) {
+            std::unique_ptr<MeshMaterialReader> meshMaterial(new MeshMaterialReader(getString("mesh")));
+            auto const linesX = meshMaterial->getLinesX();
+            auto const linesY = meshMaterial->getLinesY();
+            auto const linesZ = meshMaterial->getLinesZ();
+            Kernel::Coordinates const m = Coordinates(linesX.front(), linesY.front(), linesZ.front());
+            Kernel::Coordinates const M = Coordinates(linesX.back(), linesY.back(), linesZ.back());
+            pCli = new Domains::MCClient(_pTcl, m, M, std::move(meshMaterial));
+            Domains::global()->setClient(pCli, m, M, &linesX, &linesY, &linesZ);
+        }
+        else if(specified("linesx") && specified("linesy") && specified("linesz")) {
             auto const linesX = getFloats("linesx");
             auto const linesY = getFloats("linesy");
             auto const linesZ = getFloats("linesz");

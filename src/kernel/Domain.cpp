@@ -41,7 +41,7 @@
 using namespace Electrostatics;
 using namespace Kernel;
 
-Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Domains::MCClient *, const Coordinates &m, const Coordinates &M,
+Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Coordinates &m, const Coordinates &M,
     std::vector<float> const * const aLinesX, std::vector<float> const * const aLinesY, std::vector<float> const * const aLinesZ) :
         _rng_dom(Domains::global()->getFileParameters()->getInt("MC/General/random.seed")),
 		_um_mechani("Mechanics/General/update"), _um_poisson("MC/Electrostatic/update"), _domain_number(num)

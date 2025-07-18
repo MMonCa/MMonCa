@@ -30,7 +30,7 @@ namespace Domains {
 
 class Splitter {
 public:
-	Splitter(const Kernel::Coordinates &m, const Kernel::Coordinates &M, const IO::GetMaterial *);
+	Splitter(const Kernel::Coordinates &m, const Kernel::Coordinates &M);
 	virtual ~Splitter() {}
 
 	virtual unsigned getDomains()    const = 0;  //returns how many domains are here
@@ -44,7 +44,6 @@ public:
 protected:
 	Kernel::Coordinates _minCell;
 	Kernel::Coordinates _maxCell;  //global simulation size
-	const IO::GetMaterial *_getMaterial; //pointer to getMaterial function
 	char     _levels;
 };
 
