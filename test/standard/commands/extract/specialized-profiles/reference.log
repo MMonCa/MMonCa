@@ -1,0 +1,564 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.16
+Compiled on Jul 18 2025 19:03:21 for x86_64-Linux
+for #45-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug 30 12:02:04 UTC 2024
+        Contact: imartin2@ucam.edu
+        https://github.com/imartinbragado/MMonCa
+OKMC: (C) 2011-2014  IMDEA Materials Institute.
+OKMC: (C) 2015-2018  Ignacio Martin, Ignacio Dopico.
+LKMC: (C) 2011-2014  IMDEA Materials Institute.
+LKMC: (C) 2015-2018  Ignacio Martin, Ignacio Dopico
+All:  (C) 2019-today Ignacio Martin. imartin2@ucam.edu
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si Gas Gas'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.x' value='6'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.y' value='6'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='float' key='MC/Mesh/spacing.z' value='6'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/domains' value='1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/particles' index='I_0,-,+' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/particles' index='I' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,int>' key='Silicon/Silicon/I(state.charge)' value='I 0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/particles' index='V_0,-,+' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/particles' index='V' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,int>' key='Silicon/Vacancy/V(state.charge)' value='V 0'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/particles' index='BI_0,-' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,bool>' key='Silicon/Models/particles' index='BI' value='true'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='map<string,int>' key='Silicon/Boron/BI(state.charge)' value='BI -1'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' index='B+BI' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='array<string,string>' key='Silicon/Models/interactions' index='I+I' value='false'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(formation)' value=' 9.21e29 3.74 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Silicon/I(formation)' value=' 6e26 4 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Vacancy/V(migration)' value=' 5.00e-8 0.4 ' new
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Silicon/I(migration)' value=' 5e-2 0.8 ' new
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Boron/BI(formation)' value=' 920 2.9 '
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='arrhenius' key='Silicon/Boron/BI(migration)' value=' 5e-3 0.77 ' new
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Silicon/I(formation)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Silicon/I(formation)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/B(formation)'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param get type='arrhenius' key='Silicon/Boron/B(formation)'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='-2' miny='0' minz='0' maxx='60' maxy='300' maxz='300' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (-2 - 60) nm. 10 elements. Delta = 6.2 nm.
+     Y: (0 - 300) nm. 50 elements. Delta = 6 nm.
+     Z: (0 - 300) nm. 50 elements. Delta = 6 nm.
+Total 25000 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> Gas
+1 -> Silicon
+11111111111111111111111111111111111111111111111111 -                                                     -2:4.2
+11111111111111111111111111111111111111111111111111 -                                                     53.8:60
+Starting clusters:  Gas() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: BI+SiO2
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: CI+SiO2
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+----------------------------------------------------------------- profile -----
+profile proc='spike' name='B'
+-------------------------------------------------------------------------------
+
+Created Silicon,B(278882) 
+----------------------------------------------------------------- profile -----
+profile proc='spike' name='I'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+It is inconsistent to define amorphous.threshold for Silicon but not to define AmorphousSilicon. Ignoring amorphization.
+Created Silicon,I(279062) 
+----------------------------------------------------------------- profile -----
+profile proc='spike' name='V'
+-------------------------------------------------------------------------------
+
+Created Silicon,V(279017) 
+------------------------------------------------------------------ anneal -----
+anneal temp='900' time='60'
+-------------------------------------------------------------------------------
+
+Annealing the sample for 60 seconds at 1173.15K (900ºC)
+---------------------------- Warning -----------------------------------
+Snapshot not defined or error.
+900C    1e-05s    71794696   0.00%    7.2e+12 s^-1  258254 ev/s 541 Mb
+900C  1.1e-05s    72249441   0.00%    4.5e+11 s^-1  227372 ev/s 541 Mb
+900C    2e-05s    76322702   0.00%    4.5e+11 s^-1  254578 ev/s 541 Mb
+900C    3e-05s    80393746   0.00%    4.1e+11 s^-1  203552 ev/s 541 Mb
+900C    4e-05s    84119296   0.00%    3.7e+11 s^-1  266110 ev/s 541 Mb
+900C    5e-05s    87504215   0.00%    3.4e+11 s^-1  199112 ev/s 541 Mb
+900C    6e-05s    90715768   0.00%    3.2e+11 s^-1  267629 ev/s 541 Mb
+900C    7e-05s    93751555   0.00%    3.0e+11 s^-1  303578 ev/s 541 Mb
+900C    8e-05s    96527028   0.00%    2.8e+11 s^-1  185031 ev/s 541 Mb
+900C    9e-05s    99117665   0.00%    2.6e+11 s^-1  287848 ev/s 541 Mb
+900C 9.37e-05s   100000001   0.00%    2.4e+11 s^-1  220584 ev/s 541 Mb
+900C   0.0001s   101608113   0.00%    2.5e+11 s^-1  321622 ev/s 541 Mb
+900C  0.00011s   103994340   0.00%    2.4e+11 s^-1  238622 ev/s 541 Mb
+900C   0.0002s   121359525   0.00%    1.9e+11 s^-1  263108 ev/s 541 Mb
+900C   0.0003s   135847980   0.00%    1.4e+11 s^-1  273367 ev/s 541 Mb
+900C   0.0004s   147457172   0.00%    1.2e+11 s^-1  305505 ev/s 541 Mb
+900C   0.0005s   157264039   0.00%    9.8e+10 s^-1  350245 ev/s 541 Mb
+900C   0.0006s   165783823   0.00%    8.5e+10 s^-1  315547 ev/s 541 Mb
+900C   0.0007s   173369746   0.00%    7.6e+10 s^-1  329822 ev/s 541 Mb
+900C   0.0008s   180183081   0.00%    6.8e+10 s^-1  378518 ev/s 541 Mb
+900C   0.0009s   186461839   0.00%    6.3e+10 s^-1  348819 ev/s 541 Mb
+900C    0.001s   192271581   0.00%    5.8e+10 s^-1  414981 ev/s 541 Mb
+900C   0.0011s   197710139   0.00%    5.4e+10 s^-1  418350 ev/s 541 Mb
+900C  0.00114s   200000001   0.00%    5.3e+10 s^-1  327123 ev/s 541 Mb
+900C    0.002s   235978983   0.00%    4.2e+10 s^-1  428321 ev/s 541 Mb
+900C    0.003s   265988200   0.01%    3.0e+10 s^-1  491954 ev/s 541 Mb
+900C    0.004s   289095272   0.01%    2.3e+10 s^-1  471572 ev/s 541 Mb
+900C  0.00456s   300000001   0.01%    2.0e+10 s^-1  545236 ev/s 541 Mb
+900C    0.005s   307843843   0.01%    1.8e+10 s^-1  490240 ev/s 541 Mb
+900C    0.006s   323413212   0.01%    1.6e+10 s^-1  556048 ev/s 541 Mb
+900C    0.007s   336690032   0.01%    1.3e+10 s^-1  491734 ev/s 541 Mb
+900C    0.008s   348203041   0.01%    1.2e+10 s^-1  548238 ev/s 541 Mb
+900C    0.009s   358334103   0.01%    1.0e+10 s^-1  562836 ev/s 541 Mb
+900C     0.01s   367348046   0.02%    9.0e+09 s^-1  643853 ev/s 541 Mb
+900C    0.011s   375504393   0.02%    8.2e+09 s^-1  509771 ev/s 541 Mb
+900C   0.0146s   400000001   0.02%    6.7e+09 s^-1  662043 ev/s 541 Mb
+900C     0.02s   425958845   0.03%    4.8e+09 s^-1  786631 ev/s 541 Mb
+900C     0.03s   457958183   0.05%    3.2e+09 s^-1  864846 ev/s 541 Mb
+900C     0.04s   479115704   0.07%    2.1e+09 s^-1 1057876 ev/s 541 Mb
+900C     0.05s   495291634   0.08%    1.6e+09 s^-1  851364 ev/s 541 Mb
+900C   0.0534s   500000001   0.09%    1.4e+09 s^-1  941673 ev/s 541 Mb
+900C     0.06s   508281008   0.10%    1.3e+09 s^-1 1183001 ev/s 541 Mb
+900C     0.07s   518917827   0.12%    1.1e+09 s^-1 1181868 ev/s 541 Mb
+900C     0.08s   527761235   0.13%    8.8e+08 s^-1  982600 ev/s 541 Mb
+900C     0.09s   535360110   0.15%    7.6e+08 s^-1  759887 ev/s 541 Mb
+900C      0.1s   541732497   0.17%    6.4e+08 s^-1 1062064 ev/s 541 Mb
+900C     0.11s   547267537   0.18%    5.5e+08 s^-1 1383760 ev/s 541 Mb
+900C     0.74s   600000001   1.23%    8.4e+07 s^-1 1255534 ev/s 541 Mb
+900C     1.32s   600511815   2.20%    8.8e+05 s^-1 541 Mb
+900C     2.93s   600511826   4.89%    6.8e+00 s^-1 541 Mb
+900C     3.01s   600511830   5.01%    5.4e+01 s^-1 541 Mb
+900C     4.54s   600511839   7.56%    5.9e+00 s^-1 541 Mb
+900C      5.1s   600511849   8.50%    1.8e+01 s^-1 541 Mb
+900C      6.2s   600511856  10.33%    6.4e+00 s^-1 541 Mb
+900C        7s   609134074  11.67%    1.1e+07 s^-1 1724443 ev/s 541 Mb
+900C        8s   616727002  13.33%    7.6e+06 s^-1 1518585 ev/s 541 Mb
+900C     9.63s   622675516  16.05%    3.6e+06 s^-1  991419 ev/s 541 Mb
+900C     10.1s   622675520  16.76%    9.5e+00 s^-1 541 Mb
+900C     21.3s   642653455  35.43%    1.8e+06 s^-1 1426995 ev/s 541 Mb
+900C     31.2s   642653464  51.96%    9.1e-01 s^-1 541 Mb
+900C     49.1s   649621306  81.75%    3.9e+05 s^-1 1741960 ev/s 541 Mb
+0 -> Gas
+1 -> Silicon
+11111111111111111111111111111111111111111111111111 -                                                     -2:4.2
+11111111111111111111111111111111111111111111111111 -                                                     53.8:60
+----------------------------- Defect logfile --------------
+---------------------------------------   Silicon --------
+BICs/B2                           9297
+BICs/B2I                            18
+BICs/B2I2                            6
+BICs/B3                           4501
+BICs/B3I                             7
+BICs/B3I2                            2
+BICs/B4                            621
+BICs/B5                             20
+BICs/B6                             21
+BICs/B7                              3
+BICs/BI2                             1
+IVCluster/I2                         1
+MobileParticle/B                243977
+MobileParticle/BI                    1
+MobileParticle/V                     1
+----------------- Event Log --------------
+ ----------------------------------------Silicon         MobileParticle
+Type                 migrate   break 0   break 1    emit I    emit V     state  long hop  rejected
+V                  558958854                                                               1155102
+B                                                                  2
+BI                  18087280    390986                                                         225
+I                   71448387                                                                175286
+
+ ----------------------------------------Silicon                Cluster
+Type                   Mig      To    From     Rec Emissions  
+BICs/B2I3                                          1(BI) 
+BICs/B2I4                                          10669(I) 
+BICs/B2I5                                          45(I) 
+BICs/B2I6                                          7(BI) 57(I) 
+BICs/B2I7                                          17(BI) 1(I) 
+BICs/B2I8                                          6(BI) 
+BICs/B3I4                                          14294(I) 
+BICs/B3I5                                          11(I) 
+BICs/B3I6                                          29(I) 
+BICs/B3I7                                          21(I) 
+BICs/B4I3                                          273(BI) 
+BICs/B4I4                                          2836(BI) 
+BICs/B4I6                                          30(I) 
+BICs/B4I7                                          8(I) 
+BICs/B5I2                                          43(BI) 
+BICs/B5I3                                          216(BI) 
+BICs/B5I4                                          1(BI) 
+BICs/B5I7                                          15(I) 
+BICs/B5I8                                          4(I) 
+BICs/B6I2                                          1(I) 
+BICs/B6I3                                          85(I) 
+BICs/B6I7                                          31(I) 
+BICs/B7I2                                          1(BI) 
+BICs/B7I4                                          31(I) 
+BICs/BI3                                           56910(I) 
+BICs/BI4                                           33(I) 
+BICs/BI5                                           26(I) 
+BICs/BI6                                           11(I) 
+BICs/BI7                                           2(I) 
+BICs/BI9                                           1(I) 
+IVCluster/I3                                       48(I) 
+IVCluster/I4                                       7(I) 
+IVCluster/I5                                       6(I) 
+IVCluster/I6                                       4(I) 
+IVCluster/I7                                       4(I) 
+IVCluster/VI                               1.5e+05 
+IVCluster/VI2                              2.4e+03 
+IVCluster/VI3                              1.2e+02 
+IVCluster/VI4                                   29 
+IVCluster/VI5                                   13 
+IVCluster/VI6                                    6 
+IVCluster/VI7                                    1 
+IVCluster/VI8                                    1 
+IVCluster/VI9                                    1 
+IVCluster/V2                                       258402(V) 
+IVCluster/V2I                              2.4e+03 
+IVCluster/V2I2                                  25 
+IVCluster/V2I3                                   3 
+IVCluster/V3                                       8191(V) 
+IVCluster/V3I                                   35 
+IVCluster/V4                                       74(V) 
+IVCluster/V5                                       17(V) 
+IVCluster/V6                                       42(V) 
+IVCluster/V6I                                    2 
+IVCluster/V7                                       289(V) 
+
+----------------- Reaction Log --------------
+ ----------------------------------------Silicon         MobileParticle
+MobileParticle V+V              260712 V+BI              49833 V+I              146320
+MobileParticle B+I              475899
+MobileParticle BI+V                177 BI+I              35117
+MobileParticle I+V                6249 I+BI               4793
+
+ ----------------------------------------Silicon                Cluster
+Cluster    BICs+V            73896 BICs+BI           23808 BICs+I            81440
+Cluster    IVCluster+V        8918 IVCluster+I        5005
+
+----------------------------------------------------------------- extract -----
+extract profile defect='*' name='B'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='1.258925411794179e+19' error='0.2' init='20' end='45' tag='allBclustered'
+-------------------------------------------------------------------------------
+
+allBclustered 20.5 1.22333e+19 -> (1.25893e+19 2.82744% )
+allBclustered 21.5 1.34444e+19 -> (1.25893e+19 6.79267% )
+allBclustered 22.5 1.28444e+19 -> (1.25893e+19 2.0267% )
+allBclustered 23.5 1.34e+19 -> (1.25893e+19 6.43998% )
+allBclustered 24.5 1.27111e+19 -> (1.25893e+19 0.967855% )
+allBclustered 25.5 1.26444e+19 -> (1.25893e+19 0.43804% )
+allBclustered 26.5 1.30444e+19 -> (1.25893e+19 3.61535% )
+allBclustered 27.5 1.29e+19 -> (1.25893e+19 2.46834% )
+allBclustered 28.5 1.29222e+19 -> (1.25893e+19 2.64468% )
+allBclustered 29.5 1.36556e+19 -> (1.25893e+19 8.47029% )
+allBclustered 30.5 1.29444e+19 -> (1.25893e+19 2.82102% )
+allBclustered 31.5 1.36111e+19 -> (1.25893e+19 8.11681% )
+allBclustered 32.5 1.38111e+19 -> (1.25893e+19 9.70546% )
+allBclustered 33.5 1.32556e+19 -> (1.25893e+19 5.29297% )
+allBclustered 34.5 1.18e+19 -> (1.25893e+19 6.26927% )
+allBclustered 35.5 1.31556e+19 -> (1.25893e+19 4.49864% )
+allBclustered 36.5 1.28e+19 -> (1.25893e+19 1.67401% )
+allBclustered 37.5 1.33889e+19 -> (1.25893e+19 6.35182% )
+allBclustered 38.5 1.30667e+19 -> (1.25893e+19 3.79248% )
+allBclustered 39.5 1.33556e+19 -> (1.25893e+19 6.0873% )
+allBclustered 40.5 1.28e+19 -> (1.25893e+19 1.67401% )
+allBclustered 41.5 1.36111e+19 -> (1.25893e+19 8.11681% )
+allBclustered 42.5 1.30556e+19 -> (1.25893e+19 3.70432% )
+allBclustered 43.5 1.32e+19 -> (1.25893e+19 4.85133% )
+allBclustered 44.5 1.21556e+19 -> (1.25893e+19 3.44464% )
+---------------------------- Warning -----------------------------------
+allBclustered: Requested error is  < 20%  maximum error is 9.70546%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile defect='BICs' material='Silicon' name='B*'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='1.258925411794179e+19' error='0.2' init='20' end='45' tag='allBinBICs'
+-------------------------------------------------------------------------------
+
+allBinBICs 20.5 1.22333e+19 -> (1.25893e+19 2.82744% )
+allBinBICs 21.5 1.34444e+19 -> (1.25893e+19 6.79267% )
+allBinBICs 22.5 1.28444e+19 -> (1.25893e+19 2.0267% )
+allBinBICs 23.5 1.34e+19 -> (1.25893e+19 6.43998% )
+allBinBICs 24.5 1.27111e+19 -> (1.25893e+19 0.967855% )
+allBinBICs 25.5 1.26444e+19 -> (1.25893e+19 0.43804% )
+allBinBICs 26.5 1.30444e+19 -> (1.25893e+19 3.61535% )
+allBinBICs 27.5 1.29e+19 -> (1.25893e+19 2.46834% )
+allBinBICs 28.5 1.29222e+19 -> (1.25893e+19 2.64468% )
+allBinBICs 29.5 1.36556e+19 -> (1.25893e+19 8.47029% )
+allBinBICs 30.5 1.29444e+19 -> (1.25893e+19 2.82102% )
+allBinBICs 31.5 1.36111e+19 -> (1.25893e+19 8.11681% )
+allBinBICs 32.5 1.38111e+19 -> (1.25893e+19 9.70546% )
+allBinBICs 33.5 1.32556e+19 -> (1.25893e+19 5.29297% )
+allBinBICs 34.5 1.18e+19 -> (1.25893e+19 6.26927% )
+allBinBICs 35.5 1.31556e+19 -> (1.25893e+19 4.49864% )
+allBinBICs 36.5 1.28e+19 -> (1.25893e+19 1.67401% )
+allBinBICs 37.5 1.33889e+19 -> (1.25893e+19 6.35182% )
+allBinBICs 38.5 1.30667e+19 -> (1.25893e+19 3.79248% )
+allBinBICs 39.5 1.33556e+19 -> (1.25893e+19 6.0873% )
+allBinBICs 40.5 1.28e+19 -> (1.25893e+19 1.67401% )
+allBinBICs 41.5 1.36111e+19 -> (1.25893e+19 8.11681% )
+allBinBICs 42.5 1.30556e+19 -> (1.25893e+19 3.70432% )
+allBinBICs 43.5 1.32e+19 -> (1.25893e+19 4.85133% )
+allBinBICs 44.5 1.21556e+19 -> (1.25893e+19 3.44464% )
+---------------------------- Warning -----------------------------------
+allBinBICs: Requested error is  < 20%  maximum error is 9.70546%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile defect='BICs' material='Silicon'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='5.623413251903523e+18' error='0.2' init='20' end='45' tag='allBICpieces'
+-------------------------------------------------------------------------------
+
+allBICpieces 20.5 5.33333e+18 -> (5.62341e+18 5.15849% )
+allBICpieces 21.5 5.4e+18 -> (5.62341e+18 3.97291% )
+allBICpieces 22.5 5.64444e+18 -> (5.62341e+18 0.37392% )
+allBICpieces 23.5 5.26667e+18 -> (5.62341e+18 6.34389% )
+allBICpieces 24.5 5.07778e+18 -> (5.62341e+18 9.70288% )
+allBICpieces 25.5 5.33333e+18 -> (5.62341e+18 5.15849% )
+allBICpieces 26.5 5.45556e+18 -> (5.62341e+18 2.9849% )
+allBICpieces 27.5 5.32222e+18 -> (5.62341e+18 5.35605% )
+allBICpieces 28.5 6.02222e+18 -> (5.62341e+18 7.0919% )
+allBICpieces 29.5 4.97778e+18 -> (5.62341e+18 11.4812% )
+allBICpieces 30.5 5.27778e+18 -> (5.62341e+18 6.14632% )
+allBICpieces 31.5 5.56667e+18 -> (5.62341e+18 1.00905% )
+allBICpieces 32.5 5.78889e+18 -> (5.62341e+18 2.94264% )
+allBICpieces 33.5 5.47778e+18 -> (5.62341e+18 2.58976% )
+allBICpieces 34.5 5.1e+18 -> (5.62341e+18 9.30775% )
+allBICpieces 35.5 5.3e+18 -> (5.62341e+18 5.75119% )
+allBICpieces 36.5 5.22222e+18 -> (5.62341e+18 7.13433% )
+allBICpieces 37.5 5.41111e+18 -> (5.62341e+18 3.77534% )
+allBICpieces 38.5 5.31111e+18 -> (5.62341e+18 5.55362% )
+allBICpieces 39.5 5.51111e+18 -> (5.62341e+18 1.99706% )
+allBICpieces 40.5 5.36667e+18 -> (5.62341e+18 4.56561% )
+allBICpieces 41.5 5.72222e+18 -> (5.62341e+18 1.75707% )
+allBICpieces 42.5 5.3e+18 -> (5.62341e+18 5.75119% )
+allBICpieces 43.5 5.55556e+18 -> (5.62341e+18 1.20662% )
+allBICpieces 44.5 4.98889e+18 -> (5.62341e+18 11.2836% )
+---------------------------- Warning -----------------------------------
+allBICpieces: Requested error is  < 20%  maximum error is 11.4812%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile defect='BICs' material='Silicon' name='B3'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='1.7782794100389286e+18' error='0.25' init='20' end='45' tag='B3piecesInBIC'
+-------------------------------------------------------------------------------
+
+B3piecesInBIC 20.5 1.53333e+18 -> (1.77828e+18 13.7745% )
+B3piecesInBIC 21.5 1.55556e+18 -> (1.77828e+18 12.5244% )
+B3piecesInBIC 22.5 1.83333e+18 -> (1.77828e+18 3.09572% )
+B3piecesInBIC 23.5 1.77778e+18 -> (1.77828e+18 0.0280863% )
+B3piecesInBIC 24.5 1.6e+18 -> (1.77828e+18 10.0254% )
+B3piecesInBIC 25.5 1.66667e+18 -> (1.77828e+18 6.27626% )
+B3piecesInBIC 26.5 1.67778e+18 -> (1.77828e+18 5.6515% )
+B3piecesInBIC 27.5 1.68889e+18 -> (1.77828e+18 5.02674% )
+B3piecesInBIC 28.5 1.97778e+18 -> (1.77828e+18 11.2187% )
+B3piecesInBIC 29.5 1.55556e+18 -> (1.77828e+18 12.5244% )
+B3piecesInBIC 30.5 1.44444e+18 -> (1.77828e+18 18.7732% )
+B3piecesInBIC 31.5 1.67778e+18 -> (1.77828e+18 5.6515% )
+B3piecesInBIC 32.5 1.93333e+18 -> (1.77828e+18 8.71913% )
+B3piecesInBIC 33.5 1.72222e+18 -> (1.77828e+18 3.15245% )
+B3piecesInBIC 34.5 1.61111e+18 -> (1.77828e+18 9.40063% )
+B3piecesInBIC 35.5 1.55556e+18 -> (1.77828e+18 12.5244% )
+B3piecesInBIC 36.5 1.63333e+18 -> (1.77828e+18 8.15111% )
+B3piecesInBIC 37.5 2e+18 -> (1.77828e+18 12.4683% )
+B3piecesInBIC 38.5 1.85556e+18 -> (1.77828e+18 4.3458% )
+B3piecesInBIC 39.5 1.78889e+18 -> (1.77828e+18 0.596676% )
+B3piecesInBIC 40.5 1.53333e+18 -> (1.77828e+18 13.7745% )
+B3piecesInBIC 41.5 1.87778e+18 -> (1.77828e+18 5.59533% )
+B3piecesInBIC 42.5 1.81111e+18 -> (1.77828e+18 1.8462% )
+B3piecesInBIC 43.5 1.67778e+18 -> (1.77828e+18 5.6515% )
+B3piecesInBIC 44.5 1.52222e+18 -> (1.77828e+18 14.3993% )
+---------------------------- Warning -----------------------------------
+B3piecesInBIC: Requested error is  < 25%  maximum error is 18.7732%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='B'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='1.0000000000000079e+20' error='0.2' init='20' end='45' tag='allBvanilla'
+-------------------------------------------------------------------------------
+
+allBvanilla 20.5 9.68667e+19 -> (1e+20 3.1333% )
+allBvanilla 21.5 9.91667e+19 -> (1e+20 0.833298% )
+allBvanilla 22.5 9.87556e+19 -> (1e+20 1.2444% )
+allBvanilla 23.5 1.018e+20 -> (1e+20 1.8% )
+allBvanilla 24.5 1.01111e+20 -> (1e+20 1.111% )
+allBvanilla 25.5 9.96667e+19 -> (1e+20 0.333302% )
+allBvanilla 26.5 9.86111e+19 -> (1e+20 1.3889% )
+allBvanilla 27.5 9.97667e+19 -> (1e+20 0.233299% )
+allBvanilla 28.5 9.93333e+19 -> (1e+20 0.6667% )
+allBvanilla 29.5 1.00533e+20 -> (1e+20 0.532999% )
+allBvanilla 30.5 9.91778e+19 -> (1e+20 0.822206% )
+allBvanilla 31.5 1.00733e+20 -> (1e+20 0.732996% )
+allBvanilla 32.5 1.01467e+20 -> (1e+20 1.46699% )
+allBvanilla 33.5 1.004e+20 -> (1e+20 0.400002% )
+allBvanilla 34.5 9.88667e+19 -> (1e+20 1.13331% )
+allBvanilla 35.5 1.01478e+20 -> (1e+20 1.478% )
+allBvanilla 36.5 1.005e+20 -> (1e+20 0.499996% )
+allBvanilla 37.5 9.94111e+19 -> (1e+20 0.588898% )
+allBvanilla 38.5 9.97333e+19 -> (1e+20 0.266706% )
+allBvanilla 39.5 1.00644e+20 -> (1e+20 0.643997% )
+allBvanilla 40.5 9.91222e+19 -> (1e+20 0.877806% )
+allBvanilla 41.5 1.00522e+20 -> (1e+20 0.521995% )
+allBvanilla 42.5 9.92444e+19 -> (1e+20 0.755602% )
+allBvanilla 43.5 9.79778e+19 -> (1e+20 2.0222% )
+allBvanilla 44.5 9.51111e+19 -> (1e+20 4.8889% )
+---------------------------- Warning -----------------------------------
+allBvanilla: Requested error is  < 20%  maximum error is 4.8889%
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract profile name='B*'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test array='-1. (...)' value='8.912509381337466e+19' error='0.2' init='20' end='45' tag='allBactive'
+-------------------------------------------------------------------------------
+
+allBactive 20.5 8.46333e+19 -> (8.91251e+19 5.03988% )
+allBactive 21.5 8.57222e+19 -> (8.91251e+19 3.81811% )
+allBactive 22.5 8.59111e+19 -> (8.91251e+19 3.60616% )
+allBactive 23.5 8.84e+19 -> (8.91251e+19 0.813572% )
+allBactive 24.5 8.84e+19 -> (8.91251e+19 0.813572% )
+allBactive 25.5 8.70222e+19 -> (8.91251e+19 2.35948% )
+allBactive 26.5 8.55667e+19 -> (8.91251e+19 3.99258% )
+allBactive 27.5 8.68778e+19 -> (8.91251e+19 2.52151% )
+allBactive 28.5 8.64111e+19 -> (8.91251e+19 3.04515% )
+allBactive 29.5 8.68778e+19 -> (8.91251e+19 2.52151% )
+allBactive 30.5 8.62333e+19 -> (8.91251e+19 3.24465% )
+allBactive 31.5 8.71222e+19 -> (8.91251e+19 2.24729% )
+allBactive 32.5 8.76556e+19 -> (8.91251e+19 1.6488% )
+allBactive 33.5 8.71444e+19 -> (8.91251e+19 2.22238% )
+allBactive 34.5 8.70667e+19 -> (8.91251e+19 2.30955% )
+allBactive 35.5 8.83222e+19 -> (8.91251e+19 0.900857% )
+allBactive 36.5 8.77e+19 -> (8.91251e+19 1.59898% )
+allBactive 37.5 8.60222e+19 -> (8.91251e+19 3.4815% )
+allBactive 38.5 8.66667e+19 -> (8.91251e+19 2.75836% )
+allBactive 39.5 8.72889e+19 -> (8.91251e+19 2.06024% )
+allBactive 40.5 8.63222e+19 -> (8.91251e+19 3.1449% )
+allBactive 41.5 8.69111e+19 -> (8.91251e+19 2.48414% )
+allBactive 42.5 8.61889e+19 -> (8.91251e+19 3.29447% )
+allBactive 43.5 8.47778e+19 -> (8.91251e+19 4.87774% )
+allBactive 44.5 8.29556e+19 -> (8.91251e+19 6.92228% )
+---------------------------- Warning -----------------------------------
+allBactive: Requested error is  < 20%  maximum error is 6.92228%
+Test PASSED... continuing
+Time spent: 1346s. Annealing: 1336s.
+         1 times: Alloy material is given but selfdiffusion is set to false
+         1 times: B3piecesInBIC: Requested error is  < 25%  maximum error is 18.7732%
+    558079 times: It is inconsistent to define amorphous.threshold for Silicon but not to define AmorphousSilicon. Ignoring amorphization.
+         1 times: Silicon/Models/interactions Interaction not used: BI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: CI+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: I+SiO2
+         1 times: Silicon/Models/interactions Interaction not used: V+SiO2
+        61 times: Snapshot not defined or error.
+         1 times: allBICpieces: Requested error is  < 20%  maximum error is 11.4812%
+         1 times: allBactive: Requested error is  < 20%  maximum error is 6.92228%
+         1 times: allBclustered: Requested error is  < 20%  maximum error is 9.70546%
+         1 times: allBinBICs: Requested error is  < 20%  maximum error is 9.70546%
+         1 times: allBvanilla: Requested error is  < 20%  maximum error is 4.8889%
+There are 15 total sentences. Collect them all!
+No por mucho simular...
+                    ... amanece más temprano
