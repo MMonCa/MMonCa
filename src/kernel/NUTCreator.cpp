@@ -20,6 +20,7 @@
 #include "Domain.h"
 #include "lkmc/Lattice.h"
 #include "MeshParam.h"
+#include <limits>
 #include <cmath>
 
 using std::string;
@@ -42,8 +43,8 @@ NUTCreator::NUTCreator(const Domain *p, Coordinates &m, Coordinates &M,
         else {
             for(int i=0; i<3; ++i)
             {
-                _delta[i] = p->_pMePar->_spacing[i];
-                int nBoxes = int(std::floor((M[i] - m[i])/_delta[i] + .5));
+                float delta = p->_pMePar->_spacing[i];
+                int nBoxes = int(std::floor((M[i] - m[i])/delta + .5));
                 if(nBoxes < 2)
                     ERRORMSG("Less than 2 boxes in dimension " << i);
                 double inc = (M[i] - m[i])/double(nBoxes);
@@ -63,6 +64,16 @@ NUTCreator::NUTCreator(const Domain *p, Coordinates &m, Coordinates &M,
 
 NUTCreator::~NUTCreator()
 {
+}
+    
+float NUTCreator::getMinLine() const {
+    float result = std::numeric_limits<float>::max();
+    for(auto const& line : _lines) {
+        for(uint32_t i = 1u; i < line.size(); ++i) {
+	        result = std::min(result, line[i] - line[i - 1u]);
+        }
+    }
+    return result;
 }
 
 }

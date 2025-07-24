@@ -22,6 +22,7 @@
 #include "Material.h"
 #include "RNG.h"
 #include "UpdateManager.h"
+#include "Mesh.h"
 
 #include <string>
 #include <vector>
@@ -64,7 +65,6 @@ struct Tcl_Interp;
 
 namespace Kernel
 {
-class Mesh;
 class RateManager;
 class MeshParam;
 class StateManager;
@@ -76,6 +76,13 @@ public:
            std::vector<float> const * const aLinesX = nullptr, std::vector<float> const * const aLinesY = nullptr, std::vector<float> const * const aLinesZ = nullptr);
     void init(bool bFromStream); //is the simulation recreated from a stream?
     ~Domain();
+	
+	float getVtkCellDecrement() const { return _vtkCellDecrement; }
+	void gatherVtkMaterialData(float const aGlobalVtkCellDecrement, VtkMaterialData &aData) const { _pMesh->gatherVtkMaterialData(aGlobalVtkCellDecrement, aData); }
+	std::vector<float> const& getLinesX() const { return _linesX; }
+	std::vector<float> const& getLinesY() const { return _linesY; }
+	std::vector<float> const& getLinesZ() const { return _linesZ; }
+	M_TYPE getMaterial(Coordinates const& aWhere) const { return _pMesh->getMaterial(aWhere); }
     
     const LKMC::LatticeParam         *_pLaPar[MAX_MATERIALS];
     	  LKMC::EpiGasParam          *_pEGPar[MAX_MATERIALS];
@@ -87,6 +94,11 @@ public:
     const OKMC::ClusterParam    	 *_pClPar;
     const OKMC::ClusterReactionParam *_pClRePar;
 
+	static constexpr double _CSvtkMinCellFrameFactor = 0.05;
+	double                  _vtkCellDecrement;    // Used to decrement MeshElement sizes in each direction during VTK export.
+	std::vector<float>      _linesX;
+	std::vector<float>      _linesY;
+	std::vector<float>      _linesZ;
 	Mesh           *_pMesh;
 	RateManager    *_pRM;
 

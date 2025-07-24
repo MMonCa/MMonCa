@@ -40,6 +40,7 @@ namespace Kernel
 class Mesh;
 class Domain;
 class SubDomain;
+using VtkMaterialData = std::map<Coordinates, M_TYPE, VtkOrderLess<Coordinates::type>>;
 
 class MeshElement
 {
@@ -137,6 +138,8 @@ public:
 
     void restart(std::ostream &) const;
     void restart(std::istream &);
+
+    void gatherVtkMaterialData(float const aVtkCellDecrement, VtkMaterialData &aData) const;
 
     int _ABalance; // This is the balance between A atoms emitted/absorbed
     int _BBalance; // This is the balance between B atoms emitted/absorbed
