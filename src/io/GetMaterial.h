@@ -25,6 +25,7 @@
 
 #include "kernel/Coordinates.h"
 #include "kernel/Material.h"
+#include <cstdint>
 #include <vector>
 #include <tcl.h>
 
@@ -34,6 +35,9 @@ class GetMaterial {
 public:
 	GetMaterial(Tcl_Interp *p, const std::string &procName) : _pTcl(p), _procName(procName) {}
 	GetMaterial(std::istream &is);
+	
+	void fill(uint32_t const aDomain, uint32_t const aLinesXsize, uint32_t const aLinesYsize, uint32_t const aLinesZsize,
+        uint32_t const aLinesZindexMin, uint32_t const aLinesZindexMax, std::vector<Kernel::M_TYPE> const * const aMaterials);
 
 	Kernel::M_TYPE operator()(const Kernel::Coordinates &c, unsigned idx) const;
 	static void restart(std::ostream &);

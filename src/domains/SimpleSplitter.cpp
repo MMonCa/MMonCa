@@ -23,13 +23,13 @@
 #include "SimpleSplitter.h"
 #include "Global.h"
 #include "io/FileParameters.h"
+#include <limits>
 
 namespace Domains {
 
 SimpleSplitter::SimpleSplitter(
-		const Kernel::Coordinates &mm, const Kernel::Coordinates &MM,  //global simulation size
-		const IO::GetMaterial *gm  //pointer to getMaterial function
-		) : Splitter(mm, MM, gm)
+		const Kernel::Coordinates &mm, const Kernel::Coordinates &MM)  //global simulation size
+		 : Splitter(mm, MM)
 {
 	_nDomains = global()->getFileParameters()->getInt("MC/General/domains");
 	unsigned subDomains = global()->getFileParameters()->getInt("MC/General/subdomains");
@@ -138,6 +138,16 @@ void SimpleSplitter::splitDomain(unsigned nDomain, Kernel::Coordinates &m, Kerne
 	M._z = _minCell._z + (nDomain+1)*_zSlide;
 }
 
+std::vector<float> SimpleSplitter::getLinesZpart(float const aZmin, float const aZmax, std::vector<float> const * const aLinesZ) {
+	uint32_t indexMin = getClosestIndex(aZmin, aLinesZ);	
+	uint32_t indexMax = getClosestIndex(aZmax, aLinesZ);
+	std::vector<float> result;
+	for(uint32_t i = indexMin; i <= indexMax; ++i) {
+		result.push_back(aLinesZ->at(i));
+	}
+	return result;
+}
+
 unsigned SimpleSplitter::getDomain(const Kernel::Coordinates &c) const
 {
 	double f = (double(c._z) - double(_minCell._z)) / double(_zSlide);
@@ -184,6 +194,19 @@ unsigned SimpleSplitter::getLevel(const Kernel::Coordinates &m, const Kernel::Co
 	if(_levels == 3)
 		return z;
 	return y*3+z;
+}
+
+uint32_t SimpleSplitter::getClosestIndex(float const aWhere, std::vector<float> const * const aLines) {
+	uint32_t result = 0u;
+	float min = std::numeric_limits<float>::max();
+	for(uint32_t i = 0u; i < aLines->size(); ++i) { 
+		auto const diff = std::abs(aWhere - aLines->at(i));
+		if(diff < min) {
+			min = diff;
+			result = i;
+		}
+	}
+	return result;
 }
 
 } /* namespace Domains */
