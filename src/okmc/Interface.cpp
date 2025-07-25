@@ -163,11 +163,11 @@ void Interface::emit(Kernel::SubDomain *pSub, unsigned ev)
 				_coords_min._y + (_coords_max._y - _coords_min._y)*pSub->_rng.rand(),
 				_coords_min._z + (_coords_max._z - _coords_min._z)*pSub->_rng.rand());
 
-		if(coordi._x >= _coords_max._x)
+		if(coordi._x >= _coords_max._x && _axis != 0u)
 			coordi._x = _coords_max._x - 1e-3;
-		if(coordi._y >= _coords_max._y)
+		if(coordi._y >= _coords_max._y && _axis != 1u)
 			coordi._y = _coords_max._y - 1e-3;
-		if(coordi._z >= _coords_max._z)
+		if(coordi._z >= _coords_max._z && _axis != 2u)
 			coordi._z = _coords_max._z - 1e-3;
 	}
 	else
