@@ -104,6 +104,19 @@ int ExtractCmd::operator()()
 		}
 		Domains::global()->getFileParameters()->dump(ss, filename);
 	}
+	else if(specified("material.map"))
+	{
+		std::string filename = getString("filename");
+		Domains::global()->exportMaterialMap(filename);
+	}
+	else if(specified("material.location"))
+	{
+		Kernel::Coordinates where;
+		where._x = getFloat("x");
+		where._y = getFloat("y");
+		where._z = getFloat("z");
+		ss << Domains::global()->getMaterial(where);
+	}
 	else if(specified("diffusivity"))
 	{
 		std::string name = getString("name");

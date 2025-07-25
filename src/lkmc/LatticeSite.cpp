@@ -21,6 +21,7 @@
  */
 
 #include "LatticeSite.h"
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "domains/Global.h"
 

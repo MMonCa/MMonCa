@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
+#include "Domain.h"
 #include "Mesh.h"
 #include "lkmc/LatticeSite.h"
 #include "lkmc/LatticeAtom.h"
 #include "domains/MCClient.h"
 #include "io/Diagnostic.h"
 #include "io/ParameterManager.h"
-#include "Domain.h"
 #include "SubDomain.h"
 #include "MeshParam.h"
 #include "RateManager.h"
@@ -1513,6 +1513,15 @@ void Mesh::changeMaterial(Kernel::SubDomain *pSub, unsigned idx, M_TYPE to)
 	MEDMSG(fromProp._name << "->" << toProp._name);
 }
 
+M_TYPE Mesh::getMaterial(Coordinates const& aWhere) const {
+	if(!isInDomain(aWhere)) {
+		return MAX_MATERIALS;
+	}
+	else {
+		return _elements[getIndexFromCoordinates(aWhere)]._mat;
+	}
+}
+
 //transfers the particle between materials when the material changes.
 void Mesh::transfer(SubDomain *pSub, vector<OKMC::Particle *> &partSet, MeshElement *pME, M_TYPE from, M_TYPE to)
 {
@@ -1690,4 +1699,10 @@ void Mesh::jumpBorA(MeshElement * from, MeshElement * to, double p)
         from->decAAtoms();
         to->incAAtoms();
     }
+}
+
+void Mesh::gatherVtkMaterialData(float const aVtkCellDecrement, VtkMaterialData &aData) const {
+	for(auto const& item : _elements) {
+        item.gatherVtkMaterialData(aVtkCellDecrement, aData);
+	}
 }

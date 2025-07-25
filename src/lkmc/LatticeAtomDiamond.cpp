@@ -22,6 +22,7 @@
 
 #include "LatticeAtomDiamond.h"
 
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "kernel/RateManager.h"
 #include "kernel/SubDomain.h"

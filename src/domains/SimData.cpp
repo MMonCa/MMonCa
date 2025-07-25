@@ -21,8 +21,8 @@
 
 #include "SimData.h"
 #include "MCClient.h"
-#include "kernel/Mesh.h"
 #include "kernel/Domain.h"
+#include "kernel/Mesh.h"
 #include "kernel/RateManager.h"
 #include "kernel/Constants.h"
 #include "lkmc/LatticeParam.h"

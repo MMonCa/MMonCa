@@ -21,6 +21,7 @@
 
 #include "Coordinates.h"
 #include <vector>
+#include <array>
 
 namespace Kernel
 {
@@ -33,9 +34,9 @@ public:
                std::vector<float> const * const aLinesX, std::vector<float> const * const aLinesY, std::vector<float> const * const aLinesZ);
     ~NUTCreator();
     const std::vector<float> & getLines(int dim) const  { return _lines[dim];  }
+    float getMinLine() const;
 private:
-    float _delta[3];
-    std::vector<float> _lines[3];
+    std::array<std::vector<float>, 3u> _lines;
 };
 }
 
