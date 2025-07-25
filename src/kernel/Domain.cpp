@@ -55,7 +55,7 @@ Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Coordinates &m, const Coord
 	_pRM = new RateManager(this);
 
 	float const minLineStep = nut.getMinLine();
-	for(uint32_t i = 0u; i < Kernel::MAX_MATERIALS; ++i) {
+	for(uint32_t i = 0u; i < Domains::global()->PM()->getNMaterials(); ++i) {
 		if(minLineStep <= _pMePar->_lambda[i]) {
 			ERRORMSG("The minimal lines separation " << minLineStep << " <= " << _pMePar->_lambda[i] << " (the lambda value of material " << i << ')');
 		}
