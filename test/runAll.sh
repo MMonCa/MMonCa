@@ -9,6 +9,7 @@ echo "Running for configuration $version"
 current=`pwd`
 export MCPATH=$current/../config
 echo "using $MCPATH"
+rm -f tests.started
 for name in `find .`
 do
 	if [ -d $name -a -f $name/test.mc ]; then
