@@ -189,9 +189,9 @@ void Interface::emit(Kernel::SubDomain *pSub, unsigned ev)
 	}
 
 	if(side)
-		coordi[_axis] -= l * pSub->_rng.rand() + 0.001;
+		coordi[_axis] -= l * pSub->_rng.rand() + Kernel::Domain::_csInterfaceEmissionOffset;
 	else
-		coordi[_axis] += l * pSub->_rng.rand() + 0.001;
+		coordi[_axis] += l * pSub->_rng.rand() + Kernel::Domain::_csInterfaceEmissionOffset;
 	if(selfDefect)
 		origin = coordi;
 	MobileParticle *mp = new MobileParticle(pSub, particle, 0, _pDomain, coordi, origin); //self inserts

@@ -56,8 +56,8 @@ Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Coordinates &m, const Coord
 
 	float const minLineStep = nut.getMinLine();
 	for(uint32_t i = 0u; i < Domains::global()->PM()->getNMaterials(); ++i) {
-		if(minLineStep <= _pMePar->_lambda[i]) {
-			ERRORMSG("The minimal lines separation " << minLineStep << " <= " << _pMePar->_lambda[i] << " (the lambda value of material " << i << ')');
+		if(minLineStep <= _pMePar->_lambda[i] + _csInterfaceEmissionOffset) {
+			ERRORMSG("The minimal lines separation " << minLineStep << " <= " << _pMePar->_lambda[i] << " (the lambda value of material " << i << ") + " << _csInterfaceEmissionOffset);
 		}
 	}
 	_pMesh = new Mesh(this, mm, MM,
