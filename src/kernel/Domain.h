@@ -72,6 +72,7 @@ class StateManager;
 class Domain
 {
 public:
+	static constexpr double _csInterfaceEmissionOffset = 0.001;
     Domain(unsigned num, Tcl_Interp *, const Coordinates &m, const Coordinates &M,
            std::vector<float> const * const aLinesX = nullptr, std::vector<float> const * const aLinesY = nullptr, std::vector<float> const * const aLinesZ = nullptr);
     void init(bool bFromStream); //is the simulation recreated from a stream?
