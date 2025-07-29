@@ -163,11 +163,11 @@ void Interface::emit(Kernel::SubDomain *pSub, unsigned ev)
 				_coords_min._y + (_coords_max._y - _coords_min._y)*pSub->_rng.rand(),
 				_coords_min._z + (_coords_max._z - _coords_min._z)*pSub->_rng.rand());
 
-		if(coordi._x >= _coords_max._x && _axis != 0u)
+		if(coordi._x >= _coords_max._x)
 			coordi._x = _coords_max._x - 1e-3;
-		if(coordi._y >= _coords_max._y && _axis != 1u)
+		if(coordi._y >= _coords_max._y)
 			coordi._y = _coords_max._y - 1e-3;
-		if(coordi._z >= _coords_max._z && _axis != 2u)
+		if(coordi._z >= _coords_max._z)
 			coordi._z = _coords_max._z - 1e-3;
 	}
 	else
@@ -189,9 +189,9 @@ void Interface::emit(Kernel::SubDomain *pSub, unsigned ev)
 	}
 
 	if(side)
-		coordi[_axis] -= l * pSub->_rng.rand() + Kernel::Domain::_csInterfaceEmissionOffset;
+		coordi[_axis] -= l * pSub->_rng.rand() + 0.001;
 	else
-		coordi[_axis] += l * pSub->_rng.rand() + Kernel::Domain::_csInterfaceEmissionOffset;
+		coordi[_axis] += l * pSub->_rng.rand() + 0.001;
 	if(selfDefect)
 		origin = coordi;
 	MobileParticle *mp = new MobileParticle(pSub, particle, 0, _pDomain, coordi, origin); //self inserts

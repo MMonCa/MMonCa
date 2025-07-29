@@ -46,7 +46,7 @@ set EfB   [lindex [param get type=arrhenius key=Silicon/Boron/B(formation)] 1]
 
 set Icon [expr $PfI * exp (- $EfI / ($kB * ($T + 273.15)))]
 
-init linesx={-2 0 0.6 1.2 1.8 2.4 3.0 3.6 4.2 4.8 5.4 6} linesy={0 0.6 1.2 1.8 2.4 3.0 3.6 4.2 4.8 5.4 6} linesz={0 0.8 1.5 2.1 2.7 3.3 3.9 4.5 5.22 6} material=material
+init linesx={-2 -1.5 -1 -0.5 0 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3.0 3.3 3.6 3.9 4.2 4.5 4.8 5.1 5.4 5.7 6} linesy={0 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3.0 3.3 3.6 3.9 4.2 4.5 4.8 5.1 5.4 5.7 6} linesz={0 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3.0 3.3 3.6 3.9 4.2 4.5 4.8 5.1 5.4 5.7 6} material=material
 
 profile proc=spike name=B
 
@@ -60,7 +60,7 @@ test tag=Icon.noSat array="[extract profile.mobile name=I material=Silicon]"  va
 
 param set type=map<string,float> key=Gas_Silicon/Silicon/supersaturation.right index=I value=10
 
-init linesx={-2 0 0.6 1.2 1.8 2.4 3.0 3.6 4.2 4.8 5.4 6} linesy={0 0.6 1.2 1.8 2.4 3.0 3.6 4.2 4.8 5.4 6} linesz={0 0.8 1.5 2.1 2.7 3.3 3.9 4.5 5.22 6} material=material
+init linesx={-2 -1.5 -1 -0.5 0 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3.0 3.3 3.6 3.9 4.2 4.5 4.8 5.1 5.4 5.7 6} linesy={0 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3.0 3.3 3.6 3.9 4.2 4.5 4.8 5.1 5.4 5.7 6} linesz={0 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3.0 3.3 3.6 3.9 4.2 4.5 4.8 5.1 5.4 5.7 6} material=material
 
 profile proc=spike name=B
 

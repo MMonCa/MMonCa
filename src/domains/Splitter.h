@@ -23,7 +23,6 @@
 #define SPLITTER_H_
 
 #include "kernel/Coordinates.h"
-#include <vector>
 
 namespace IO { class GetMaterial; }
 
@@ -38,7 +37,6 @@ public:
 	virtual unsigned getSubDomains(unsigned nDom) const = 0;
 	        unsigned getLevels()     const { return _levels; }
 	virtual void splitDomain(unsigned nDomain, Kernel::Coordinates &m, Kernel::Coordinates &M) const = 0; //given a domain number, returns the block it occupies
-	virtual std::vector<float> getLinesZpart(float const aZmin, float const aZmax, std::vector<float> const * const aLinesZ) = 0;
 	virtual unsigned getDomain(const Kernel::Coordinates &) const = 0; //given a global coordinate, returns the domain.
 	virtual unsigned getSubDomain(const Kernel::Coordinates &m, const Kernel::Coordinates &M) const = 0;
 	virtual unsigned getLevel(const Kernel::Coordinates &m, const Kernel::Coordinates &M) const = 0;

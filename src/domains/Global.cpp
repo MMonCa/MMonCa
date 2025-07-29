@@ -196,7 +196,7 @@ void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::
 				{
 					Kernel::Coordinates cornerMin, cornerMax;
 					_pSplitter->splitDomain(i, cornerMin, cornerMax);
-					std::vector<float> zPart = _pSplitter->getLinesZpart(cornerMin._z, cornerMax._z, aLinesZ);
+					std::vector<float> zPart = SimpleSplitter::getLinesZpart(cornerMin._z, cornerMax._z, aLinesZ);
 					if(zPart.size() < 2u) {
                 		ERRORMSG("Inhomogeneous mesh should be refined between Z values " <<
 							cornerMin._z << " and " << cornerMax._z <<
