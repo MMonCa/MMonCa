@@ -56,7 +56,8 @@ Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Coordinates &m, const Coord
 	_pMesh = new Mesh(this, mm, MM,
 		nut.getLines(0), nut.getLines(1), nut.getLines(2),
 		Domains::global()->client());
-	
+	_vtkCellDecrement = nut.getMinLine() * _CSvtkMinCellFrameFactor;
+		
 	_pSM = new OKMC::ChargedStates(this);
 
     _pClPar = new OKMC::ClusterParam(pTcl, Domains::global()->PM(), Domains::global()->getFileParameters());

@@ -105,6 +105,8 @@ public:
 	void defectReport() const;
 	void meshReport() const;
 	void domainReport() const;
+	void exportMaterialMap(std::string const& aFilename) const;
+	std::string getMaterial(Kernel::Coordinates const& aWhere) const;
 
 	bool IsPoisson() const { return _isPoisson; }
 	std::string mechModel() const { return _mechModel; }
@@ -128,6 +130,8 @@ private:
 	SimData *_pSimData;
 	Domains::Splitter *_pSplitter;
 	std::vector<Kernel::Domain *> _domains;
+
+	float _vtkCellDecrement;    // Used to decrement MeshElement sizes in each direction during VTK export.
 
 	bool _isPoisson;
 	std::string _mechModel;

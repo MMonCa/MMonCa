@@ -1,0 +1,252 @@
+#   #        #   #  ###  #   #      ###  ###    
+## ##        ## ## #   # ##  #     #    #   #      Modular
+# # #        # # # #   # # # #     #    #####        MC  
+#   #        #   # #   # #  ##     #    #   #      Simulator
+#   # odular #   #  ###  #   # te   ### #   # rlo 
+Version: 2.0.16
+Compiled on Jul 22 2025 15:42:50 for x86_64-Linux
+for #45-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug 30 12:02:04 UTC 2024
+        Contact: imartin2@ucam.edu
+        https://github.com/imartinbragado/MMonCa
+OKMC: (C) 2011-2014  IMDEA Materials Institute.
+OKMC: (C) 2015-2018  Ignacio Martin, Ignacio Dopico.
+LKMC: (C) 2011-2014  IMDEA Materials Institute.
+LKMC: (C) 2015-2018  Ignacio Martin, Ignacio Dopico
+All:  (C) 2019-today Ignacio Martin. imartin2@ucam.edu
+ For licensing details, write "license"
+------------------------------------------------------------------- param -----
+param set type='map<string,string>' key='MC/General/materials' value='Silicon Si SiO2 SiO2'
+-------------------------------------------------------------------------------
+
+------------------------------------------------------------------- param -----
+param set type='int' key='MC/General/domains' value='2'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- init -----
+init minx='0' miny='0' minz='0' maxx='6' maxy='6' maxz='6' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+---------------------------- Warning -----------------------------------
+Alloy material is given but selfdiffusion is set to false
+     X: (0 - 6) nm. 4 elements. Delta = 1.5 nm.
+     Y: (0 - 6) nm. 4 elements. Delta = 1.5 nm.
+     Z: (0 - 3) nm. 2 elements. Delta = 1.5 nm.
+Total 32 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> SiO2
+1 -> Silicon
+0000 -       0:1.5
+0011 -       1.5:3
+0111 -       4.5:6
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+---------------------------- Warning -----------------------------------
+SiO2/Models/interactions Interaction not used: C+Nitride
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: I+Gas
+---------------------------- Warning -----------------------------------
+Silicon/Models/interactions Interaction not used: V+Gas
+     X: (0 - 6) nm. 4 elements. Delta = 1.5 nm.
+     Y: (0 - 6) nm. 4 elements. Delta = 1.5 nm.
+     Z: (3 - 6) nm. 2 elements. Delta = 1.5 nm.
+Total 32 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> SiO2
+1 -> Silicon
+0000 -       0:1.5
+1111 -       1.5:3
+1111 -       4.5:6
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+----------------------------------------------------------------- extract -----
+extract material.map filename='uniform-2.vtk'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract material.location x='0.1' y='0.1' z='0.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='SiO2' equal two='SiO2' tag='uniform_SiO2'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+uniform_SiO2: Requested test SiO2 == SiO2
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract material.location x='0.1' y='5.0' z='1.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='SiO2' equal two='SiO2' tag='uniform_SiO2'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract material.location x='5.1' y='5.0' z='3.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='Silicon' equal two='Silicon' tag='uniform_Si'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+uniform_Si: Requested test Silicon == Silicon
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init mesh='mesh.json'
+-------------------------------------------------------------------------------
+
+Reading defects: SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+Deleting old simulation
+     X: (0 - 6) nm. 4 elements. Custom line spacing.
+     Y: (0 - 6) nm. 4 elements. Custom line spacing.
+     Z: (0 - 2.6) nm. 2 elements. Custom line spacing.
+Total 32 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> SiO2
+1 -> Silicon
+1111 -       0:1.5
+1100 -       1.5:3
+1000 -       4.5:6
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+     X: (0 - 6) nm. 4 elements. Custom line spacing.
+     Y: (0 - 6) nm. 4 elements. Custom line spacing.
+     Z: (2.6 - 6) nm. 2 elements. Custom line spacing.
+Total 32 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> SiO2
+1 -> Silicon
+1111 -       0:1.5
+0000 -       1.5:3
+0000 -       4.5:6
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+----------------------------------------------------------------- extract -----
+extract material.map filename='nonuniform-json-2.vtk'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract material.location x='0.1' y='0.1' z='0.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='Silicon' equal two='Silicon' tag='nonuniform_json_SiO2'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+nonuniform_json_SiO2: Requested test Silicon == Silicon
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract material.location x='0.1' y='5.0' z='1.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='Silicon' equal two='Silicon' tag='nonuniform_json_SiO2'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract material.location x='5.1' y='5.0' z='3.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='SiO2' equal two='SiO2' tag='nonuniform_json_Si'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+nonuniform_json_Si: Requested test SiO2 == SiO2
+Test PASSED... continuing
+-------------------------------------------------------------------- init -----
+init linesx='0 1 2 3 4 5 6' linesy='0 0.5 1 1.5 2 3 6' linesz='0 0.25 0.75 1.75 3.75 6' material='material'
+-------------------------------------------------------------------------------
+
+Reading defects: SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void ) 
+Deleting old simulation
+     X: (0 - 6) nm. 6 elements. Custom line spacing.
+     Y: (0 - 6) nm. 6 elements. Custom line spacing.
+     Z: (0 - 3.75) nm. 4 elements. Custom line spacing.
+Total 144 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> SiO2
+1 -> Silicon
+000000 -         0:1
+000001 -         1:2
+000111 -         5:6
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+     X: (0 - 6) nm. 6 elements. Custom line spacing.
+     Y: (0 - 6) nm. 6 elements. Custom line spacing.
+     Z: (3.75 - 6) nm. 1 elements. Custom line spacing.
+Total 36 elements
+Loading Particle To Node handler
+Building nodes... Done
+0 -> SiO2
+1 -> Silicon
+000000 -         0:1
+111111 -         1:2
+111111 -         5:6
+Starting clusters:  SiO2() Silicon(<311> BICs CCluster DLoop IVCluster Void )
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+Interfacing...
+Checking SPER... 0/0 atoms. Done.
+----------------------------------------------------------------- extract -----
+extract material.map filename='nonuniform-2.vtk'
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------- extract -----
+extract material.location x='0.1' y='0.1' z='0.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='SiO2' equal two='SiO2' tag='nonuniform_SiO2'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+nonuniform_SiO2: Requested test SiO2 == SiO2
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract material.location x='0.1' y='5.0' z='1.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='SiO2' equal two='SiO2' tag='nonuniform_SiO2'
+-------------------------------------------------------------------------------
+
+Test PASSED... continuing
+----------------------------------------------------------------- extract -----
+extract material.location x='5.1' y='5.0' z='3.1'
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------- test -----
+test one='Silicon' equal two='Silicon' tag='nonuniform_Si'
+-------------------------------------------------------------------------------
+
+---------------------------- Warning -----------------------------------
+nonuniform_Si: Requested test Silicon == Silicon
+Test PASSED... continuing
+Time spent: 11s. Annealing: 0s.
+         6 times: Alloy material is given but selfdiffusion is set to false
+         6 times: SiO2/Models/interactions Interaction not used: C+Nitride
+         6 times: Silicon/Models/interactions Interaction not used: I+Gas
+         6 times: Silicon/Models/interactions Interaction not used: V+Gas
+         1 times: nonuniform_Si: Requested test Silicon == Silicon
+         2 times: nonuniform_SiO2: Requested test SiO2 == SiO2
+         1 times: nonuniform_json_Si: Requested test SiO2 == SiO2
+         2 times: nonuniform_json_SiO2: Requested test Silicon == Silicon
+         1 times: uniform_Si: Requested test Silicon == Silicon
+         2 times: uniform_SiO2: Requested test SiO2 == SiO2
+There are 15 total sentences. Collect them all!
+Camarón que se duerme...
+                     ... se lo lleva la corriente

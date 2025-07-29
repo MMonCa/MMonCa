@@ -25,6 +25,7 @@
 #include "kernel/MeshElement.h"
 #include "kernel/RateManager.h"
 #include "kernel/Event.h"
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "okmc/ClusterParam.h"
 

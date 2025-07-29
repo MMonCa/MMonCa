@@ -28,6 +28,8 @@ namespace Kernel
 	template <typename T>
 	struct CoordinatesT
 	{
+		using type = T;
+		
 		CoordinatesT() {}
 		CoordinatesT(T x, T y, T z) : _x(x), _y(y), _z(z) {}
 		T _x, _y, _z;
@@ -99,6 +101,19 @@ namespace Kernel
 		return true;
 	}
 	typedef CoordinatesT<float> Coordinates;
+
+	template<typename T>
+	struct VtkOrderLess final {
+		bool operator()(CoordinatesT<T> const& aLhs, CoordinatesT<T> const& aRhs) {
+			if (aLhs._z < aRhs._z) return true;
+			if (aLhs._z > aRhs._z) return false;
+			if (aLhs._y < aRhs._y) return true;
+			if (aLhs._y > aRhs._y) return false;
+			if (aLhs._x < aRhs._x) return true;
+			if (aLhs._x > aRhs._x) return false;
+			return false;
+		}
+	};
 }
 	 
 #endif

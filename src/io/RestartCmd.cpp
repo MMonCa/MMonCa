@@ -27,6 +27,7 @@ using std::string;
 #include "version.h"
 #include "domains/MCClient.h"
 #include "io/FileParameters.h"
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "kernel/MeshElement.h"
 #include "kernel/RateManager.h"

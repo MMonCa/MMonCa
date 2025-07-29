@@ -222,8 +222,11 @@ void Global::setClient(MCClient *p, const Kernel::Coordinates &m, const Kernel::
                 _domains.push_back(new Kernel::Domain(i, _pGlobalTcl, area, Area));
             }
         }
-	for(std::vector<Kernel::Domain *>::iterator it=_domains.begin(); it!=_domains.end(); ++it)
+	_vtkCellDecrement = std::numeric_limits<decltype(_vtkCellDecrement)>::max();
+	for(std::vector<Kernel::Domain *>::iterator it=_domains.begin(); it!=_domains.end(); ++it) {
 		(*it)->init(p->isFromStream());
+		_vtkCellDecrement = std::min(_vtkCellDecrement, (*it)->getVtkCellDecrement());
+	}
 	_pSimData = new SimData(_pPar);
 
 	int nSubDom = _pSplitter->getSubDomains(0);
@@ -258,6 +261,62 @@ void Global::meshReport() const
 void Global::domainReport() const
 {
 	_domains.back()->_pMesh->printDomains();
+}
+	
+void Global::exportMaterialMap(std::string const& aFilename) const {
+	Kernel::VtkMaterialData data;
+	std::vector<float> const& linesX = _domains[0u]->getLinesX();
+	std::vector<float> const& linesY = _domains[0u]->getLinesY();
+	std::vector<float> linesZ = _domains[0u]->getLinesZ();
+	for(auto const item : _domains) {
+		item->gatherVtkMaterialData(_vtkCellDecrement, data);
+		std::vector<float> const& partZ = item->getLinesZ();
+		for(auto const value : partZ) {
+			if(value > linesZ.back()) {
+				linesZ.push_back(value);
+			}
+		}
+	}
+	std::ofstream out(aFilename);
+	out << "# vtk DataFile Version 2.0\n2D Surface\nASCII\nDATASET RECTILINEAR_GRID\nDIMENSIONS ";
+	out << (linesX.size() * 2u - 2u) << ' ' << (linesY.size() * 2u - 2u) << ' ' << (linesZ.size() * 2u - 2u);
+	auto lambda=[&out, this](char const * const aPrefix, std::vector<float> const aLines) {
+		out << aPrefix << aLines.size() * 2u - 2u << " float\n";
+		for(auto const value : aLines) {
+			out << ' ';
+			if(value == aLines.front() || value == aLines.back()) {
+				out << value;
+			}
+			else {
+				out << value - _vtkCellDecrement << ' ' << value + _vtkCellDecrement;
+			}
+		}
+	};
+	lambda("\nX_COORDINATES ", linesX);
+	lambda("\nY_COORDINATES ", linesY);
+	lambda("\nZ_COORDINATES ", linesZ);
+	out << "\nPOINT_DATA " << (linesX.size() - 1u) * (linesY.size() - 1u) * (linesZ.size() - 1u) * 8u << "\nSCALARS SDValues float\n\nLOOKUP_TABLE default\n";
+	uint32_t cnt = 0u;
+	for(auto const& item : data) {
+		if(cnt == 40u) {
+			cnt = 0u;
+			out << '\n';
+		}
+		out << ' ' << static_cast<uint32_t>(item.second);
+		++cnt;
+	}
+}
+
+std::string Global::getMaterial(Kernel::Coordinates const& aWhere) const {
+	std::string result("Requested location outside the domain.");
+	for(auto const item : _domains) {
+		Kernel::M_TYPE mat = item->getMaterial(aWhere);
+		if(mat < Kernel::MAX_MATERIALS) {
+			result = _pPM->getMaterialName(mat);
+			break;
+		}
+	}
+	return result;
 }
 
 void Global::defectReport() const
