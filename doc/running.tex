@@ -1,3 +1,43 @@
+\section{MMonCa simulation geometry}
+
+\MMonCa\ is a three-dimensional simulator. It simulates a cuboid area consisting of one or more materials, which can have defects or dopant particles in them. While the location of these particles within the simulation area is arbitrary, the materials are represented by a cuboid mesh, where each cell has a homogeneous material. The subdivision of this cuboid mesh can be uniform and non-uniform, but in either case, the mesh is defined by planes perpendicular to either axis (X, Y or Z) of the Cartesian coordinate system. The mesh can be described by either
+
+\begin{itemize}
+  \item the extent of the whole cuboid area, so the minimum and maximum coordinates along each axis, together with the approximate subdivision steps along each axis. In this case, \MMonCa\ automatically adjusts the given step values to yield equidistantly placed division planes.
+  \item the list of positions of the planes along each axis. The extent of the whole cuboid area is implicitly given by the two extreme positions along each axis.
+\end{itemize}
+
+In the general case, the nonuniform mesh can look like Fig.\ref{fig-nonuniform-mesh}. Here, the subdivision along the Z axis is uniform, but nonuniform for the other two axes. Note, a mesh with a nonuniform subdivision along any axis counts as a nonuniform mesh. This nonuniform mesh can represent a curved interface between two materials more accurately with a lower total cell count than the original uniform version. A further advantage of nonuniform meshes is that they enable \MMonCa\ to use material descriptions from other simulators.
+
+Please refer to \ref{sec-Commands-init} for more details about the mesh definition.
+
+\begin{figure}[!htb]
+  \centering
+  \tdplotsetmaincoords{-60}{30}
+  \begin{tikzpicture}[scale=0.7,tdplot_main_coords]
+
+    % AXES                y z x
+      \coordinate (O) at (0,0,0);
+      \draw[thick,->] (0,0,0) -- (7,0,0) node[right=0.1]{$y$};
+      \draw[thick,->] (0,0,0) -- (0,7,0) node[above=1]{$z$};
+      \draw[thick,->] (0,0,0) -- (0,0,7) node[below=-0.5]{$x$};
+
+      \foreach \x in {0,2,3,4,6} {
+        \draw[plane] (6,0,\x) -- (0,0,\x) node[left=0.05]{$\x$};
+        \draw[plane] (6,0,\x) -- (6,6,\x);
+      }
+      \foreach \z in {0,...,6} {
+        \draw[plane] (6,\z,0) -- (0,\z,0) node[above=0.1]{$\z$};
+        \draw[plane] (6,\z,0) -- (6,\z,6);
+      }
+      \foreach \y in {0,0.5,1.5,3.5,6} {
+        \draw[plane] (\y,6,0) -- (\y,0,0) node[above=0.1]{$\y$};
+        \draw[plane] (\y,0,0) -- (\y,0,6);
+      }
+  \end{tikzpicture}
+  \caption{\label{fig-nonuniform-mesh} Nonuniform mesh example}
+\end{figure}
+
 \section{Generalities}
 
 To run a \MMonCa\ script just call the {\param mmonca} binary with the input file you want to execute as a parameter name.
@@ -119,7 +159,7 @@ TCL variables defined to easily change the simulation size and the annealing tim
 \begin{lstlisting}[firstnumber=5]
 proc material { x y z } { return "S_Iron" }
 \end{lstlisting}
-Required script to define the material in the simulation. In this case, a block containing only Iron is defined.
+One of the two possibilities to define the material in the simulation. In this case, we use a Tcl function defining a block containing only Iron. We also have the possibility to define the material and the mesh in a JSON file, see \ref{Commands.init}.
 
 \begin{lstlisting}[firstnumber=7]
 #parameters
