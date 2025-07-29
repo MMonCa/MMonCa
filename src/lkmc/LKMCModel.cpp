@@ -230,12 +230,15 @@ void LKMCModel::epitaxy() const
 		while(pLS)
 		{
 			LatticeAtomDEpi * pLA = dynamic_cast<LatticeAtomDEpi *>(pLS);
-			pLS = pLS->getNext();
 			if (pLA && !pLA->getPerformed() && pLA->getCoordination(0) == 0) //not at the interface
 			{
 				pLA->getElement()->decLA(pLA->getPerformed());
 				_pDomain->_pRM->remove(pLA, pLA->getElement());
+				pLS = pLS->getNext();
 				delete pLA;
+			}
+			else {
+				pLS = pLS->getNext();
 			}
 		}
 	}
@@ -284,8 +287,9 @@ void LKMCModel::localSPER(Kernel::SubDomain *pSub, const std::vector<Kernel::Mes
 	unsigned na = 0;
 	for(std::map<unsigned, Kernel::MeshElement *>::iterator it=cells.begin(); it!=cells.end(); ++it)
 		na += putLKMCAtoms(pSub, it->second, pPM->getMaterial(it->second->getMaterial())._basicMaterial, MOD_SPER);
-	LOWMSG2(" " << na);
+	LOWMSG2("  +" << na);
 	//Refinement, it removes atoms!
+	na = 0u;
 	for(std::map<unsigned, Kernel::MeshElement *>::const_iterator it=cellsToUpdate.begin(); it!=cellsToUpdate.end(); ++it)
 	{
 		LatticeSite *pLS = it->second->getFirstLS();
@@ -296,13 +300,16 @@ void LKMCModel::localSPER(Kernel::SubDomain *pSub, const std::vector<Kernel::Mes
 			{
 				pLA->getElement()->decLA(pLA->getPerformed());
 				_pDomain->_pRM->remove(pLA, pLA->getElement());
+				pLS = pLS->getNext();
 				delete pLA;
-				na--;
+				na++;
 			}
-			pLS = pLS->getNext();
+			else {
+				pLS = pLS->getNext();
+			}
 		}
 	}
-	LOWMSG2("/" << na << " atoms.");
+	LOWMSG2(" / -" << na << " atoms.");
 	//build updated list now that atoms were removed.
 	std::map<int, LatticeAtomDiamond *> toUpdate;
 	for(std::map<unsigned, Kernel::MeshElement *>::iterator it=cellsToUpdate.begin(); it!=cellsToUpdate.end(); ++it)
