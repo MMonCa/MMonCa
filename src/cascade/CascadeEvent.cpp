@@ -24,6 +24,7 @@
 #include "domains/MCClient.h"
 #include "io/Diagnostic.h"
 #include "io/ParameterManager.h"
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "kernel/SubDomain.h"
 #include "kernel/Analyzer.h"

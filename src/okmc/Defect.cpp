@@ -22,6 +22,7 @@
 
 #include "Defect.h"
 #include "Interface.h"
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "kernel/MeshElement.h"
 #include "kernel/MeshParam.h"

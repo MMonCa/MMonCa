@@ -262,3 +262,26 @@ void MeshElement::restart(std::ostream &os) const
 	os << _BAtoms << " " << _AAtoms << " ";
 }
 
+void MeshElement::gatherVtkMaterialData(float const aVtkCellDecrement, VtkMaterialData &aData) const {
+	Kernel::Coordinates min;
+	Kernel::Coordinates max;
+	_pDomain->_pMesh->getCorners(_index, min, max);
+	min += aVtkCellDecrement;
+	max -= aVtkCellDecrement;
+	Kernel::Coordinates c = min;
+	aData[c] = _mat;
+	c._x = max._x;
+	aData[c] = _mat;
+	c._y = max._y;
+	aData[c] = _mat;
+	c._x = min._x;
+	aData[c] = _mat;
+	c._z = max._z;
+	aData[c] = _mat;
+	c._y = min._y;
+	aData[c] = _mat;
+	c._x = max._x;
+	aData[c] = _mat;
+	c._y = max._y;
+	aData[c] = _mat;
+}

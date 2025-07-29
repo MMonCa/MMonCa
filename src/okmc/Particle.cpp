@@ -23,6 +23,7 @@
 #include "Particle.h"
 #include "kernel/Constants.h"
 #include "kernel/SubDomain.h"
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 #include "kernel/MeshElement.h"
 #include "kernel/MeshParam.h"

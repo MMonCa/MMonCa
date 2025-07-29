@@ -23,7 +23,6 @@
 #define SIMPLESPLITTER_H_
 
 #include "Splitter.h"
-#include <vector>
 #include <cstdint>
 
 namespace Domains {
@@ -36,7 +35,7 @@ public:
 	virtual unsigned getDomains() const { return _nDomains; }
 	virtual unsigned getSubDomains(unsigned dom) const { return _subDomains[dom].size(); }
 	virtual void splitDomain(unsigned nDomain, Kernel::Coordinates &m, Kernel::Coordinates &M) const;
-	static std::vector<float> getLinesZpart(float const aZmin, float const aZmax, std::vector<float> const * const aLinesZ);
+	virtual std::vector<float> getLinesZpart(float const aZmin, float const aZmax, std::vector<float> const * const aLinesZ);
 	virtual unsigned getDomain(const Kernel::Coordinates &) const;
 	virtual unsigned getSubDomain(const Kernel::Coordinates &m, const Kernel::Coordinates &M) const;
 	virtual unsigned getLevel(const Kernel::Coordinates &m, const Kernel::Coordinates &M) const;
@@ -53,6 +52,7 @@ private:
 	std::vector<std::vector<box> > _subDomains; //domains, subdomains.
 	unsigned _nDomains;
 	float _zSlide;
+	std::vector<std::vector<float>> _linesZparts;
 };
 
 } /* namespace Domains */

@@ -29,6 +29,7 @@
 
 #include <boost/numeric/ublas/io.hpp>
 
+#include "kernel/Domain.h"
 #include "kernel/Mesh.h"
 
 #include "ParticleToNodeHandler.h"

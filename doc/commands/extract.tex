@@ -18,6 +18,8 @@ It extracts simulation information. It does not write information on screen, but
 
 \item [amorphous.fraction]\index{amorphous.fraction} Returns the fraction of space that is amorphous in an {\tt OKMC} enviroment for the material specified in the required option \param{material=$<$mt$>$}. For more information, read Section \ref{sec:amorph}.
 
+\item [configuration]\index{configuration} Comparing \MMonCa\ effective configurations is not always straightforward, especially when parameters were overruled in the simulation script. This command enables one to dump all the actual configuration to the log or a file. All dump invocations must be preceded by the init command. Any configuration parameter overruled after this command does not affect the already happened dump content. If the optional argument \param{filename} is given, the configuration is dumped into the given file; otherwise into a Tcl variable. The format is \param{key:data type:value}.
+
 \item [coord=$<$x y z$>$]\index{coord} Uses the coordinate x, y and z as the starting center to look for neighbors in the \param{coordination} command.
 
 \item [coordination]\index{coordination} Returns a list of neighbors, distance to it, the neighbor type and total account of neighbor types. It requires the use of the option \param{coord} to specify the value of the coordinate to use as a center and \param{radius} for the look-up radius. It buils a crystal as a sphere with the specified radius plus 0.5 nanometers, so the specified coordinate should be close to 0 0 0.
@@ -48,11 +50,15 @@ It extracts simulation information. It does not write information on screen, but
 
 \item [jumps]\index{jumps} Returns the number of jumps for the mobile particle specified in the required option \param{name=$<$pt$>$}
 
+\item [material.location]\index{material.location} Returns the long material name at the location given by \param{x=$<$value$>$}, \param{y=$<$value$>$} and \param{z=$<$value$>$}. It can be used to unit test material definition Tcl functions or JSON files.
+
+\item [material.map]\index{material.map} Extracts the internal mesh's material attributes. For the sake of simple implementation, it represents each mesh cell with a slightly smaller cell, with each corner having the material attribute of the cell. This file is best viewed using linear interpolation, for example in Paraview. The linear interpolation of the thin layers between the cells are to be ignored. The material attributes in the VTK file come from the internal MMonCa representation, which is also visible in the log. Requires the \param{filename=$<$VTK filename$>$}
+
 \item [min.radius]\index{min.radius} Optional parameter for \param{defect.radius}. It considers only ``visible'' defects with radius equal or bigger than the specified one.
 
 \item [min.size]\index{min.size} Optional parameter for \param{count.defects} or \param{count.particles}. It limits the count to defects with size equals or bigger than the specified. The size of a defect is defined as its total number of particles.
 
-\item [profile]\index{profile} Returns the concentration for the particle specified in the required option \param{name=$<$pt$>$}. When simulating binary alloys it is possible to extract the atom counters of the A and B species in the AB binary alloy with the \param{name=A.atoms} and \param{name=B.atoms} respectively. Also it is possible to extract the profile of the A atoms of the AB binary alloy by no introducing the \param{name} keyword and introducing the desired material profile with the \param{material} keyword. LKMC information can also be extracted through \param{name=lkmc.defects} and \param{name=lkmc.ac} options and corresponding to defective configurations and amorphous/crystalline interface respectively.
+\item [profile]\index{profile} Returns the concentration for the particle specified in the required option \param{name=$<$pt$>$}. When simulating binary alloys it is possible to extract the atom counters of the A and B species in the AB binary alloy with the \param{name=A.atoms} and \param{name=B.atoms} respectively. Also it is possible to extract the profile of the A atoms of the AB binary alloy by no introducing the \param{name} keyword and introducing the desired material profile with the \param{material} keyword. LKMC information can also be extracted through \param{name=lkmc.defects} and \param{name=lkmc.ac} options and corresponding to defective configurations and amorphous/crystalline interface respectively. Additonal OKMC options are in the examples.
 
 \item [profile.damage]\index{profile.damage} Returns the damage concentration (i.e. self-Interstitials and Vacancies) for the material specified in the required option \param{material=$<$mt$>$}. Such concentration saturates at the {\tt amorphization.threshold} value. For more information, read Section \ref{sec:amorph}.
 
@@ -76,4 +82,9 @@ It extracts simulation information. It does not write information on screen, but
 \item \verb+extract histogram defect=<111> material=Iron+ 
 \item \verb+extract profile name=Cr dimension=1 material=Iron+ Extracts the profile [$cm^{-3}$] of the Cr atoms collapsed to the X-dimension
 \item \verb+extract profile material=Iron+ Extracts the profile [$cm^{-3}$] of the Iron lattice atoms (computed from the cell counters)
+\item \verb+extract profile name=X*+ Extracts the profile for all the active (not clustered) X atoms.
+\item \verb+extract profile defect=* name=X+ Extracts the profile for all clustered B atoms such that a \ch{B3} cluster is counted three times.
+\item \verb+extract profile defect=BICs material=Silicon name=B2I+ Extracts the profile for the \ch{B2I} cluster within the BICs family.
+\item \verb+extract profile defect=BICs material=Silicon name=B*+ Extracts the profile for all clustered B atoms within the BICs cluster family, such that a \ch{B3} cluster is counted three times.
+\item \verb+extract profile defect=BICs material=Silicon+ Extracts the profile for all BICs clusters.
 \end{itemize}

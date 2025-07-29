@@ -115,6 +115,7 @@ public:
 
     void resetDiffusivity();
     void changeMaterial(SubDomain *, unsigned idx, M_TYPE to);
+    M_TYPE getMaterial(Coordinates const& aWhere) const;
 
     void print() const;
     void printDomains() const;
@@ -125,6 +126,10 @@ public:
     unsigned getnx() const { return _xlines.size(); }
     unsigned getny() const { return _ylines.size(); }
     unsigned getnz() const { return _zlines.size(); }
+
+    std::vector<float> const& getLinesX() const { return _xlines; }
+    std::vector<float> const& getLinesY() const { return _ylines; }
+    std::vector<float> const& getLinesZ() const { return _zlines; }
 
     bool getPeriodicX() const { return _periodicX; }
     bool getPeriodicY() const { return _periodicY; }
@@ -153,6 +158,8 @@ public:
 
     // Selfdiffusion for a AB alloy. A jump or B jump
     void jumpBorA(MeshElement * from, MeshElement * to, double prob);
+    
+    void gatherVtkMaterialData(float const aVtkCellDecrement, VtkMaterialData &aData) const;
 
 private:
     const Coordinates _min, _max;

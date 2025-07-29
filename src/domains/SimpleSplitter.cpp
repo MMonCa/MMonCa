@@ -145,13 +145,25 @@ std::vector<float> SimpleSplitter::getLinesZpart(float const aZmin, float const 
 	for(uint32_t i = indexMin; i <= indexMax; ++i) {
 		result.push_back(aLinesZ->at(i));
 	}
+	_linesZparts.push_back(result);
 	return result;
 }
 
 unsigned SimpleSplitter::getDomain(const Kernel::Coordinates &c) const
 {
-	double f = (double(c._z) - double(_minCell._z)) / double(_zSlide);
-	return f;
+	unsigned result;
+	if(_linesZparts.size() > 0u) {
+		for(result = 0u; result < _nDomains; ++result) {
+			if(_linesZparts[result].front() <= c._z && c._z <= _linesZparts[result].back()) {
+				break;
+			}
+		}
+		assert(result < _nDomains);
+	}
+	else {
+		result = static_cast<unsigned>((double(c._z) - double(_minCell._z)) / double(_zSlide));
+	}
+	return result;
 }
 
 unsigned SimpleSplitter::getSubDomain(const Kernel::Coordinates &m, const Kernel::Coordinates &M) const
