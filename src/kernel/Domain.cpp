@@ -53,11 +53,8 @@ Domain::Domain(unsigned num, Tcl_Interp *pTcl, const Coordinates &m, const Coord
 	Coordinates mm = m, MM = M;
         NUTCreator nut(this, mm, MM, aLinesX, aLinesY, aLinesZ);
 	_pRM = new RateManager(this);
-	_linesX = nut.getLines(0);
-	_linesY = nut.getLines(1);
-	_linesZ = nut.getLines(2);
 	_pMesh = new Mesh(this, mm, MM,
-		_linesX, _linesY, _linesZ,
+		nut.getLines(0), nut.getLines(1), nut.getLines(2),
 		Domains::global()->client());
 	_vtkCellDecrement = nut.getMinLine() * _CSvtkMinCellFrameFactor;
 		

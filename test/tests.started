@@ -1,0 +1,6 @@
+./others/commands/restart/lkmc-DEpi/test.mc
+./others/okmc/charge/Si-B/test.mc
+./others/lkmc/SiGe-epi-general/diff-etch-epi/test.mc
+./standard/okmc/diffusion/ko-fine-mesh/test.mc
+./standard/okmc/diffusion/supersaturation-nonuniform-parallel/test.mc
+./standard/okmc/diffusion/supersaturation-nonuniform-mesh/test.mc

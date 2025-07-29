@@ -127,6 +127,10 @@ public:
     unsigned getny() const { return _ylines.size(); }
     unsigned getnz() const { return _zlines.size(); }
 
+    std::vector<float> const& getLinesX() const { return _xlines; }
+    std::vector<float> const& getLinesY() const { return _ylines; }
+    std::vector<float> const& getLinesZ() const { return _zlines; }
+
     bool getPeriodicX() const { return _periodicX; }
     bool getPeriodicY() const { return _periodicY; }
     bool getPeriodicZ() const { return _periodicZ; }

@@ -79,9 +79,9 @@ public:
 	
 	float getVtkCellDecrement() const { return _vtkCellDecrement; }
 	void gatherVtkMaterialData(float const aGlobalVtkCellDecrement, VtkMaterialData &aData) const { _pMesh->gatherVtkMaterialData(aGlobalVtkCellDecrement, aData); }
-	std::vector<float> const& getLinesX() const { return _linesX; }
-	std::vector<float> const& getLinesY() const { return _linesY; }
-	std::vector<float> const& getLinesZ() const { return _linesZ; }
+	std::vector<float> const& getLinesX() const { return _pMesh->getLinesX(); }
+	std::vector<float> const& getLinesY() const { return _pMesh->getLinesY(); }
+	std::vector<float> const& getLinesZ() const { return _pMesh->getLinesZ(); }
 	M_TYPE getMaterial(Coordinates const& aWhere) const { return _pMesh->getMaterial(aWhere); }
     
     const LKMC::LatticeParam         *_pLaPar[MAX_MATERIALS];
@@ -96,9 +96,6 @@ public:
 
 	static constexpr double _CSvtkMinCellFrameFactor = 0.05;
 	double                  _vtkCellDecrement;    // Used to decrement MeshElement sizes in each direction during VTK export.
-	std::vector<float>      _linesX;
-	std::vector<float>      _linesY;
-	std::vector<float>      _linesZ;
 	Mesh           *_pMesh;
 	RateManager    *_pRM;
 

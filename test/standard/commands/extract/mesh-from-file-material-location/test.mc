@@ -26,7 +26,7 @@ test one="SiO2" equal two=[extract material.location x=5.1 y=5.0 z=3.1] tag=nonu
 
 
 
-init linesx={0 1 2 3 4 5 6} linesy={0 0.5 1 1.5 2 3 6} linesz={0 0.25 0.75 1.75 3.75 6}  material=material
+init linesx={0 1 2 3 4 5 6} linesy={0 0.5 1 1.5 2 3 6} linesz={0 0.5 1.25 2.75 4 6}  material=material
 
 extract material.map filename="nonuniform-2.vtk"
 test one="SiO2" equal two=[extract material.location x=0.1 y=0.1 z=0.1] tag=nonuniform_SiO2
