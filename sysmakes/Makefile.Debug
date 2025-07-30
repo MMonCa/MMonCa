@@ -10,7 +10,7 @@
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 CXX      = g++
-CXXFLAGS = -O0 -g -fno-implement-inlines -pedantic -Wall -std=c++11 -fsanitize=address -fsanitize=undefined
+CXXFLAGS = -O0 -g -fno-implement-inlines -pedantic -Wall -std=c++11 -fsanitize=address -fsanitize=undefined -D BOOST_TIMER_ENABLE_DEPRECATED
 CC       = gcc
 CCFLAGS  = -O0 -g -pedantic -Wall
 DEPFLAGS = -MMD -MP
@@ -25,7 +25,6 @@ SHLIBFLAGS =
 
 # ---------------------------------------------------------------------
 # MMonCa-specific settings
-
 # TCL lib, required
 
 TCL_INC = -I/usr/include/tcl8.6/

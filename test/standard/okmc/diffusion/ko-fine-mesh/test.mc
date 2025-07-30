@@ -31,7 +31,7 @@ for { set n 0 } { $n < $C_number } { incr n } {
 	insert coord={ [expr rand()*$sizeX] [expr rand()*$sizeYZ] [expr rand()*$sizeYZ] } particle=C
 }
 
-anneal time=1e25 temp=$T events=1.2e7	
+anneal time=1e25 temp=$T events=1.5e7	
 
 set kB  8.6174e-5
 set If_P [lindex [param get type=arrhenius key=S_Iron/Iron/I(formation)] 0]
