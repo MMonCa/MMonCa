@@ -2,6 +2,12 @@ Obj*
 nodist*
 test.mc.log
 errors
+test.results
 test.result
+test.started
 time
 test.errors
+**/*.profile
+**/*.bal
+**/*.th
+**/*.init

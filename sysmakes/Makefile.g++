@@ -10,7 +10,7 @@
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 CXX      = g++
-CXXFLAGS = -O3 -Wall -fopenmp -g -std=c++11
+CXXFLAGS = -O3 -Wall -fopenmp -g -std=c++11 -D BOOST_TIMER_ENABLE_DEPRECATED
 CC       = gcc
 CCFLAGS  = -O3 -Wall
 DEPFLAGS = -MMD -MP
