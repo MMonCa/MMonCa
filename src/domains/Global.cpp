@@ -428,7 +428,7 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 				newDepth += _domains[nD]->_pRM->getDepthLA();
 			}
 		}
-		newTime /= _domains.size();
+		newTime /= _domains.size(); // TODO consider min(domain time) instead. Would help converge the threads, but not much difference.
 		newDepth /= _domains.size();
 		if(newDepth > 1e35)
 			newDepth = origDepth;
