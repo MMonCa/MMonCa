@@ -167,8 +167,9 @@ void SaveCmd::save(const string &filename, FORMAT_TYPES ft, bool bDefects, const
 	Coordinates m, M;
 	Domains::global()->client()->getCell(m, M);
 
+	float margin = specified("margin") ? getFloat("margin") : std::numeric_limits<float>::max();
 	vector<Domains::ParticleData> data;
-    if(specified("lattice"))
+    if(specified("lattice")) {
 		for(Domains::MeshElementIterator it= Domains::global()->beginMEI(); it!=Domains::global()->endMEI(); ++it)
 		{
 			LKMC::LatticeSite *part = it->getFirstLS();
@@ -177,7 +178,9 @@ void SaveCmd::save(const string &filename, FORMAT_TYPES ft, bool bDefects, const
 				while(part)
 				{
 					std::string name = Domains::global()->PM()->getParticleName(it->getMaterial(), part->getPType());
-					data.push_back(Domains::ParticleData(it->getMaterial(), part->getCoordinates(), part->getPType(), Kernel::Event::LATTICEATOM, name));
+					if(it->isCloseToGas(part->getCoordinates(), margin)) {
+						data.push_back(Domains::ParticleData(it->getMaterial(), part->getCoordinates(), part->getPType(), Kernel::Event::LATTICEATOM, name));
+					}
 					part = part->getNext();
 				}
 			}
@@ -191,21 +194,24 @@ void SaveCmd::save(const string &filename, FORMAT_TYPES ft, bool bDefects, const
 				vector<LKMC::Lattice::LatticeInformation> atoms;
 				it->getDomain()->_pLat[mt]->fill(m, M, atoms, false);
 				float x = it->getAlloyFraction();
-				for(vector<LKMC::Lattice::LatticeInformation>::iterator it = atoms.begin(); it!=atoms.end();++it)
+				for(vector<LKMC::Lattice::LatticeInformation>::iterator itA = atoms.begin(); itA!=atoms.end(); ++itA)
 				{
-					if(Domains::global()->client()->rand() < x)
-					{
-						std::string name = Domains::global()->PM()->getAlloyName(mt);
-						data.push_back(Domains::ParticleData(mt, it->_coords, 1, Kernel::Event::LATTICEATOM, name));
-					}
-					else
-					{
-						std::string name = Domains::global()->PM()->getParticleName(mt, it->_type);
-						data.push_back(Domains::ParticleData(mt, it->_coords, 0, Kernel::Event::LATTICEATOM, name));
+					if(it->isCloseToGas(itA->_coords, margin)) {
+						if(Domains::global()->client()->rand() < x)
+						{
+							std::string name = Domains::global()->PM()->getAlloyName(mt);
+							data.push_back(Domains::ParticleData(mt, itA->_coords, 1, Kernel::Event::LATTICEATOM, name));
+						}
+						else
+						{
+							std::string name = Domains::global()->PM()->getParticleName(mt, itA->_type);
+							data.push_back(Domains::ParticleData(mt, itA->_coords, 0, Kernel::Event::LATTICEATOM, name));
+						}
 					}
 				}
 			}
 		}
+	}
 	else
 	{
 		Domains::global()->data()->getLKMCInterface(data, bDefects);

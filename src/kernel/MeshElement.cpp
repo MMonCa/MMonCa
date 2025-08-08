@@ -285,3 +285,44 @@ void MeshElement::gatherVtkMaterialData(float const aVtkCellDecrement, VtkMateri
 	c._y = max._y;
 	aData[c] = _mat;
 }
+
+bool MeshElement::isCloseToGas(Kernel::Coordinates const& aWhere, float const aMargin) const {
+	auto const pm = Domains::global()->PM();
+	Kernel::Coordinates m;
+	Kernel::Coordinates M;
+	getCorners(m, M);
+	assert(aWhere.isInto(m, M));
+	if(pm->isGasLike(_mat)) {
+		return false;
+	}
+	for(auto const interface : _interfaces) {
+		if((interface->_me[0] == this && pm->isGasLike(interface->_me[1]->_mat))
+	    || (interface->_me[1] == this && pm->isGasLike(interface->_me[0]->_mat))) {			
+			if(interface->_coords_min._x == interface->_coords_max._x) {
+				if(interface->_coords_min._x == m._x && aWhere._x - m._x < aMargin) {
+					return true;
+				}
+				if(interface->_coords_min._x == M._x && M._x - aWhere._x < aMargin) {
+					return true;
+				}
+			}
+			if(interface->_coords_min._y == interface->_coords_max._y) {
+				if(interface->_coords_min._y == m._y && aWhere._y - m._y < aMargin) {
+					return true;
+				}
+				if(interface->_coords_min._y == M._y && M._y - aWhere._y < aMargin) {
+					return true;
+				}
+			}
+			if(interface->_coords_min._z == interface->_coords_max._z) {
+				if(interface->_coords_min._z == m._z && aWhere._z - m._z < aMargin) {
+					return true;
+				}
+				if(interface->_coords_min._z == M._z && M._z - aWhere._z < aMargin) {
+					return true;
+				}
+			}
+		}	
+	}
+	return false;
+}

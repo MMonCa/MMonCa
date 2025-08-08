@@ -140,6 +140,7 @@ public:
     void restart(std::istream &);
 
     void gatherVtkMaterialData(float const aVtkCellDecrement, VtkMaterialData &aData) const;
+		bool isCloseToGas(Kernel::Coordinates const& aWhere, float const aMargin) const;
 
     int _ABalance; // This is the balance between A atoms emitted/absorbed
     int _BBalance; // This is the balance between B atoms emitted/absorbed
