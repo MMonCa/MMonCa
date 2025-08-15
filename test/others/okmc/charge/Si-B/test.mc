@@ -17,7 +17,7 @@ param set type=arrhenius key=Silicon/Vacancy/V(formation)    value="1 6"
 
 set T 900
 #set eF 0.33
-set scale 0.720462
+set scale 0.7448065
 set kT [expr 8.6174e-5*($T+273.15)]
 
 init minx=-2 miny=0 minz=0 maxx=$sizeX maxy=$sizeYZ maxz=$sizeYZ material=material
@@ -55,7 +55,7 @@ set eBiM  [param get type=float key=Silicon/Boron/BI(e(-1,0))]
 set CBiM  [expr $CB*$Bif_P*exp(($Bf_E - $Bif_E)/($kB*($T+273.15)))]
 
 
-anneal time=1e25 temp=$T events=2.4e8
+anneal time=1e25 temp=$T events=1.5e8
 
 test tag=$T.I array={ [extract profile.mobile name=I state=0] } value=$CI init=1 end=$sizeX error=.10
 set test  [test tag=$T.BiM array={ [extract profile.mobile name=BI state=-] } value=$CBiM init=1 end=$sizeX error=.17]
