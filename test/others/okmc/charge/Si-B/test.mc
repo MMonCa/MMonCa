@@ -17,7 +17,7 @@ param set type=arrhenius key=Silicon/Vacancy/V(formation)    value="1 6"
 
 set T 900
 #set eF 0.33
-set scale 0.720462
+set scale 0.7448065
 set kT [expr 8.6174e-5*($T+273.15)]
 
 init minx=-2 miny=0 minz=0 maxx=$sizeX maxy=$sizeYZ maxz=$sizeYZ material=material
