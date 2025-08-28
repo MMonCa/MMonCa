@@ -152,7 +152,7 @@ void ParameterManager::readElements(const IO::FileParameters *p)
 					if(composition[i] == _families[j]._s_family)
 						_materials[mt]._pt[i] = j;
 				if(_materials[mt]._pt[i] == Kernel::UNDEFINED_TYPE)
-					ERRORMSG(getMaterialName(mt) + "Models/material.composition. Cannot understand composition " << composition[i]);
+					ERRORMSG(getMaterialName(mt) + "/Models/material.composition. Cannot understand composition " << composition[i]);
 			}
 		}
 		else
