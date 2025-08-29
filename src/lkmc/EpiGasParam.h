@@ -31,7 +31,8 @@
 
 namespace LKMC {
 
-const unsigned MAX_EPI_GASES = 3;
+const unsigned MAX_EPI_GASES = 3;  //                    +1                 +2                  +3
+enum LkmcEvent { LE_FINAL_MIGRATES = MAX_EPI_GASES, LE_FINAL_REMOVED, LE_PRECUR_TO_FINAL, LE_PRECUR_REMOVED, MAX_LKMC_EVENT };
 
 struct EpiGasParam
 {

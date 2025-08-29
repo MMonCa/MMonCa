@@ -68,13 +68,13 @@ void LatticeAtomDEpi::perform (Kernel::SubDomain *pSub, unsigned eventType)
 
 	if(eventType < MAX_EPI_GASES)
 		performPrecursor(pSub, _pDomain->_pEGPar[_basicMat]->_toPType[eventType], toUpdate);
-	else if(eventType == MAX_EPI_GASES) //mig
+	else if(eventType == LE_FINAL_MIGRATES) //mig
 		performMig(pSub, toUpdate);
-	else if(eventType == MAX_EPI_GASES+1) //depositions or etching
+	else if(eventType == LE_FINAL_REMOVED) //depositions or etching
 		performEtching(pSub, toUpdate);
-	else if(eventType == MAX_EPI_GASES+2)
+	else if(eventType == LE_PRECUR_TO_FINAL)
 		performAdsorption(pSub, toUpdate);
-	else if(eventType == MAX_EPI_GASES+3)
+	else if(eventType == LE_PRECUR_REMOVED)
 		performDesorption(pSub, toUpdate);
 	else
 		ERRORMSG("LatticeAtomDEpi::Unknown event " << eventType);
@@ -211,18 +211,18 @@ void LatticeAtomDEpi::performPrecursor(Kernel::SubDomain *pSub, Kernel::P_TYPE p
 	toUpdate[_number] = this;
 }
 
-// eventType < MAX_EPI_GASES: Deposit the atom specified in the GasParameters;
-// eventType == MAX_EPI_GASES: Migration
-//           == MAX_EPI_GASES+1: etching
-//           == MAX_EPI_GASES+2: final adsorption
-//           == MAX_EPI_GASES+3: precursor desorption
+// eventType < MAX_EPI_GASES:       Deposit the atom specified in the GasParameters;
+// eventType == LE_FINAL_MIGRATES:  Migration
+//           == LE_FINAL_REMOVED:   etching
+//           == LE_PRECUR_TO_FINAL: final adsorption
+//           == LE_PRECUR_REMOVED:  precursor desorption
 float LatticeAtomDEpi::getRate(unsigned eventType, float kT) const
 {
-	if((eventType <    MAX_EPI_GASES && _state != LS_AVAILABLE) || //precursor depo
-	   (eventType ==   MAX_EPI_GASES && _state != LS_PERFORMED) || //mig
-	   (eventType == 1+MAX_EPI_GASES && _state != LS_PERFORMED) || //final product etching
-	   (eventType == 2+MAX_EPI_GASES && _state != LS_PRECURSOR) || //final absorption
-	   (eventType == 3+MAX_EPI_GASES && _state != LS_PRECURSOR))   //precursor desorption
+	if((eventType <  MAX_EPI_GASES      && _state != LS_AVAILABLE) || //precursor depo
+	   (eventType == LE_FINAL_MIGRATES  && _state != LS_PERFORMED) || //mig
+	   (eventType == LE_FINAL_REMOVED   && _state != LS_PERFORMED) || //final product etching
+	   (eventType == LE_PRECUR_TO_FINAL && _state != LS_PRECURSOR) || //final absorption
+	   (eventType == LE_PRECUR_REMOVED  && _state != LS_PRECURSOR))   //precursor desorption
 		return 0;
 
 	const LatticeDiamondParam * param = static_cast<const LatticeDiamondParam *>(_pDomain->_pLaPar[_basicMat]);
@@ -233,10 +233,11 @@ float LatticeAtomDEpi::getRate(unsigned eventType, float kT) const
 	for(unsigned i=0; i<FIRSTN; ++i)
 		if(_neighbors[i])
 			neigStates[static_cast<LatticeAtomDEpi *>(_neighbors[i])->_state]++;
-	if( (eventType <    MAX_EPI_GASES && neigStates[LS_PERFORMED] == 0) ||
-	    (eventType == 1+MAX_EPI_GASES && neigStates[LS_AVAILABLE] == 0))
+	if( (eventType <     MAX_EPI_GASES && neigStates[LS_PERFORMED] == 0) ||   // precursor depo without any cristalline neighbour
+	    (eventType == LE_FINAL_REMOVED && neigStates[LS_AVAILABLE] == 0) ||   // product etching with no place to go
+		(eventType == LE_PRECUR_TO_FINAL && neigStates[LS_PERFORMED] == 0)) { // final absorption and no cristalline neighbour
 		return 0;
-	assert(eventType != 2+MAX_EPI_GASES || neigStates[LS_PERFORMED]);
+	}
 	Kernel::P_TYPE myType = (eventType < MAX_EPI_GASES ? _pDomain->_pEGPar[_basicMat]->_toPType[eventType]: _type);
 	if(myType == Kernel::UNDEFINED_TYPE) //gas not defined.
 		return 0;
@@ -271,7 +272,7 @@ float LatticeAtomDEpi::getRate(unsigned eventType, float kT) const
 		float ener = param->_epi[myType]._barrierPrecursor;
 		return pref*exp(-ener/kT);
 	}
-	if(eventType == 3+MAX_EPI_GASES) //precursor desorption
+	if(eventType == LE_PRECUR_REMOVED) //precursor desorption
 	{
 		float pref = _speed_rateFactor * param->_epi[myType]._prefDes;
 		float ener = param->_epi[myType]._barrierDes;
@@ -310,15 +311,15 @@ float LatticeAtomDEpi::getRate(unsigned eventType, float kT) const
 	float pref = 0;
 	float ener = 0;
 
-	if(eventType == MAX_EPI_GASES) //migration
+	if(eventType == LE_FINAL_MIGRATES) //migration
 		return param->_model_simplified? 0 : getMigRate(tempEner, kT);
-	else if(eventType == MAX_EPI_GASES+1) //de-attachment
+	else if(eventType == LE_FINAL_REMOVED) //de-attachment
 	{
 		pref = param->_epi[myType]._prefEtch;
 		if(!param->_model_simplified)
 			ener = -tempEner;
 	}
-	else if(eventType == MAX_EPI_GASES+2) //attachment of a precursor.
+	else if(eventType == LE_PRECUR_TO_FINAL) //attachment of a precursor.
 	{
 		if(neighborhood._pt.size() == 0)
 			return 0;

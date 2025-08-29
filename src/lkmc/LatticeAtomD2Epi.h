@@ -37,7 +37,7 @@ public:
 	virtual float getRate(unsigned eventType, float kT) const;
 	virtual void setIndex(unsigned eventType, int idx) { _idx[eventType] = idx; }
 	virtual int  getIndex(unsigned eventType) const { return _idx[eventType]; }
-	virtual unsigned getNEvents() const { return MAX_EPI_GASES+4; } //depositions + mig + etching + final adsorption + desorption
+	virtual unsigned getNEvents() const { return MAX_LKMC_EVENT; } //depositions + mig + etching + final adsorption + desorption
 	//              4         4+12=16   16+12=28         Perfect, but due to periodic BC and twins it can be more.
 	enum { FIRSTN = 9, SECONDN = 30, THIRDN = 64 };
 	virtual unsigned first() const  { return FIRSTN; }
@@ -48,7 +48,7 @@ public:
 	virtual void restart(std::ostream &) const;
 
 private:
-	int _idx[4 + MAX_EPI_GASES];
+	int _idx[MAX_LKMC_EVENT];
 	const static unsigned MAX_ATOM_MIGS = 5;
 	mutable unsigned _rateMigs;  //number of atoms in the cache
 	mutable float    _rateMig[MAX_ATOM_MIGS];  //Mig freq. for each atom
