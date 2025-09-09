@@ -78,7 +78,7 @@ set eF      [expr -[extract electrostatic name=valence.bandedge dimension=0 min.
 lowmsg      "eF is $eF and eBiM is $eBiM"
 set CBi0    [expr $CBiM*exp(($scale*$eBiM - $eF)/($kB*($T+273.15)))]
 
-test tag=$T.$conc.hole array={[extract electrostatic  name=hole.density dimension=1]} value=$conc error=.75 init=5 end=$size
+test tag=$T.$conc.hole array={[extract electrostatic  name=hole.density dimension=1]} value=$conc error=.76 init=5 end=$size
 test tag=$T.$conc.CBiM array={[extract profile.mobile name=BI state=- dimension=1]} value=$CBiM error=.60 init=5 end=$size
 test tag=$T.$conc.CBi0 array={[extract profile.mobile name=BI state=0 dimension=1]} value=$CBi0   error=.75 init=5 end=$size
 

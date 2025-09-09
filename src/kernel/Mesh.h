@@ -181,10 +181,13 @@ private:
     std::vector<unsigned> _yParticles;
     std::unordered_map<unsigned, double> _longHopFactor[MAX_MATERIALS];
 
+    unsigned _xCells; //sizeZ
+    unsigned _yCells; //sizeZ
     unsigned _zCells; //sizeZ
     unsigned _yzCells; //size Y * Z
     bool _periodicX, _periodicY, _periodicZ;
-    float _xsize, _ysize, _zsize;
+    double _xsize, _ysize, _zsize;
+    double _xModOffset, _yModOffset, _zModOffset;
 
 	std::string _poissonX, _poissonY, _poissonZ;
 	double      _potentialX, _potentialY, _potentialZ;

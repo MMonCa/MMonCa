@@ -51,9 +51,11 @@ const Domains::MCClient *pCli) : _min(m), _max(M)
 	_xlines = x;
 	_ylines = y;
 	_zlines = z;
+	_xCells  = _xlines.size() -1;
+	_yCells  = _ylines.size() -1;
 	_zCells  = _zlines.size() -1;
-	_yzCells = (_zlines.size() -1)*(_ylines.size() -1);
-	unsigned NElements = (_xlines.size() -1) * (_ylines.size() -1) * (_zlines.size() -1);
+	_yzCells = _zCells * _yCells;
+	unsigned NElements = _xCells * _yCells * _zCells;
 	_elements.assign(NElements,MeshElement(_pDomain));
 	unsigned idx=0;
 	for(vector<MeshElement>::iterator it=_elements.begin(); it!=_elements.end(); ++it)
@@ -73,15 +75,18 @@ const Domains::MCClient *pCli) : _min(m), _max(M)
 		else
 			it->_AAtoms = round(Domains::global()->PM()->getMaterial(it->_mat)._densityCm3 * vol * 1e-21);
 	}
-	for(unsigned i=0; i< _ylines.size() -1; ++i) _yParticles.push_back(0);
-	for(unsigned i=0; i< _xlines.size() -1; ++i) _xParticles.push_back(0);
+	for(unsigned i=0; i< _yCells; ++i) _yParticles.push_back(0);
+	for(unsigned i=0; i< _xCells; ++i) _xParticles.push_back(0);
 
 	_periodicX = _pDomain->_pMePar->_periodicX;
 	_periodicY = _pDomain->_pMePar->_periodicY;
 	_periodicZ = _pDomain->_pMePar->_periodicZ;
-	_xsize = _xlines.back() - _xlines.front();
-	_ysize = _ylines.back() - _ylines.front();
-	_zsize = _zlines.back() - _zlines.front();
+	_xsize = static_cast<double>(_xlines.back()) - _xlines.front();
+	_ysize = static_cast<double>(_ylines.back()) - _ylines.front();
+	_zsize = static_cast<double>(_zlines.back()) - _zlines.front();
+	_xModOffset = _xsize - _xlines.front();
+	_yModOffset = _ysize - _ylines.front();
+	_zModOffset = _zsize - _zlines.front();
 
 	_poissonX  = _pDomain->_pMePar->_poissonX;
 	_poissonY  = _pDomain->_pMePar->_poissonY;
@@ -100,7 +105,7 @@ const Domains::MCClient *pCli) : _min(m), _max(M)
       for(uint32_t y = 1u; y < _ylines.size(); ++y) {
 				uint32_t xm1 = x - 1u;
 				uint32_t ym1 = y - 1u;
-				_longHopFactor[mt][xm1 * (_ylines.size() - 1u) + ym1] =
+				_longHopFactor[mt][xm1 * _yCells + ym1] =
 std::max(unsigned(1), unsigned(std::min(_xlines[x] - _xlines[xm1], _ylines[y] - _ylines[ym1]) / _pDomain->_pMePar->_lambda[mt]));
 			}
 		}
@@ -142,22 +147,22 @@ void Mesh::buildNodes() {
 				_pNodes[ix][iy][iz]._iy     = iy;
 				_pNodes[ix][iy][iz]._iz     = iz;
 
-				if (_periodicX && ix == (_xlines.size() - 1))
+				if (_periodicX && ix == _xCells)
 					_pNodes[ix][iy][iz]._active = false;
-				if (_periodicY && iy == (_ylines.size() - 1))
+				if (_periodicY && iy == _yCells)
 					_pNodes[ix][iy][iz]._active = false;
-				if (_periodicZ && iz == (_zlines.size() - 1))
+				if (_periodicZ && iz == _zCells)
 					_pNodes[ix][iy][iz]._active = false;
 
-				if (_poissonX == "Dirichlet" && (ix == 0 || ix == (_xlines.size() - 1))) {
+				if (_poissonX == "Dirichlet" && (ix == 0 || ix == _xCells)) {
 					_pNodes[ix][iy][iz]._active    = false;
 					_pNodes[ix][iy][iz]._V = _potentialX;
 				}
-				if (_poissonY == "Dirichlet" && (iy == 0 || iy == (_ylines.size() - 1))) {
+				if (_poissonY == "Dirichlet" && (iy == 0 || iy == _yCells)) {
 					_pNodes[ix][iy][iz]._active    = false;
 					_pNodes[ix][iy][iz]._V = _potentialY;
 				}
-				if (_poissonZ == "Dirichlet" && (iz == 0 || iz == (_zlines.size() - 1))) {
+				if (_poissonZ == "Dirichlet" && (iz == 0 || iz == _zCells)) {
 					_pNodes[ix][iy][iz]._active    = false;
 					_pNodes[ix][iy][iz]._V = _potentialZ;
 				}
@@ -192,11 +197,11 @@ void Mesh::initNodes() {
 					unsigned i = ix;
 					unsigned j = iy;
 					unsigned k = iz;
-					if (_periodicX && ix == (_xlines.size() - 1))
+					if (_periodicX && ix == _xCells)
 						i = 0;
-					if (_periodicY && iy == (_ylines.size() - 1))
+					if (_periodicY && iy == _yCells)
 						j = 0;
-					if (_periodicZ && iz == (_zlines.size() - 1))
+					if (_periodicZ && iz == _zCells)
 						k = 0;
 
 					_pNodes[i][j][k]._volume += (_pNodes[ix][iy][iz]._xp - _pNodes[ix][iy][iz]._xm) *
@@ -219,20 +224,20 @@ void Mesh::initNodes() {
 					double zp = _pNodes[ix][iy][iz]._zp;
 
 					if (_periodicX && ix == 0)
-						xm = _pNodes[_xlines.size() - 1][iy][iz]._xm;
+						xm = _pNodes[_xCells][iy][iz]._xm;
 					if (_periodicY && iy == 0)
-						ym = _pNodes[ix][_ylines.size() - 1][iz]._ym;
+						ym = _pNodes[ix][_yCells][iz]._ym;
 					if (_periodicZ && iz == 0)
-						zm = _pNodes[ix][iy][_zlines.size() - 1]._zm;
+						zm = _pNodes[ix][iy][_zCells]._zm;
 
 					MeshElement *pME[8];
 
 					unsigned xmin = 0;
-					unsigned xmax = _xlines.size() - 1;
+					unsigned xmax = _xCells;
 					unsigned ymin = 0;
-					unsigned ymax = _ylines.size() - 1;
+					unsigned ymax = _yCells;
 					unsigned zmin = 0;
-					unsigned zmax = _zlines.size() - 1;
+					unsigned zmax = _zCells;
 
 					for (unsigned i = 0; i < 8; ++i)
 						pME[i] = NULL;
@@ -272,7 +277,7 @@ void Mesh::initNodes() {
 }
 
 void Mesh::getMidX(unsigned ix, unsigned iy, unsigned iz, double &xm, double &xp) {
-	if (ix != 0 && ix != (_xlines.size() - 1)) {
+	if (ix != 0 && ix != _xCells) {
 		xm = 1. / 2. * (_pNodes[ix][iy][iz]._coord._x + _pNodes[ix-1][iy][iz]._coord._x);
 		xp = 1. / 2. * (_pNodes[ix][iy][iz]._coord._x + _pNodes[ix+1][iy][iz]._coord._x);
 	} else {
@@ -280,7 +285,7 @@ void Mesh::getMidX(unsigned ix, unsigned iy, unsigned iz, double &xm, double &xp
 			xm = _pNodes[ix][iy][iz]._coord._x;
 			xp = 1. / 2. * (_pNodes[ix][iy][iz]._coord._x + _pNodes[ix+1][iy][iz]._coord._x);
 		}
-		if (ix == (_xlines.size() - 1)) {
+		if (ix == _xCells) {
 			xm = 1. / 2. * (_pNodes[ix][iy][iz]._coord._x + _pNodes[ix-1][iy][iz]._coord._x);
 			xp = _pNodes[ix][iy][iz]._coord._x;
 		}
@@ -288,7 +293,7 @@ void Mesh::getMidX(unsigned ix, unsigned iy, unsigned iz, double &xm, double &xp
 }
 
 void Mesh::getMidY(unsigned ix, unsigned iy, unsigned iz, double &ym, double &yp) {
-	if (iy != 0 && iy != (_ylines.size() - 1)) {
+	if (iy != 0 && iy != _yCells) {
 		ym = 1. / 2. * (_pNodes[ix][iy][iz]._coord._y + _pNodes[ix][iy-1][iz]._coord._y);
 		yp = 1. / 2. * (_pNodes[ix][iy][iz]._coord._y + _pNodes[ix][iy+1][iz]._coord._y);
 	} else {
@@ -296,7 +301,7 @@ void Mesh::getMidY(unsigned ix, unsigned iy, unsigned iz, double &ym, double &yp
 			ym = _pNodes[ix][iy][iz]._coord._y;
 			yp = 1. / 2. * (_pNodes[ix][iy][iz]._coord._y + _pNodes[ix][iy+1][iz]._coord._y);
 		}
-		if (iy == (_ylines.size() - 1)) {
+		if (iy == _yCells) {
 			ym = 1. / 2. * (_pNodes[ix][iy][iz]._coord._y + _pNodes[ix][iy-1][iz]._coord._y);
 			yp = _pNodes[ix][iy][iz]._coord._y;
 		}
@@ -304,7 +309,7 @@ void Mesh::getMidY(unsigned ix, unsigned iy, unsigned iz, double &ym, double &yp
 }
 
 void Mesh::getMidZ(unsigned ix, unsigned iy, unsigned iz, double &zm, double &zp) {
-	if (iz != 0 && iz != (_zlines.size() - 1)) {
+	if (iz != 0 && iz != _zCells) {
 		zm = 1 / 2. * (_pNodes[ix][iy][iz]._coord._z + _pNodes[ix][iy][iz-1]._coord._z);
 		zp = 1 / 2. * (_pNodes[ix][iy][iz]._coord._z + _pNodes[ix][iy][iz+1]._coord._z);
 	} else {
@@ -312,7 +317,7 @@ void Mesh::getMidZ(unsigned ix, unsigned iy, unsigned iz, double &zm, double &zp
 			zm = _pNodes[ix][iy][iz]._coord._z;
 			zp = 1. / 2. * (_pNodes[ix][iy][iz]._coord._z + _pNodes[ix][iy][iz+1]._coord._z);
 		}
-		if (iz == (_zlines.size() - 1)) {
+		if (iz == _zCells) {
 			zm = 1. / 2. * (_pNodes[ix][iy][iz]._coord._z + _pNodes[ix][iy][iz-1]._coord._z);
 			zp = _pNodes[ix][iy][iz]._coord._z;
 		}
@@ -410,10 +415,10 @@ void Mesh::print() const
 	std::string oldLine;
 	for(Kernel::M_TYPE mt=0; mt < Domains::global()->PM()->getNMaterials(); ++mt)
 		LOWMSG(int(mt) << " -> " << Domains::global()->PM()->getMaterialName(mt));
-	for(unsigned ix=0; ix<_xlines.size()-1; ++ix)
+	for(unsigned ix=0; ix<_xCells; ++ix)
 	{
 		std::stringstream ss;
-		for(unsigned iy=0; iy<_ylines.size()-1;++iy)
+		for(unsigned iy=0; iy<_yCells; ++iy)
 		{
 			const MeshElement &me = _elements[getIndexFromIndices(ix, iy, 0)];
 			if(me.getMaterial() < Kernel::MAX_MATERIALS)
@@ -425,7 +430,7 @@ void Mesh::print() const
 		{
 			LOWMSG2(ss.str());
 			LOWMSG2(" - ");
-			for(unsigned iy=0; iy<_ylines.size()-1;++iy)
+			for(unsigned iy=0; iy<_yCells; ++iy)
 			{
 				const MeshElement &me = _elements[getIndexFromIndices(ix, iy, 0)];
 				LKMC::LatticeAtom *pLA = dynamic_cast<LKMC::LatticeAtom *>(me.getFirstLS());
@@ -441,15 +446,15 @@ void Mesh::print() const
 void Mesh::printDomains() const
 {
 	LOWMSG("----------- SubDomains -- Levels --");
-	for(unsigned ix=0; ix<_xlines.size()-1; ++ix)
+	for(unsigned ix=0; ix<_xCells; ++ix)
 	{
-		for(unsigned iy=0; iy<_ylines.size()-1;++iy)
+		for(unsigned iy=0; iy<_yCells; ++iy)
 		{
 			const MeshElement &me = _elements[getIndexFromIndices(ix, iy, 0)];
 			LOWMSG2( char('A' + me._subDomainIdx));
 		}
 		LOWMSG2(" - ");
-		for(unsigned iy=0; iy<_ylines.size()-1;++iy)
+		for(unsigned iy=0; iy<_yCells; ++iy)
 		{
 			const MeshElement &me = _elements[getIndexFromIndices(ix, iy, 0)];
 			LOWMSG2(int(me._subDomainLevel));
@@ -457,15 +462,15 @@ void Mesh::printDomains() const
 		LOWMSG2("  " << _xlines[ix] << ":" << _xlines[ix+1] << "\n");
 	}
 	LOWMSG("");
-	for(unsigned iz=0; iz<_zlines.size()-1; ++iz)
+	for(unsigned iz=0; iz<_zCells; ++iz)
 	{
-		for(unsigned iy=0; iy<_ylines.size()-1;++iy)
+		for(unsigned iy=0; iy<_yCells; ++iy)
 		{
 			const MeshElement &me = _elements[getIndexFromIndices(0, iy, iz)];
 			LOWMSG2( char('A' + me._subDomainIdx));
 		}
 		LOWMSG2(" - ");
-		for(unsigned iy=0; iy<_ylines.size()-1;++iy)
+		for(unsigned iy=0; iy<_yCells; ++iy)
 		{
 			const MeshElement &me = _elements[getIndexFromIndices(0, iy, iz)];
 			LOWMSG2(int(me._subDomainLevel));
@@ -601,7 +606,7 @@ void Mesh::trackLHF(unsigned idx, int pm)
 
 unsigned Mesh::getxIndex(float cx) const
 {
-	unsigned xInf = 0, xSup = _xlines.size() -1;
+	unsigned xInf = 0, xSup = _xCells;
 	unsigned nx;
 	do
 	{
@@ -618,7 +623,7 @@ unsigned Mesh::getxIndex(float cx) const
 
 unsigned Mesh::getyIndex(float cy) const
 {
-	unsigned yInf = 0, ySup = _ylines.size() -1;
+	unsigned yInf = 0, ySup = _yCells;
 	unsigned ny;
 	do
 	{
@@ -635,7 +640,7 @@ unsigned Mesh::getyIndex(float cy) const
 
 unsigned Mesh::getzIndex(float cz) const
 {
-	unsigned zInf = 0, zSup = _zlines.size() -1;
+	unsigned zInf = 0, zSup = _zCells;
 	unsigned nz;
 	do
 	{
@@ -910,7 +915,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 		{
 			if(_periodicX)
 			{
-				minX  = _xlines.size() -1;
+				minX  = _xCells;
 				limit += _xsize;
 			}
 			else
@@ -935,7 +940,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 			}
 			else
 			{
-				maxX = _xlines.size()-1;
+				maxX = _xCells;
 				break;
 			}
 		}
@@ -946,7 +951,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 	{
 		WARNINGMSG("Defect large enough to see itself using PBC in x");
 		minX = 0;
-		maxX = _xlines.size() - 1;
+		maxX = _xCells;
 	}
 	// Y
 	overwrite = false;
@@ -959,7 +964,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 		{
 			if(_periodicY)
 			{
-				minY  = _ylines.size() -1;
+				minY  = _yCells;
 				limit += _ysize;
 			}
 			else
@@ -984,7 +989,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 			}
 			else
 			{
-				maxY = _ylines.size()-1;
+				maxY = _yCells;
 				break;
 			}
 		}
@@ -995,7 +1000,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 	{
 		WARNINGMSG("Defect large enough to see itself using PBC in y");
 		minY = 0;
-		maxY = _ylines.size() - 1;
+		maxY = _yCells;
 	}
 	// Z
 	overwrite = false;
@@ -1008,7 +1013,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 		{
 			if(_periodicZ)
 			{
-				minZ  = _zlines.size() -1;
+				minZ  = _zCells;
 				limit += _zsize;
 			}
 			else
@@ -1033,7 +1038,7 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 			}
 			else
 			{
-				maxZ = _zlines.size()-1;
+				maxZ = _zCells;
 				break;
 			}
 		}
@@ -1044,20 +1049,20 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 	{
 		WARNINGMSG("Defect large enough to see itself using PBC in z");
 		minZ = 0;
-		maxZ = _zlines.size() - 1;
+		maxZ = _zCells;
 	}
 	elems.reserve(27);
 	for(unsigned indx = minX; indx != maxX; ++indx)
 	{
-		if(indx == _xlines.size()-1)
+		if(indx == _xCells)
 			indx=0;
 		for(unsigned indy = minY; indy != maxY; ++indy)
 		{
-			if(indy == _ylines.size()-1)
+			if(indy == _yCells)
 				indy=0;
 			for(unsigned indz = minZ; indz != maxZ; ++indz)
 			{
-				if(indz == _zlines.size()-1)
+				if(indz == _zCells)
 					indz=0;
 				unsigned index = getIndexFromIndices(indx, indy, indz);
 				if(_elements[index].getMaterial() == mt)
@@ -1070,59 +1075,64 @@ void Mesh::fillNeighborsOneMat(const MeshElement *pEle, const Coordinates &c, fl
 //fills neighbors for all materials around c, distance dist
 void Mesh::fillNeighborsAllMat(const Coordinates &c, float dist, vector<MeshElement *> &elems)
 {
-	float newdist = c[0]-dist;
-	if(newdist < _xlines.front())
+	double newdist = c[0]-dist;
+	if(newdist < _xlines.front() && !_periodicX)
 	{
-		newdist = (_periodicX? _xsize + newdist : _xlines.front());
-		if(newdist >= _xlines.back()) newdist = _xlines.front();
+		newdist = _xlines.front();
 	}
-	const unsigned ix = getxIndex(newdist);
+	unsigned const ix = getxIndex(std::fmod(newdist + _xModOffset, _xsize) + _xlines.front()) 
+		+ (newdist < _xlines.front() ? 0u : _xCells);
 	newdist = c[0]+dist;
-	if(newdist >= _xlines.back())
+	if(newdist >= _xlines.back() && !_periodicX)
 	{
-		newdist = (_periodicX? newdist - _xsize : _xlines.back() - 1e-4);
-		if(newdist < _xlines.front()) newdist = _xlines.back() - 1e-4;
+		newdist = _xlines.back() - 1e-4;
 	}
-	const unsigned Ix = getxIndex(newdist);
+	unsigned Ix = getxIndex(std::fmod(newdist + _xModOffset, _xsize) + _xlines.front())
+		+ (newdist >= _xlines.back() ? _xCells * 2u : _xCells);
+	Ix -= (ix % _xCells == Ix % _xCells && Ix > ix ? 1u : 0u);
+	assert(ix <= Ix);
+	
 	newdist = c[1]-dist;
-	if(newdist < _ylines.front())
+	if(newdist < _ylines.front() && !_periodicY)
 	{
-		newdist = (_periodicY? _ysize + newdist : _ylines.front());
-		if(newdist >= _ylines.back()) newdist = _ylines.front(); //to avoid floating issues when applying BC
+		newdist = _ylines.front();
 	}
-	const unsigned iy = getyIndex(newdist);
+	unsigned const iy = getyIndex(std::fmod(newdist + _yModOffset, _ysize) + _ylines.front()) 
+		+ (newdist < _ylines.front() ? 0u : _yCells);
 	newdist = c[1]+dist;
-	if(newdist >= _ylines.back())
+	if(newdist >= _ylines.back() && !_periodicY)
 	{
-		newdist = (_periodicY? newdist - _ysize : _ylines.back() - 1e-4);
-		if(newdist < _ylines.front()) newdist = _ylines.back() - 1e-4;
+		newdist = _ylines.back() - 1e-4;
 	}
-	const unsigned Iy = getyIndex(newdist);
+	unsigned Iy = getyIndex(std::fmod(newdist + _yModOffset, _ysize) + _ylines.front())
+		+ (newdist >= _ylines.back() ? _yCells * 2u : _yCells);
+	Iy -= (iy % _yCells == Iy % _yCells && Iy > iy ? 1u : 0u);
+	assert(iy <= Iy);
+	
 	newdist = c[2]-dist;
-	if(newdist < _zlines.front())
+	if(newdist < _zlines.front() && !_periodicZ)
 	{
-		newdist = (_periodicZ? _zsize + newdist : _zlines.front());
-		if(newdist >= _zlines.back()) newdist = _zlines.front();
+		newdist = _zlines.front();
 	}
-	const unsigned iz = getzIndex(newdist);
+	unsigned const iz = getzIndex(std::fmod(newdist + _zModOffset, _zsize) + _zlines.front())
+		+ (newdist < _zlines.front() ? 0u : _zCells);
 	newdist = c[2]+dist;
-	if(newdist >= _zlines.back())
+	if(newdist >= _zlines.back() && !_periodicZ)
 	{
-		newdist = (_periodicZ? newdist - _zsize : _zlines.back() - 1e-4);
-		if(newdist < _zlines.front()) newdist = _zlines.back() - 1e-4;
+		newdist = _zlines.back() - 1e-4;
 	}
-	const unsigned Iz = getzIndex(newdist);
+	unsigned Iz = static_cast<int>(getzIndex(std::fmod(newdist + _zModOffset, _zsize) + _zlines.front()))
+		+ (newdist >= _zlines.back() ? _zCells * 2u : _zCells);
+	Iz -= (iz % _zCells == Iz % _zCells && Iz > iz ? 1u : 0u);
+	assert(iz <= Iz);
 
-	for(unsigned i=ix; (ix <= Ix? (i<=Ix) : (i >= ix || i <= Ix) ); ++i)
+	for(unsigned i=ix; i <= Ix; ++i)
 	{
-		if(i == _xlines.size() -1) i=0;
-		for(unsigned j=iy; (iy <= Iy? (j <=Iy) : (j >= iy || j <= Iy) ); ++j)
+		for(unsigned j=iy; j <= Iy; ++j)
 		{
-			if(j == _ylines.size() -1) j = 0;
-			for(unsigned k=iz; (iz <= Iz? (k <= Iz) : (k >=iz || k <= Iz) ); ++k)
+			for(unsigned k=iz; k <= Iz; ++k)
 			{
-				if(k == _zlines.size() - 1) k = 0;
-				elems.push_back(&_elements[getIndexFromIndices(i, j, k)]);
+				elems.push_back(&_elements[getIndexFromIndices(i % _xCells, j % _yCells, k % _zCells)]);
 			}
 		}
 	}
