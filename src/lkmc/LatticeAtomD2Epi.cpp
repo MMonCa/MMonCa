@@ -233,7 +233,7 @@ float LatticeAtomD2Epi::getRate(unsigned eventType, float kT) const
 	unsigned neigStates[3] = { 0, 0, 0 }; //array with neighboring states
 	for(unsigned i=0; i<FIRSTN; ++i)
 		if(_neighbors[i])
-			neigStates[static_cast<LatticeAtomD2Epi *>(_neighbors[i])->_state]++;
+			neigStates[_neighbors[i]->getState()]++;
 	if( (eventType <     MAX_EPI_GASES && neigStates[LS_PERFORMED] == 0) ||   // precursor depo without any cristalline neighbour
 	    (eventType == LE_FINAL_REMOVED && neigStates[LS_AVAILABLE] == 0) ||   // product etching with no place to go
 		(eventType == LE_PRECUR_TO_FINAL && neigStates[LS_PERFORMED] == 0)) { // final absorption and no cristalline neighbour
@@ -357,7 +357,7 @@ double LatticeAtomD2Epi::getMigRate(float tempEner, float kT) const
 	float returnRate = 0;
 	_rateMigs = 0;
 	for(unsigned i=0; i<SECONDN; ++i)
-		if(_neighbors[i] && static_cast<LatticeAtomD2Epi *>(_neighbors[i])->_state == LS_AVAILABLE)
+		if(_neighbors[i] && _neighbors[i]->getState() == LS_AVAILABLE)
 		{
 			_atomMig[_rateMigs] = static_cast<LatticeAtomD2Epi *>(_neighbors[i]); //candidate for "moving"
 			LatticeAtomD2Epi *candidate = _atomMig[_rateMigs];
