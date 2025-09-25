@@ -430,8 +430,7 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 		}
 		newTime /= _domains.size(); // TODO consider min(domain time) instead. Would help converge the threads, but not much difference.
 		newDepth /= _domains.size();
-		if(newDepth > 1e35)
-			newDepth = origDepth;
+		bool const validDepth = newDepth < 1e35;
 		_time = newTime;
 		if(bFinished && event == 0 && bDepth == false)
 			_time = endTime;
@@ -446,7 +445,7 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 		{
 			if(Tcl_EvalEx(_pGlobalTcl,  "snapshot", -1, 0) != TCL_OK)
 				WARNINGMSG("Snapshot not defined or error.");
-			printOutput(100.*(origDepth - newDepth)/(origDepth - depth));
+			printOutput(validDepth ? 100.*(origDepth - newDepth)/(origDepth - depth) : 0.0);
 		}
 		else if((_time - initTime)/(endTime - initTime) < 1.)
 		{
@@ -454,7 +453,7 @@ void Global::anneal(double time, bool bDepth, float depth, long unsigned event)
 				WARNINGMSG("Snapshot not defined or error.");
 			printOutput(100.*(_time - initTime)/(endTime - initTime));
 		}
-		bStop = bFinished || (event > 0 && nEvents >= event) || (bDepth && newDepth < depth);
+		bStop = bFinished || (event > 0 && nEvents >= event) || (bDepth && validDepth && newDepth < depth);
 	}
 	time_t endCPUTime;
 	std::time(&endCPUTime);
