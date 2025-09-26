@@ -155,7 +155,7 @@ void LatticeAtomDEpi::performAdsorption(Kernel::SubDomain *pSub, map<int, Lattic
 			isAllowed(twinPos, pEle, MOD_Epitaxy))
 		{
 			Kernel::Mesh::LSNeiList neiList;
-			_pDomain->_pMesh->fillLatticeNeighbors(twinPos, _pDomain->_pLaPar[_basicMat]->_neighborDistance[0]*.66, neiList);
+			_pDomain->_pMesh->fillLatticeNeighbors(twinPos, 0.0, _pDomain->_pLaPar[_basicMat]->_neighborDistance[0]*.66, neiList);
 			for(Kernel::Mesh::LSNeiList::iterator neiIt = neiList.begin(); neiIt != neiList.end(); ++neiIt)
 			{
 				if(neiIt->_dist2 <= 0.05)

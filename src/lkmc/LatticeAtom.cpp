@@ -91,30 +91,52 @@ void LatticeAtom::insertNeighbors()
 		_neighbors[i] = 0;
 
 	Mesh::LSNeiList neighbors;
-	float first2 =  _pDomain->_pLaPar[mt]->_neighborDistance[0] * _pDomain->_pLaPar[mt]->_neighborDistance[0];
+	float minDist = _pDomain->_pLaPar[mt]->_neighborDistance[0];
 	float second2 = _pDomain->_pLaPar[mt]->_neighborDistance[1] * _pDomain->_pLaPar[mt]->_neighborDistance[1];
-	_pDomain->_pMesh->fillLatticeNeighbors(_coord, _pDomain->_pLaPar[mt]->_neighborDistance[2], neighbors);
+	float first2 = minDist * minDist;
+	minDist *= MIN_DIST_FACTOR;
+	_pDomain->_pMesh->fillLatticeNeighbors(_coord, minDist, _pDomain->_pLaPar[mt]->_neighborDistance[2], neighbors);
+	float minDist2 = first2 * MIN_DIST_FACTOR;
 
-	for(Mesh::LSNeiList::iterator it=neighbors.begin(); it!=neighbors.end(); ++it)
+	bool good = true;
+	for(Mesh::LSNeiList::iterator it=neighbors.begin(); it!=neighbors.end() && good; ++it)
 	{
 		LatticeAtom *itpLA = static_cast<LatticeAtom *>(it->_pLS);
 		if(itpLA->getLatticeType() == getLatticeType() && itpLA != this)
 		{
-			if(it->_dist2 < first2 )
+			int this2it, it2this, neighborhood;
+			if(it->_dist2 < first2)
 			{
-				itpLA->newNeig(0, this, it->_dist2);
-				this->newNeig(0, itpLA, it->_dist2);
+				neighborhood = 0;
 			}
 			else if(it->_dist2 < second2)
 			{
-				itpLA->newNeig(1, this, it->_dist2);
-				this->newNeig(1, itpLA, it->_dist2);
+				neighborhood = 1;
 			}
 			else
 			{
-				itpLA->newNeig(2, this, it->_dist2);
-				this->newNeig(2, itpLA, it->_dist2);
+				neighborhood = 2;
 			}
+			this2it = itpLA->tryNeig(neighborhood, this, it->_dist2, minDist2);
+			it2this = this->tryNeig(neighborhood, itpLA, it->_dist2, minDist2);
+			if(this2it >= 0 && it2this >= 0) {
+				itpLA->insertNeig(this, this2it, it->_dist2);
+				this->insertNeig(itpLA, it2this, it->_dist2);
+			}
+			else if(this2it == NEIGH_NO_PLACE || it2this == NEIGH_NO_PLACE) {
+				int limit;
+				if(neighborhood == 0) {
+					limit = first();
+				}
+				else if(neighborhood == 1) {
+					limit = second() - first();
+				}
+				else {
+					limit = third() - second();
+				}
+				ERRORMSG("Inserting too many neighbors for neighborhood " << neighborhood + 1 << ", limit: " << limit);
+			}
+			else {} // Too close to an existing neighbour, skip silently.
 		}
 	}
 }
@@ -130,9 +152,10 @@ void LatticeAtom::removeNeighbor(LatticeAtom *pLA)
 	WARNINGMSG("Removing neighbor that does not exist!");
 }
 
-void LatticeAtom::newNeig(unsigned in, LatticeAtom *pLA, float dist2)
+int LatticeAtom::tryNeig(unsigned in, LatticeAtom *pLA, float dist2, float minDist2)
 {
-	unsigned start, end;
+	unsigned start = _maxNeigh;
+	unsigned end = _maxNeigh;
 	switch (in)
 	{
 	case 0:
@@ -146,36 +169,26 @@ void LatticeAtom::newNeig(unsigned in, LatticeAtom *pLA, float dist2)
 	case 2:
 		start=this->second();
 		end = this->third();
-		break;
-	default:
-		ERRORMSG(in << " newNeigh()");
-		start = 0; end=this->first();
-		break;
 	}
-	assert(end <= _maxNeigh);
-	for(unsigned i=start; i<end; ++i)
+	assert(start < end && end <= _maxNeigh);
+	auto const pMesh = _pElement->getDomain()->_pMesh;
+	for(unsigned i=0; i < _maxNeigh; ++i) {
+		if(_neighbors[i] && pMesh->getDist2periodic(_neighbors[i]->_coord, pLA->_coord) < minDist2) {
+			return NEIGH_TOO_CLOSE;
+		}
+	}
+	for(unsigned i=start; i<end; ++i) {
 		if(!_neighbors[i])
 		{
-			_neighbors[i] = pLA;
-			this->setNeiDist(i,dist2);
-			return;
-		}
-//	ERROR here
-	LOWMSG(_number << " Orig atom is " << _coord);
-	LOWMSG(pLA->_number << " inserted atoms is " << pLA->_coord << " dist " << sqrt(dist2));
-	for(unsigned i=0; i < _maxNeigh; ++i)
-	{
-		if(_neighbors[i])
-		{
-			Kernel::Coordinates ci = _neighbors[i]->getCoordinates();
-			Kernel::Coordinates cj = getCoordinates();
-			_pDomain->_pMesh->setPeriodicRelative(ci, cj);
-			LOWMSG(_neighbors[i]->_number << " Neighbor " << i << " "<< _neighbors[i]->getCoordinates() <<
-					" " << sqrt(cj._x*cj._x + cj._y*cj._y +	cj._z*cj._z) );
+			return i;
 		}
 	}
+	return NEIGH_NO_PLACE;
+}
 
-	ERRORMSG(in << " Inserting more than " << end-start << " neighbors!");
+void LatticeAtom::insertNeig(LatticeAtom * const pLA, int const where, float dist2) {
+	_neighbors[where] = pLA;
+	this->setNeiDist(where, dist2);
 }
 
 int LatticeAtom::getCoordination(unsigned i) const

@@ -36,6 +36,11 @@ namespace LKMC
 
 class LatticeAtom : public Kernel::Event, public LatticeSite
 {
+private:
+    static constexpr int NEIGH_TOO_CLOSE = -1;
+    static constexpr int NEIGH_NO_PLACE  = -2;
+    static constexpr float MIN_DIST_FACTOR = 0.8;
+
 public:
 	enum LASTATE { LS_AVAILABLE, LS_PERFORMED, LS_PRECURSOR };
 
@@ -77,7 +82,8 @@ protected:
 	LatticeAtom **_neighbors;
 	unsigned char _maxNeigh;
 	
-	void newNeig(unsigned, LatticeAtom *pLA, float dist2);
+    int tryNeig(unsigned, LatticeAtom *pLA, float dist2, float minDist2);
+    void insertNeig(LatticeAtom * const pLA, int const where, float dist2);
 	void insertNeighbors();
 	void removeNeighbor(LatticeAtom *);
 	void updateME4Epitaxy(Kernel::SubDomain *); //to add more "non-crystalline" atoms...

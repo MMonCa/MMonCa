@@ -17,7 +17,7 @@ proc material { x y z } {
 }
 
 set vel(0)  10.43
-set vel(9)  0.31
+set vel(9)  0.5022398539985375
 set vel(14) 3.332
 
 set angle(0)  00

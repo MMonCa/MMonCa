@@ -4,7 +4,7 @@ test.mc.log
 errors
 test.results
 test.result
-test.started
+**/tests.started
 time
 test.errors
 **/*.profile

@@ -93,7 +93,8 @@ public:
     		{ if(h==0) return _xlines; if(h==1) return _ylines; return _zlines; }
     void fillInterfaces(const Coordinates &, float dist, std::vector<OKMC::Interface *> &);
 
-    bool fillLatticeNeighbors       (const Coordinates &, float dist, LSNeiList &); //LatticeAtoms
+    float getDist2periodic(Coordinates const& c1, Coordinates const& c2) const;
+    bool fillLatticeNeighbors       (const Coordinates &, float distMin, float distMax, LSNeiList &); //LatticeAtoms
     void fillNeighborsAllMat        (const Coordinates &, float dist, std::vector<MeshElement *> &); //MeshElements
     void fillNeighborsTopology      (MeshElement *pEle, std::vector<const MeshElement *> &, std::vector<const MeshElement *> &, std::vector<const MeshElement *> &) const; //Edges, etc...
     void fillNeighborsOneMat        (const MeshElement *pEle, const Coordinates &, float dist, std::vector<MeshElement *> &elems);

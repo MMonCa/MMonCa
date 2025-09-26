@@ -39,7 +39,7 @@ public:
 	virtual int  getIndex(unsigned eventType) const { return _idx[eventType]; }
 	virtual unsigned getNEvents() const { return MAX_LKMC_EVENT; } //depositions + mig + etching + final adsorption + desorption
 	//              4         4+12=16   16+12=28         Perfect, but due to periodic BC and twins it can be more.
-	enum { FIRSTN = 9, SECONDN = 30, THIRDN = 64 };
+	enum { FIRSTN = 8, SECONDN = 28, THIRDN = 48 };
 	virtual unsigned first() const  { return FIRSTN; }
 	virtual unsigned second() const { return SECONDN; }
 	virtual unsigned third() const  { return THIRDN; }

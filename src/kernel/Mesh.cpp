@@ -671,27 +671,37 @@ unsigned Mesh::getIndexFromCoordinates(const Coordinates &c) const
 	return getIndexFromIndices(nx, ny, nz);
 }
 
+float Mesh::getDist2periodic(Coordinates const& c1, Coordinates const& c2) const {
+	float xdist = std::fabs(c1._x - c2._x);
+	if(_periodicX && xdist > _xsize/2.) xdist -= _xsize;
+	float ydist = std::fabs(c1._y - c2._y);
+	if(_periodicY && ydist > _ysize/2.) ydist -= _ysize;
+	float zdist = std::fabs(c1._z - c2._z);
+	if(_periodicZ && zdist > _zsize/2.) zdist -= _zsize;
+    return xdist*xdist + ydist*ydist + zdist*zdist;
+}
+
 //takes BC into account
-bool Mesh::fillLatticeNeighbors(const Coordinates &c, float dist, LSNeiList &neiList)
+bool Mesh::fillLatticeNeighbors(const Coordinates &c, float distMin, float distMax, LSNeiList &neiList)
 {
-	const float dist2 = dist*dist;
+	const float distMin2 = distMin*distMin;
+	const float distMax2 = distMax*distMax;
 	vector<MeshElement *> elems;
-	fillNeighborsAllMat(c, dist, elems);
+	fillNeighborsAllMat(c, distMax, elems);
 	for(vector<MeshElement *>::iterator it=elems.begin(); it!=elems.end(); ++it)
 	{
 		LatticeSite *pLS = (*it)->_firstLS;
 		while(pLS)
 		{
 			Coordinates n = pLS->getCoordinates();
-			float xdist = std::fabs(c._x - n._x);
-			if(_periodicX && xdist > _xsize/2.) xdist -= _xsize;
-			float ydist = std::fabs(c._y - n._y);
-			if(_periodicY && ydist > _ysize/2.) ydist -= _ysize;
-			float zdist = std::fabs(c._z - n._z);
-			if(_periodicZ && zdist > _zsize/2.) zdist -= _zsize;
-			float cdist2 = xdist*xdist + ydist*ydist + zdist*zdist;
-			if(cdist2 < dist2)
-				neiList.push_back(LSNeiInfo(pLS, cdist2));
+			float dist2 = getDist2periodic(c, n);
+			if(dist2 < distMax2 && (distMin2 == 0.0 || (dist2 > distMin2 && 
+			    std::find_if(neiList.cbegin(), neiList.cend(), [&n, distMin2, this](LSNeiInfo const& ni){
+					auto const n2 = ni._pLS->getCoordinates();
+					auto const nDist2 = getDist2periodic(n, n2);
+					return nDist2 < distMin2;
+				}) == neiList.cend())))
+				neiList.push_back(LSNeiInfo(pLS, dist2));
 			pLS = pLS->_next;
 		}
 	}
@@ -1351,7 +1361,7 @@ bool Mesh::isInDomain(const Coordinates &c) const
 LatticeSite * Mesh::findLS(const Coordinates &c, float dist)
 {
 	LSNeiList neiList;
-	fillLatticeNeighbors(c, dist, neiList);
+	fillLatticeNeighbors(c, 0.0, dist, neiList);
 	assert(neiList.size() <= 1);
 	if(neiList.size())
 		return neiList.back()._pLS;
