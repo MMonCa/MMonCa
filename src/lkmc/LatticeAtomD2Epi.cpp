@@ -19,6 +19,7 @@
  * limitations under the License.
  */
 
+#include "LatticeAtomDEpi.h"
 #include "LatticeAtomD2Epi.h"
 #include "LatticeDiamondParam.h"
 #include "LatticeDiamond.h"
@@ -81,7 +82,7 @@ void LatticeAtomD2Epi::perform (Kernel::SubDomain *pSub, unsigned eventType)
 		ERRORMSG("LatticeAtomD2Epi::Unknown event " << eventType);
 
 	for(map<int, LatticeAtomDiamond *>::iterator it=toUpdate.begin(); it!=toUpdate.end(); ++it)
-		_pDomain->_pRM->update(it->second, static_cast<LatticeAtomD2Epi *>(it->second)->_pElement);
+		_pDomain->_pRM->update(it->second, it->second->getElement());
 	if(_pElement->getNonCrystallineLA() == 0)
 		_pDomain->_pLKMC->cleanLKMCAtoms(_pElement, MOD_Epitaxy);
 }
@@ -204,11 +205,27 @@ void LatticeAtomD2Epi::performPrecursor(Kernel::SubDomain *pSub, Kernel::P_TYPE 
 	const LatticeDiamondParam * param = static_cast<const LatticeDiamondParam *>(_pDomain->_pLaPar[_basicMat]);
 	for(unsigned i=0; i<FIRSTN; ++i)
 	{
-		LatticeAtomD2Epi * laepi = static_cast<LatticeAtomD2Epi *>(_neighbors[i]);
-		if( _neighbors[i] && laepi->_state == LS_PRECURSOR &&
-		   laepi->_atomPair == 0  &&
-		   laepi->_type == param->_epi[_type]._pairPrecursor)
-			toUpdate[laepi->_number]=laepi;
+		auto const neighbor = _neighbors[i];
+		if(neighbor == nullptr) {
+			continue;
+		}
+		LatticeAtomD2Epi * lad2epi = dynamic_cast<LatticeAtomD2Epi *>(neighbor);
+		if(lad2epi != nullptr) {
+			if(lad2epi->_state == LS_PRECURSOR &&
+				lad2epi->_atomPair == 0  &&
+		  		lad2epi->_type == param->_epi[_type]._pairPrecursor) {
+				toUpdate[lad2epi->getNumber()]=lad2epi;
+			}
+			continue;
+		}
+		LatticeAtomDEpi * ladepi = dynamic_cast<LatticeAtomDEpi *>(neighbor);
+		if(ladepi != nullptr) {
+			if(ladepi->getState() == LS_PRECURSOR) {
+				toUpdate[ladepi->getNumber()]=ladepi;
+			}
+			continue;
+		}
+		ERRORMSG("Neighbour can't be converted to any of LatticeAtomD2Epi or LatticeAtomDEpi.");
 	}
 }
 
@@ -331,16 +348,17 @@ float LatticeAtomD2Epi::getRate(unsigned eventType, float kT) const
 		if(neigStates[LS_PRECURSOR])
 			for(unsigned i=0; i<FIRSTN; ++i)
 			{
-				LatticeAtomD2Epi * laepi = static_cast<LatticeAtomD2Epi *>(_neighbors[i]);
-					if( _neighbors[i] && laepi->_state == LS_PRECURSOR &&
-					   (laepi->_atomPair == 0 || laepi->_atomPair == this) &&
-						laepi->_type == param->_epi[myType]._pairPrecursor)
-					{
-						barrier = param->_epi[myType]._barrierPairEpi;
-						_atomPair = laepi;
-						_atomPair->_atomPair = const_cast<LatticeAtomD2Epi *>(this);
-						break;
-					}
+				auto const neighbor = _neighbors[i];
+				LatticeAtomD2Epi * lad2epi = dynamic_cast<LatticeAtomD2Epi *>(neighbor);
+				if(lad2epi && lad2epi->_state == LS_PRECURSOR &&
+					(lad2epi->_atomPair == 0 || lad2epi->_atomPair == this) &&
+					lad2epi->_type == param->_epi[myType]._pairPrecursor)
+				{
+					barrier = param->_epi[myType]._barrierPairEpi;
+					_atomPair = lad2epi;
+					_atomPair->_atomPair = const_cast<LatticeAtomD2Epi *>(this);
+					break;
+				}
 			}
 		ener = barrier + (param->_model_simplified? binding:0);
 	}
