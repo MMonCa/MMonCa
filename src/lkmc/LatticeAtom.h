@@ -84,6 +84,7 @@ protected:
 	
     int tryNeig(unsigned, LatticeAtom *pLA, float dist2, float minDist2);
     void insertNeig(LatticeAtom * const pLA, int const where, float dist2);
+    void error(LatticeAtom * other, char const * const name);
 	void insertNeighbors();
 	void removeNeighbor(LatticeAtom *);
 	void updateME4Epitaxy(Kernel::SubDomain *); //to add more "non-crystalline" atoms...

@@ -82,6 +82,39 @@ void LatticeAtom::setState(LASTATE st)
 	_pElement->incLA(getPerformed()); 
 }
 
+void LatticeAtom::error(LatticeAtom * other, char const * const name) {
+	std::multimap<std::string, Coordinates> result;
+	LOWMSG(_number << " Orig atom is " << _coord);
+	result.insert(std::pair<std::string, Coordinates>("original", _coord));
+	LOWMSG(other->_number << " inserted atom is " << other->_coord);
+	result.insert(std::pair<std::string, Coordinates>("inserted", other->_coord));
+	std::string level("neighbor1");
+	for(unsigned i=0; i < _maxNeigh; ++i)
+	{
+		if(i == first()) {
+			level = "neighbor2";
+		}
+		else if(i == second()) {
+			level = "neighbor3";
+		}
+		if(_neighbors[i])
+		{
+			Kernel::Coordinates ci = _neighbors[i]->getCoordinates();
+			Kernel::Coordinates cj = getCoordinates();
+			_pDomain->_pMesh->setPeriodicRelative(ci, cj);
+			result.insert(std::pair<std::string, Coordinates>(level, _neighbors[i]->getCoordinates()));
+			LOWMSG(_neighbors[i]->_number << " Neighbor " << i << " "<< _neighbors[i]->getCoordinates() <<
+					" " << sqrt(cj._x*cj._x + cj._y*cj._y +	cj._z*cj._z) );
+		}
+	}
+	std::string filename("neig-error-");
+	std::ofstream out(filename + name + ".xyz");
+	out << result.size() << "\n\n";
+	for(auto const& item : result) {
+		out << item.first << ' ' << item.second._x << ' ' << item.second._y << ' ' << item.second._z << '\n';
+	}
+}
+
 void LatticeAtom::insertNeighbors()
 {
 	Kernel::M_TYPE mt = _basicMat;
@@ -124,6 +157,12 @@ void LatticeAtom::insertNeighbors()
 				this->insertNeig(itpLA, it2this, it->_dist2);
 			}
 			else if(this2it == NEIGH_NO_PLACE || it2this == NEIGH_NO_PLACE) {
+				if(this2it == NEIGH_NO_PLACE) {
+					itpLA->error(this, "neig");
+				}
+				if(it2this == NEIGH_NO_PLACE) {
+					error(itpLA, "host");
+				}
 				int limit;
 				if(neighborhood == 0) {
 					limit = first();
