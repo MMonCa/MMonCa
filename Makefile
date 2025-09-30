@@ -95,6 +95,9 @@ dist-static:
 	@echo "Compiling MMonCa for machine $@..."
 	@$(MAKE) $(MAKESILENT) -C Obj_$@ "EXE = $(MC_BIN)" "TARGET = mmonca"
 	@echo "Built target $(shell pwd)/Obj_$@/$(MC_BIN)"
+	if [ $@ == "Test" ]; then\
+		mv Obj_Test/mmonca Obj_Test/mmoncatest;\
+	fi
 
 clean-all:
 	rm -rf Obj_*

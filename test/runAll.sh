@@ -2,8 +2,10 @@
 # 16 means a maximum of 8 CPUs busy (each one is counted as two because of the time command)
 if [ "A$1" = "A" ]; then
    version=Obj_Test
+   exe=mmoncatest
 else
    version=$1
+   exe=mmonca
 fi
 echo "Running for configuration $version"
 current=`pwd`
@@ -15,12 +17,12 @@ do
 	if [ -d $name -a -f $name/test.mc ]; then
 		./runSingle.sh $current $name $version &
 	fi
-	while [ `ps aux | grep mmonca | grep test | wc -l` -ge 2 ]; do
+	while [ `ps aux | grep $exe | grep test | wc -l` -ge 2 ]; do
 		sleep 1
 	done
 done
 #see if everyone has finished
-while [ `ps aux | grep mmonca | grep test | wc -l` -ne 0 ]; do
+while [ `ps aux | grep $exe | grep test | wc -l` -ne 0 ]; do
 	sleep 1
 done
 ./collect.sh

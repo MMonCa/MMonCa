@@ -12,8 +12,13 @@ cd $2
 if [ -f errors ]; then
 	rm errors
 fi
+if [ $3 = "Obj_Test" ]; then
+   exe=mmoncatest
+else
+   exe=mmonca
+fi
 echo "$2/test.mc" >>$1/tests.started
-if time -o time -f "%U" $1/../$3/mmonca test.mc >/dev/null 2> test.errors; then
+if time -o time -f "%U" $1/../$3/$exe test.mc >/dev/null 2> test.errors; then
 	echo "$2/test.mc `cat time` PASSED" >test.result
 	echo "$2/test.mc `cat time` PASSED"
 	rm test.errors
