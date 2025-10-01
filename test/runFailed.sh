@@ -28,6 +28,7 @@ do
 done
 #see if everyone has finished
 while [ `ps aux | grep $exe | grep test | wc -l` -ne 0 ]; do
+  ps aux | grep $exe | grep test
 	sleep 1
 done
 ./collect.sh
