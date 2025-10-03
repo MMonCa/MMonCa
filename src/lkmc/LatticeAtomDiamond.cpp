@@ -70,7 +70,7 @@ bool LatticeAtomDiamond::isAllowed(const Coordinates &final, const Kernel::MeshE
 	    ( (mode == MOD_Epitaxy && !pPM->isGasLike(mt)) || mode == MOD_SPER))
 	    	return false;
 	Mesh::LSNeiList neiList;
-	_pDomain->_pMesh->fillLatticeNeighbors(final, neiDist0, neiList);
+	_pDomain->_pMesh->fillLatticeNeighbors(final, 0.0, neiDist0, neiList);
 	if(neiList.size() > 5)
 		return false;
 	for(Mesh::LSNeiList::iterator it=neiList.begin(); it != neiList.end(); ++it)

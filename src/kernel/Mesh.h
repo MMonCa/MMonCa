@@ -93,7 +93,8 @@ public:
     		{ if(h==0) return _xlines; if(h==1) return _ylines; return _zlines; }
     void fillInterfaces(const Coordinates &, float dist, std::vector<OKMC::Interface *> &);
 
-    bool fillLatticeNeighbors       (const Coordinates &, float dist, LSNeiList &); //LatticeAtoms
+    float getDist2periodic(Coordinates const& c1, Coordinates const& c2) const;
+    bool fillLatticeNeighbors       (const Coordinates &, float distMin, float distMax, LSNeiList &); //LatticeAtoms
     void fillNeighborsAllMat        (const Coordinates &, float dist, std::vector<MeshElement *> &); //MeshElements
     void fillNeighborsTopology      (MeshElement *pEle, std::vector<const MeshElement *> &, std::vector<const MeshElement *> &, std::vector<const MeshElement *> &) const; //Edges, etc...
     void fillNeighborsOneMat        (const MeshElement *pEle, const Coordinates &, float dist, std::vector<MeshElement *> &elems);
@@ -181,10 +182,13 @@ private:
     std::vector<unsigned> _yParticles;
     std::unordered_map<unsigned, double> _longHopFactor[MAX_MATERIALS];
 
+    unsigned _xCells; //sizeZ
+    unsigned _yCells; //sizeZ
     unsigned _zCells; //sizeZ
     unsigned _yzCells; //size Y * Z
     bool _periodicX, _periodicY, _periodicZ;
-    float _xsize, _ysize, _zsize;
+    double _xsize, _ysize, _zsize;
+    double _xModOffset, _yModOffset, _zModOffset;
 
 	std::string _poissonX, _poissonY, _poissonZ;
 	double      _potentialX, _potentialY, _potentialZ;
