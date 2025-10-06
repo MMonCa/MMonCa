@@ -82,4 +82,4 @@ foreach i "0 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95" {
         test tag=depth.$i float=$depth value=$value($i)0 error=0.01
 }
 
-test tag=rough float=$roughness value=3.96429 error=0.02
+test tag=rough float=$roughness value=4.07639 error=0.02

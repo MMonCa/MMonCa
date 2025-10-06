@@ -72,23 +72,11 @@ void MeshElement::updateLAStatus(Kernel::SubDomain *pSub, LKMC::LKMCMode mode)
 {
 	_crystallineLA++;
 	_nonCrystallineLA--;
-	M_TYPE alloy = Domains::global()->PM()->getMaterial(getFirstLS()->getBasicMat())._alloy;
 	if(_nonCrystallineLA == 0)
 	{//element is completely crystalline
 		M_TYPE toMat = getToMat(mode);
-		_pDomain->_pMesh->changeMaterial(pSub, getIndex(), toMat);
-		if(Domains::global()->PM()->isGasLike(_mat)) //epitaxy
-		{
-			LKMC::LatticeSite *pLS = getFirstLS();
-			while(pLS)
-			{
-				if(pLS->getPType() == alloy)
-                {
-					decAAtoms();
-					incBAtoms();
-                }
-				pLS = pLS->getNext();
-			}
+		if(!Domains::global()->PM()->isGasLike(toMat)) {
+			_pDomain->_pMesh->changeMaterial(pSub, getIndex(), toMat);
 		}
 	}
 }
